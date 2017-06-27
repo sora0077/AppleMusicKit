@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol Include {
+    associatedtype Relationships
+}
+
 public struct GetSong<Song, Album, Artist>: Request
 where
     Song: AppleMusicKit.Song,
