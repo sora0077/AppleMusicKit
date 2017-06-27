@@ -12,7 +12,7 @@ import APIKit
 public protocol PaginatorRequest: Request, Decodable {
     associatedtype Element: Decodable
     typealias Response = Page<Self>
-    
+
     init(path: String, parameters: [String: Any])
     func elements(from data: Data, urlResponse: HTTPURLResponse) throws -> [Element]
 }
@@ -28,7 +28,7 @@ private enum PaginatorRequestCodingKeys: String, CodingKey {
 
 extension PaginatorRequest {
     public var method: HTTPMethod { return .get }
-    
+
     public init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: PaginatorRequestCodingKeys.self)
         let comps = URLComponents(string: try c.decode(String.self, forKey: .next))!
@@ -36,11 +36,11 @@ extension PaginatorRequest {
             ($0.name, $0.value ?? "") } ?? [])
         self.init(path: comps.path, parameters: parameters)
     }
-    
+
     public func elements(from data: Data, urlResponse: HTTPURLResponse) throws -> [Element] {
         return try defaultDecoder.decode([Element].self, from: data)
     }
-    
+
     public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Page<Self> {
         return try defaultDecoder.decode(Page<Self>.self, from: object as! Data)
     }
