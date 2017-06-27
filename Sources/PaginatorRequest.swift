@@ -13,7 +13,6 @@ public protocol PaginatorRequest: Request, Decodable {
     associatedtype Element
 
     init(path: String, parameters: [String: Any])
-    func elements(from data: Data, urlResponse: HTTPURLResponse) throws -> [Element]
 }
 
 public struct Page<R: PaginatorRequest>: Decodable where R.Element: Decodable {
@@ -38,10 +37,6 @@ extension PaginatorRequest {
 }
 
 extension PaginatorRequest where Response == Page<Self> {
-    public func elements(from data: Data, urlResponse: HTTPURLResponse) throws -> [Element] {
-        return try defaultDecoder.decode([Element].self, from: data)
-    }
-
     public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Page<Self> {
         return try defaultDecoder.decode(Page<Self>.self, from: object as! Data)
     }
