@@ -13,6 +13,8 @@
 		D9A025171F00F96C00C49113 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025161F00F96C00C49113 /* Song.swift */; };
 		D9A025191F011FD000C49113 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025181F011FD000C49113 /* Album.swift */; };
 		D9A0251B1F012A4F00C49113 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A0251A1F012A4F00C49113 /* Artist.swift */; };
+		D9C4D5641F02334500D2B58F /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5631F02334500D2B58F /* Request.swift */; };
+		D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		D9A025161F00F96C00C49113 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		D9A025181F011FD000C49113 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		D9A0251A1F012A4F00C49113 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
+		D9C4D5631F02334500D2B58F /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatorRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				D9A025101F00F89F00C49113 /* AppleMusicKit.swift */,
+				D9C4D5631F02334500D2B58F /* Request.swift */,
+				D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */,
 				D9A025151F00F95E00C49113 /* Resource */,
 				D9A025121F00F92800C49113 /* Request */,
 			);
@@ -183,9 +189,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9A025171F00F96C00C49113 /* Song.swift in Sources */,
+				D9C4D5641F02334500D2B58F /* Request.swift in Sources */,
 				D9A025111F00F89F00C49113 /* AppleMusicKit.swift in Sources */,
 				D9A025141F00F93800C49113 /* GetSong.swift in Sources */,
 				D9A0251B1F012A4F00C49113 /* Artist.swift in Sources */,
+				D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */,
 				D9A025191F011FD000C49113 /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
