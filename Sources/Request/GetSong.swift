@@ -44,7 +44,7 @@ where
     Song: AppleMusicKit.Song,
     Album: AppleMusicKit.Album,
     Artist: AppleMusicKit.Artist {
-    public typealias Response = [GetSong<Song, Album, Artist>.Response]
+    public typealias Response = [AppleMusicKit.Response<Song, GetSong<Song, Album, Artist>.Relationships?>]
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/songs" }
     public let parameters: Any?
