@@ -10,3 +10,19 @@ import Foundation
 import APIKit
 
 let defaultDecoder = JSONDecoder()
+
+public struct NoRelationships: Decodable {}
+
+extension Dictionary where Key == String, Value == Any? {
+    var cleaned: [String: Any] {
+        return [String: Any](uniqueKeysWithValues: flatMap { (arg) in
+            arg.value.map { (arg.key, $0) }
+        })
+    }
+}
+
+extension Locale {
+    var languageTag: String {
+        return description
+    }
+}

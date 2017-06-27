@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D92087191F02563F00F995FA /* Storefront.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92087181F02563F00F995FA /* Storefront.swift */; };
+		D920871B1F0256C600F995FA /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920871A1F0256C600F995FA /* Response.swift */; };
 		D9A025011F00F22400C49113 /* AppleMusicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A024FF1F00F22300C49113 /* AppleMusicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9A025111F00F89F00C49113 /* AppleMusicKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025101F00F89F00C49113 /* AppleMusicKit.swift */; };
 		D9A025141F00F93800C49113 /* GetSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025131F00F93800C49113 /* GetSong.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D92087181F02563F00F995FA /* Storefront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storefront.swift; sourceTree = "<group>"; };
+		D920871A1F0256C600F995FA /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleMusicKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A024FF1F00F22300C49113 /* AppleMusicKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppleMusicKit.h; sourceTree = "<group>"; };
 		D9A025001F00F22400C49113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 				D9A025101F00F89F00C49113 /* AppleMusicKit.swift */,
 				D9C4D5631F02334500D2B58F /* Request.swift */,
 				D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */,
+				D920871A1F0256C600F995FA /* Response.swift */,
 				D9A025151F00F95E00C49113 /* Resource */,
 				D9A025121F00F92800C49113 /* Request */,
 			);
@@ -102,6 +107,7 @@
 		D9A025151F00F95E00C49113 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				D92087181F02563F00F995FA /* Storefront.swift */,
 				D9A025161F00F96C00C49113 /* Song.swift */,
 				D9A025181F011FD000C49113 /* Album.swift */,
 				D9A0251A1F012A4F00C49113 /* Artist.swift */,
@@ -189,8 +195,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9A025171F00F96C00C49113 /* Song.swift in Sources */,
+				D92087191F02563F00F995FA /* Storefront.swift in Sources */,
 				D9C4D5641F02334500D2B58F /* Request.swift in Sources */,
 				D9A025111F00F89F00C49113 /* AppleMusicKit.swift in Sources */,
+				D920871B1F0256C600F995FA /* Response.swift in Sources */,
 				D9A025141F00F93800C49113 /* GetSong.swift in Sources */,
 				D9A0251B1F012A4F00C49113 /* Artist.swift in Sources */,
 				D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */,
