@@ -33,11 +33,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
-        Session.shared.send(GetSong<Song, Album, Artist>(storefront: "us", id: "203709340")) { (result) in
+        Session.shared.send(GetSong<Song, Album, Artist>(storefront: "us", id: "203709340", include: ["albums"])) { result in
             print(result)
             switch result {
             case .success(let response):
-                print(response?.relationships?.albums.data)
+                print(response.data)
+                if let next = response.data.first?.relationships?.albums.next {
+                    Session.shared.send(next) { result in
+                        switch result {
+                        case .success(let response):
+                            print(response)
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                }
             case .failure(let error):
                 print(error)
             }

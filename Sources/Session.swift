@@ -65,6 +65,7 @@ private struct AnyRequest<R>: APIKit.Request {
     }
 
     func intercept(urlRequest: URLRequest) throws -> URLRequest {
+        print(urlRequest)
         return try interceptRequest(urlRequest)
     }
 

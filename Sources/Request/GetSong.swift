@@ -18,7 +18,6 @@ where
     Album: AppleMusicKit.Album,
     Artist: AppleMusicKit.Artist {
     public typealias Resource = AppleMusicKit.Resource<Song, Relationships>
-    public typealias Response = Resource?
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/songs/\(id)" }
     public let parameters: Any?
@@ -29,7 +28,7 @@ where
     public init(storefront: String, id: Song.Identifier, locale: Locale? = nil, include: [String]? = nil) {
         self.storefront = storefront
         self.id = id
-        self.parameters = ["l": locale?.languageTag, "include": include].cleaned
+        self.parameters = ["l": locale?.languageTag, "include": include?.joined(separator: ",")].cleaned
     }
 }
 
@@ -46,7 +45,6 @@ where
     Album: AppleMusicKit.Album,
     Artist: AppleMusicKit.Artist {
     public typealias Resource = AppleMusicKit.Resource<Song, GetSong<Song, Album, Artist>.Relationships>
-    public typealias Response = [Resource]
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/songs" }
     public let parameters: Any?

@@ -12,12 +12,24 @@ public protocol Attributes: Decodable {
     associatedtype Identifier: Decodable
 }
 
+public protocol Response: Decodable {
+    associatedtype Resource
+    var data: [Resource] { get }
+}
+
 public struct Resource<Attributes: AppleMusicKit.Attributes, Relationships: Decodable>: Decodable {
     public let id: Attributes.Identifier
+    public let href: String
     public let attributes: Attributes?
     public let relationships: Relationships?
 }
 
-struct ResponseRoot<Resource: Decodable>: Decodable {
-    let data: [Resource]
+public struct ResponseRoot<Resource: Decodable>: Response {
+    public let data: [Resource]
+}
+
+public struct Page<R: PaginatorRequest>: Response where R.Resource: Decodable {
+    public let data: [R.Resource]
+    public let href: String
+    public let next: R?
 }

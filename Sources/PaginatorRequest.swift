@@ -13,11 +13,6 @@ public protocol PaginatorRequest: Request, Decodable {
     init(path: String, parameters: [String: Any])
 }
 
-public struct Page<R: PaginatorRequest>: Decodable where R.Resource: Decodable {
-    public let data: [R.Resource]
-    public let next: R?
-}
-
 private enum PaginatorRequestCodingKeys: String, CodingKey {
     case next
 }
@@ -40,6 +35,11 @@ extension PaginatorRequest where Response == Page<Self> {
     }
 
     public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Page<Self> {
+        do {
+            if let data = object as? Data {
+                print(try? JSONSerialization.jsonObject(with: data, options: .allowFragments))
+            }
+        }
         return try defaultDecoder.decode(Page<Self>.self, from: object as! Data)
     }
 }

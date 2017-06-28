@@ -10,10 +10,8 @@ import Foundation
 import APIKit
 
 public typealias HTTPMethod = APIKit.HTTPMethod
-public protocol Request: APIKit.Request {
+public protocol Request: APIKit.Request where Response: AppleMusicKit.Response {
     associatedtype Resource
-
-    func response(from resources: [Resource]) throws -> Response
 }
 
 private struct FoundationDataParser: DataParser {
@@ -31,20 +29,12 @@ extension Request {
 }
 
 extension Request where Resource: Decodable {
-    public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
-        let root = try defaultDecoder.decode(ResponseRoot<Resource>.self, from: object as! Data)
-        return try response(from: root.data)
-    }
-}
-
-extension Request where Response == [Resource] {
-    public func response(from resources: [Resource]) throws -> Response {
-        return resources
-    }
-}
-
-extension Request where Response == Resource? {
-    public func response(from resources: [Resource]) throws -> Response {
-        return resources.first
+    public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> ResponseRoot<Resource> {
+        do {
+            if let data = object as? Data {
+                print(try? JSONSerialization.jsonObject(with: data, options: .allowFragments))
+            }
+        }
+        return try defaultDecoder.decode(ResponseRoot<Resource>.self, from: object as! Data)
     }
 }
