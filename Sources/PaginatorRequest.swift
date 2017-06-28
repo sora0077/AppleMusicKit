@@ -10,13 +10,11 @@ import Foundation
 import APIKit
 
 public protocol PaginatorRequest: Request, Decodable {
-    associatedtype Element
-
     init(path: String, parameters: [String: Any])
 }
 
-public struct Page<R: PaginatorRequest>: Decodable where R.Element: Decodable {
-    public let data: [R.Element]
+public struct Page<R: PaginatorRequest>: Decodable where R.Resource: Decodable {
+    public let data: [R.Resource]
     public let next: R?
 }
 
@@ -37,6 +35,10 @@ extension PaginatorRequest {
 }
 
 extension PaginatorRequest where Response == Page<Self> {
+    public func response(from resources: [Resource]) throws -> Page<Self> {
+        fatalError()
+    }
+
     public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Page<Self> {
         return try defaultDecoder.decode(Page<Self>.self, from: object as! Data)
     }

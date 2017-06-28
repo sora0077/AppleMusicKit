@@ -17,7 +17,8 @@ where
     Song: AppleMusicKit.Song,
     Album: AppleMusicKit.Album,
     Artist: AppleMusicKit.Artist {
-    public typealias Response = AppleMusicKit.Response<Song, Relationships?>?
+    public typealias Resource = AppleMusicKit.Resource<Song, Relationships>
+    public typealias Response = Resource?
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/songs/\(id)" }
     public let parameters: Any?
@@ -44,7 +45,8 @@ where
     Song: AppleMusicKit.Song,
     Album: AppleMusicKit.Album,
     Artist: AppleMusicKit.Artist {
-    public typealias Response = [AppleMusicKit.Response<Song, GetSong<Song, Album, Artist>.Relationships?>]
+    public typealias Resource = AppleMusicKit.Resource<Song, GetSong<Song, Album, Artist>.Relationships>
+    public typealias Response = [Resource]
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/songs" }
     public let parameters: Any?
@@ -74,7 +76,7 @@ extension GetSong {
 
 extension GetSong {
     public struct GetAlbums: PaginatorRequest {
-        public typealias Element = AppleMusicKit.Response<Album, NoRelationships>
+        public typealias Resource = AppleMusicKit.Resource<Album, NoRelationships>
         public let path: String
         public let parameters: Any?
 
@@ -89,7 +91,7 @@ extension GetSong {
         }
     }
     public struct GetArtists: PaginatorRequest {
-        public typealias Element = Artist
+        public typealias Resource = AppleMusicKit.Resource<Artist, NoRelationships>
         public let path: String
         public let parameters: Any?
 

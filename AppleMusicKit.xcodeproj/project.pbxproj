@@ -7,8 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D9043B9D1F0360EF001D9B50 /* AppleMusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */; };
+		D9043B9E1F0360EF001D9B50 /* AppleMusicKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9043BA21F0360F5001D9B50 /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A0250E1F00F63E00C49113 /* APIKit.framework */; };
+		D9043BA31F0360F5001D9B50 /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9A0250E1F00F63E00C49113 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9043BA41F0360F5001D9B50 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A0250D1F00F63E00C49113 /* Result.framework */; };
+		D9043BA51F0360F5001D9B50 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9A0250D1F00F63E00C49113 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D92087191F02563F00F995FA /* Storefront.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92087181F02563F00F995FA /* Storefront.swift */; };
-		D920871B1F0256C600F995FA /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920871A1F0256C600F995FA /* Response.swift */; };
+		D920871B1F0256C600F995FA /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920871A1F0256C600F995FA /* Resource.swift */; };
 		D920871D1F0266A200F995FA /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920871C1F0266A200F995FA /* Session.swift */; };
 		D9A025011F00F22400C49113 /* AppleMusicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A024FF1F00F22300C49113 /* AppleMusicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9A025111F00F89F00C49113 /* AppleMusicKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025101F00F89F00C49113 /* AppleMusicKit.swift */; };
@@ -25,9 +31,35 @@
 		D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		D9043B9F1F0360EF001D9B50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D9A024F31F00F22300C49113 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9A024FB1F00F22300C49113;
+			remoteInfo = AppleMusicKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D9043BA11F0360EF001D9B50 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D9043BA51F0360F5001D9B50 /* Result.framework in Embed Frameworks */,
+				D9043BA31F0360F5001D9B50 /* APIKit.framework in Embed Frameworks */,
+				D9043B9E1F0360EF001D9B50 /* AppleMusicKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		D92087181F02563F00F995FA /* Storefront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storefront.swift; sourceTree = "<group>"; };
-		D920871A1F0256C600F995FA /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		D920871A1F0256C600F995FA /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		D920871C1F0266A200F995FA /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleMusicKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A024FF1F00F22300C49113 /* AppleMusicKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppleMusicKit.h; sourceTree = "<group>"; };
@@ -62,6 +94,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9043BA41F0360F5001D9B50 /* Result.framework in Frameworks */,
+				D9043BA21F0360F5001D9B50 /* APIKit.framework in Frameworks */,
+				D9043B9D1F0360EF001D9B50 /* AppleMusicKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,9 +147,9 @@
 				D9A025101F00F89F00C49113 /* AppleMusicKit.swift */,
 				D9C4D5631F02334500D2B58F /* Request.swift */,
 				D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */,
-				D920871A1F0256C600F995FA /* Response.swift */,
+				D920871A1F0256C600F995FA /* Resource.swift */,
 				D920871C1F0266A200F995FA /* Session.swift */,
-				D9A025151F00F95E00C49113 /* Resource */,
+				D9A025151F00F95E00C49113 /* Attributes */,
 				D9A025121F00F92800C49113 /* Request */,
 			);
 			path = Sources;
@@ -128,7 +163,7 @@
 			path = Request;
 			sourceTree = "<group>";
 		};
-		D9A025151F00F95E00C49113 /* Resource */ = {
+		D9A025151F00F95E00C49113 /* Attributes */ = {
 			isa = PBXGroup;
 			children = (
 				D92087181F02563F00F995FA /* Storefront.swift */,
@@ -136,7 +171,7 @@
 				D9A025181F011FD000C49113 /* Album.swift */,
 				D9A0251A1F012A4F00C49113 /* Artist.swift */,
 			);
-			path = Resource;
+			path = Attributes;
 			sourceTree = "<group>";
 		};
 		D9AD5EC11F02DD8500CE8468 /* Demo */ = {
@@ -191,10 +226,12 @@
 				D9AD5EBC1F02DD8500CE8468 /* Sources */,
 				D9AD5EBD1F02DD8500CE8468 /* Frameworks */,
 				D9AD5EBE1F02DD8500CE8468 /* Resources */,
+				D9043BA11F0360EF001D9B50 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				D9043BA01F0360EF001D9B50 /* PBXTargetDependency */,
 			);
 			name = Demo;
 			productName = Demo;
@@ -269,7 +306,7 @@
 				D92087191F02563F00F995FA /* Storefront.swift in Sources */,
 				D9C4D5641F02334500D2B58F /* Request.swift in Sources */,
 				D9A025111F00F89F00C49113 /* AppleMusicKit.swift in Sources */,
-				D920871B1F0256C600F995FA /* Response.swift in Sources */,
+				D920871B1F0256C600F995FA /* Resource.swift in Sources */,
 				D9A025141F00F93800C49113 /* GetSong.swift in Sources */,
 				D9A0251B1F012A4F00C49113 /* Artist.swift in Sources */,
 				D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */,
@@ -287,6 +324,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D9043BA01F0360EF001D9B50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9A024FB1F00F22300C49113 /* AppleMusicKit */;
+			targetProxy = D9043B9F1F0360EF001D9B50 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		D9AD5EC61F02DD8500CE8468 /* Main.storyboard */ = {
@@ -469,7 +514,12 @@
 		D9AD5ECF1F02DD8600CE8468 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.sora0077.musickit.Demo;
@@ -482,7 +532,12 @@
 		D9AD5ED01F02DD8600CE8468 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.sora0077.musickit.Demo;
@@ -520,6 +575,7 @@
 				D9AD5ED01F02DD8600CE8468 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -8,6 +8,5 @@
 
 import Foundation
 
-public protocol Song: Decodable {
-    associatedtype Identifier: CustomStringConvertible
+public protocol Song: Attributes {
 }

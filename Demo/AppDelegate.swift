@@ -7,15 +7,42 @@
 //
 
 import UIKit
+import AppleMusicKit
+
+struct Song: AppleMusicKit.Song {
+    typealias Identifier = String
+
+    let name: String
+}
+struct Album: AppleMusicKit.Album {
+    typealias Identifier = String
+
+    let name: String
+}
+struct Artist: AppleMusicKit.Artist {
+    typealias Identifier = String
+
+    let name: String
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        Session.shared.send(GetSong<Song, Album, Artist>(storefront: "us", id: "203709340")) { (result) in
+            print(result)
+            switch result {
+            case .success(let response):
+                print(response?.relationships?.albums.data)
+            case .failure(let error):
+                print(error)
+            }
+        }
+
         return true
     }
 
@@ -41,6 +68,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
 }
-

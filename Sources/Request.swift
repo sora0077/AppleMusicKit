@@ -11,7 +11,9 @@ import APIKit
 
 public typealias HTTPMethod = APIKit.HTTPMethod
 public protocol Request: APIKit.Request {
+    associatedtype Resource
 
+    func response(from resources: [Resource]) throws -> Response
 }
 
 private struct FoundationDataParser: DataParser {
@@ -28,8 +30,21 @@ extension Request {
     }
 }
 
-extension Request where Response: Decodable {
+extension Request where Resource: Decodable {
     public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
-        return try defaultDecoder.decode(Response.self, from: object as! Data)
+        let root = try defaultDecoder.decode(ResponseRoot<Resource>.self, from: object as! Data)
+        return try response(from: root.data)
+    }
+}
+
+extension Request where Response == [Resource] {
+    public func response(from resources: [Resource]) throws -> Response {
+        return resources
+    }
+}
+
+extension Request where Response == Resource? {
+    public func response(from resources: [Resource]) throws -> Response {
+        return resources.first
     }
 }
