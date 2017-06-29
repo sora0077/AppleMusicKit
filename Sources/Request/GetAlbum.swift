@@ -1,66 +1,66 @@
 //
-//  GetSong.swift
+//  GetAlbum.swift
 //  AppleMusicKit
 //
-//  Created by 林達也 on 2017/06/26.
+//  Created by 林 達也 on 2017/06/29.
 //  Copyright © 2017年 jp.sora0077. All rights reserved.
 //
 
 import Foundation
 
-public struct GetSong<Song, Album, Artist>: Request
-where
-    Song: AppleMusicKit.Song,
+public struct GetAlbum<Album, Song, Artist>: Request
+    where
     Album: AppleMusicKit.Album,
+    Song: AppleMusicKit.Song,
     Artist: AppleMusicKit.Artist {
-    public typealias Resource = AppleMusicKit.Resource<Song, Relationships>
+    public typealias Resource = AppleMusicKit.Resource<Album, Relationships>
     public var method: HTTPMethod { return .get }
-    public var path: String { return "/v1/catalog/\(storefront)/songs/\(id)" }
+    public var path: String { return "/v1/catalog/\(storefront)/albums/\(id)" }
     public let parameters: Any?
 
     private let storefront: String
-    private let id: Song.Identifier
+    private let id: Album.Identifier
 
-    public init(storefront: String, id: Song.Identifier, locale: Locale? = nil, include: [String]? = nil) {
+    public init(storefront: String, id: Album.Identifier, locale: Locale? = nil, include: [String]? = nil) {
         self.storefront = storefront
         self.id = id
         self.parameters = ["l": locale?.languageTag, "include": include?.joined(separator: ",")].cleaned
     }
 }
 
-extension GetSong {
+extension GetAlbum {
     public struct Relationships: Decodable {
-        public let albums: Page<GetAlbums>
+        public let tracks: Page<GetTracks>
         public let artists: Page<GetArtists>
     }
 }
 
-public struct GetMultipleSongs<Song, Album, Artist>: Request
-where
-    Song: AppleMusicKit.Song,
+public struct GetMultipleAlbums<Album, Song, Artist>: Request
+    where
     Album: AppleMusicKit.Album,
+    Song: AppleMusicKit.Song,
     Artist: AppleMusicKit.Artist {
-    public typealias Resource = AppleMusicKit.Resource<Song, GetSong<Song, Album, Artist>.Relationships>
+    public typealias Resource = AppleMusicKit.Resource<Album, GetAlbum<Album, Song, Artist>.Relationships>
     public var method: HTTPMethod { return .get }
-    public var path: String { return "/v1/catalog/\(storefront)/songs" }
+    public var path: String { return "/v1/catalog/\(storefront)/albums" }
     public let parameters: Any?
 
     private let storefront: String
 
-    public init(storefront: String, id: Song.Identifier, _ additions: Song.Identifier..., locale: Locale? = nil, include: [String]? = nil) {
+    public init(storefront: String, id: Album.Identifier, _ additions: Album.Identifier..., locale: Locale? = nil, include: [String]? = nil) {
         self.init(storefront: storefront, ids: [id] + additions, locale: locale, include: include)
     }
 
-    public init(storefront: String, ids: [Song.Identifier], locale: Locale? = nil, include: [String]? = nil) {
+    public init(storefront: String, ids: [Album.Identifier], locale: Locale? = nil, include: [String]? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
         self.parameters = ["ids": ids, "l": locale?.languageTag, "include": include].cleaned
     }
 }
 
-extension GetSong {
-    func albums(limit: Int? = nil, offset: Int? = nil) -> GetAlbums {
-        return GetAlbums(storefront: storefront, id: id, limit: limit, offset: offset)
+extension GetAlbum {
+    func tracks(limit: Int? = nil, offset: Int? = nil) -> GetTracks {
+        return GetTracks(storefront: storefront, id: id, limit: limit, offset: offset)
     }
 
     func artists(limit: Int? = nil, offset: Int? = nil) -> GetArtists {
@@ -68,14 +68,14 @@ extension GetSong {
     }
 }
 
-extension GetSong {
-    public struct GetAlbums: PaginatorRequest {
+extension GetAlbum {
+    public struct GetTracks: PaginatorRequest {
         public typealias Resource = AppleMusicKit.Resource<Album, NoRelationships>
         public let path: String
         public let parameters: Any?
 
-        init(storefront: String, id: Song.Identifier, limit: Int? = nil, offset: Int? = nil) {
-            self.init(path: "/v1/catalog/\(storefront)/songs/\(id)/albums",
+        init(storefront: String, id: Album.Identifier, limit: Int? = nil, offset: Int? = nil) {
+            self.init(path: "/v1/catalog/\(storefront)/albums/\(id)/tracks",
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }
 
@@ -89,8 +89,8 @@ extension GetSong {
         public let path: String
         public let parameters: Any?
 
-        init(storefront: String, id: Song.Identifier, limit: Int? = nil, offset: Int? = nil) {
-            self.init(path: "/v1/catalog/\(storefront)/songs/\(id)/artists",
+        init(storefront: String, id: Album.Identifier, limit: Int? = nil, offset: Int? = nil) {
+            self.init(path: "/v1/catalog/\(storefront)/albums/\(id)/artists",
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }
 

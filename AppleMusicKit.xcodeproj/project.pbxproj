@@ -27,6 +27,7 @@
 		D9AD5EC81F02DD8600CE8468 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9AD5EC61F02DD8500CE8468 /* Main.storyboard */; };
 		D9AD5ECA1F02DD8600CE8468 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9AD5EC91F02DD8600CE8468 /* Assets.xcassets */; };
 		D9AD5ECD1F02DD8600CE8468 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9AD5ECB1F02DD8600CE8468 /* LaunchScreen.storyboard */; };
+		D9B1A6DC1F051C6A0088DB93 /* GetAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B1A6DB1F051C6A0088DB93 /* GetAlbum.swift */; };
 		D9C4D5641F02334500D2B58F /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5631F02334500D2B58F /* Request.swift */; };
 		D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */; };
 /* End PBXBuildFile section */
@@ -78,6 +79,7 @@
 		D9AD5EC91F02DD8600CE8468 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9AD5ECC1F02DD8600CE8468 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9AD5ECE1F02DD8600CE8468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9B1A6DB1F051C6A0088DB93 /* GetAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAlbum.swift; sourceTree = "<group>"; };
 		D9C4D5631F02334500D2B58F /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatorRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				D9A025131F00F93800C49113 /* GetSong.swift */,
+				D9B1A6DB1F051C6A0088DB93 /* GetAlbum.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				D9A0251B1F012A4F00C49113 /* Artist.swift in Sources */,
 				D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */,
 				D9A025191F011FD000C49113 /* Album.swift in Sources */,
+				D9B1A6DC1F051C6A0088DB93 /* GetAlbum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
