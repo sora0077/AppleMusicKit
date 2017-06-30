@@ -22,7 +22,7 @@ public enum ResourceType: String, Decodable {
 }
 
 public struct Resource<Attributes: AppleMusicKit.Attributes, Relationships: Decodable>: Decodable {
-    public let id: String
+    public let id: Attributes.Identifier
     public let href: String
     public let type: ResourceType
     public let attributes: Attributes?

@@ -10,9 +10,9 @@ import Foundation
 
 public struct GetSong<Song, Album, Artist>: Request
 where
-    Song: AppleMusicKit.Song,
-    Album: AppleMusicKit.Album,
-    Artist: AppleMusicKit.Artist {
+    Song: SongDecodable,
+    Album: AlbumDecodable,
+    Artist: ArtistDecodable {
     public typealias Resource = AppleMusicKit.Resource<Song, Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/songs/\(id)" }
@@ -37,9 +37,9 @@ extension GetSong {
 
 public struct GetMultipleSongs<Song, Album, Artist>: Request
 where
-    Song: AppleMusicKit.Song,
-    Album: AppleMusicKit.Album,
-    Artist: AppleMusicKit.Artist {
+    Song: SongDecodable,
+    Album: AlbumDecodable,
+    Artist: ArtistDecodable {
     public typealias Resource = AppleMusicKit.Resource<Song, GetSong<Song, Album, Artist>.Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/songs" }

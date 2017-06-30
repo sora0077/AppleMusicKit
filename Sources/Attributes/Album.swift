@@ -8,6 +8,8 @@
 
 import Foundation
 
-public protocol Album: Attributes {
+public protocol AlbumDecodable: Attributes {
+}
 
+public protocol Album: AlbumDecodable {
 }

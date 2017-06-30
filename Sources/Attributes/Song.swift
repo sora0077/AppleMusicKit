@@ -8,5 +8,8 @@
 
 import Foundation
 
-public protocol Song: Attributes {
+public protocol SongDecodable: Attributes {
+}
+
+public protocol Song: SongDecodable {
 }

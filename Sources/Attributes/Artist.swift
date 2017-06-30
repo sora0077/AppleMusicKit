@@ -8,6 +8,8 @@
 
 import Foundation
 
-public protocol Artist: Attributes {
+public protocol ArtistDecodable: Attributes {
+}
 
+public protocol Artist: ArtistDecodable {
 }
