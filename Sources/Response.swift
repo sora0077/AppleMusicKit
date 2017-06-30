@@ -17,11 +17,43 @@ public protocol Response: Decodable {
     var data: [Resource] { get }
 }
 
+public enum ResourceType: String, Decodable {
+    case songs, albums, artists, musicVideos = "music-videos"
+}
+
 public struct Resource<Attributes: AppleMusicKit.Attributes, Relationships: Decodable>: Decodable {
-    public let id: Attributes.Identifier
+    public let id: String
     public let href: String
+    public let type: ResourceType
     public let attributes: Attributes?
     public let relationships: Relationships?
+}
+
+public struct AnyResource: Decodable {
+    private let decoder: Decoder
+    public let id: String
+    public let href: String
+    public let type: ResourceType
+
+    private enum CodingKeys: String, CodingKey {
+        case id, href, type
+    }
+
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(String.self, forKey: .id)
+        href = try c.decode(String.self, forKey: .href)
+        type = try c.decode(ResourceType.self, forKey: .type)
+        self.decoder = decoder
+    }
+
+    public func `as`<T, R>(_ type: T.Type, _ relationships: R.Type) throws -> Resource<T, R> {
+        return try Resource(from: decoder)
+    }
+
+    public func `as`<T>(_ type: T.Type) throws -> Resource<T, NoRelationships> {
+        return try Resource(from: decoder)
+    }
 }
 
 public struct ResponseRoot<Resource: Decodable>: Response {

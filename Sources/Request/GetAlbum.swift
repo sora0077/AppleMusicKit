@@ -70,7 +70,7 @@ extension GetAlbum {
 
 extension GetAlbum {
     public struct GetTracks: PaginatorRequest {
-        public typealias Resource = AppleMusicKit.Resource<Album, NoRelationships>
+        public typealias Resource = AnyResource
         public let path: String
         public let parameters: Any?
 
