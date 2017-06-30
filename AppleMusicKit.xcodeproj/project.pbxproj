@@ -32,6 +32,7 @@
 		D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */; };
 		D9CFF7181F063AFE005F983D /* GetArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF7171F063AFE005F983D /* GetArtist.swift */; };
 		D9CFF71A1F063B38005F983D /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF7191F063B38005F983D /* Genre.swift */; };
+		D9CFF71C1F0648C5005F983D /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF71B1F0648C5005F983D /* Artwork.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatorRequest.swift; sourceTree = "<group>"; };
 		D9CFF7171F063AFE005F983D /* GetArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetArtist.swift; sourceTree = "<group>"; };
 		D9CFF7191F063B38005F983D /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		D9CFF71B1F0648C5005F983D /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 		D9A025151F00F95E00C49113 /* Attributes */ = {
 			isa = PBXGroup;
 			children = (
+				D9CFF71B1F0648C5005F983D /* Artwork.swift */,
 				D92087181F02563F00F995FA /* Storefront.swift */,
 				D9A025161F00F96C00C49113 /* Song.swift */,
 				D9A025181F011FD000C49113 /* Album.swift */,
@@ -312,6 +315,7 @@
 			files = (
 				D920871D1F0266A200F995FA /* Session.swift in Sources */,
 				D9A025171F00F96C00C49113 /* Song.swift in Sources */,
+				D9CFF71C1F0648C5005F983D /* Artwork.swift in Sources */,
 				D92087191F02563F00F995FA /* Storefront.swift in Sources */,
 				D9C4D5641F02334500D2B58F /* Request.swift in Sources */,
 				D9A025111F00F89F00C49113 /* AppleMusicKit.swift in Sources */,

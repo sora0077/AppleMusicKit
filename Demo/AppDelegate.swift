@@ -9,22 +9,6 @@
 import UIKit
 import AppleMusicKit
 
-struct Song: AppleMusicKit.Song {
-    typealias Identifier = String
-
-    let name: String
-}
-struct Album: AppleMusicKit.Album {
-    typealias Identifier = String
-
-    let name: String
-}
-struct Artist: AppleMusicKit.Artist {
-    typealias Identifier = String
-
-    let name: String
-}
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
