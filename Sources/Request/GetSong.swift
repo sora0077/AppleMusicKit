@@ -8,11 +8,12 @@
 
 import Foundation
 
-public struct GetSong<Song, Album, Artist>: Request
+public struct GetSong<Song, Album, Artist, Genre>: Request
 where
     Song: SongDecodable,
     Album: AlbumDecodable,
-    Artist: ArtistDecodable {
+    Artist: ArtistDecodable,
+    Genre: GenreDecodable {
     public typealias Resource = AppleMusicKit.Resource<Song, Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/songs/\(id)" }
@@ -32,15 +33,17 @@ extension GetSong {
     public struct Relationships: Decodable {
         public let albums: Page<GetAlbums>
         public let artists: Page<GetArtists>
+        public let genres: Page<GetGenres>?
     }
 }
 
-public struct GetMultipleSongs<Song, Album, Artist>: Request
+public struct GetMultipleSongs<Song, Album, Artist, Genre>: Request
 where
     Song: SongDecodable,
     Album: AlbumDecodable,
-    Artist: ArtistDecodable {
-    public typealias Resource = AppleMusicKit.Resource<Song, GetSong<Song, Album, Artist>.Relationships>
+    Artist: ArtistDecodable,
+    Genre: GenreDecodable {
+    public typealias Resource = AppleMusicKit.Resource<Song, GetSong<Song, Album, Artist, Genre>.Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/songs" }
     public let parameters: Any?
@@ -98,5 +101,21 @@ extension GetSong {
             self.path = path
             self.parameters = parameters
         }
+    }
+    public struct GetGenres: PaginatorRequest {
+        public typealias Resource = AppleMusicKit.Resource<Genre, NoRelationships>
+        public let path: String
+        public let parameters: Any?
+        
+        init(storefront: String, id: Song.Identifier, limit: Int? = nil, offset: Int? = nil) {
+            self.init(path: "/v1/catalog/\(storefront)/songs/\(id)/genres",
+                parameters: ["limit": limit, "offset": offset].cleaned)
+        }
+        
+        public init(path: String, parameters: [String: Any]) {
+            self.path = path
+            self.parameters = parameters
+        }
+        
     }
 }

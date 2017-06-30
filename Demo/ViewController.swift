@@ -56,7 +56,7 @@ struct Genre: AppleMusicKit.Genre {
     let name: String
 }
 
-typealias GetSong = AppleMusicKit.GetSong<Song, Album, Artist>
+typealias GetSong = AppleMusicKit.GetSong<Song, Album, Artist, Genre>
 typealias GetAlbum = AppleMusicKit.GetAlbum<Album, Song, Artist>
 typealias GetArtist = AppleMusicKit.GetArtist<Artist, Album, Genre>
 
