@@ -30,6 +30,8 @@
 		D9B1A6DC1F051C6A0088DB93 /* GetAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B1A6DB1F051C6A0088DB93 /* GetAlbum.swift */; };
 		D9C4D5641F02334500D2B58F /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5631F02334500D2B58F /* Request.swift */; };
 		D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */; };
+		D9CFF7181F063AFE005F983D /* GetArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF7171F063AFE005F983D /* GetArtist.swift */; };
+		D9CFF71A1F063B38005F983D /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF7191F063B38005F983D /* Genre.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,8 @@
 		D9B1A6DB1F051C6A0088DB93 /* GetAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAlbum.swift; sourceTree = "<group>"; };
 		D9C4D5631F02334500D2B58F /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatorRequest.swift; sourceTree = "<group>"; };
+		D9CFF7171F063AFE005F983D /* GetArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetArtist.swift; sourceTree = "<group>"; };
+		D9CFF7191F063B38005F983D /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +166,7 @@
 			children = (
 				D9A025131F00F93800C49113 /* GetSong.swift */,
 				D9B1A6DB1F051C6A0088DB93 /* GetAlbum.swift */,
+				D9CFF7171F063AFE005F983D /* GetArtist.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -173,6 +178,7 @@
 				D9A025161F00F96C00C49113 /* Song.swift */,
 				D9A025181F011FD000C49113 /* Album.swift */,
 				D9A0251A1F012A4F00C49113 /* Artist.swift */,
+				D9CFF7191F063B38005F983D /* Genre.swift */,
 			);
 			path = Attributes;
 			sourceTree = "<group>";
@@ -309,9 +315,11 @@
 				D92087191F02563F00F995FA /* Storefront.swift in Sources */,
 				D9C4D5641F02334500D2B58F /* Request.swift in Sources */,
 				D9A025111F00F89F00C49113 /* AppleMusicKit.swift in Sources */,
+				D9CFF7181F063AFE005F983D /* GetArtist.swift in Sources */,
 				D920871B1F0256C600F995FA /* Response.swift in Sources */,
 				D9A025141F00F93800C49113 /* GetSong.swift in Sources */,
 				D9A0251B1F012A4F00C49113 /* Artist.swift in Sources */,
+				D9CFF71A1F063B38005F983D /* Genre.swift in Sources */,
 				D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */,
 				D9A025191F011FD000C49113 /* Album.swift in Sources */,
 				D9B1A6DC1F051C6A0088DB93 /* GetAlbum.swift in Sources */,

@@ -9,21 +9,23 @@
 import UIKit
 import AppleMusicKit
 
+struct Genre: AppleMusicKit.Genre {
+    typealias Identifier = String
+    let name: String
+}
+
+typealias GetAlbum = AppleMusicKit.GetAlbum<Album, Song, Artist>
+typealias GetArtist = AppleMusicKit.GetArtist<Artist, Album, Genre>
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Session.shared.send(GetAlbum<Album, Song, Artist>(storefront: "us", id: "310730204", include: ["songs"])) { result in
+        Session.shared.send(GetArtist(storefront: "us", id: "178834")) { result in
             switch result {
             case .success(let response):
-                do {
-                    let track = response.data.first?.relationships?.tracks.data.first
-                    print(try track?.resource(with: Song.self).attributes?.name ?? "")
-                } catch {
-                    print(error)
-                }
-                if let next = response.data.first?.relationships?.tracks.next {
+                if let next = response.data.first?.relationships?.albums.next {
                     Session.shared.send(next) { result in
                         switch result {
                         case .success(let response):

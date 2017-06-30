@@ -50,11 +50,11 @@ public struct AnyResource: Decodable {
     }
 
     public func resource<T, R>(with type: T.Type, _ relationships: R.Type) throws -> Resource<T, R> {
-        return try Resource(from: decoder)
+        return try .init(from: decoder)
     }
 
     public func resource<T>(with type: T.Type) throws -> Resource<T, NoRelationships> {
-        return try Resource(from: decoder)
+        return try .init(from: decoder)
     }
 }
 
@@ -64,6 +64,6 @@ public struct ResponseRoot<Resource: Decodable>: Response {
 
 public struct Page<R: PaginatorRequest>: Response where R.Resource: Decodable {
     public let data: [R.Resource]
-    public let href: String
+    public let href: String?
     public let next: R?
 }

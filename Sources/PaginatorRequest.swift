@@ -13,16 +13,12 @@ public protocol PaginatorRequest: Request, Decodable {
     init(path: String, parameters: [String: Any])
 }
 
-private enum PaginatorRequestCodingKeys: String, CodingKey {
-    case next
-}
-
 extension PaginatorRequest {
     public var method: HTTPMethod { return .get }
 
     public init(from decoder: Decoder) throws {
-        let c = try decoder.container(keyedBy: PaginatorRequestCodingKeys.self)
-        let comps = URLComponents(string: try c.decode(String.self, forKey: .next))!
+        let c = try decoder.singleValueContainer()
+        let comps = URLComponents(string: try c.decode(String.self))!
         let parameters = [String: Any](uniqueKeysWithValues: comps.queryItems?.map {
             ($0.name, $0.value ?? "") } ?? [])
         self.init(path: comps.path, parameters: parameters)

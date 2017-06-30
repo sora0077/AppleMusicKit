@@ -10,9 +10,9 @@ import Foundation
 
 public struct GetAlbum<Album, Song, Artist>: Request
     where
-    Album: AppleMusicKit.Album,
-    Song: AppleMusicKit.Song,
-    Artist: AppleMusicKit.Artist {
+    Album: AlbumDecodable,
+    Song: SongDecodable,
+    Artist: ArtistDecodable {
     public typealias Resource = AppleMusicKit.Resource<Album, Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/albums/\(id)" }
@@ -37,9 +37,9 @@ extension GetAlbum {
 
 public struct GetMultipleAlbums<Album, Song, Artist>: Request
     where
-    Album: AppleMusicKit.Album,
-    Song: AppleMusicKit.Song,
-    Artist: AppleMusicKit.Artist {
+    Album: AlbumDecodable,
+    Song: SongDecodable,
+    Artist: ArtistDecodable {
     public typealias Resource = AppleMusicKit.Resource<Album, GetAlbum<Album, Song, Artist>.Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/albums" }
@@ -60,11 +60,11 @@ public struct GetMultipleAlbums<Album, Song, Artist>: Request
 
 extension GetAlbum {
     func tracks(limit: Int? = nil, offset: Int? = nil) -> GetTracks {
-        return GetTracks(storefront: storefront, id: id, limit: limit, offset: offset)
+        return .init(storefront: storefront, id: id, limit: limit, offset: offset)
     }
 
     func artists(limit: Int? = nil, offset: Int? = nil) -> GetArtists {
-        return GetArtists(storefront: storefront, id: id, limit: limit, offset: offset)
+        return .init(storefront: storefront, id: id, limit: limit, offset: offset)
     }
 }
 
