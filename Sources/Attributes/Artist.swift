@@ -12,4 +12,5 @@ public protocol ArtistDecodable: Attributes {
 }
 
 public protocol Artist: ArtistDecodable {
+    associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
 }

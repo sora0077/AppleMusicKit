@@ -26,6 +26,7 @@ extension UIColor {
 struct Song: AppleMusicKit.Song {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
+    typealias EditorialNotes = Demo.EditorialNotes
 
     let name: String
     let artwork: Artwork
@@ -33,9 +34,27 @@ struct Song: AppleMusicKit.Song {
 struct MusicVideo: AppleMusicKit.MusicVideo {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
+    typealias EditorialNotes = Demo.EditorialNotes
 
     let name: String
     let artwork: Artwork
+}
+struct Album: AppleMusicKit.Album {
+    typealias Identifier = String
+    typealias Artwork = Demo.Artwork
+    typealias EditorialNotes = Demo.EditorialNotes
+
+    let name: String
+}
+struct Artist: AppleMusicKit.Artist {
+    typealias Identifier = String
+    typealias EditorialNotes = Demo.EditorialNotes
+
+    let name: String
+}
+struct Genre: AppleMusicKit.Genre {
+    typealias Identifier = String
+    let name: String
 }
 struct Artwork: AppleMusicKit.Artwork {
     let bgColor: UIColor
@@ -49,20 +68,7 @@ struct Artwork: AppleMusicKit.Artwork {
         bgColor = .init(hex: try c.decode(String.self, forKey: .bgColor))
     }
 }
-struct Album: AppleMusicKit.Album {
-    typealias Identifier = String
-
-    let name: String
-}
-struct Artist: AppleMusicKit.Artist {
-    typealias Identifier = String
-
-    let name: String
-}
-
-struct Genre: AppleMusicKit.Genre {
-    typealias Identifier = String
-    let name: String
+struct EditorialNotes: AppleMusicKit.EditorialNotes {
 }
 
 typealias GetSong = AppleMusicKit.GetSong<Song, Album, Artist, Genre>
