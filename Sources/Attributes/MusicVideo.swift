@@ -14,4 +14,5 @@ public protocol MusicVideoDecodable: Attributes {
 public protocol MusicVideo: MusicVideoDecodable {
     associatedtype Artwork: AppleMusicKit.Artwork
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
+    associatedtype PlayParameters: AppleMusicKit.PlayParameters
 }

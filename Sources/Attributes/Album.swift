@@ -14,4 +14,5 @@ public protocol AlbumDecodable: Attributes {
 public protocol Album: AlbumDecodable {
     associatedtype Artwork: AppleMusicKit.Artwork
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
+    associatedtype PlayParameters: AppleMusicKit.PlayParameters
 }

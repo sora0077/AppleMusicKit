@@ -27,6 +27,7 @@ struct Song: AppleMusicKit.Song {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
     typealias EditorialNotes = Demo.EditorialNotes
+    typealias PlayParameters = Demo.PlayParameters
 
     let name: String
     let artwork: Artwork
@@ -35,6 +36,7 @@ struct MusicVideo: AppleMusicKit.MusicVideo {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
     typealias EditorialNotes = Demo.EditorialNotes
+    typealias PlayParameters = Demo.PlayParameters
 
     let name: String
     let artwork: Artwork
@@ -43,6 +45,7 @@ struct Album: AppleMusicKit.Album {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
     typealias EditorialNotes = Demo.EditorialNotes
+    typealias PlayParameters = Demo.PlayParameters
 
     let name: String
 }
@@ -69,6 +72,8 @@ struct Artwork: AppleMusicKit.Artwork {
     }
 }
 struct EditorialNotes: AppleMusicKit.EditorialNotes {
+}
+struct PlayParameters: AppleMusicKit.PlayParameters {
 }
 
 typealias GetSong = AppleMusicKit.GetSong<Song, Album, Artist, Genre>
