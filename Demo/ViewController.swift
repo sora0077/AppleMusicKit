@@ -60,7 +60,7 @@ struct Genre: AppleMusicKit.Genre {
     let name: String
 }
 struct Artwork: AppleMusicKit.Artwork {
-    let bgColor: UIColor
+    let bgColor: UIColor?
 
     private enum CodingKeys: String, CodingKey {
         case bgColor
@@ -68,7 +68,7 @@ struct Artwork: AppleMusicKit.Artwork {
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        bgColor = .init(hex: try c.decode(String.self, forKey: .bgColor))
+        bgColor = try c.decodeIfPresent(String.self, forKey: .bgColor).map { UIColor(hex: $0) }
     }
 }
 struct EditorialNotes: AppleMusicKit.EditorialNotes {
@@ -77,6 +77,7 @@ struct PlayParameters: AppleMusicKit.PlayParameters {
 }
 
 typealias GetSong = AppleMusicKit.GetSong<Song, Album, Artist, Genre>
+typealias GetMusicVideo = AppleMusicKit.GetMusicVideo<MusicVideo, Album, Artist, Genre>
 typealias GetAlbum = AppleMusicKit.GetAlbum<Album, Song, MusicVideo, Artist>
 typealias GetArtist = AppleMusicKit.GetArtist<Artist, Album, Genre>
 
@@ -85,10 +86,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Session.shared.send(GetAlbum(storefront: "us", id: "310730204")) { result in
+        Session.shared.send(GetMusicVideo(storefront: "us", id: "639032181")) { result in
             switch result {
             case .success(let response):
-                print(response.data.first?.relationships?.tracks.data.first)
+                print(response.data.first?.relationships?.albums.data.first)
             case .failure(let error):
                 print(error)
             }
