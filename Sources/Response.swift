@@ -21,7 +21,9 @@ public enum ResourceType: String, Decodable {
     case songs, albums, artists, musicVideos = "music-videos"
 }
 
-public struct Resource<Attributes: AppleMusicKit.Attributes, Relationships: Decodable>: Decodable {
+public struct Resource<A: Attributes, R: Decodable>: Decodable {
+    public typealias Attributes = A
+    public typealias Relationships = R
     public let id: Attributes.Identifier
     public let href: String
     public let type: ResourceType
@@ -47,11 +49,11 @@ public struct AnyResource: Decodable {
         self.decoder = decoder
     }
 
-    public func `as`<T, R>(_ type: T.Type, _ relationships: R.Type) throws -> Resource<T, R> {
+    public func resource<T, R>(with type: T.Type, _ relationships: R.Type) throws -> Resource<T, R> {
         return try Resource(from: decoder)
     }
 
-    public func `as`<T>(_ type: T.Type) throws -> Resource<T, NoRelationships> {
+    public func resource<T>(with type: T.Type) throws -> Resource<T, NoRelationships> {
         return try Resource(from: decoder)
     }
 }
