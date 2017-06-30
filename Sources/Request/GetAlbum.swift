@@ -8,10 +8,11 @@
 
 import Foundation
 
-public struct GetAlbum<Album, Song, Artist>: Request
+public struct GetAlbum<Album, Song, MusicVideo, Artist>: Request
     where
     Album: AlbumDecodable,
     Song: SongDecodable,
+    MusicVideo: MusicVideoDecodable,
     Artist: ArtistDecodable {
     public typealias Resource = AppleMusicKit.Resource<Album, Relationships>
     public var method: HTTPMethod { return .get }
@@ -35,12 +36,13 @@ extension GetAlbum {
     }
 }
 
-public struct GetMultipleAlbums<Album, Song, Artist>: Request
+public struct GetMultipleAlbums<Album, Song, MusicVideo, Artist>: Request
     where
     Album: AlbumDecodable,
     Song: SongDecodable,
+    MusicVideo: MusicVideoDecodable,
     Artist: ArtistDecodable {
-    public typealias Resource = AppleMusicKit.Resource<Album, GetAlbum<Album, Song, Artist>.Relationships>
+    public typealias Resource = AppleMusicKit.Resource<Album, GetAlbum<Album, Song, MusicVideo, Artist>.Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/albums" }
     public let parameters: Any?
@@ -70,7 +72,7 @@ extension GetAlbum {
 
 extension GetAlbum {
     public struct GetTracks: PaginatorRequest {
-        public typealias Resource = AnyResource
+        public typealias Resource = TrackResource<Song, MusicVideo>
         public let path: String
         public let parameters: Any?
 

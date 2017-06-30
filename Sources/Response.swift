@@ -58,6 +58,27 @@ public struct AnyResource: Decodable {
     }
 }
 
+public enum TrackResource<Song: SongDecodable, MusicVideo: MusicVideoDecodable>: Decodable {
+    case song(Resource<Song, NoRelationships>), musicVideo(Resource<MusicVideo, NoRelationships>)
+
+    private enum CodingKeys: String, CodingKey {
+        case type
+    }
+
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        let type = try c.decode(ResourceType.self, forKey: .type)
+        switch type {
+        case .songs:
+            self = .song(try .init(from: decoder))
+        case .musicVideos:
+            self = .musicVideo(try .init(from: decoder))
+        default:
+            throw DecodingError.dataCorrupted(.init(codingPath: c.codingPath, debugDescription: "\(#function)@\(#line)"))
+        }
+    }
+}
+
 public struct ResponseRoot<Resource: Decodable>: Response {
     public let data: [Resource]
 }

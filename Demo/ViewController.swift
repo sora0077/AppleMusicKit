@@ -16,9 +16,21 @@ extension UIColor {
         let b = CGFloat(hex & 0x0000FF) / 255.0
         self.init(red: r, green: g, blue: b, alpha: alpha)
     }
+    convenience init(hex: String, alpha: CGFloat = 1) {
+        var color: Int32 = 0
+        Scanner(string: hex).scanInt32(&color)
+        self.init(hex: Int(color), alpha: alpha)
+    }
 }
 
 struct Song: AppleMusicKit.Song {
+    typealias Identifier = String
+    typealias Artwork = Demo.Artwork
+
+    let name: String
+    let artwork: Artwork
+}
+struct MusicVideo: AppleMusicKit.MusicVideo {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
 
@@ -34,10 +46,7 @@ struct Artwork: AppleMusicKit.Artwork {
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        guard let bgColor = Int(try c.decode(String.self, forKey: .bgColor)) else {
-            throw DecodingError.typeMismatch(Int.self, .init(codingPath: c.codingPath, debugDescription: "\(#function)@\(#line)"))
-        }
-        self.bgColor = .init(hex: bgColor)
+        bgColor = .init(hex: try c.decode(String.self, forKey: .bgColor))
     }
 }
 struct Album: AppleMusicKit.Album {
@@ -57,7 +66,7 @@ struct Genre: AppleMusicKit.Genre {
 }
 
 typealias GetSong = AppleMusicKit.GetSong<Song, Album, Artist, Genre>
-typealias GetAlbum = AppleMusicKit.GetAlbum<Album, Song, Artist>
+typealias GetAlbum = AppleMusicKit.GetAlbum<Album, Song, MusicVideo, Artist>
 typealias GetArtist = AppleMusicKit.GetArtist<Artist, Album, Genre>
 
 class ViewController: UIViewController {
@@ -65,10 +74,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Session.shared.send(GetSong(storefront: "us", id: "900032829")) { result in
+        Session.shared.send(GetAlbum(storefront: "us", id: "310730204")) { result in
             switch result {
             case .success(let response):
-                print(response)
+                print(response.data.first?.relationships?.tracks.data.first)
             case .failure(let error):
                 print(error)
             }

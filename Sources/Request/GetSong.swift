@@ -106,16 +106,16 @@ extension GetSong {
         public typealias Resource = AppleMusicKit.Resource<Genre, NoRelationships>
         public let path: String
         public let parameters: Any?
-        
+
         init(storefront: String, id: Song.Identifier, limit: Int? = nil, offset: Int? = nil) {
             self.init(path: "/v1/catalog/\(storefront)/songs/\(id)/genres",
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }
-        
+
         public init(path: String, parameters: [String: Any]) {
             self.path = path
             self.parameters = parameters
         }
-        
+
     }
 }

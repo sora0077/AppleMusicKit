@@ -33,6 +33,7 @@
 		D9CFF7181F063AFE005F983D /* GetArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF7171F063AFE005F983D /* GetArtist.swift */; };
 		D9CFF71A1F063B38005F983D /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF7191F063B38005F983D /* Genre.swift */; };
 		D9CFF71C1F0648C5005F983D /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF71B1F0648C5005F983D /* Artwork.swift */; };
+		D9CFF71E1F065225005F983D /* MusicVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF71D1F065225005F983D /* MusicVideo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,7 @@
 		D9CFF7171F063AFE005F983D /* GetArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetArtist.swift; sourceTree = "<group>"; };
 		D9CFF7191F063B38005F983D /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		D9CFF71B1F0648C5005F983D /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
+		D9CFF71D1F065225005F983D /* MusicVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				D9A025181F011FD000C49113 /* Album.swift */,
 				D9A0251A1F012A4F00C49113 /* Artist.swift */,
 				D9CFF7191F063B38005F983D /* Genre.swift */,
+				D9CFF71D1F065225005F983D /* MusicVideo.swift */,
 			);
 			path = Attributes;
 			sourceTree = "<group>";
@@ -325,6 +328,7 @@
 				D9A0251B1F012A4F00C49113 /* Artist.swift in Sources */,
 				D9CFF71A1F063B38005F983D /* Genre.swift in Sources */,
 				D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */,
+				D9CFF71E1F065225005F983D /* MusicVideo.swift in Sources */,
 				D9A025191F011FD000C49113 /* Album.swift in Sources */,
 				D9B1A6DC1F051C6A0088DB93 /* GetAlbum.swift in Sources */,
 			);
