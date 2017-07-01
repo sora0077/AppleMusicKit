@@ -1,8 +1,8 @@
 //
-//  Response.swift
+//  Resource.swift
 //  AppleMusicKit
 //
-//  Created by 林 達也 on 2017/06/27.
+//  Created by 林達也 on 2017/07/01.
 //  Copyright © 2017年 jp.sora0077. All rights reserved.
 //
 
@@ -10,11 +10,6 @@ import Foundation
 
 public protocol Attributes: Decodable {
     associatedtype Identifier: Decodable
-}
-
-public protocol Response: Decodable {
-    associatedtype Resource
-    var data: [Resource] { get }
 }
 
 public enum ResourceType: String, Decodable {
@@ -58,8 +53,8 @@ public struct AnyResource: Decodable {
     }
 }
 
-public enum TrackResource<Song: SongDecodable, MusicVideo: MusicVideoDecodable>: Decodable {
-    case song(Resource<Song, NoRelationships>), musicVideo(Resource<MusicVideo, NoRelationships>)
+public enum Track<Song: SongDecodable, MusicVideo: MusicVideoDecodable, R: Decodable>: Decodable {
+    case song(Resource<Song, R>), musicVideo(Resource<MusicVideo, R>)
 
     private enum CodingKeys: String, CodingKey {
         case type
@@ -77,14 +72,4 @@ public enum TrackResource<Song: SongDecodable, MusicVideo: MusicVideoDecodable>:
             throw DecodingError.dataCorrupted(.init(codingPath: c.codingPath, debugDescription: "\(#function)@\(#line)"))
         }
     }
-}
-
-public struct ResponseRoot<Resource: Decodable>: Response {
-    public let data: [Resource]
-}
-
-public struct Page<R: PaginatorRequest>: Response where R.Resource: Decodable {
-    public let data: [R.Resource]
-    public let href: String?
-    public let next: R?
 }

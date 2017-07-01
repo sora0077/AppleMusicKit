@@ -72,7 +72,7 @@ extension GetAlbum {
 
 extension GetAlbum {
     public struct GetTracks: PaginatorRequest {
-        public typealias Resource = TrackResource<Song, MusicVideo>
+        public typealias Resource = Track<Song, MusicVideo, NoRelationships>
         public let path: String
         public let parameters: Any?
 
