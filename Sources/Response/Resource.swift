@@ -14,6 +14,8 @@ public protocol Attributes: Decodable {
 
 public enum ResourceType: String, Decodable {
     case songs, albums, artists, musicVideos = "music-videos"
+    case playlists
+    case appleCurators = "apple-curators"
 }
 
 public struct Resource<A: Attributes, R: Decodable>: Decodable {

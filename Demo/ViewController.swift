@@ -59,6 +59,12 @@ struct Genre: AppleMusicKit.Genre {
     typealias Identifier = String
     let name: String
 }
+struct Playlist: AppleMusicKit.Playlist {
+    typealias Identifier = String
+}
+struct Curator: AppleMusicKit.Curator {
+    typealias Identifier = String
+}
 struct Artwork: AppleMusicKit.Artwork {
     let bgColor: UIColor?
 
@@ -80,16 +86,17 @@ typealias GetSong = AppleMusicKit.GetSong<Song, Album, Artist, Genre>
 typealias GetMusicVideo = AppleMusicKit.GetMusicVideo<MusicVideo, Album, Artist, Genre>
 typealias GetAlbum = AppleMusicKit.GetAlbum<Album, Song, MusicVideo, Artist>
 typealias GetArtist = AppleMusicKit.GetArtist<Artist, Album, Genre>
+typealias GetPlaylist = AppleMusicKit.GetPlaylist<Playlist, Curator, Song, MusicVideo>
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Session.shared.send(GetMusicVideo(storefront: "us", id: "639032181")) { result in
+        Session.shared.send(GetPlaylist(storefront: "us", id: "pl.acc464c750b94302b8806e5fcbe56e17")) { result in
             switch result {
             case .success(let response):
-                print(response.data.first?.relationships?.albums.data.first)
+                print(response.data.first?.relationships?.tracks.data.first)
             case .failure(let error):
                 print(error)
             }
