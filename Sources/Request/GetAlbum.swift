@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct GetAlbum<Album, Song, MusicVideo, Artist>: Request
+public struct GetAlbum<Album, Song, MusicVideo, Artist>: ResourceRequest
     where
     Album: AlbumDecodable,
     Song: SongDecodable,
@@ -36,7 +36,7 @@ extension GetAlbum {
     }
 }
 
-public struct GetMultipleAlbums<Album, Song, MusicVideo, Artist>: Request
+public struct GetMultipleAlbums<Album, Song, MusicVideo, Artist>: ResourceRequest
     where
     Album: AlbumDecodable,
     Song: SongDecodable,

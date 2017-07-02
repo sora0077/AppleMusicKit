@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct GetArtist<Artist, Album, Genre>: Request
+public struct GetArtist<Artist, Album, Genre>: ResourceRequest
     where
     Artist: ArtistDecodable,
     Album: AlbumDecodable,
@@ -35,7 +35,7 @@ extension GetArtist {
     }
 }
 
-public struct GetMultipleArtists<Artist, Album, Genre>: Request
+public struct GetMultipleArtists<Artist, Album, Genre>: ResourceRequest
     where
     Artist: ArtistDecodable,
     Album: AlbumDecodable,

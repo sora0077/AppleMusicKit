@@ -9,7 +9,7 @@
 import Foundation
 import APIKit
 
-public protocol PaginatorRequest: Request, Decodable {
+public protocol PaginatorRequest: ResourceRequest, Decodable {
     init(path: String, parameters: [String: Any])
 }
 

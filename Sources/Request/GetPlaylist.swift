@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct GetPlaylist<Playlist, Curator, Song, MusicVideo>: Request
+public struct GetPlaylist<Playlist, Curator, Song, MusicVideo>: ResourceRequest
     where
     Playlist: PlaylistDecodable,
     Curator: CuratorDecodable,
@@ -36,7 +36,7 @@ extension GetPlaylist {
     }
 }
 
-public struct GetMultiplePlaylists<Playlist, Curator, Song, MusicVideo>: Request
+public struct GetMultiplePlaylists<Playlist, Curator, Song, MusicVideo>: ResourceRequest
     where
     Playlist: PlaylistDecodable,
     Curator: CuratorDecodable,

@@ -9,8 +9,6 @@
 import Foundation
 
 public protocol Response: Decodable {
-    associatedtype Resource
-    var data: [Resource] { get }
 }
 
 public struct ResponseRoot<Resource: Decodable>: Response {

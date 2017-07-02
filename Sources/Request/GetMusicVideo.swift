@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct GetMusicVideo<MusicVideo, Album, Artist, Genre>: Request
+public struct GetMusicVideo<MusicVideo, Album, Artist, Genre>: ResourceRequest
     where
     MusicVideo: MusicVideoDecodable,
     Album: AlbumDecodable,
@@ -37,7 +37,7 @@ extension GetMusicVideo {
     }
 }
 
-public struct GetMultipleMusicVideos<MusicVideo, Album, Artist, Genre>: Request
+public struct GetMultipleMusicVideos<MusicVideo, Album, Artist, Genre>: ResourceRequest
     where
     MusicVideo: MusicVideoDecodable,
     Album: AlbumDecodable,

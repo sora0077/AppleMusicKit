@@ -11,6 +11,9 @@ import APIKit
 
 public typealias HTTPMethod = APIKit.HTTPMethod
 public protocol Request: APIKit.Request where Response: AppleMusicKit.Response {
+}
+
+public protocol ResourceRequest: Request {
     associatedtype Resource
 }
 
@@ -28,7 +31,7 @@ extension Request {
     }
 }
 
-extension Request where Resource: Decodable {
+extension ResourceRequest where Resource: Decodable {
     public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> ResponseRoot<Resource> {
         do {
             if let data = object as? Data {
