@@ -18,7 +18,8 @@ extension PaginatorRequest {
 
     public init(from decoder: Decoder) throws {
         let c = try decoder.singleValueContainer()
-        let comps = URLComponents(string: try c.decode(String.self))!
+        let str = try c.decode(String.self).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let comps = URLComponents(string: str)!
         let parameters = [String: Any](uniqueKeysWithValues: comps.queryItems?.map {
             ($0.name, $0.value ?? "") } ?? [])
         self.init(path: comps.path, parameters: parameters)

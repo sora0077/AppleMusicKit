@@ -88,13 +88,14 @@ typealias GetAlbum = AppleMusicKit.GetAlbum<Album, Song, MusicVideo, Artist>
 typealias GetArtist = AppleMusicKit.GetArtist<Artist, Album, Genre>
 typealias GetPlaylist = AppleMusicKit.GetPlaylist<Playlist, Curator, Song, MusicVideo>
 typealias GetCharts = AppleMusicKit.GetCharts<Song, MusicVideo, Album>
+typealias SearchResources = AppleMusicKit.SearchResources<Song, MusicVideo, Album, Artist>
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Session.shared.send(GetCharts(storefront: "us", types: [.songs])) { result in
+        Session.shared.send(SearchResources(storefront: "us", term: "james brown")) { result in
             switch result {
             case .success(let response):
                 print(response)

@@ -21,6 +21,7 @@
 		D97C47041F0769BE00DADC28 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47031F0769BE00DADC28 /* Playlist.swift */; };
 		D97C47061F076A2B00DADC28 /* GetPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47051F076A2B00DADC28 /* GetPlaylist.swift */; };
 		D97C47081F076A7900DADC28 /* Curator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47071F076A7900DADC28 /* Curator.swift */; };
+		D99A8FD91F0954F70076EFBA /* SearchResources.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99A8FD81F0954F70076EFBA /* SearchResources.swift */; };
 		D9A025011F00F22400C49113 /* AppleMusicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A024FF1F00F22300C49113 /* AppleMusicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9A025111F00F89F00C49113 /* AppleMusicKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025101F00F89F00C49113 /* AppleMusicKit.swift */; };
 		D9A025141F00F93800C49113 /* GetSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025131F00F93800C49113 /* GetSong.swift */; };
@@ -79,6 +80,7 @@
 		D97C47031F0769BE00DADC28 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		D97C47051F076A2B00DADC28 /* GetPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPlaylist.swift; sourceTree = "<group>"; };
 		D97C47071F076A7900DADC28 /* Curator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curator.swift; sourceTree = "<group>"; };
+		D99A8FD81F0954F70076EFBA /* SearchResources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResources.swift; sourceTree = "<group>"; };
 		D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleMusicKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A024FF1F00F22300C49113 /* AppleMusicKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppleMusicKit.h; sourceTree = "<group>"; };
 		D9A025001F00F22400C49113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				D9CFF7171F063AFE005F983D /* GetArtist.swift */,
 				D97C47051F076A2B00DADC28 /* GetPlaylist.swift */,
 				D93B356D1F092A1500A5D216 /* GetCharts.swift */,
+				D99A8FD81F0954F70076EFBA /* SearchResources.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D93B356E1F092B1200A5D216 /* GetCharts.swift in Sources */,
+				D99A8FD91F0954F70076EFBA /* SearchResources.swift in Sources */,
 				D920871D1F0266A200F995FA /* Session.swift in Sources */,
 				D9A025171F00F96C00C49113 /* Song.swift in Sources */,
 				D9CFF71C1F0648C5005F983D /* Artwork.swift in Sources */,
