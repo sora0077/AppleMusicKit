@@ -31,6 +31,17 @@ extension Request {
     }
 }
 
+extension Request {
+    public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
+        do {
+            if let data = object as? Data {
+                print(try? JSONSerialization.jsonObject(with: data, options: .allowFragments))
+            }
+        }
+        return try defaultDecoder.decode(Response.self, from: object as! Data)
+    }
+}
+
 extension ResourceRequest where Resource: Decodable {
     public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> ResponseRoot<Resource> {
         do {
