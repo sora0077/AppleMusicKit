@@ -54,7 +54,7 @@ public struct GetMultipleArtists<Artist, Album, Genre>: ResourceRequest
     public init(storefront: String, ids: [Artist.Identifier], locale: Locale? = nil, include: [String]? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
-        self.parameters = ["ids": ids, "l": locale?.languageTag, "include": include].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": include].cleaned
     }
 }
 

@@ -57,7 +57,7 @@ public struct GetMultipleMusicVideos<MusicVideo, Album, Artist, Genre>: Resource
     public init(storefront: String, ids: [MusicVideo.Identifier], locale: Locale? = nil, include: [String]? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
-        self.parameters = ["ids": ids, "l": locale?.languageTag, "include": include].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": include].cleaned
     }
 }
 

@@ -13,6 +13,7 @@
 		D9043BA31F0360F5001D9B50 /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9A0250E1F00F63E00C49113 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9043BA41F0360F5001D9B50 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A0250D1F00F63E00C49113 /* Result.framework */; };
 		D9043BA51F0360F5001D9B50 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9A0250D1F00F63E00C49113 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D90ACBE11F0A2D4200D6CB94 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90ACBE01F0A2D4200D6CB94 /* Utils.swift */; };
 		D92087191F02563F00F995FA /* Storefront.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92087181F02563F00F995FA /* Storefront.swift */; };
 		D920871B1F0256C600F995FA /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920871A1F0256C600F995FA /* Response.swift */; };
 		D920871D1F0266A200F995FA /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920871C1F0266A200F995FA /* Session.swift */; };
@@ -73,6 +74,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D90ACBE01F0A2D4200D6CB94 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		D92087181F02563F00F995FA /* Storefront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storefront.swift; sourceTree = "<group>"; };
 		D920871A1F0256C600F995FA /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D920871C1F0266A200F995FA /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				D9A025151F00F95E00C49113 /* Attributes */,
 				D9A025121F00F92800C49113 /* Request */,
 				D97C46FD1F07673500DADC28 /* Response */,
+				D90ACBE01F0A2D4200D6CB94 /* Utils.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 				D920871D1F0266A200F995FA /* Session.swift in Sources */,
 				D9A025171F00F96C00C49113 /* Song.swift in Sources */,
 				D9CFF71C1F0648C5005F983D /* Artwork.swift in Sources */,
+				D90ACBE11F0A2D4200D6CB94 /* Utils.swift in Sources */,
 				D92087191F02563F00F995FA /* Storefront.swift in Sources */,
 				D9B1D27A1F066C9000F3720B /* GetMusicVideo.swift in Sources */,
 				D9C4D5641F02334500D2B58F /* Request.swift in Sources */,

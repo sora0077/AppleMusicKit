@@ -57,7 +57,7 @@ where
     public init(storefront: String, ids: [Song.Identifier], locale: Locale? = nil, include: [String]? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
-        self.parameters = ["ids": ids, "l": locale?.languageTag, "include": include].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": include].cleaned
     }
 }
 

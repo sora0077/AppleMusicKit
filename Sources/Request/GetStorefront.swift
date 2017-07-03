@@ -34,8 +34,7 @@ public struct GetMultipleStorefronts<Storefront: StorefrontDecodable>: ResourceR
 
     public init(ids: [Storefront.Identifier], local: Locale? = nil) {
         assert(!ids.isEmpty)
-        self.parameters = ["ids": ids.map(String.init(describing:)).joined(separator: ","),
-                           "l": local?.languageTag].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": local?.languageTag].cleaned
     }
 }
 

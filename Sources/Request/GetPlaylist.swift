@@ -56,7 +56,7 @@ public struct GetMultiplePlaylists<Playlist, Curator, Song, MusicVideo>: Resourc
     public init(storefront: String, ids: [Playlist.Identifier], locale: Locale? = nil, include: [String]? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
-        self.parameters = ["ids": ids, "l": locale?.languageTag, "include": include].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": include].cleaned
     }
 }
 
