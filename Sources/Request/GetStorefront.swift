@@ -42,7 +42,11 @@ public struct GetAllStorefronts<Storefront: StorefrontDecodable>: PaginatorReque
     public typealias Resource = AppleMusicKit.Resource<Storefront, NoRelationships>
 
     public let path: String
-    public let parameters: Any?
+    public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+
+    public var limit: Int?
+    public var offset: Int?
+    private let _parameters: [String: Any]
 
     public init(local: Locale? = nil, limit: Int? = nil, offset: Int? = nil) {
         self.init(path: "/v1/storefronts",
@@ -51,7 +55,8 @@ public struct GetAllStorefronts<Storefront: StorefrontDecodable>: PaginatorReque
 
     public init(path: String, parameters: [String: Any]) {
         self.path = path
-        self.parameters = parameters
+        _parameters = parameters
+        (limit, offset) = parsePaginatorParameters(parameters)
     }
 }
 

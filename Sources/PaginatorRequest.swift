@@ -10,6 +10,8 @@ import Foundation
 import APIKit
 
 public protocol PaginatorRequest: ResourceRequest, Decodable {
+    var limit: Int? { get set }
+    var offset: Int? { get set }
     init(path: String, parameters: [String: Any])
 }
 
@@ -27,16 +29,14 @@ extension PaginatorRequest {
 }
 
 extension PaginatorRequest where Response == Page<Self> {
-    public func response(from resources: [Resource]) throws -> Page<Self> {
-        fatalError()
-    }
-
     public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Page<Self> {
         do {
             if let data = object as? Data {
                 print(try? JSONSerialization.jsonObject(with: data, options: .allowFragments))
             }
         }
-        return try defaultDecoder.decode(Page<Self>.self, from: object as! Data)
+        var page = try defaultDecoder.decode(Page<Self>.self, from: object as! Data)
+        page.next?.limit = limit
+        return page
     }
 }

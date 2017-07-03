@@ -75,7 +75,11 @@ extension GetMusicVideo {
     public struct GetAlbums: PaginatorRequest {
         public typealias Resource = AppleMusicKit.Resource<Album, NoRelationships>
         public let path: String
-        public let parameters: Any?
+        public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+
+        public var limit: Int?
+        public var offset: Int?
+        private let _parameters: [String: Any]
 
         init(storefront: String, id: MusicVideo.Identifier, limit: Int? = nil, offset: Int? = nil) {
             self.init(path: "/v1/catalog/\(storefront)/music-videos/\(id)/albums",
@@ -84,13 +88,18 @@ extension GetMusicVideo {
 
         public init(path: String, parameters: [String: Any]) {
             self.path = path
-            self.parameters = parameters
+            _parameters = parameters
+            (limit, offset) = parsePaginatorParameters(parameters)
         }
     }
     public struct GetArtists: PaginatorRequest {
         public typealias Resource = AppleMusicKit.Resource<Artist, NoRelationships>
         public let path: String
-        public let parameters: Any?
+        public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+
+        public var limit: Int?
+        public var offset: Int?
+        private let _parameters: [String: Any]
 
         init(storefront: String, id: MusicVideo.Identifier, limit: Int? = nil, offset: Int? = nil) {
             self.init(path: "/v1/catalog/\(storefront)/music-videos/\(id)/artists",
@@ -99,13 +108,18 @@ extension GetMusicVideo {
 
         public init(path: String, parameters: [String: Any]) {
             self.path = path
-            self.parameters = parameters
+            _parameters = parameters
+            (limit, offset) = parsePaginatorParameters(parameters)
         }
     }
     public struct GetGenres: PaginatorRequest {
         public typealias Resource = AppleMusicKit.Resource<Genre, NoRelationships>
         public let path: String
-        public let parameters: Any?
+        public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+
+        public var limit: Int?
+        public var offset: Int?
+        private let _parameters: [String: Any]
 
         init(storefront: String, id: MusicVideo.Identifier, limit: Int? = nil, offset: Int? = nil) {
             self.init(path: "/v1/catalog/\(storefront)/songs/\(id)/genres",
@@ -114,7 +128,8 @@ extension GetMusicVideo {
 
         public init(path: String, parameters: [String: Any]) {
             self.path = path
-            self.parameters = parameters
+            _parameters = parameters
+            (limit, offset) = parsePaginatorParameters(parameters)
         }
     }
 }

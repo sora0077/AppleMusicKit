@@ -100,19 +100,39 @@ typealias GetMultipleStorefronts = AppleMusicKit.GetMultipleStorefronts<Storefro
 typealias GetAllStorefronts = AppleMusicKit.GetAllStorefronts<Storefront>
 typealias GetUserStorefront = AppleMusicKit.GetUserStorefront<Storefront>
 
+private func recursiveStorefronts(request: GetAllStorefronts?) {
+    guard let request = request else {
+        return
+    }
+    Session.shared.send(request) { result in
+        switch result {
+        case .success(let response):
+            recursiveStorefronts(request: response.next)
+        case .failure(let error):
+            print(error)
+        }
+    }
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Session.shared.send(GetAllStorefronts()) { result in
-            switch result {
-            case .success(let response):
-                print(response)
-            case .failure(let error):
-                print(error)
-            }
-        }
+        recursiveStorefronts(request: GetAllStorefronts(limit: 5))
+//        Session.shared.send(GetAllStorefronts(limit: 5)) { result in
+//            switch result {
+//            case .success(let response):
+////                print(response)
+//                if let next = response.next {
+//                    Session.shared.send(next) { result in
+//                        print(next)
+//                    }
+//                }
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
     }
 
     override func didReceiveMemoryWarning() {

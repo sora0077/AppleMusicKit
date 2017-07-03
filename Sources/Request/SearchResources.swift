@@ -71,11 +71,16 @@ extension SearchResources {
     public struct GetPage<A: Attributes>: PaginatorRequest {
         public typealias Resource = AppleMusicKit.Resource<A, NoRelationships>
         public let path: String
-        public let parameters: Any?
+        public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+
+        public var limit: Int?
+        public var offset: Int?
+        private let _parameters: [String: Any]
 
         public init(path: String, parameters: [String: Any]) {
             self.path = path
-            self.parameters = parameters
+            _parameters = parameters
+            (limit, offset) = parsePaginatorParameters(parameters)
         }
     }
 }
