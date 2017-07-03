@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+public protocol StorefrontDecodable: Attributes {
+}
+
+public protocol Storefront: StorefrontDecodable {
+}

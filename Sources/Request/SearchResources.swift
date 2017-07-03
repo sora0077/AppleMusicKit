@@ -26,7 +26,7 @@ where
     public var method: HTTPMethod { return .get }
     public let path: String
     public let parameters: Any?
-    
+
     public init(storefront: String, term: String,
                 limit: Int? = nil, offset: Int? = nil,
                 types: Set<ResourceType>? = nil) {
@@ -35,7 +35,7 @@ where
                          "types": types?.map { $0.rawValue }.joined(separator: ","),
                          "limit": limit, "offset": offset].cleaned)
     }
-    
+
     public init(path: String, parameters: [String: Any]) {
         self.path = path
         self.parameters = parameters
@@ -48,14 +48,14 @@ extension SearchResources {
         public let musicVideos: Page<GetPage<MusicVideo>>?
         public let albums: Page<GetPage<Album>>?
         public let artists: Page<GetPage<Artist>>?
-        
+
         private enum RootKeys: String, CodingKey {
             case results
         }
         private enum CodingKeys: String, CodingKey {
             case songs, musicVideos = "music-videos", albums, artists
         }
-        
+
         public init(from decoder: Decoder) throws {
             let c = try decoder.container(keyedBy: RootKeys.self)
             let cc = try c.nestedContainer(keyedBy: CodingKeys.self, forKey: .results)
@@ -72,7 +72,7 @@ extension SearchResources {
         public typealias Resource = AppleMusicKit.Resource<A, NoRelationships>
         public let path: String
         public let parameters: Any?
-        
+
         public init(path: String, parameters: [String: Any]) {
             self.path = path
             self.parameters = parameters

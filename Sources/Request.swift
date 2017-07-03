@@ -17,6 +17,10 @@ public protocol ResourceRequest: Request {
     associatedtype Resource
 }
 
+extension ResourceRequest {
+    public var method: HTTPMethod { return .get }
+}
+
 private struct FoundationDataParser: DataParser {
     var contentType: String? { return nil }
 

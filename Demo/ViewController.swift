@@ -23,6 +23,12 @@ extension UIColor {
     }
 }
 
+struct Storefront: AppleMusicKit.Storefront {
+    typealias Identifier = String
+
+    let name: String
+    let defaultLanguageTag: String
+}
 struct Song: AppleMusicKit.Song {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
@@ -89,13 +95,17 @@ typealias GetArtist = AppleMusicKit.GetArtist<Artist, Album, Genre>
 typealias GetPlaylist = AppleMusicKit.GetPlaylist<Playlist, Curator, Song, MusicVideo>
 typealias GetCharts = AppleMusicKit.GetCharts<Song, MusicVideo, Album>
 typealias SearchResources = AppleMusicKit.SearchResources<Song, MusicVideo, Album, Artist>
+typealias GetStorefront = AppleMusicKit.GetStorefront<Storefront>
+typealias GetMultipleStorefronts = AppleMusicKit.GetMultipleStorefronts<Storefront>
+typealias GetAllStorefronts = AppleMusicKit.GetAllStorefronts<Storefront>
+typealias GetUserStorefront = AppleMusicKit.GetUserStorefront<Storefront>
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Session.shared.send(SearchResources(storefront: "us", term: "james brown")) { result in
+        Session.shared.send(GetAllStorefronts()) { result in
             switch result {
             case .success(let response):
                 print(response)

@@ -43,6 +43,7 @@
 		D9CFF71A1F063B38005F983D /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF7191F063B38005F983D /* Genre.swift */; };
 		D9CFF71C1F0648C5005F983D /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF71B1F0648C5005F983D /* Artwork.swift */; };
 		D9CFF71E1F065225005F983D /* MusicVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF71D1F065225005F983D /* MusicVideo.swift */; };
+		D9DAE08D1F0A0190007EB5DE /* GetStorefront.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DAE08C1F0A0190007EB5DE /* GetStorefront.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		D9CFF7191F063B38005F983D /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		D9CFF71B1F0648C5005F983D /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		D9CFF71D1F065225005F983D /* MusicVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideo.swift; sourceTree = "<group>"; };
+		D9DAE08C1F0A0190007EB5DE /* GetStorefront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStorefront.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +204,7 @@
 				D97C47051F076A2B00DADC28 /* GetPlaylist.swift */,
 				D93B356D1F092A1500A5D216 /* GetCharts.swift */,
 				D99A8FD81F0954F70076EFBA /* SearchResources.swift */,
+				D9DAE08C1F0A0190007EB5DE /* GetStorefront.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				D9CFF71A1F063B38005F983D /* Genre.swift in Sources */,
 				D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */,
 				D9CFF71E1F065225005F983D /* MusicVideo.swift in Sources */,
+				D9DAE08D1F0A0190007EB5DE /* GetStorefront.swift in Sources */,
 				D97C47081F076A7900DADC28 /* Curator.swift in Sources */,
 				D9A025191F011FD000C49113 /* Album.swift in Sources */,
 				D9B1A6DC1F051C6A0088DB93 /* GetAlbum.swift in Sources */,
