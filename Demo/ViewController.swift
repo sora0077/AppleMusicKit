@@ -71,6 +71,14 @@ struct Playlist: AppleMusicKit.Playlist {
 struct Curator: AppleMusicKit.Curator {
     typealias Identifier = String
 }
+struct Station: AppleMusicKit.Station {
+    typealias Identifier = String
+    typealias Artwork = Demo.Artwork
+    typealias EditorialNotes = Demo.EditorialNotes
+
+    let name: String
+    let isLive: Bool
+}
 struct Artwork: AppleMusicKit.Artwork {
     let bgColor: UIColor?
 
@@ -99,6 +107,7 @@ typealias GetStorefront = AppleMusicKit.GetStorefront<Storefront>
 typealias GetMultipleStorefronts = AppleMusicKit.GetMultipleStorefronts<Storefront>
 typealias GetAllStorefronts = AppleMusicKit.GetAllStorefronts<Storefront>
 typealias GetUserStorefront = AppleMusicKit.GetUserStorefront<Storefront>
+typealias GetMultipleStations = AppleMusicKit.GetMultipleStations<Station>
 
 private func recursiveStorefronts(request: GetAllStorefronts?) {
     guard let request = request else {
@@ -119,20 +128,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        recursiveStorefronts(request: GetAllStorefronts(limit: 5))
-//        Session.shared.send(GetAllStorefronts(limit: 5)) { result in
-//            switch result {
-//            case .success(let response):
-////                print(response)
+        Session.shared.send(GetMultipleStations(storefront: "us", id: "ra.985484166", "ra.1128062616")) { result in
+            switch result {
+            case .success(let response):
+                print(response)
 //                if let next = response.next {
 //                    Session.shared.send(next) { result in
 //                        print(next)
 //                    }
 //                }
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -9,7 +9,7 @@
 import Foundation
 
 func makeIds<Identifier>(_ ids: [Identifier]) -> String {
-    return ids.map(String.init(describing:)).joined(separator: ",")
+    return Set(ids.map(String.init(describing:))).joined(separator: ",")
 }
 
 func makePaginatorParameters<R: PaginatorRequest>(_ base: [String: Any], request: R) -> [String: Any] {
