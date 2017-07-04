@@ -19,6 +19,7 @@
 		D92087191F02563F00F995FA /* Storefront.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92087181F02563F00F995FA /* Storefront.swift */; };
 		D920871B1F0256C600F995FA /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920871A1F0256C600F995FA /* Response.swift */; };
 		D920871D1F0266A200F995FA /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920871C1F0266A200F995FA /* Session.swift */; };
+		D93B01021F0BE740005216B6 /* GetGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93B01011F0BE740005216B6 /* GetGenre.swift */; };
 		D93B356E1F092B1200A5D216 /* GetCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93B356D1F092A1500A5D216 /* GetCharts.swift */; };
 		D97C47021F07678500DADC28 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47011F07678500DADC28 /* Resource.swift */; };
 		D97C47041F0769BE00DADC28 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47031F0769BE00DADC28 /* Playlist.swift */; };
@@ -82,6 +83,7 @@
 		D92087181F02563F00F995FA /* Storefront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storefront.swift; sourceTree = "<group>"; };
 		D920871A1F0256C600F995FA /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		D920871C1F0266A200F995FA /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		D93B01011F0BE740005216B6 /* GetGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGenre.swift; sourceTree = "<group>"; };
 		D93B356D1F092A1500A5D216 /* GetCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCharts.swift; sourceTree = "<group>"; };
 		D97C47011F07678500DADC28 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		D97C47031F0769BE00DADC28 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				D99A8FD81F0954F70076EFBA /* SearchResources.swift */,
 				D9DAE08C1F0A0190007EB5DE /* GetStorefront.swift */,
 				D90ACBE21F0A458E00D6CB94 /* GetStation.swift */,
+				D93B01011F0BE740005216B6 /* GetGenre.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				D9DAE08D1F0A0190007EB5DE /* GetStorefront.swift in Sources */,
 				D97C47081F076A7900DADC28 /* Curator.swift in Sources */,
 				D9A025191F011FD000C49113 /* Album.swift in Sources */,
+				D93B01021F0BE740005216B6 /* GetGenre.swift in Sources */,
 				D9B1A6DC1F051C6A0088DB93 /* GetAlbum.swift in Sources */,
 				D97C47041F0769BE00DADC28 /* Playlist.swift in Sources */,
 			);

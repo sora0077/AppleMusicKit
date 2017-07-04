@@ -16,7 +16,7 @@ public enum ResourceType: String, Decodable {
     case songs, albums, artists, musicVideos = "music-videos"
     case playlists
     case appleCurators = "apple-curators"
-    case stations, storefronts
+    case stations, storefronts, genres
 }
 
 public struct Resource<A: Attributes, R: Decodable>: Decodable {

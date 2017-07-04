@@ -108,6 +108,7 @@ typealias GetMultipleStorefronts = AppleMusicKit.GetMultipleStorefronts<Storefro
 typealias GetAllStorefronts = AppleMusicKit.GetAllStorefronts<Storefront>
 typealias GetUserStorefront = AppleMusicKit.GetUserStorefront<Storefront>
 typealias GetMultipleStations = AppleMusicKit.GetMultipleStations<Station>
+typealias GetTopChartGenres = AppleMusicKit.GetTopChartGenres<Genre, Storefront>
 
 private func recursiveStorefronts(request: GetAllStorefronts?) {
     guard let request = request else {
@@ -128,7 +129,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Session.shared.send(GetMultipleStations(storefront: "us", id: "ra.985484166", "ra.1128062616")) { result in
+        Session.shared.send(GetTopChartGenres(storefront: "us")) { result in
             switch result {
             case .success(let response):
                 print(response)
