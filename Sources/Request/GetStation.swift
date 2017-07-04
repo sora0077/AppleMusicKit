@@ -17,10 +17,10 @@ public struct GetStation<Station: StationDecodable>: ResourceRequest {
     private let storefront: String
     private let id: Station.Identifier
 
-    public init(storefront: String, id: Station.Identifier, locale: Locale? = nil, include: [String]? = nil) {
+    public init(storefront: String, id: Station.Identifier, locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         self.storefront = storefront
         self.id = id
-        self.parameters = ["l": locale?.languageTag, "include": include?.joined(separator: ",")].cleaned
+        self.parameters = ["l": locale?.languageTag, "include": makeInclude(include)].cleaned
     }
 }
 
@@ -32,13 +32,13 @@ public struct GetMultipleStations<Station: StationDecodable>: ResourceRequest {
 
     private let storefront: String
 
-    public init(storefront: String, id: Station.Identifier, _ additions: Station.Identifier..., locale: Locale? = nil, include: [String]? = nil) {
+    public init(storefront: String, id: Station.Identifier, _ additions: Station.Identifier..., locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         self.init(storefront: storefront, ids: [id] + additions, locale: locale, include: include)
     }
 
-    public init(storefront: String, ids: [Station.Identifier], locale: Locale? = nil, include: [String]? = nil) {
+    public init(storefront: String, ids: [Station.Identifier], locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
-        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": include].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": makeInclude(include)].cleaned
     }
 }

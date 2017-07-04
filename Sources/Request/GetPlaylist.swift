@@ -22,10 +22,10 @@ public struct GetPlaylist<Playlist, Curator, Song, MusicVideo>: ResourceRequest
     private let storefront: String
     private let id: Playlist.Identifier
 
-    public init(storefront: String, id: Playlist.Identifier, locale: Locale? = nil, include: [String]? = nil) {
+    public init(storefront: String, id: Playlist.Identifier, locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         self.storefront = storefront
         self.id = id
-        self.parameters = ["l": locale?.languageTag, "include": include?.joined(separator: ",")].cleaned
+        self.parameters = ["l": locale?.languageTag, "include": makeInclude(include)].cleaned
     }
 }
 
@@ -49,14 +49,14 @@ public struct GetMultiplePlaylists<Playlist, Curator, Song, MusicVideo>: Resourc
 
     private let storefront: String
 
-    public init(storefront: String, id: Playlist.Identifier, _ additions: Playlist.Identifier..., locale: Locale? = nil, include: [String]? = nil) {
+    public init(storefront: String, id: Playlist.Identifier, _ additions: Playlist.Identifier..., locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         self.init(storefront: storefront, ids: [id] + additions, locale: locale, include: include)
     }
 
-    public init(storefront: String, ids: [Playlist.Identifier], locale: Locale? = nil, include: [String]? = nil) {
+    public init(storefront: String, ids: [Playlist.Identifier], locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
-        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": include].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": makeInclude(include)].cleaned
     }
 }
 

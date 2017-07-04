@@ -12,6 +12,10 @@ func makeIds<Identifier>(_ ids: [Identifier]) -> String {
     return Set(ids.map(String.init(describing:))).joined(separator: ",")
 }
 
+func makeInclude(_ include: Set<ResourceType>?) -> String? {
+    return include?.map { $0.rawValue }.joined(separator: ",")
+}
+
 func makePaginatorParameters<R: PaginatorRequest>(_ base: [String: Any], request: R) -> [String: Any] {
     var p = base
     if let limit = request.limit {
