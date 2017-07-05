@@ -1,5 +1,5 @@
 //
-//  GetAlbum.swift
+//  FetchAlbums.swift
 //  AppleMusicKit
 //
 //  Created by 林 達也 on 2017/06/29.

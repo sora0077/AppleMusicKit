@@ -1,5 +1,5 @@
 //
-//  GetRecommendation.swift
+//  FetchRecommendations.swift
 //  AppleMusicKit
 //
 //  Created by 林 達也 on 2017/07/05.

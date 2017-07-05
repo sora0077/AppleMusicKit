@@ -1,5 +1,5 @@
 //
-//  GetPlaylist.swift
+//  FetchPlaylists.swift
 //  AppleMusicKit
 //
 //  Created by 林達也 on 2017/07/01.
