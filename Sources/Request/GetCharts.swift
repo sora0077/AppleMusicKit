@@ -8,16 +8,17 @@
 
 import Foundation
 
-public struct GetCharts<Song, MusicVideo, Album>: Request
+public struct GetCharts<Song, MusicVideo, Album, Storefront>: Request
 where
     Song: SongDecodable,
     MusicVideo: MusicVideoDecodable,
-    Album: AlbumDecodable {
+    Album: AlbumDecodable,
+    Storefront: StorefrontDecodable {
     public var method: HTTPMethod { return .get }
     public let path: String
     public let parameters: Any?
 
-    public init(storefront: String, types: Set<ResourceType>,
+    public init(storefront: Storefront.Identifier, types: Set<ResourceType>,
          chart: String? = nil, genre: String? = nil,
          limit: Int? = nil, offset: Int? = nil) {
         assert(types.contains(.songs) || types.contains(.musicVideos) || types.contains(.albums))

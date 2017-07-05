@@ -8,21 +8,22 @@
 
 import Foundation
 
-public struct GetPlaylist<Playlist, Curator, Song, MusicVideo>: ResourceRequest
+public struct GetPlaylist<Playlist, Curator, Song, MusicVideo, Storefront>: ResourceRequest
     where
     Playlist: PlaylistDecodable,
     Curator: CuratorDecodable,
     Song: SongDecodable,
-    MusicVideo: MusicVideoDecodable {
+    MusicVideo: MusicVideoDecodable,
+    Storefront: StorefrontDecodable {
     public typealias Resource = AppleMusicKit.Resource<Playlist, Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/playlists/\(id)" }
     public let parameters: Any?
 
-    private let storefront: String
+    private let storefront: Storefront.Identifier
     private let id: Playlist.Identifier
 
-    public init(storefront: String, id: Playlist.Identifier, locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, id: Playlist.Identifier, locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         self.storefront = storefront
         self.id = id
         self.parameters = ["l": locale?.languageTag, "include": makeInclude(include)].cleaned
@@ -36,24 +37,25 @@ extension GetPlaylist {
     }
 }
 
-public struct GetMultiplePlaylists<Playlist, Curator, Song, MusicVideo>: ResourceRequest
+public struct GetMultiplePlaylists<Playlist, Curator, Song, MusicVideo, Storefront>: ResourceRequest
     where
     Playlist: PlaylistDecodable,
     Curator: CuratorDecodable,
     Song: SongDecodable,
-    MusicVideo: MusicVideoDecodable {
-    public typealias Resource = AppleMusicKit.Resource<Playlist, GetPlaylist<Playlist, Curator, Song, MusicVideo>.Relationships>
+    MusicVideo: MusicVideoDecodable,
+    Storefront: StorefrontDecodable {
+    public typealias Resource = AppleMusicKit.Resource<Playlist, GetPlaylist<Playlist, Curator, Song, MusicVideo, Storefront>.Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/playlists" }
     public let parameters: Any?
 
-    private let storefront: String
+    private let storefront: Storefront.Identifier
 
-    public init(storefront: String, id: Playlist.Identifier, _ additions: Playlist.Identifier..., locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, id: Playlist.Identifier, _ additions: Playlist.Identifier..., locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         self.init(storefront: storefront, ids: [id] + additions, locale: locale, include: include)
     }
 
-    public init(storefront: String, ids: [Playlist.Identifier], locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, ids: [Playlist.Identifier], locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
         self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": makeInclude(include)].cleaned
@@ -80,7 +82,7 @@ extension GetPlaylist {
         public var offset: Int?
         private let _parameters: [String: Any]
 
-        init(storefront: String, id: Playlist.Identifier, limit: Int? = nil, offset: Int? = nil) {
+        init(storefront: Storefront.Identifier, id: Playlist.Identifier, limit: Int? = nil, offset: Int? = nil) {
             self.init(path: "/v1/catalog/\(storefront)/playlists/\(id)/curator",
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }
@@ -100,7 +102,7 @@ extension GetPlaylist {
         public var offset: Int?
         private let _parameters: [String: Any]
 
-        init(storefront: String, id: Playlist.Identifier, limit: Int? = nil, offset: Int? = nil) {
+        init(storefront: Storefront.Identifier, id: Playlist.Identifier, limit: Int? = nil, offset: Int? = nil) {
             self.init(path: "/v1/catalog/\(storefront)/playlists/\(id)/tracks",
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }

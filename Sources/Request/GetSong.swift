@@ -8,21 +8,22 @@
 
 import Foundation
 
-public struct GetSong<Song, Album, Artist, Genre>: ResourceRequest
+public struct GetSong<Song, Album, Artist, Genre, Storefront>: ResourceRequest
 where
     Song: SongDecodable,
     Album: AlbumDecodable,
     Artist: ArtistDecodable,
-    Genre: GenreDecodable {
+    Genre: GenreDecodable,
+    Storefront: StorefrontDecodable {
     public typealias Resource = AppleMusicKit.Resource<Song, Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/songs/\(id)" }
     public let parameters: Any?
 
-    private let storefront: String
+    private let storefront: Storefront.Identifier
     private let id: Song.Identifier
 
-    public init(storefront: String, id: Song.Identifier, locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, id: Song.Identifier, locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         self.storefront = storefront
         self.id = id
         self.parameters = ["l": locale?.languageTag, "include": makeInclude(include)].cleaned
@@ -37,24 +38,25 @@ extension GetSong {
     }
 }
 
-public struct GetMultipleSongs<Song, Album, Artist, Genre>: ResourceRequest
+public struct GetMultipleSongs<Song, Album, Artist, Genre, Storefront>: ResourceRequest
 where
     Song: SongDecodable,
     Album: AlbumDecodable,
     Artist: ArtistDecodable,
-    Genre: GenreDecodable {
-    public typealias Resource = AppleMusicKit.Resource<Song, GetSong<Song, Album, Artist, Genre>.Relationships>
+    Genre: GenreDecodable,
+    Storefront: StorefrontDecodable {
+    public typealias Resource = AppleMusicKit.Resource<Song, GetSong<Song, Album, Artist, Genre, Storefront>.Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/songs" }
     public let parameters: Any?
 
-    private let storefront: String
+    private let storefront: Storefront.Identifier
 
-    public init(storefront: String, id: Song.Identifier, _ additions: Song.Identifier..., locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, id: Song.Identifier, _ additions: Song.Identifier..., locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         self.init(storefront: storefront, ids: [id] + additions, locale: locale, include: include)
     }
 
-    public init(storefront: String, ids: [Song.Identifier], locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, ids: [Song.Identifier], locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
         self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": makeInclude(include)].cleaned
@@ -81,7 +83,7 @@ extension GetSong {
         public var offset: Int?
         private let _parameters: [String: Any]
 
-        init(storefront: String, id: Song.Identifier, limit: Int? = nil, offset: Int? = nil) {
+        init(storefront: Storefront.Identifier, id: Song.Identifier, limit: Int? = nil, offset: Int? = nil) {
             self.init(path: "/v1/catalog/\(storefront)/songs/\(id)/albums",
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }
@@ -101,7 +103,7 @@ extension GetSong {
         public var offset: Int?
         private let _parameters: [String: Any]
 
-        init(storefront: String, id: Song.Identifier, limit: Int? = nil, offset: Int? = nil) {
+        init(storefront: Storefront.Identifier, id: Song.Identifier, limit: Int? = nil, offset: Int? = nil) {
             self.init(path: "/v1/catalog/\(storefront)/songs/\(id)/artists",
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }
@@ -121,7 +123,7 @@ extension GetSong {
         public var offset: Int?
         private let _parameters: [String: Any]
 
-        init(storefront: String, id: Song.Identifier, limit: Int? = nil, offset: Int? = nil) {
+        init(storefront: Storefront.Identifier, id: Song.Identifier, limit: Int? = nil, offset: Int? = nil) {
             self.init(path: "/v1/catalog/\(storefront)/songs/\(id)/genres",
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }

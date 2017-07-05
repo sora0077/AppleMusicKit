@@ -17,17 +17,18 @@ extension KeyedDecodingContainer {
     }
 }
 
-public struct SearchResources<Song, MusicVideo, Album, Artist>: Request
+public struct SearchResources<Song, MusicVideo, Album, Artist, Storefront>: Request
 where
     Song: SongDecodable,
     MusicVideo: MusicVideoDecodable,
     Album: AlbumDecodable,
-    Artist: ArtistDecodable {
+    Artist: ArtistDecodable,
+    Storefront: StorefrontDecodable {
     public var method: HTTPMethod { return .get }
     public let path: String
     public let parameters: Any?
 
-    public init(storefront: String, term: String,
+    public init(storefront: Storefront.Identifier, term: String,
                 limit: Int? = nil, offset: Int? = nil,
                 types: Set<ResourceType>? = nil) {
         self.init(path: "/v1/catalog/\(storefront)/search",

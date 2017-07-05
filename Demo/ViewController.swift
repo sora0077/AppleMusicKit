@@ -96,18 +96,18 @@ struct EditorialNotes: AppleMusicKit.EditorialNotes {
 struct PlayParameters: AppleMusicKit.PlayParameters {
 }
 
-typealias GetSong = AppleMusicKit.GetSong<Song, Album, Artist, Genre>
-typealias GetMusicVideo = AppleMusicKit.GetMusicVideo<MusicVideo, Album, Artist, Genre>
-typealias GetAlbum = AppleMusicKit.GetAlbum<Album, Song, MusicVideo, Artist>
-typealias GetArtist = AppleMusicKit.GetArtist<Artist, Album, Genre>
-typealias GetPlaylist = AppleMusicKit.GetPlaylist<Playlist, Curator, Song, MusicVideo>
-typealias GetCharts = AppleMusicKit.GetCharts<Song, MusicVideo, Album>
-typealias SearchResources = AppleMusicKit.SearchResources<Song, MusicVideo, Album, Artist>
+typealias GetSong = AppleMusicKit.GetSong<Song, Album, Artist, Genre, Storefront>
+typealias GetMusicVideo = AppleMusicKit.GetMusicVideo<MusicVideo, Album, Artist, Genre, Storefront>
+typealias GetAlbum = AppleMusicKit.GetAlbum<Album, Song, MusicVideo, Artist, Storefront>
+typealias GetArtist = AppleMusicKit.GetArtist<Artist, Album, Genre, Storefront>
+typealias GetPlaylist = AppleMusicKit.GetPlaylist<Playlist, Curator, Song, MusicVideo, Storefront>
+typealias GetCharts = AppleMusicKit.GetCharts<Song, MusicVideo, Album, Storefront>
+typealias SearchResources = AppleMusicKit.SearchResources<Song, MusicVideo, Album, Artist, Storefront>
 typealias GetStorefront = AppleMusicKit.GetStorefront<Storefront>
 typealias GetMultipleStorefronts = AppleMusicKit.GetMultipleStorefronts<Storefront>
 typealias GetAllStorefronts = AppleMusicKit.GetAllStorefronts<Storefront>
 typealias GetUserStorefront = AppleMusicKit.GetUserStorefront<Storefront>
-typealias GetMultipleStations = AppleMusicKit.GetMultipleStations<Station>
+typealias GetMultipleStations = AppleMusicKit.GetMultipleStations<Station, Storefront>
 typealias GetTopChartGenres = AppleMusicKit.GetTopChartGenres<Genre, Storefront>
 
 private func recursiveStorefronts(request: GetAllStorefronts?) {

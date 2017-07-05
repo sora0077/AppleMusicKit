@@ -8,21 +8,22 @@
 
 import Foundation
 
-public struct GetAlbum<Album, Song, MusicVideo, Artist>: ResourceRequest
+public struct GetAlbum<Album, Song, MusicVideo, Artist, Storefront>: ResourceRequest
     where
     Album: AlbumDecodable,
     Song: SongDecodable,
     MusicVideo: MusicVideoDecodable,
-    Artist: ArtistDecodable {
+    Artist: ArtistDecodable,
+    Storefront: StorefrontDecodable {
     public typealias Resource = AppleMusicKit.Resource<Album, Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/albums/\(id)" }
     public let parameters: Any?
 
-    private let storefront: String
+    private let storefront: Storefront.Identifier
     private let id: Album.Identifier
 
-    public init(storefront: String, id: Album.Identifier, locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, id: Album.Identifier, locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         self.storefront = storefront
         self.id = id
         self.parameters = ["l": locale?.languageTag, "include": makeInclude(include)].cleaned
@@ -36,24 +37,25 @@ extension GetAlbum {
     }
 }
 
-public struct GetMultipleAlbums<Album, Song, MusicVideo, Artist>: ResourceRequest
+public struct GetMultipleAlbums<Album, Song, MusicVideo, Artist, Storefront>: ResourceRequest
     where
     Album: AlbumDecodable,
     Song: SongDecodable,
     MusicVideo: MusicVideoDecodable,
-    Artist: ArtistDecodable {
-    public typealias Resource = AppleMusicKit.Resource<Album, GetAlbum<Album, Song, MusicVideo, Artist>.Relationships>
+    Artist: ArtistDecodable,
+    Storefront: StorefrontDecodable {
+    public typealias Resource = AppleMusicKit.Resource<Album, GetAlbum<Album, Song, MusicVideo, Artist, Storefront>.Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/albums" }
     public let parameters: Any?
 
-    private let storefront: String
+    private let storefront: Storefront.Identifier
 
-    public init(storefront: String, id: Album.Identifier, _ additions: Album.Identifier..., locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, id: Album.Identifier, _ additions: Album.Identifier..., locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         self.init(storefront: storefront, ids: [id] + additions, locale: locale, include: include)
     }
 
-    public init(storefront: String, ids: [Album.Identifier], locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, ids: [Album.Identifier], locale: Locale? = nil, include: Set<ResourceType>? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
         self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": makeInclude(include)].cleaned
@@ -80,7 +82,7 @@ extension GetAlbum {
         public var offset: Int?
         private let _parameters: [String: Any]
 
-        init(storefront: String, id: Album.Identifier, limit: Int? = nil, offset: Int? = nil) {
+        init(storefront: Storefront.Identifier, id: Album.Identifier, limit: Int? = nil, offset: Int? = nil) {
             self.init(path: "/v1/catalog/\(storefront)/albums/\(id)/tracks",
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }
@@ -100,7 +102,7 @@ extension GetAlbum {
         public var offset: Int?
         private let _parameters: [String: Any]
 
-        init(storefront: String, id: Album.Identifier, limit: Int? = nil, offset: Int? = nil) {
+        init(storefront: Storefront.Identifier, id: Album.Identifier, limit: Int? = nil, offset: Int? = nil) {
             self.init(path: "/v1/catalog/\(storefront)/albums/\(id)/artists",
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }
