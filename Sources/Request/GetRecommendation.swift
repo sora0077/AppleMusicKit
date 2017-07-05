@@ -46,9 +46,21 @@ public struct GetDefaultRecommendations<
 
 extension GetDefaultRecommendations {
     public struct Relationships: Decodable {
-        public typealias AnyResource = AppleMusicKit.AnyResource<Song, Album, Artist, MusicVideo, Playlist, Curator, Station, Storefront, Genre, Recommendation, NoRelationships>
-        public let contents: [AnyResource]?
+        public let contents: [AnyResource<NoRelationships>]?
         public let recommendations: [Resource]?
+
+        public typealias AnyResource<R: Decodable> = AppleMusicKit.AnyResource<
+            Song,
+            Album,
+            Artist,
+            MusicVideo,
+            Playlist,
+            Curator,
+            Station,
+            Storefront,
+            Genre,
+            Recommendation,
+            R>
     }
 }
 
