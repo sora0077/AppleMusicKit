@@ -23,10 +23,10 @@ public struct GetPlaylist<Playlist, Curator, Song, MusicVideo, Storefront>: Reso
     private let storefront: Storefront.Identifier
     private let id: Playlist.Identifier
 
-    public init(storefront: Storefront.Identifier, id: Playlist.Identifier, locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, id: Playlist.Identifier, language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
         self.storefront = storefront
         self.id = id
-        self.parameters = ["l": locale?.languageTag, "include": makeInclude(include)].cleaned
+        self.parameters = ["l": language?.languageTag, "include": makeInclude(include)].cleaned
     }
 }
 
@@ -51,14 +51,14 @@ public struct GetMultiplePlaylists<Playlist, Curator, Song, MusicVideo, Storefro
 
     private let storefront: Storefront.Identifier
 
-    public init(storefront: Storefront.Identifier, id: Playlist.Identifier, _ additions: Playlist.Identifier..., locale: Locale? = nil, include: Set<ResourceType>? = nil) {
-        self.init(storefront: storefront, ids: [id] + additions, locale: locale, include: include)
+    public init(storefront: Storefront.Identifier, id: Playlist.Identifier, _ additions: Playlist.Identifier..., language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
+        self.init(storefront: storefront, ids: [id] + additions, language: language, include: include)
     }
 
-    public init(storefront: Storefront.Identifier, ids: [Playlist.Identifier], locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, ids: [Playlist.Identifier], language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
-        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": makeInclude(include)].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": language?.languageTag, "include": makeInclude(include)].cleaned
     }
 }
 

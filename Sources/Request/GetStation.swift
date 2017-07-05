@@ -17,10 +17,10 @@ public struct GetStation<Station: StationDecodable, Storefront: StorefrontDecoda
     private let storefront: Storefront.Identifier
     private let id: Station.Identifier
 
-    public init(storefront: Storefront.Identifier, id: Station.Identifier, locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, id: Station.Identifier, language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
         self.storefront = storefront
         self.id = id
-        self.parameters = ["l": locale?.languageTag, "include": makeInclude(include)].cleaned
+        self.parameters = ["l": language?.languageTag, "include": makeInclude(include)].cleaned
     }
 }
 
@@ -32,13 +32,13 @@ public struct GetMultipleStations<Station: StationDecodable, Storefront: Storefr
 
     private let storefront: Storefront.Identifier
 
-    public init(storefront: Storefront.Identifier, id: Station.Identifier, _ additions: Station.Identifier..., locale: Locale? = nil, include: Set<ResourceType>? = nil) {
-        self.init(storefront: storefront, ids: [id] + additions, locale: locale, include: include)
+    public init(storefront: Storefront.Identifier, id: Station.Identifier, _ additions: Station.Identifier..., language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
+        self.init(storefront: storefront, ids: [id] + additions, language: language, include: include)
     }
 
-    public init(storefront: Storefront.Identifier, ids: [Station.Identifier], locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, ids: [Station.Identifier], language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
-        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": makeInclude(include)].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": language?.languageTag, "include": makeInclude(include)].cleaned
     }
 }

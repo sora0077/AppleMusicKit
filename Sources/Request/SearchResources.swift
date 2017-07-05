@@ -29,10 +29,12 @@ where
     public let parameters: Any?
 
     public init(storefront: Storefront.Identifier, term: String,
+                language: Storefront.Language? = nil,
                 limit: Int? = nil, offset: Int? = nil,
                 types: Set<ResourceType>? = nil) {
         self.init(path: "/v1/catalog/\(storefront)/search",
             parameters: ["term": term.replacingOccurrences(of: " ", with: "+"),
+                         "l": language?.languageTag,
                          "types": types?.map { $0.rawValue }.joined(separator: ","),
                          "limit": limit, "offset": offset].cleaned)
     }

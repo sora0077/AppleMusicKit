@@ -18,9 +18,9 @@ public struct GetTopChartGenres<Genre: GenreDecodable, Storefront: StorefrontDec
     public var offset: Int?
     private let _parameters: [String: Any]
 
-    public init(storefront: Storefront.Identifier, locale: Locale? = nil, limit: Int? = nil, offset: Int? = nil) {
+    public init(storefront: Storefront.Identifier, language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {
         self.init(path: "/v1/catalog/\(storefront)/genres",
-            parameters: ["l": locale?.languageTag, "limit": limit, "offset": offset].cleaned)
+            parameters: ["l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
     public init(path: String, parameters: [String: Any]) {
@@ -39,10 +39,10 @@ public struct GetGenre<Genre: GenreDecodable, Storefront: StorefrontDecodable>: 
     private let storefront: Storefront.Identifier
     private let id: Genre.Identifier
 
-    public init(storefront: Storefront.Identifier, id: Genre.Identifier, locale: Locale? = nil) {
+    public init(storefront: Storefront.Identifier, id: Genre.Identifier, language: Storefront.Language? = nil) {
         self.storefront = storefront
         self.id = id
-        self.parameters = ["l": locale?.languageTag].cleaned
+        self.parameters = ["l": language?.languageTag].cleaned
     }
 }
 
@@ -54,13 +54,13 @@ public struct GetMultipleGenres<Genre: GenreDecodable, Storefront: StorefrontDec
 
     private let storefront: Storefront.Identifier
 
-    public init(storefront: Storefront.Identifier, id: Genre.Identifier, _ additions: Genre.Identifier..., locale: Locale? = nil) {
-        self.init(storefront: storefront, ids: [id] + additions, locale: locale)
+    public init(storefront: Storefront.Identifier, id: Genre.Identifier, _ additions: Genre.Identifier..., language: Storefront.Language? = nil) {
+        self.init(storefront: storefront, ids: [id] + additions, language: language)
     }
 
-    public init(storefront: Storefront.Identifier, ids: [Genre.Identifier], locale: Locale? = nil) {
+    public init(storefront: Storefront.Identifier, ids: [Genre.Identifier], language: Storefront.Language? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
-        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": language?.languageTag].cleaned
     }
 }

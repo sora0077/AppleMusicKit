@@ -23,8 +23,11 @@ extension UIColor {
     }
 }
 
+extension String: Language {}
+
 struct Storefront: AppleMusicKit.Storefront {
     typealias Identifier = String
+    typealias Language = String
 
     let name: String
     let defaultLanguageTag: String

@@ -23,10 +23,10 @@ public struct GetAlbum<Album, Song, MusicVideo, Artist, Storefront>: ResourceReq
     private let storefront: Storefront.Identifier
     private let id: Album.Identifier
 
-    public init(storefront: Storefront.Identifier, id: Album.Identifier, locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, id: Album.Identifier, language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
         self.storefront = storefront
         self.id = id
-        self.parameters = ["l": locale?.languageTag, "include": makeInclude(include)].cleaned
+        self.parameters = ["l": language?.languageTag, "include": makeInclude(include)].cleaned
     }
 }
 
@@ -51,14 +51,14 @@ public struct GetMultipleAlbums<Album, Song, MusicVideo, Artist, Storefront>: Re
 
     private let storefront: Storefront.Identifier
 
-    public init(storefront: Storefront.Identifier, id: Album.Identifier, _ additions: Album.Identifier..., locale: Locale? = nil, include: Set<ResourceType>? = nil) {
-        self.init(storefront: storefront, ids: [id] + additions, locale: locale, include: include)
+    public init(storefront: Storefront.Identifier, id: Album.Identifier, _ additions: Album.Identifier..., language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
+        self.init(storefront: storefront, ids: [id] + additions, language: language, include: include)
     }
 
-    public init(storefront: Storefront.Identifier, ids: [Album.Identifier], locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, ids: [Album.Identifier], language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
-        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": makeInclude(include)].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": language?.languageTag, "include": makeInclude(include)].cleaned
     }
 }
 

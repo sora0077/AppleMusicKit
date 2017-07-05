@@ -20,9 +20,3 @@ extension Dictionary where Key == String, Value == Any? {
         })
     }
 }
-
-extension Locale {
-    var languageTag: String {
-        return description
-    }
-}

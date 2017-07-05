@@ -31,10 +31,10 @@ public struct GetDefaultRecommendations<
     public var offset: Int?
     private let _parameters: [String: Any]
 
-    public init(type: ResourceType? = nil, locale: Locale? = nil, limit: Int? = nil, offset: Int? = nil) {
+    public init(type: ResourceType? = nil, language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {
         assert(type?.contains(in: .albums, .playlists) ?? true)
         self.init(path: "/v1/me/recommendations",
-                  parameters: ["type": type?.rawValue, "l": locale?.languageTag, "limit": limit, "offset": offset].cleaned)
+                  parameters: ["type": type?.rawValue, "l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
     public init(path: String, parameters: [String: Any]) {
@@ -76,9 +76,9 @@ public struct GetRecommendation<
     public var offset: Int?
     private let _parameters: [String: Any]
 
-    public init(id: Recommendation.Identifier, locale: Locale? = nil, limit: Int? = nil, offset: Int? = nil) {
+    public init(id: Recommendation.Identifier, language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {
         self.init(path: "/v1/me/recommendations/\(id)",
-            parameters: ["l": locale?.languageTag, "limit": limit, "offset": offset].cleaned)
+            parameters: ["l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
     public init(path: String, parameters: [String: Any]) {
@@ -113,13 +113,13 @@ public struct GetMultipleRecommendations<
     private let _parameters: [String: Any]
 
     public init(id: Recommendation.Identifier, _ additions: Recommendation.Identifier...,
-        locale: Locale? = nil, limit: Int? = nil, offset: Int? = nil) {
-        self.init(ids: [id] + additions, locale: locale, limit: limit, offset: offset)
+        language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {
+        self.init(ids: [id] + additions, language: language, limit: limit, offset: offset)
     }
 
-    public init(ids: [Recommendation.Identifier], locale: Locale? = nil, limit: Int? = nil, offset: Int? = nil) {
+    public init(ids: [Recommendation.Identifier], language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {
         self.init(path: "/v1/me/recommendations",
-                  parameters: ["ids": makeIds(ids), "l": locale?.languageTag, "limit": limit, "offset": offset].cleaned)
+                  parameters: ["ids": makeIds(ids), "l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
     public init(path: String, parameters: [String: Any]) {

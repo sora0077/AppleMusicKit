@@ -23,10 +23,10 @@ public struct GetMusicVideo<MusicVideo, Album, Artist, Genre, Storefront>: Resou
     private let storefront: Storefront.Identifier
     private let id: MusicVideo.Identifier
 
-    public init(storefront: Storefront.Identifier, id: MusicVideo.Identifier, locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, id: MusicVideo.Identifier, language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
         self.storefront = storefront
         self.id = id
-        self.parameters = ["l": locale?.languageTag, "include": makeInclude(include)].cleaned
+        self.parameters = ["l": language?.languageTag, "include": makeInclude(include)].cleaned
     }
 }
 
@@ -52,14 +52,14 @@ public struct GetMultipleMusicVideos<MusicVideo, Album, Artist, Genre, Storefron
 
     private let storefront: Storefront.Identifier
 
-    public init(storefront: Storefront.Identifier, id: MusicVideo.Identifier, _ additions: MusicVideo.Identifier..., locale: Locale? = nil, include: Set<ResourceType>? = nil) {
-        self.init(storefront: storefront, ids: [id] + additions, locale: locale, include: include)
+    public init(storefront: Storefront.Identifier, id: MusicVideo.Identifier, _ additions: MusicVideo.Identifier..., language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
+        self.init(storefront: storefront, ids: [id] + additions, language: language, include: include)
     }
 
-    public init(storefront: Storefront.Identifier, ids: [MusicVideo.Identifier], locale: Locale? = nil, include: Set<ResourceType>? = nil) {
+    public init(storefront: Storefront.Identifier, ids: [MusicVideo.Identifier], language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
         assert(!ids.isEmpty)
         self.storefront = storefront
-        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag, "include": makeInclude(include)].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": language?.languageTag, "include": makeInclude(include)].cleaned
     }
 }
 

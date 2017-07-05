@@ -19,12 +19,13 @@ where
     public let parameters: Any?
 
     public init(storefront: Storefront.Identifier, types: Set<ResourceType>,
-         chart: String? = nil, genre: String? = nil,
-         limit: Int? = nil, offset: Int? = nil) {
+                language: Storefront.Language? = nil,
+                chart: String? = nil, genre: String? = nil,
+                limit: Int? = nil, offset: Int? = nil) {
         assert(types.contains(.songs) || types.contains(.musicVideos) || types.contains(.albums))
         self.init(path: "/v1/catalog/\(storefront)/charts",
             parameters: ["types": types.map { $0.rawValue }.joined(separator: ","),
-                         "limit": limit, "offset": offset].cleaned)
+                         "l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
     public init(path: String, parameters: [String: Any]) {

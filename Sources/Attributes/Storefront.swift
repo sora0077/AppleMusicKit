@@ -8,7 +8,16 @@
 
 import Foundation
 
+public protocol Language {
+    var languageTag: String { get }
+}
+
+public extension Language where Self: StringProtocol {
+    var languageTag: String { return String(self) }
+}
+
 public protocol StorefrontDecodable: Attributes {
+    associatedtype Language: AppleMusicKit.Language
 }
 
 public protocol Storefront: StorefrontDecodable {
