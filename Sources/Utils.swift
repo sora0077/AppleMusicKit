@@ -35,3 +35,12 @@ func parsePaginatorParameters(_ base: [String: Any]) -> (limit: Int?, offset: In
     }
     return (toInt(forKey: "limit"), toInt(forKey: "offset"))
 }
+
+extension Hashable {
+    func contains(in values: Self...) -> Bool {
+        return values.contains(self)
+    }
+    func contains(in values: [Self]) -> Bool {
+        return values.contains(self)
+    }
+}
