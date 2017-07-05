@@ -1,17 +1,21 @@
 //
-//  FetchCurators.swift
+//  FetchAppleCurators.swift
 //  AppleMusicKit
 //
-//  Created by 林 達也 on 2017/07/05.
+//  Created by 林達也 on 2017/07/06.
 //  Copyright © 2017年 jp.sora0077. All rights reserved.
 //
 
 import Foundation
 
-public struct GetCurator<Curator: CuratorDecodable, Playlist: PlaylistDecodable, Storefront: StorefrontDecodable>: ResourceRequest {
+public struct GetAppleCurator<
+    Curator: AppleCuratorDecodable,
+    Playlist: PlaylistDecodable,
+    Storefront: StorefrontDecodable
+>: ResourceRequest {
     public typealias Resource = AppleMusicKit.Resource<Curator, Relationships>
 
-    public var path: String { return "/v1/catalog/\(storefront)/curators/\(id)" }
+    public var path: String { return "/v1/catalog/\(storefront)/apple-curators/\(id)" }
     public let parameters: Any?
 
     private let storefront: Storefront.Identifier
@@ -24,19 +28,19 @@ public struct GetCurator<Curator: CuratorDecodable, Playlist: PlaylistDecodable,
     }
 }
 
-extension GetCurator {
+extension GetAppleCurator {
     public struct Relationships: Decodable {
         public let playlists: Page<GetPlaylists>?
     }
 }
 
-extension GetCurator {
+extension GetAppleCurator {
     public func playlists(limit: Int? = nil, offset: Int? = nil) -> GetPlaylists {
         return .init(storefront: storefront, id: id, limit: limit, offset: offset)
     }
 }
 
-extension GetCurator {
+extension GetAppleCurator {
     public struct GetPlaylists: PaginatorRequest {
         public typealias Resource = AppleMusicKit.Resource<Playlist, NoRelationships>
 
@@ -60,9 +64,13 @@ extension GetCurator {
     }
 }
 
-// MARK - GetMultipleCurators
-public struct GetMultipleCurators<Curator: CuratorDecodable, Playlist: PlaylistDecodable, Storefront: StorefrontDecodable>: ResourceRequest {
-    public typealias Resource = AppleMusicKit.Resource<Playlist, GetCurator<Curator, Playlist, Storefront>.Relationships>
+// MARK - GetMultipleAppleCurators
+public struct GetMultipleAppleCurators<
+    Curator: AppleCuratorDecodable,
+    Playlist: PlaylistDecodable,
+    Storefront: StorefrontDecodable
+>: ResourceRequest {
+    public typealias Resource = AppleMusicKit.Resource<Playlist, GetAppleCurator<Curator, Playlist, Storefront>.Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/curators" }
     public let parameters: Any?
