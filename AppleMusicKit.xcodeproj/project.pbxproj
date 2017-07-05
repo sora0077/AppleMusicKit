@@ -45,6 +45,7 @@
 		D9B1D27A1F066C9000F3720B /* FetchMusicVideos.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B1D2791F066C9000F3720B /* FetchMusicVideos.swift */; };
 		D9B46B181F0CC0220067B721 /* FetchRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B46B171F0CC0220067B721 /* FetchRecommendations.swift */; };
 		D9B46B1A1F0CDFC50067B721 /* FetchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B46B191F0CDFC50067B721 /* FetchHistory.swift */; };
+		D9B46B1C1F0CE8510067B721 /* FetchRecent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B46B1B1F0CE8510067B721 /* FetchRecent.swift */; };
 		D9C4D5641F02334500D2B58F /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5631F02334500D2B58F /* Request.swift */; };
 		D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */; };
 		D9CFF7181F063AFE005F983D /* FetchArtists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF7171F063AFE005F983D /* FetchArtists.swift */; };
@@ -119,6 +120,7 @@
 		D9B1D2791F066C9000F3720B /* FetchMusicVideos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchMusicVideos.swift; sourceTree = "<group>"; };
 		D9B46B171F0CC0220067B721 /* FetchRecommendations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecommendations.swift; sourceTree = "<group>"; };
 		D9B46B191F0CDFC50067B721 /* FetchHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHistory.swift; sourceTree = "<group>"; };
+		D9B46B1B1F0CE8510067B721 /* FetchRecent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecent.swift; sourceTree = "<group>"; };
 		D9C4D5631F02334500D2B58F /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatorRequest.swift; sourceTree = "<group>"; };
 		D9CFF7171F063AFE005F983D /* FetchArtists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchArtists.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				D93B01011F0BE740005216B6 /* FetchGenres.swift */,
 				D9B46B171F0CC0220067B721 /* FetchRecommendations.swift */,
 				D9B46B191F0CDFC50067B721 /* FetchHistory.swift */,
+				D9B46B1B1F0CE8510067B721 /* FetchRecent.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */,
 				D9CFF71E1F065225005F983D /* MusicVideo.swift in Sources */,
 				D9DAE08D1F0A0190007EB5DE /* FetchStorefronts.swift in Sources */,
+				D9B46B1C1F0CE8510067B721 /* FetchRecent.swift in Sources */,
 				D97C47081F076A7900DADC28 /* Curator.swift in Sources */,
 				D9A025191F011FD000C49113 /* Album.swift in Sources */,
 				D93B01021F0BE740005216B6 /* FetchGenres.swift in Sources */,

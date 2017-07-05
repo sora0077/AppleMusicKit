@@ -1,5 +1,5 @@
 //
-//  FetchHistory.swift
+//  FetchRecent.swift
 //  AppleMusicKit
 //
 //  Created by 林 達也 on 2017/07/05.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct GetHeavyRotationContent<
+public struct GetRecentlyPlayed<
     Song: SongDecodable,
     Album: AlbumDecodable,
     Artist: ArtistDecodable,
@@ -31,8 +31,8 @@ public struct GetHeavyRotationContent<
     private let _parameters: [String: Any]
 
     public init(language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {
-        self.init(path: "/v1/me/history/heavy-rotation",
-            parameters: ["l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
+        self.init(path: "/v1/me/recent/played",
+                  parameters: ["l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
     public init(path: String, parameters: [String: Any]) {
@@ -42,7 +42,7 @@ public struct GetHeavyRotationContent<
     }
 }
 
-extension GetHeavyRotationContent {
+extension GetRecentlyPlayed {
     public typealias AnyResource<R: Decodable> = AppleMusicKit.AnyResource<
         Song,
         Album,
@@ -55,4 +55,28 @@ extension GetHeavyRotationContent {
         Genre,
         Recommendation,
         R>
+}
+
+// MARK: - GetRecentStations
+public struct GetRecentStations<Station: StationDecodable, Storefront: StorefrontDecodable>: PaginatorRequest {
+    public typealias Resource = AppleMusicKit.Resource<Station, NoRelationships>
+
+    public var scope: AccessScope { return .user }
+    public let path: String
+    public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+
+    public var limit: Int?
+    public var offset: Int?
+    private let _parameters: [String: Any]
+
+    public init(language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {
+        self.init(path: "/v1/me/recent/radio-stations",
+                  parameters: ["l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
+    }
+
+    public init(path: String, parameters: [String: Any]) {
+        self.path = path
+        _parameters = parameters
+        (limit, offset) = parsePaginatorParameters(parameters)
+    }
 }
