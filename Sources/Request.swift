@@ -10,7 +10,13 @@ import Foundation
 import APIKit
 
 public typealias HTTPMethod = APIKit.HTTPMethod
+
+public enum AccessScope {
+    case readonly, user
+}
+
 public protocol Request: APIKit.Request where Response: AppleMusicKit.Response {
+    var scope: AccessScope { get }
 }
 
 public protocol ResourceRequest: Request {
@@ -28,6 +34,8 @@ private struct FoundationDataParser: DataParser {
 }
 
 extension Request {
+    public var scope: AccessScope { return .readonly }
+
     public var baseURL: URL { return URL(string: "https://api.music.apple.com")! }
 
     public var dataParser: DataParser {

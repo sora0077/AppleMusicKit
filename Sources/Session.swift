@@ -10,6 +10,15 @@ import Foundation
 import APIKit
 import Result
 
+private extension AccessScope {
+    var requireUserToken: Bool {
+        switch self {
+        case .user: return true
+        case .readonly: return false
+        }
+    }
+}
+
 public struct Authorization {
     public var developerToken: String
     public var musicUserToken: String?
@@ -21,7 +30,8 @@ public struct Authorization {
 }
 
 public enum AppleMusicKitError: Error {
-    case invalidDeveloperToken(String?)
+    case missingDeveloperToken
+    case missingMusicUserToken
 }
 
 private struct AnyRequest<R>: APIKit.Request {
@@ -41,7 +51,7 @@ private struct AnyRequest<R>: APIKit.Request {
     private let response: (Any, HTTPURLResponse) throws -> R
     fileprivate let raw: Any
 
-    init<Req: AppleMusicKit.Request>(_ request: Req, authorization: Authorization?) where Req.Response == R {
+    init<Req: AppleMusicKit.Request>(_ request: Req, authorization: Authorization?) throws where Req.Response == R {
         interceptRequest = request.intercept(urlRequest:)
         interceptObject = request.intercept(object:urlResponse:)
         response = request.response
@@ -50,9 +60,13 @@ private struct AnyRequest<R>: APIKit.Request {
         var headers = request.headerFields
         if let developerToken = authorization?.developerToken {
             headers["Authorization"] = "Bearer \(developerToken)"
+        } else {
+            throw AppleMusicKitError.missingDeveloperToken
         }
         if let musicUserToken = authorization?.musicUserToken {
             headers["Music-User-Token"] = musicUserToken
+        } else if request.scope.requireUserToken {
+            throw AppleMusicKitError.missingMusicUserToken
         }
         headerFields = headers
         method = request.method
@@ -103,16 +117,16 @@ open class Session: APIKit.Session {
         callbackQueue: CallbackQueue? = nil,
         handler: @escaping (Result<Request.Response, SessionTaskError>) -> Void)
         -> SessionTask? where Request : AppleMusicKit.Request {
-            guard authorization?.developerToken != nil else {
-                let error = AppleMusicKitError.invalidDeveloperToken(authorization?.developerToken)
+            do {
+                return super.send(try AnyRequest(request, authorization: authorization),
+                                  callbackQueue: callbackQueue,
+                                  handler: handler)
+            } catch {
                 (callbackQueue ?? .main).execute {
                     handler(Result(error: SessionTaskError.requestError(error)))
                 }
                 return nil
             }
-            return super.send(AnyRequest(request, authorization: authorization),
-                              callbackQueue: callbackQueue,
-                              handler: handler)
     }
 
     open override func cancelRequests<Request>(
