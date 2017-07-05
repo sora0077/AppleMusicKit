@@ -21,6 +21,8 @@
 		D920871D1F0266A200F995FA /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = D920871C1F0266A200F995FA /* Session.swift */; };
 		D93B01021F0BE740005216B6 /* GetGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93B01011F0BE740005216B6 /* GetGenre.swift */; };
 		D93B356E1F092B1200A5D216 /* GetCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93B356D1F092A1500A5D216 /* GetCharts.swift */; };
+		D96CB9DF1F0C976B003B8122 /* AnyResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CB9DE1F0C976B003B8122 /* AnyResource.swift */; };
+		D96CB9E11F0C9846003B8122 /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CB9E01F0C9846003B8122 /* Recommendation.swift */; };
 		D97C47021F07678500DADC28 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47011F07678500DADC28 /* Resource.swift */; };
 		D97C47041F0769BE00DADC28 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47031F0769BE00DADC28 /* Playlist.swift */; };
 		D97C47061F076A2B00DADC28 /* GetPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47051F076A2B00DADC28 /* GetPlaylist.swift */; };
@@ -85,6 +87,8 @@
 		D920871C1F0266A200F995FA /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		D93B01011F0BE740005216B6 /* GetGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGenre.swift; sourceTree = "<group>"; };
 		D93B356D1F092A1500A5D216 /* GetCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCharts.swift; sourceTree = "<group>"; };
+		D96CB9DE1F0C976B003B8122 /* AnyResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyResource.swift; sourceTree = "<group>"; };
+		D96CB9E01F0C9846003B8122 /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		D97C47011F07678500DADC28 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		D97C47031F0769BE00DADC28 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		D97C47051F076A2B00DADC28 /* GetPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPlaylist.swift; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 			children = (
 				D920871A1F0256C600F995FA /* Response.swift */,
 				D97C47011F07678500DADC28 /* Resource.swift */,
+				D96CB9DE1F0C976B003B8122 /* AnyResource.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 				D97C47031F0769BE00DADC28 /* Playlist.swift */,
 				D97C47071F076A7900DADC28 /* Curator.swift */,
 				D90ACBE41F0A45CA00D6CB94 /* Station.swift */,
+				D96CB9E01F0C9846003B8122 /* Recommendation.swift */,
 			);
 			path = Attributes;
 			sourceTree = "<group>";
@@ -374,6 +380,7 @@
 				D90ACBE11F0A2D4200D6CB94 /* Utils.swift in Sources */,
 				D90ACBE51F0A45CA00D6CB94 /* Station.swift in Sources */,
 				D90ACBE31F0A458E00D6CB94 /* GetStation.swift in Sources */,
+				D96CB9E11F0C9846003B8122 /* Recommendation.swift in Sources */,
 				D92087191F02563F00F995FA /* Storefront.swift in Sources */,
 				D9B1D27A1F066C9000F3720B /* GetMusicVideo.swift in Sources */,
 				D9C4D5641F02334500D2B58F /* Request.swift in Sources */,
@@ -394,6 +401,7 @@
 				D9A025191F011FD000C49113 /* Album.swift in Sources */,
 				D93B01021F0BE740005216B6 /* GetGenre.swift in Sources */,
 				D9B1A6DC1F051C6A0088DB93 /* GetAlbum.swift in Sources */,
+				D96CB9DF1F0C976B003B8122 /* AnyResource.swift in Sources */,
 				D97C47041F0769BE00DADC28 /* Playlist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
