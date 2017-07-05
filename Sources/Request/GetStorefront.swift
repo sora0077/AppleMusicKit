@@ -16,9 +16,9 @@ public struct GetStorefront<Storefront: StorefrontDecodable>: ResourceRequest {
 
     private let id: Storefront.Identifier
 
-    public init(id: Storefront.Identifier, local: Locale? = nil) {
+    public init(id: Storefront.Identifier, locale: Locale? = nil) {
         self.id = id
-        self.parameters = ["l": local?.languageTag].cleaned
+        self.parameters = ["l": locale?.languageTag].cleaned
     }
 }
 
@@ -28,13 +28,13 @@ public struct GetMultipleStorefronts<Storefront: StorefrontDecodable>: ResourceR
     public var path: String { return "/v1/storefronts" }
     public let parameters: Any?
 
-    public init(id: Storefront.Identifier, _ additions: Storefront.Identifier..., local: Locale? = nil) {
-        self.init(ids: [id] + additions, local: local)
+    public init(id: Storefront.Identifier, _ additions: Storefront.Identifier..., locale: Locale? = nil) {
+        self.init(ids: [id] + additions, locale: locale)
     }
 
-    public init(ids: [Storefront.Identifier], local: Locale? = nil) {
+    public init(ids: [Storefront.Identifier], locale: Locale? = nil) {
         assert(!ids.isEmpty)
-        self.parameters = ["ids": makeIds(ids), "l": local?.languageTag].cleaned
+        self.parameters = ["ids": makeIds(ids), "l": locale?.languageTag].cleaned
     }
 }
 
@@ -48,9 +48,9 @@ public struct GetAllStorefronts<Storefront: StorefrontDecodable>: PaginatorReque
     public var offset: Int?
     private let _parameters: [String: Any]
 
-    public init(local: Locale? = nil, limit: Int? = nil, offset: Int? = nil) {
+    public init(locale: Locale? = nil, limit: Int? = nil, offset: Int? = nil) {
         self.init(path: "/v1/storefronts",
-                  parameters: ["l": local?.languageTag, "limit": limit, "offset": offset].cleaned)
+                  parameters: ["l": locale?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
     public init(path: String, parameters: [String: Any]) {
@@ -66,7 +66,7 @@ public struct GetUserStorefront<Storefront: StorefrontDecodable>: ResourceReques
     public var path: String { return "/v1/me/storefront" }
     public let parameters: Any?
 
-    public init(local: Locale? = nil) {
-        parameters = ["l": local?.languageTag].cleaned
+    public init(locale: Locale? = nil) {
+        parameters = ["l": locale?.languageTag].cleaned
     }
 }
