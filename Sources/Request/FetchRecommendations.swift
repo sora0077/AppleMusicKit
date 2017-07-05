@@ -17,6 +17,7 @@ public struct GetDefaultRecommendations<
     MusicVideo: MusicVideoDecodable,
     Playlist: PlaylistDecodable,
     Curator: CuratorDecodable,
+    AppleCurator: AppleCuratorDecodable,
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
@@ -56,6 +57,7 @@ extension GetDefaultRecommendations {
             MusicVideo,
             Playlist,
             Curator,
+            AppleCurator,
             Station,
             Storefront,
             Genre,
@@ -73,11 +75,12 @@ public struct GetRecommendation<
     MusicVideo: MusicVideoDecodable,
     Playlist: PlaylistDecodable,
     Curator: CuratorDecodable,
+    AppleCurator: AppleCuratorDecodable,
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
 >: PaginatorRequest {
-    public typealias Relationships = GetDefaultRecommendations<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, Station, Storefront, Genre>.Relationships
+    public typealias Relationships = GetDefaultRecommendations<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, AppleCurator, Station, Storefront, Genre>.Relationships
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 
     public var scope: AccessScope { return .user }
@@ -109,11 +112,12 @@ public struct GetMultipleRecommendations<
     MusicVideo: MusicVideoDecodable,
     Playlist: PlaylistDecodable,
     Curator: CuratorDecodable,
+    AppleCurator: AppleCuratorDecodable,
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
 >: PaginatorRequest {
-    public typealias Relationships = GetRecommendation<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, Station, Storefront, Genre>.Relationships
+    public typealias Relationships = GetRecommendation<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, AppleCurator, Station, Storefront, Genre>.Relationships
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 
     public var scope: AccessScope { return .user }

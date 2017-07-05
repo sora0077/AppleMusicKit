@@ -46,6 +46,8 @@
 		D9B46B181F0CC0220067B721 /* FetchRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B46B171F0CC0220067B721 /* FetchRecommendations.swift */; };
 		D9B46B1A1F0CDFC50067B721 /* FetchHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B46B191F0CDFC50067B721 /* FetchHistory.swift */; };
 		D9B46B1C1F0CE8510067B721 /* FetchRecent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B46B1B1F0CE8510067B721 /* FetchRecent.swift */; };
+		D9B46B1E1F0CF4C20067B721 /* AppleCurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B46B1D1F0CF4C20067B721 /* AppleCurator.swift */; };
+		D9B46B201F0CF6310067B721 /* FetchCurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B46B1F1F0CF6310067B721 /* FetchCurators.swift */; };
 		D9C4D5641F02334500D2B58F /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5631F02334500D2B58F /* Request.swift */; };
 		D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */; };
 		D9CFF7181F063AFE005F983D /* FetchArtists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF7171F063AFE005F983D /* FetchArtists.swift */; };
@@ -121,6 +123,8 @@
 		D9B46B171F0CC0220067B721 /* FetchRecommendations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecommendations.swift; sourceTree = "<group>"; };
 		D9B46B191F0CDFC50067B721 /* FetchHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHistory.swift; sourceTree = "<group>"; };
 		D9B46B1B1F0CE8510067B721 /* FetchRecent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecent.swift; sourceTree = "<group>"; };
+		D9B46B1D1F0CF4C20067B721 /* AppleCurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleCurator.swift; sourceTree = "<group>"; };
+		D9B46B1F1F0CF6310067B721 /* FetchCurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCurators.swift; sourceTree = "<group>"; };
 		D9C4D5631F02334500D2B58F /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatorRequest.swift; sourceTree = "<group>"; };
 		D9CFF7171F063AFE005F983D /* FetchArtists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchArtists.swift; sourceTree = "<group>"; };
@@ -222,6 +226,7 @@
 				D9B1A6DB1F051C6A0088DB93 /* FetchAlbums.swift */,
 				D9CFF7171F063AFE005F983D /* FetchArtists.swift */,
 				D97C47051F076A2B00DADC28 /* FetchPlaylists.swift */,
+				D9B46B1F1F0CF6310067B721 /* FetchCurators.swift */,
 				D93B356D1F092A1500A5D216 /* FetchCharts.swift */,
 				D99A8FD81F0954F70076EFBA /* SearchCatalog.swift */,
 				D9DAE08C1F0A0190007EB5DE /* FetchStorefronts.swift */,
@@ -248,6 +253,7 @@
 				D9B1D2771F06686600F3720B /* PlayParameters.swift */,
 				D97C47031F0769BE00DADC28 /* Playlist.swift */,
 				D97C47071F076A7900DADC28 /* Curator.swift */,
+				D9B46B1D1F0CF4C20067B721 /* AppleCurator.swift */,
 				D90ACBE41F0A45CA00D6CB94 /* Station.swift */,
 				D96CB9E01F0C9846003B8122 /* Recommendation.swift */,
 			);
@@ -388,6 +394,7 @@
 				D9CFF71C1F0648C5005F983D /* Artwork.swift in Sources */,
 				D90ACBE11F0A2D4200D6CB94 /* Utils.swift in Sources */,
 				D90ACBE51F0A45CA00D6CB94 /* Station.swift in Sources */,
+				D9B46B1E1F0CF4C20067B721 /* AppleCurator.swift in Sources */,
 				D9B46B181F0CC0220067B721 /* FetchRecommendations.swift in Sources */,
 				D90ACBE31F0A458E00D6CB94 /* FetchStations.swift in Sources */,
 				D9B46B1A1F0CDFC50067B721 /* FetchHistory.swift in Sources */,
@@ -403,6 +410,7 @@
 				D9A025141F00F93800C49113 /* FetchSongs.swift in Sources */,
 				D97C47021F07678500DADC28 /* Resource.swift in Sources */,
 				D9A0251B1F012A4F00C49113 /* Artist.swift in Sources */,
+				D9B46B201F0CF6310067B721 /* FetchCurators.swift in Sources */,
 				D97C47061F076A2B00DADC28 /* FetchPlaylists.swift in Sources */,
 				D9CFF71A1F063B38005F983D /* Genre.swift in Sources */,
 				D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */,

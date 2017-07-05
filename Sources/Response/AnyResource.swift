@@ -35,6 +35,7 @@ public enum AnyResource<
     MusicVideo: MusicVideoDecodable,
     Playlist: PlaylistDecodable,
     Curator: CuratorDecodable,
+    AppleCurator: AppleCuratorDecodable,
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable,
@@ -47,6 +48,7 @@ public enum AnyResource<
     case musicVideo(Resource<MusicVideo, Relationships>)
     case playlist(Resource<Playlist, Relationships>)
     case curator(Resource<Curator, Relationships>)
+    case appleCurator(Resource<AppleCurator, Relationships>)
     case station(Resource<Station, Relationships>)
     case storefront(Resource<Storefront, Relationships>)
     case genre(Resource<Genre, Relationships>)
@@ -64,7 +66,8 @@ public enum AnyResource<
         case .artists: self = .artist(try Resource(from: decoder))
         case .musicVideos: self = .musicVideo(try Resource(from: decoder))
         case .playlists: self = .playlist(try Resource(from: decoder))
-        case .appleCurators: self = .curator(try Resource(from: decoder))
+        case .curators: self = .curator(try Resource(from: decoder))
+        case .appleCurators: self = .appleCurator(try Resource(from: decoder))
         case .stations: self = .station(try Resource(from: decoder))
         case .storefronts: self = .storefront(try Resource(from: decoder))
         case .genres: self = .genre(try Resource(from: decoder))

@@ -15,7 +15,7 @@ public protocol Attributes: Decodable {
 public enum ResourceType: String, Decodable {
     case songs, albums, artists, musicVideos = "music-videos"
     case playlists
-    case appleCurators = "apple-curators"
+    case curators, appleCurators = "apple-curators"
     case stations, storefronts, genres
     case personalRecommendation = "personal-recommendation"
 }
