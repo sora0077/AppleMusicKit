@@ -30,12 +30,7 @@ extension PaginatorRequest {
 
 extension PaginatorRequest where Response == Page<Self> {
     public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Page<Self> {
-        do {
-            if let data = object as? Data {
-                print(try? JSONSerialization.jsonObject(with: data, options: .allowFragments))
-            }
-        }
-        var page = try defaultDecoder.decode(Page<Self>.self, from: object as! Data)
+        var page = try decode(object) as Page<Self>
         page.next?.limit = limit
         return page
     }

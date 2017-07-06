@@ -41,26 +41,20 @@ extension Request {
     public var dataParser: DataParser {
         return FoundationDataParser()
     }
+
+    public func intercept(object: Any, urlResponse: HTTPURLResponse) throws -> Any {
+        return object
+    }
 }
 
 extension Request {
     public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
-        do {
-            if let data = object as? Data {
-                print(try? JSONSerialization.jsonObject(with: data, options: .allowFragments))
-            }
-        }
-        return try defaultDecoder.decode(Response.self, from: object as! Data)
+        return try decode(object)
     }
 }
 
 extension ResourceRequest where Resource: Decodable {
     public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> ResponseRoot<Resource> {
-        do {
-            if let data = object as? Data {
-                print(try? JSONSerialization.jsonObject(with: data, options: .allowFragments))
-            }
-        }
-        return try defaultDecoder.decode(ResponseRoot<Resource>.self, from: object as! Data)
+        return try decode(object)
     }
 }

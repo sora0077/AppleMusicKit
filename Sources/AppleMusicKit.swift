@@ -9,14 +9,21 @@
 import Foundation
 import APIKit
 
-let defaultDecoder = JSONDecoder()
-
 public struct NoRelationships: Decodable {}
 
-extension Dictionary where Key == String, Value == Any? {
-    var cleaned: [String: Any] {
-        return [String: Any](uniqueKeysWithValues: flatMap { (arg) in
-            arg.value.map { (arg.key, $0) }
-        })
+private let defaultDecoder = JSONDecoder()
+
+func decode<D: Decodable>(_ object: Any) throws -> D {
+    let data = object as! Data
+    do {
+        return try defaultDecoder.decode(D.self, from: data)
+    } catch let modelError {
+        do {
+            throw try defaultDecoder.decode(Errors.self, from: data)
+        } catch let error as Errors {
+            throw error
+        } catch {
+            throw modelError
+        }
     }
 }

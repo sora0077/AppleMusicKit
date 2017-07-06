@@ -29,11 +29,6 @@ public struct Authorization {
     }
 }
 
-public enum AppleMusicKitError: Error {
-    case missingDeveloperToken
-    case missingMusicUserToken
-}
-
 private struct AnyRequest<R>: APIKit.Request {
     typealias Response = R
 
@@ -92,13 +87,27 @@ private struct AnyRequest<R>: APIKit.Request {
     }
 }
 
+private final class Adapter: URLSessionAdapter {
+    override func createTask(with URLRequest: URLRequest, handler: @escaping (Data?, URLResponse?, Error?) -> Void) -> SessionTask {
+        return super.createTask(with: URLRequest, handler: { (data, response, error) in
+            if let data = data,
+                let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                print(json)
+            } else if let error = error {
+                print(error)
+            }
+            handler(data, response, error)
+        })
+    }
+}
+
 open class Session: APIKit.Session {
     open override class var shared: Session {
         get { return _custom ?? _shared }
         set { _custom = newValue }
     }
     private static var _custom: Session?
-    private static let _shared = Session(adapter: URLSessionAdapter(configuration: URLSessionConfiguration.default))
+    private static let _shared = Session(adapter: Adapter(configuration: URLSessionConfiguration.default))
 
     open var authorization: Authorization?
 
@@ -127,6 +136,13 @@ open class Session: APIKit.Session {
                 }
                 return nil
             }
+    }
+
+    open override class func cancelRequests<Request>(
+        with requestType: Request.Type,
+        passingTest test: @escaping (Request) -> Bool)
+        where Request : APIKit.Request {
+            shared.cancelRequests(with: requestType, passingTest: test)
     }
 
     open override func cancelRequests<Request>(

@@ -132,7 +132,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Session.shared.send(GetTopChartGenres(storefront: "us")) { result in
+        Session.shared.send(GetSong(storefront: "us", id: "3")) { result in
             switch result {
             case .success(let response):
                 print(response)

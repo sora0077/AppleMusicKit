@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - GetStorefront
 public struct GetStorefront<Storefront: StorefrontDecodable>: ResourceRequest {
     public typealias Resource = AppleMusicKit.Resource<Storefront, NoRelationships>
 
@@ -22,6 +23,7 @@ public struct GetStorefront<Storefront: StorefrontDecodable>: ResourceRequest {
     }
 }
 
+// MARK: - GetMultipleStorefronts
 public struct GetMultipleStorefronts<Storefront: StorefrontDecodable>: ResourceRequest {
     public typealias Resource = AppleMusicKit.Resource<Storefront, NoRelationships>
 
@@ -38,6 +40,7 @@ public struct GetMultipleStorefronts<Storefront: StorefrontDecodable>: ResourceR
     }
 }
 
+// MARK: - GetAllStorefronts
 public struct GetAllStorefronts<Storefront: StorefrontDecodable>: PaginatorRequest {
     public typealias Resource = AppleMusicKit.Resource<Storefront, NoRelationships>
 
@@ -60,6 +63,7 @@ public struct GetAllStorefronts<Storefront: StorefrontDecodable>: PaginatorReque
     }
 }
 
+// MARK: - GetUserStorefront
 public struct GetUserStorefront<Storefront: StorefrontDecodable>: ResourceRequest {
     public typealias Resource = AppleMusicKit.Resource<Storefront, NoRelationships>
 
