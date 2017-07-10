@@ -20,5 +20,20 @@ public protocol StorefrontDecodable: Attributes {
     associatedtype Language: AppleMusicKit.Language
 }
 
+// MARK: - Storefront
 public protocol Storefront: StorefrontDecodable {
+    init(defaultLanguageTag: String, name: String, supportedLanguageTags: [String]) throws
+}
+
+private enum CodingKeys: String, CodingKey {
+    case defaultLanguageTag, name, supportedLanguageTags
+}
+
+extension Storefront {
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        try self.init(defaultLanguageTag: c.decode(forKey: .defaultLanguageTag),
+                      name: c.decode(forKey: .name),
+                      supportedLanguageTags: c.decode(forKey: .supportedLanguageTags))
+    }
 }

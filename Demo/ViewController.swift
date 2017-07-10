@@ -31,6 +31,11 @@ struct Storefront: AppleMusicKit.Storefront {
 
     let name: String
     let defaultLanguageTag: String
+
+    init(defaultLanguageTag: String, name: String, supportedLanguageTags: [String]) throws {
+        self.name = name
+        self.defaultLanguageTag = defaultLanguageTag
+    }
 }
 struct Song: AppleMusicKit.Song {
     typealias Identifier = String
@@ -128,11 +133,10 @@ private func recursiveStorefronts(request: GetAllStorefronts?) {
 }
 
 class ViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Session.shared.send(GetSong(storefront: "us", id: "3")) { result in
+        Session.shared.send(GetSong(storefront: "jp", id: "1248216996")) { result in
             switch result {
             case .success(let response):
                 print(response)

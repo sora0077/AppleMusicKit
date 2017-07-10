@@ -248,8 +248,8 @@
 		D9A025151F00F95E00C49113 /* Attributes */ = {
 			isa = PBXGroup;
 			children = (
-				D9CFF71B1F0648C5005F983D /* Artwork.swift */,
 				D92087181F02563F00F995FA /* Storefront.swift */,
+				D9CFF71B1F0648C5005F983D /* Artwork.swift */,
 				D9A025161F00F96C00C49113 /* Song.swift */,
 				D9A025181F011FD000C49113 /* Album.swift */,
 				D9A0251A1F012A4F00C49113 /* Artist.swift */,
