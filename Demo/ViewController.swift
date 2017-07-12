@@ -88,15 +88,8 @@ struct Station: AppleMusicKit.Station {
     let isLive: Bool
 }
 struct Artwork: AppleMusicKit.Artwork {
-    let bgColor: UIColor?
-
-    private enum CodingKeys: String, CodingKey {
-        case bgColor
-    }
-
-    init(from decoder: Decoder) throws {
-        let c = try decoder.container(keyedBy: CodingKeys.self)
-        bgColor = try c.decodeIfPresent(String.self, forKey: .bgColor).map { UIColor(hex: $0) }
+    init(width: Int, height: Int, url: String, colors: (bgColor: String, textColor1: String, textColor2: String, textColor3: String, textColor4: String)?) throws {
+        print(colors)
     }
 }
 struct EditorialNotes: AppleMusicKit.EditorialNotes {
@@ -136,7 +129,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        Session.shared.send(GetSong(storefront: "jp", id: "1248216996")) { result in
+        Session.shared.send(GetMusicVideo(storefront: "us", id: "639032181")) { result in
             switch result {
             case .success(let response):
                 print(response)
