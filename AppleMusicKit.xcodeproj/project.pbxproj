@@ -29,6 +29,10 @@
 		D97C47041F0769BE00DADC28 /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47031F0769BE00DADC28 /* Playlist.swift */; };
 		D97C47061F076A2B00DADC28 /* FetchPlaylists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47051F076A2B00DADC28 /* FetchPlaylists.swift */; };
 		D97C47081F076A7900DADC28 /* Curator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47071F076A7900DADC28 /* Curator.swift */; };
+		D98E44341F1BBE7F00429665 /* AppleMusicKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98E44331F1BBE7F00429665 /* AppleMusicKitTests.swift */; };
+		D98E44361F1BBE7F00429665 /* AppleMusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */; };
+		D98E443D1F1BBEF700429665 /* APIKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9A0250E1F00F63E00C49113 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D98E443E1F1BBEF700429665 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9A0250D1F00F63E00C49113 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D99A8FD91F0954F70076EFBA /* SearchCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99A8FD81F0954F70076EFBA /* SearchCatalog.swift */; };
 		D9A025011F00F22400C49113 /* AppleMusicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A024FF1F00F22300C49113 /* AppleMusicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9A025111F00F89F00C49113 /* AppleMusicKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025101F00F89F00C49113 /* AppleMusicKit.swift */; };
@@ -67,6 +71,13 @@
 			remoteGlobalIDString = D9A024FB1F00F22300C49113;
 			remoteInfo = AppleMusicKit;
 		};
+		D98E44371F1BBE7F00429665 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D9A024F31F00F22300C49113 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D9A024FB1F00F22300C49113;
+			remoteInfo = AppleMusicKit;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -81,6 +92,17 @@
 				D9043B9E1F0360EF001D9B50 /* AppleMusicKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D98E443C1F1BBEE400429665 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D98E443D1F1BBEF700429665 /* APIKit.framework in CopyFiles */,
+				D98E443E1F1BBEF700429665 /* Result.framework in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -102,6 +124,9 @@
 		D97C47031F0769BE00DADC28 /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		D97C47051F076A2B00DADC28 /* FetchPlaylists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPlaylists.swift; sourceTree = "<group>"; };
 		D97C47071F076A7900DADC28 /* Curator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Curator.swift; sourceTree = "<group>"; };
+		D98E44311F1BBE7F00429665 /* AppleMusicKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleMusicKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D98E44331F1BBE7F00429665 /* AppleMusicKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicKitTests.swift; sourceTree = "<group>"; };
+		D98E44351F1BBE7F00429665 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D99A8FD81F0954F70076EFBA /* SearchCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCatalog.swift; sourceTree = "<group>"; };
 		D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleMusicKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A024FF1F00F22300C49113 /* AppleMusicKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppleMusicKit.h; sourceTree = "<group>"; };
@@ -139,6 +164,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D98E442E1F1BBE7F00429665 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D98E44361F1BBE7F00429665 /* AppleMusicKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D9A024F81F00F22300C49113 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -169,11 +202,21 @@
 			path = Response;
 			sourceTree = "<group>";
 		};
+		D98E44321F1BBE7F00429665 /* AppleMusicKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				D98E44331F1BBE7F00429665 /* AppleMusicKitTests.swift */,
+				D98E44351F1BBE7F00429665 /* Info.plist */,
+			);
+			path = AppleMusicKitTests;
+			sourceTree = "<group>";
+		};
 		D9A024F21F00F22300C49113 = {
 			isa = PBXGroup;
 			children = (
 				D9A0250F1F00F88400C49113 /* Sources */,
 				D9A024FE1F00F22300C49113 /* AppleMusicKit */,
+				D98E44321F1BBE7F00429665 /* AppleMusicKitTests */,
 				D9AD5EC11F02DD8500CE8468 /* Demo */,
 				D9A0250C1F00F61100C49113 /* Frameworks */,
 				D9A024FD1F00F22300C49113 /* Products */,
@@ -185,6 +228,7 @@
 			children = (
 				D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */,
 				D9AD5EC01F02DD8500CE8468 /* Demo.app */,
+				D98E44311F1BBE7F00429665 /* AppleMusicKitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -293,6 +337,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		D98E44301F1BBE7F00429665 /* AppleMusicKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D98E443B1F1BBE7F00429665 /* Build configuration list for PBXNativeTarget "AppleMusicKitTests" */;
+			buildPhases = (
+				D98E442D1F1BBE7F00429665 /* Sources */,
+				D98E443C1F1BBEE400429665 /* CopyFiles */,
+				D98E442E1F1BBE7F00429665 /* Frameworks */,
+				D98E442F1F1BBE7F00429665 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D98E44381F1BBE7F00429665 /* PBXTargetDependency */,
+			);
+			name = AppleMusicKitTests;
+			productName = AppleMusicKitTests;
+			productReference = D98E44311F1BBE7F00429665 /* AppleMusicKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		D9A024FB1F00F22300C49113 /* AppleMusicKit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D9A025041F00F22400C49113 /* Build configuration list for PBXNativeTarget "AppleMusicKit" */;
@@ -340,6 +403,9 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = jp.sora0077;
 				TargetAttributes = {
+					D98E44301F1BBE7F00429665 = {
+						CreatedOnToolsVersion = 9.0;
+					};
 					D9A024FB1F00F22300C49113 = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
@@ -363,12 +429,20 @@
 			projectRoot = "";
 			targets = (
 				D9A024FB1F00F22300C49113 /* AppleMusicKit */,
+				D98E44301F1BBE7F00429665 /* AppleMusicKitTests */,
 				D9AD5EBF1F02DD8500CE8468 /* Demo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		D98E442F1F1BBE7F00429665 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D9A024FA1F00F22300C49113 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -389,6 +463,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		D98E442D1F1BBE7F00429665 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D98E44341F1BBE7F00429665 /* AppleMusicKitTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D9A024F71F00F22300C49113 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -451,6 +533,11 @@
 			target = D9A024FB1F00F22300C49113 /* AppleMusicKit */;
 			targetProxy = D9043B9F1F0360EF001D9B50 /* PBXContainerItemProxy */;
 		};
+		D98E44381F1BBE7F00429665 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D9A024FB1F00F22300C49113 /* AppleMusicKit */;
+			targetProxy = D98E44371F1BBE7F00429665 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -473,6 +560,34 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		D98E44391F1BBE7F00429665 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				INFOPLIST_FILE = AppleMusicKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jp.sora0077.AppleMusicKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D98E443A1F1BBE7F00429665 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				INFOPLIST_FILE = AppleMusicKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = jp.sora0077.AppleMusicKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		D9A025021F00F22400C49113 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -670,6 +785,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D98E443B1F1BBE7F00429665 /* Build configuration list for PBXNativeTarget "AppleMusicKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D98E44391F1BBE7F00429665 /* Debug */,
+				D98E443A1F1BBE7F00429665 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		D9A024F61F00F22300C49113 /* Build configuration list for PBXProject "AppleMusicKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
