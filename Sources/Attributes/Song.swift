@@ -15,4 +15,51 @@ public protocol Song: SongDecodable {
     associatedtype Artwork: AppleMusicKit.Artwork
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
     associatedtype PlayParameters: AppleMusicKit.PlayParameters
+
+    init(artistName: String,
+         artwork: Artwork,
+         composerName: String?,
+         contentRating: String?,
+         discNumber: Int,
+         durationInMillis: Int?,
+         editorialNotes: EditorialNotes?,
+         genreNames: [String],
+         movementCount: Int?,
+         movementName: String?,
+         movementNumber: Int?,
+         name: String,
+         playParams: PlayParameters?,
+         releaseDate: String,
+         trackNumber: Int,
+         url: String,
+         workName: String?) throws
+}
+
+private enum CodingKeys: String, CodingKey {
+    case artistName, artwork, composerName, contentRating, discNumber, durationInMillis, editorialNotes, genreNames
+    case movementCount, movementName, movementNumber, workName
+    case name, playParams, releaseDate, trackNumber, url
+}
+
+extension Song {
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        try self.init(artistName: c.decode(forKey: .artistName),
+                      artwork: c.decode(forKey: .artwork),
+                      composerName: c.decodeIfPresent(forKey: .composerName),
+                      contentRating: c.decodeIfPresent(forKey: .contentRating),
+                      discNumber: c.decode(forKey: .discNumber),
+                      durationInMillis: c.decodeIfPresent(forKey: .durationInMillis),
+                      editorialNotes: c.decodeIfPresent(forKey: .editorialNotes),
+                      genreNames: c.decode(forKey: .genreNames),
+                      movementCount: c.decodeIfPresent(forKey: .movementCount),
+                      movementName: c.decodeIfPresent(forKey: .movementName),
+                      movementNumber: c.decodeIfPresent(forKey: .movementNumber),
+                      name: c.decode(forKey: .name),
+                      playParams: c.decodeIfPresent(forKey: .playParams),
+                      releaseDate: c.decode(forKey: .releaseDate),
+                      trackNumber: c.decode(forKey: .trackNumber),
+                      url: c.decode(forKey: .url),
+                      workName: c.decodeIfPresent(forKey: .workName))
+    }
 }

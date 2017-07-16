@@ -11,5 +11,19 @@ import Foundation
 public protocol EditorialNotesDecodable: Decodable {
 }
 
+// MARK: - EditorialNotes
 public protocol EditorialNotes: EditorialNotesDecodable {
+    init(standard: String?, short: String) throws
+}
+
+private enum CodingKeys: String, CodingKey {
+    case standard, short
+}
+
+extension EditorialNotes {
+    public init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        try self.init(standard: c.decodeIfPresent(forKey: .standard),
+                      short: c.decode(forKey: .short))
+    }
 }

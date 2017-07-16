@@ -35,7 +35,8 @@ public struct GetDefaultRecommendations<
     public init(type: ResourceType? = nil, language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {
         assert(type?.contains(in: .albums, .playlists) ?? true)
         self.init(path: "/v1/me/recommendations",
-                  parameters: ["type": type?.rawValue, "l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
+                  parameters: ["type": type?.rawValue, "l": language?.languageTag,
+                               "limit": limit, "offset": offset].cleaned)
     }
 
     public init(path: String, parameters: [String: Any]) {

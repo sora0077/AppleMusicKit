@@ -45,6 +45,11 @@ struct Song: AppleMusicKit.Song {
 
     let name: String
     let artwork: Artwork
+
+    init(artistName: String, artwork: Artwork, composerName: String?, contentRating: String?, discNumber: Int, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], movementCount: Int?, movementName: String?, movementNumber: Int?, name: String, playParams: PlayParameters?, releaseDate: String, trackNumber: Int, url: String, workName: String?) throws {
+        self.name = name
+        self.artwork = artwork
+    }
 }
 struct MusicVideo: AppleMusicKit.MusicVideo {
     typealias Identifier = String
@@ -54,6 +59,11 @@ struct MusicVideo: AppleMusicKit.MusicVideo {
 
     let name: String
     let artwork: Artwork
+
+    init(artistName: String, artwork: Artwork, contentRating: String?, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], name: String, playParams: PlayParameters?, releaseDate: String, trackNumber: Int?, url: String, videoSubType: String?) throws {
+        self.name = name
+        self.artwork = artwork
+    }
 }
 struct Album: AppleMusicKit.Album {
     typealias Identifier = String
@@ -62,12 +72,21 @@ struct Album: AppleMusicKit.Album {
     typealias PlayParameters = Demo.PlayParameters
 
     let name: String
+
+    init(artistName: String, artwork: Artwork, contentRating: String?, copyright: String, editorialNotes: EditorialNotes?, genreNames: [String], isComplete: Bool, isSingle: Bool, name: String, releaseDate: String, playParams: PlayParameters?, trackCount: Int, url: String) throws {
+        self.name = name
+        print(artwork)
+    }
 }
 struct Artist: AppleMusicKit.Artist {
     typealias Identifier = String
     typealias EditorialNotes = Demo.EditorialNotes
 
     let name: String
+
+    init(genreNames: [String], editorialNotes: EditorialNotes?, name: String, url: String) throws {
+        self.name = name
+    }
 }
 struct Genre: AppleMusicKit.Genre {
     typealias Identifier = String
@@ -78,6 +97,12 @@ struct Playlist: AppleMusicKit.Playlist {
 }
 struct Curator: AppleMusicKit.Curator {
     typealias Identifier = String
+    typealias Artwork = Demo.Artwork
+    typealias EditorialNotes = Demo.EditorialNotes
+
+    init(artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: String) throws {
+        print(artwork, editorialNotes)
+    }
 }
 struct Station: AppleMusicKit.Station {
     typealias Identifier = String
@@ -86,6 +111,11 @@ struct Station: AppleMusicKit.Station {
 
     let name: String
     let isLive: Bool
+
+    init(artwork: Artwork, durationInMillis: Int?, editorialNotes: EditorialNotes?, episodeNumber: Int?, isLive: Bool, name: String, url: String) throws {
+        self.name = name
+        self.isLive = isLive
+    }
 }
 struct Artwork: AppleMusicKit.Artwork {
     init(width: Int, height: Int, url: String, colors: (bgColor: String, textColor1: String, textColor2: String, textColor3: String, textColor4: String)?) throws {
@@ -93,8 +123,12 @@ struct Artwork: AppleMusicKit.Artwork {
     }
 }
 struct EditorialNotes: AppleMusicKit.EditorialNotes {
+    init(standard: String?, short: String) throws {
+    }
 }
 struct PlayParameters: AppleMusicKit.PlayParameters {
+    init(id: String, kind: String) throws {
+    }
 }
 
 typealias GetSong = AppleMusicKit.GetSong<Song, Album, Artist, Genre, Storefront>
