@@ -1,0 +1,17 @@
+{
+    "data": [
+        {
+            "attributes": {
+                "defaultLanguageTag": "ja-jp",
+                "name": "Japan",
+                "supportedLanguageTags": [
+                    "ja-jp",
+                    "en-us"
+                ]
+            },
+            "href": "/v1/storefronts/jp",
+            "id": "jp",
+            "type": "storefronts"
+        }
+    ]
+}

@@ -127,6 +127,10 @@
 		D98E44311F1BBE7F00429665 /* AppleMusicKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleMusicKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98E44331F1BBE7F00429665 /* AppleMusicKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicKitTests.swift; sourceTree = "<group>"; };
 		D98E44351F1BBE7F00429665 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D98E44431F1D051400429665 /* get_multiple_storefronts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_multiple_storefronts.json; sourceTree = "<group>"; };
+		D98E44441F1D051400429665 /* get_all_storefronts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_all_storefronts.json; sourceTree = "<group>"; };
+		D98E44451F1D051400429665 /* get_users_storefront.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_users_storefront.json; sourceTree = "<group>"; };
+		D98E44461F1D051400429665 /* get_storefront.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_storefront.json; sourceTree = "<group>"; };
 		D99A8FD81F0954F70076EFBA /* SearchCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCatalog.swift; sourceTree = "<group>"; };
 		D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleMusicKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A024FF1F00F22300C49113 /* AppleMusicKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppleMusicKit.h; sourceTree = "<group>"; };
@@ -205,10 +209,30 @@
 		D98E44321F1BBE7F00429665 /* AppleMusicKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				D98E443F1F1D03E200429665 /* Fixtures */,
 				D98E44331F1BBE7F00429665 /* AppleMusicKitTests.swift */,
 				D98E44351F1BBE7F00429665 /* Info.plist */,
 			);
 			path = AppleMusicKitTests;
+			sourceTree = "<group>";
+		};
+		D98E443F1F1D03E200429665 /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				D98E44401F1D03F500429665 /* Storefronts */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
+		D98E44401F1D03F500429665 /* Storefronts */ = {
+			isa = PBXGroup;
+			children = (
+				D98E44461F1D051400429665 /* get_storefront.json */,
+				D98E44431F1D051400429665 /* get_multiple_storefronts.json */,
+				D98E44441F1D051400429665 /* get_all_storefronts.json */,
+				D98E44451F1D051400429665 /* get_users_storefront.json */,
+			);
+			path = Storefronts;
 			sourceTree = "<group>";
 		};
 		D9A024F21F00F22300C49113 = {

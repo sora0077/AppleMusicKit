@@ -1,0 +1,69 @@
+{
+    "data": [
+        {
+            "attributes": {
+                "defaultLanguageTag": "en-us",
+                "name": "United States",
+                "supportedLanguageTags": [
+                    "en-us",
+                    "es-mx"
+                ]
+            },
+            "href": "/v1/storefronts/us",
+            "id": "us",
+            "type": "storefronts"
+        },
+        {
+            "attributes": {
+                "defaultLanguageTag": "en-ca",
+                "name": "Canada",
+                "supportedLanguageTags": [
+                    "en-ca",
+                    "fr-ca"
+                ]
+            },
+            "href": "/v1/storefronts/ca",
+            "id": "ca",
+            "type": "storefronts"
+        },
+        {
+            "attributes": {
+                "defaultLanguageTag": "zh-cn",
+                "name": "China",
+                "supportedLanguageTags": [
+                    "zh-cn",
+                    "en-gb"
+                ]
+            },
+            "href": "/v1/storefronts/cn",
+            "id": "cn",
+            "type": "storefronts"
+        },
+        {
+            "attributes": {
+                "defaultLanguageTag": "en-au",
+                "name": "Australia",
+                "supportedLanguageTags": [
+                    "en-au"
+                ]
+            },
+            "href": "/v1/storefronts/au",
+            "id": "au",
+            "type": "storefronts"
+        },
+        {
+            "attributes": {
+                "defaultLanguageTag": "en-gb",
+                "name": "Hong Kong",
+                "supportedLanguageTags": [
+                    "en-gb",
+                    "zh-hk",
+                    "zh-tw"
+                ]
+            },
+            "href": "/v1/storefronts/hk",
+            "id": "hk",
+            "type": "storefronts"
+        }
+    ]
+}
