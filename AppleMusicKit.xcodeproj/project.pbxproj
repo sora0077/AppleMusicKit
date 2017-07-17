@@ -33,6 +33,7 @@
 		D98E44361F1BBE7F00429665 /* AppleMusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */; };
 		D98E443D1F1BBEF700429665 /* APIKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9A0250E1F00F63E00C49113 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D98E443E1F1BBEF700429665 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9A0250D1F00F63E00C49113 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D98E44481F1D056F00429665 /* StorefrontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98E44471F1D056F00429665 /* StorefrontTests.swift */; };
 		D99A8FD91F0954F70076EFBA /* SearchCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99A8FD81F0954F70076EFBA /* SearchCatalog.swift */; };
 		D9A025011F00F22400C49113 /* AppleMusicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A024FF1F00F22300C49113 /* AppleMusicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9A025111F00F89F00C49113 /* AppleMusicKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025101F00F89F00C49113 /* AppleMusicKit.swift */; };
@@ -56,6 +57,10 @@
 		D9B46B201F0CF6310067B721 /* FetchCurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B46B1F1F0CF6310067B721 /* FetchCurators.swift */; };
 		D9C4D5641F02334500D2B58F /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5631F02334500D2B58F /* Request.swift */; };
 		D9C4D5661F02343100D2B58F /* PaginatorRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C4D5651F02343100D2B58F /* PaginatorRequest.swift */; };
+		D9C795CA1F1D083F0008D43D /* get_storefront.json in Resources */ = {isa = PBXBuildFile; fileRef = D98E44461F1D051400429665 /* get_storefront.json */; };
+		D9C795CB1F1D08440008D43D /* get_multiple_storefronts.json in Resources */ = {isa = PBXBuildFile; fileRef = D98E44431F1D051400429665 /* get_multiple_storefronts.json */; };
+		D9C795CC1F1D08470008D43D /* get_all_storefronts.json in Resources */ = {isa = PBXBuildFile; fileRef = D98E44441F1D051400429665 /* get_all_storefronts.json */; };
+		D9C795CD1F1D084A0008D43D /* get_users_storefront.json in Resources */ = {isa = PBXBuildFile; fileRef = D98E44451F1D051400429665 /* get_users_storefront.json */; };
 		D9CFF7181F063AFE005F983D /* FetchArtists.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF7171F063AFE005F983D /* FetchArtists.swift */; };
 		D9CFF71A1F063B38005F983D /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF7191F063B38005F983D /* Genre.swift */; };
 		D9CFF71C1F0648C5005F983D /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF71B1F0648C5005F983D /* Artwork.swift */; };
@@ -131,6 +136,7 @@
 		D98E44441F1D051400429665 /* get_all_storefronts.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_all_storefronts.json; sourceTree = "<group>"; };
 		D98E44451F1D051400429665 /* get_users_storefront.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_users_storefront.json; sourceTree = "<group>"; };
 		D98E44461F1D051400429665 /* get_storefront.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_storefront.json; sourceTree = "<group>"; };
+		D98E44471F1D056F00429665 /* StorefrontTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorefrontTests.swift; sourceTree = "<group>"; };
 		D99A8FD81F0954F70076EFBA /* SearchCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCatalog.swift; sourceTree = "<group>"; };
 		D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleMusicKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A024FF1F00F22300C49113 /* AppleMusicKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppleMusicKit.h; sourceTree = "<group>"; };
@@ -212,6 +218,7 @@
 				D98E443F1F1D03E200429665 /* Fixtures */,
 				D98E44331F1BBE7F00429665 /* AppleMusicKitTests.swift */,
 				D98E44351F1BBE7F00429665 /* Info.plist */,
+				D98E44471F1D056F00429665 /* StorefrontTests.swift */,
 			);
 			path = AppleMusicKitTests;
 			sourceTree = "<group>";
@@ -464,6 +471,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9C795CB1F1D08440008D43D /* get_multiple_storefronts.json in Resources */,
+				D9C795CC1F1D08470008D43D /* get_all_storefronts.json in Resources */,
+				D9C795CA1F1D083F0008D43D /* get_storefront.json in Resources */,
+				D9C795CD1F1D084A0008D43D /* get_users_storefront.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D98E44341F1BBE7F00429665 /* AppleMusicKitTests.swift in Sources */,
+				D98E44481F1D056F00429665 /* StorefrontTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -816,6 +828,7 @@
 				D98E443A1F1BBE7F00429665 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D9A024F61F00F22300C49113 /* Build configuration list for PBXProject "AppleMusicKit" */ = {
 			isa = XCConfigurationList;
