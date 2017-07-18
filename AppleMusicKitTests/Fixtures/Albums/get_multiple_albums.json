@@ -1,0 +1,883 @@
+{
+    "data": [
+        {
+            "attributes": {
+                "artistName": "Bruce Springsteen",
+                "artwork": {
+                    "bgColor": "ffffff",
+                    "height": 1500,
+                    "textColor1": "0c0b09",
+                    "textColor2": "2a2724",
+                    "textColor3": "3d3c3a",
+                    "textColor4": "555250",
+                    "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
+                    "width": 1500
+                },
+                "copyright": "\u2117 1975 Bruce Springsteen",
+                "editorialNotes": {
+                    "short": "Springsteen's third album was the one that broke it all open for him.",
+                    "standard": "Springsteen's third album was the one that broke it all open for him, planting his tales of Jersey girls, cars, and nights spent sleeping on the beach firmly in the Top Five. He shot for an unholy hybrid of Orbison, Dylan and Spector \u2014 and actually reached it. \"Come take my hand,\" he invited in the opening lines. \"We're ridin' out tonight to case the Promised Land.\" Soon after this album, he'd discover the limits of such dreams, but here, it's a wide-open road: Even the tales of petty crime (\"Meeting Across the River\") and teen-gang violence (\"Jungleland\") are invested with all the wit and charm you can handle. Bruce's catalog is filled with one-of-a-kind albums from <i>The Wild, The Innocent and the E Street Shuffle</i> to <i>The Ghost of Tom Joad</i>. Forty years on, <i>Born to Run</i> still sits near the very top of that stack."
+                },
+                "genreNames": [
+                    "Rock",
+                    "Music",
+                    "Arena Rock",
+                    "Rock & Roll",
+                    "Pop",
+                    "Pop/Rock"
+                ],
+                "isComplete": true,
+                "isSingle": false,
+                "name": "Born to Run",
+                "playParams": {
+                    "id": "310730204",
+                    "kind": "album"
+                },
+                "releaseDate": "1975-08-25",
+                "trackCount": 8,
+                "url": "https://itunes.apple.com/us/album/born-to-run/id310730204"
+            },
+            "href": "/v1/catalog/us/albums/310730204",
+            "id": "310730204",
+            "relationships": {
+                "artists": {
+                    "data": [
+                        {
+                            "href": "/v1/catalog/us/artists/178834",
+                            "id": "178834",
+                            "type": "artists"
+                        }
+                    ],
+                    "href": "/v1/catalog/us/albums/310730204/artists"
+                },
+                "tracks": {
+                    "data": [
+                        {
+                            "attributes": {
+                                "artistName": "Bruce Springsteen",
+                                "artwork": {
+                                    "bgColor": "ffffff",
+                                    "height": 1500,
+                                    "textColor1": "0c0b09",
+                                    "textColor2": "2a2724",
+                                    "textColor3": "3d3c3a",
+                                    "textColor4": "555250",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
+                                    "width": 1500
+                                },
+                                "composerName": "Bruce Springsteen",
+                                "discNumber": 1,
+                                "durationInMillis": 289186,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Arena Rock",
+                                    "Rock & Roll",
+                                    "Pop",
+                                    "Pop/Rock"
+                                ],
+                                "name": "Thunder Road",
+                                "playParams": {
+                                    "id": "310730206",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1975-08-25",
+                                "trackNumber": 1,
+                                "url": "https://itunes.apple.com/us/album/thunder-road/id310730204?i=310730206"
+                            },
+                            "href": "/v1/catalog/us/songs/310730206",
+                            "id": "310730206",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bruce Springsteen",
+                                "artwork": {
+                                    "bgColor": "ffffff",
+                                    "height": 1500,
+                                    "textColor1": "0c0b09",
+                                    "textColor2": "2a2724",
+                                    "textColor3": "3d3c3a",
+                                    "textColor4": "555250",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
+                                    "width": 1500
+                                },
+                                "composerName": "Bruce Springsteen",
+                                "discNumber": 1,
+                                "durationInMillis": 191315,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Arena Rock",
+                                    "Rock & Roll",
+                                    "Pop",
+                                    "Pop/Rock"
+                                ],
+                                "name": "Tenth Avenue Freeze-Out",
+                                "playParams": {
+                                    "id": "310730208",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1975-08-25",
+                                "trackNumber": 2,
+                                "url": "https://itunes.apple.com/us/album/tenth-avenue-freeze-out/id310730204?i=310730208"
+                            },
+                            "href": "/v1/catalog/us/songs/310730208",
+                            "id": "310730208",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bruce Springsteen",
+                                "artwork": {
+                                    "bgColor": "ffffff",
+                                    "height": 1500,
+                                    "textColor1": "0c0b09",
+                                    "textColor2": "2a2724",
+                                    "textColor3": "3d3c3a",
+                                    "textColor4": "555250",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
+                                    "width": 1500
+                                },
+                                "composerName": "Bruce Springsteen",
+                                "discNumber": 1,
+                                "durationInMillis": 181341,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Arena Rock",
+                                    "Rock & Roll",
+                                    "Pop",
+                                    "Pop/Rock"
+                                ],
+                                "name": "Night",
+                                "playParams": {
+                                    "id": "310730209",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1975-08-25",
+                                "trackNumber": 3,
+                                "url": "https://itunes.apple.com/us/album/night/id310730204?i=310730209"
+                            },
+                            "href": "/v1/catalog/us/songs/310730209",
+                            "id": "310730209",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bruce Springsteen",
+                                "artwork": {
+                                    "bgColor": "ffffff",
+                                    "height": 1500,
+                                    "textColor1": "0c0b09",
+                                    "textColor2": "2a2724",
+                                    "textColor3": "3d3c3a",
+                                    "textColor4": "555250",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
+                                    "width": 1500
+                                },
+                                "composerName": "Bruce Springsteen",
+                                "discNumber": 1,
+                                "durationInMillis": 391764,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Arena Rock",
+                                    "Rock & Roll",
+                                    "Pop",
+                                    "Pop/Rock"
+                                ],
+                                "name": "Backstreets",
+                                "playParams": {
+                                    "id": "310730213",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1975-08-25",
+                                "trackNumber": 4,
+                                "url": "https://itunes.apple.com/us/album/backstreets/id310730204?i=310730213"
+                            },
+                            "href": "/v1/catalog/us/songs/310730213",
+                            "id": "310730213",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bruce Springsteen",
+                                "artwork": {
+                                    "bgColor": "ffffff",
+                                    "height": 1500,
+                                    "textColor1": "0c0b09",
+                                    "textColor2": "2a2724",
+                                    "textColor3": "3d3c3a",
+                                    "textColor4": "555250",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
+                                    "width": 1500
+                                },
+                                "composerName": "Bruce Springsteen",
+                                "discNumber": 1,
+                                "durationInMillis": 269933,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Arena Rock",
+                                    "Rock & Roll",
+                                    "Pop",
+                                    "Pop/Rock"
+                                ],
+                                "name": "Born to Run",
+                                "playParams": {
+                                    "id": "310730214",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1975-08-25",
+                                "trackNumber": 5,
+                                "url": "https://itunes.apple.com/us/album/born-to-run/id310730204?i=310730214"
+                            },
+                            "href": "/v1/catalog/us/songs/310730214",
+                            "id": "310730214",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bruce Springsteen",
+                                "artwork": {
+                                    "bgColor": "ffffff",
+                                    "height": 1500,
+                                    "textColor1": "0c0b09",
+                                    "textColor2": "2a2724",
+                                    "textColor3": "3d3c3a",
+                                    "textColor4": "555250",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
+                                    "width": 1500
+                                },
+                                "composerName": "Bruce Springsteen",
+                                "discNumber": 1,
+                                "durationInMillis": 270261,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Arena Rock",
+                                    "Rock & Roll",
+                                    "Pop",
+                                    "Pop/Rock"
+                                ],
+                                "name": "She's the One",
+                                "playParams": {
+                                    "id": "310730220",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1975-08-25",
+                                "trackNumber": 6,
+                                "url": "https://itunes.apple.com/us/album/shes-the-one/id310730204?i=310730220"
+                            },
+                            "href": "/v1/catalog/us/songs/310730220",
+                            "id": "310730220",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bruce Springsteen",
+                                "artwork": {
+                                    "bgColor": "ffffff",
+                                    "height": 1500,
+                                    "textColor1": "0c0b09",
+                                    "textColor2": "2a2724",
+                                    "textColor3": "3d3c3a",
+                                    "textColor4": "555250",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
+                                    "width": 1500
+                                },
+                                "composerName": "Bruce Springsteen",
+                                "discNumber": 1,
+                                "durationInMillis": 198721,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Arena Rock",
+                                    "Rock & Roll",
+                                    "Pop",
+                                    "Pop/Rock"
+                                ],
+                                "name": "Meeting Across the River",
+                                "playParams": {
+                                    "id": "310730222",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1975-08-25",
+                                "trackNumber": 7,
+                                "url": "https://itunes.apple.com/us/album/meeting-across-the-river/id310730204?i=310730222"
+                            },
+                            "href": "/v1/catalog/us/songs/310730222",
+                            "id": "310730222",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bruce Springsteen",
+                                "artwork": {
+                                    "bgColor": "ffffff",
+                                    "height": 1500,
+                                    "textColor1": "0c0b09",
+                                    "textColor2": "2a2724",
+                                    "textColor3": "3d3c3a",
+                                    "textColor4": "555250",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music3/v4/2d/02/4a/2d024aaa-4547-ca71-7ba1-b8f5e1d98256/source/{w}x{h}bb.jpg",
+                                    "width": 1500
+                                },
+                                "composerName": "Bruce Springsteen",
+                                "discNumber": 1,
+                                "durationInMillis": 573496,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Arena Rock",
+                                    "Rock & Roll",
+                                    "Pop",
+                                    "Pop/Rock"
+                                ],
+                                "name": "Jungleland",
+                                "playParams": {
+                                    "id": "310730227",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1975-08-25",
+                                "trackNumber": 8,
+                                "url": "https://itunes.apple.com/us/album/jungleland/id310730204?i=310730227"
+                            },
+                            "href": "/v1/catalog/us/songs/310730227",
+                            "id": "310730227",
+                            "type": "songs"
+                        }
+                    ],
+                    "href": "/v1/catalog/us/albums/310730204/tracks"
+                }
+            },
+            "type": "albums"
+        },
+        {
+            "attributes": {
+                "artistName": "Bob Dylan",
+                "artwork": {
+                    "bgColor": "291821",
+                    "height": 600,
+                    "textColor1": "f7ece3",
+                    "textColor2": "dcbcbb",
+                    "textColor3": "cec2bc",
+                    "textColor4": "b89b9c",
+                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                    "width": 600
+                },
+                "copyright": "\u2117 Originally Released 1963 Sony Music Entertainment Inc.",
+                "editorialNotes": {
+                    "short": "The protest and love songs that made his early reputation.",
+                    "standard": "Bob Dylan\u2019s first album was mostly old folk and blues songs, but his second album, <i>The Freewheelin\u2019 Bob Dylan</i>, shows a nearly unbelievable transformation. Dylan\u2019s songwriting talents came fast and furious. These earliest compositions include the landmark civil rights anthem \u201cBlowin\u2019 in the Wind\u201d; the anti-war screeds \u201cMasters of War,\u201d \u201cTalkin\u2019 World War III Blues,\u201d and \u201cA Hard Rain\u2019s a-Gonna Fall\u201d; and the romantic turns of \u201cGirl from the North Country\u201d and \u201cDon\u2019t Think Twice, It\u2019s All Right.\u201d Modern singer-songwriting starts here."
+                },
+                "genreNames": [
+                    "Rock",
+                    "Music",
+                    "Singer/ Songwriter",
+                    "Singer/Songwriter",
+                    "Contemporary Folk"
+                ],
+                "isComplete": true,
+                "isSingle": false,
+                "name": "The Freewheelin' Bob Dylan",
+                "playParams": {
+                    "id": "190758914",
+                    "kind": "album"
+                },
+                "releaseDate": "1963-05-27",
+                "trackCount": 13,
+                "url": "https://itunes.apple.com/us/album/the-freewheelin-bob-dylan/id190758914"
+            },
+            "href": "/v1/catalog/us/albums/190758914",
+            "id": "190758914",
+            "relationships": {
+                "artists": {
+                    "data": [
+                        {
+                            "href": "/v1/catalog/us/artists/462006",
+                            "id": "462006",
+                            "type": "artists"
+                        }
+                    ],
+                    "href": "/v1/catalog/us/albums/190758914/artists"
+                },
+                "tracks": {
+                    "data": [
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "B. Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 168757,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "Blowin' In the Wind",
+                                "playParams": {
+                                    "id": "190758932",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 1,
+                                "url": "https://itunes.apple.com/us/album/blowin-in-the-wind/id190758914?i=190758932"
+                            },
+                            "href": "/v1/catalog/us/songs/190758932",
+                            "id": "190758932",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "B. Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 203082,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "Girl from the North Country",
+                                "playParams": {
+                                    "id": "190758937",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 2,
+                                "url": "https://itunes.apple.com/us/album/girl-from-the-north-country/id190758914?i=190758937"
+                            },
+                            "href": "/v1/catalog/us/songs/190758937",
+                            "id": "190758937",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "B. Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 278100,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "Masters of War",
+                                "playParams": {
+                                    "id": "190758945",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 3,
+                                "url": "https://itunes.apple.com/us/album/masters-of-war/id190758914?i=190758945"
+                            },
+                            "href": "/v1/catalog/us/songs/190758945",
+                            "id": "190758945",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "Bob Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 212108,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "Down the Highway",
+                                "playParams": {
+                                    "id": "190759004",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 4,
+                                "url": "https://itunes.apple.com/us/album/down-the-highway/id190758914?i=190759004"
+                            },
+                            "href": "/v1/catalog/us/songs/190759004",
+                            "id": "190759004",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "Bob Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 148874,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "Bob Dylan's Blues",
+                                "playParams": {
+                                    "id": "190759330",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 5,
+                                "url": "https://itunes.apple.com/us/album/bob-dylans-blues/id190758914?i=190759330"
+                            },
+                            "href": "/v1/catalog/us/songs/190759330",
+                            "id": "190759330",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "Bob Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 412988,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "A Hard Rain's a-Gonna Fall",
+                                "playParams": {
+                                    "id": "190759530",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 6,
+                                "url": "https://itunes.apple.com/us/album/a-hard-rains-a-gonna-fall/id190758914?i=190759530"
+                            },
+                            "href": "/v1/catalog/us/songs/190759530",
+                            "id": "190759530",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "Bob Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 220888,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "Don't Think Twice, It's All Right",
+                                "playParams": {
+                                    "id": "190759866",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 7,
+                                "url": "https://itunes.apple.com/us/album/dont-think-twice-its-all-right/id190758914?i=190759866"
+                            },
+                            "href": "/v1/catalog/us/songs/190759866",
+                            "id": "190759866",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "Bob Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 302600,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "Bob Dylan's Dream",
+                                "playParams": {
+                                    "id": "190759897",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 8,
+                                "url": "https://itunes.apple.com/us/album/bob-dylans-dream/id190758914?i=190759897"
+                            },
+                            "href": "/v1/catalog/us/songs/190759897",
+                            "id": "190759897",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "Bob Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 110336,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "Oxford Town",
+                                "playParams": {
+                                    "id": "190760759",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 9,
+                                "url": "https://itunes.apple.com/us/album/oxford-town/id190758914?i=190760759"
+                            },
+                            "href": "/v1/catalog/us/songs/190760759",
+                            "id": "190760759",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "Bob Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 387464,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "Talkin' World War III Blues",
+                                "playParams": {
+                                    "id": "190761023",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 10,
+                                "url": "https://itunes.apple.com/us/album/talkin-world-war-iii-blues/id190758914?i=190761023"
+                            },
+                            "href": "/v1/catalog/us/songs/190761023",
+                            "id": "190761023",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "B. Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 164032,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "Corrina, Corrina",
+                                "playParams": {
+                                    "id": "190761041",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 11,
+                                "url": "https://itunes.apple.com/us/album/corrina-corrina/id190758914?i=190761041"
+                            },
+                            "href": "/v1/catalog/us/songs/190761041",
+                            "id": "190761041",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "Bob Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 120843,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "Honey, Just Allow Me One More Chance",
+                                "playParams": {
+                                    "id": "190761184",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 12,
+                                "url": "https://itunes.apple.com/us/album/honey-just-allow-me-one-more-chance/id190758914?i=190761184"
+                            },
+                            "href": "/v1/catalog/us/songs/190761184",
+                            "id": "190761184",
+                            "type": "songs"
+                        },
+                        {
+                            "attributes": {
+                                "artistName": "Bob Dylan",
+                                "artwork": {
+                                    "bgColor": "291821",
+                                    "height": 600,
+                                    "textColor1": "f7ece3",
+                                    "textColor2": "dcbcbb",
+                                    "textColor3": "cec2bc",
+                                    "textColor4": "b89b9c",
+                                    "url": "https://example.mzstatic.com/image/thumb/Music/v4/13/3d/ad/133dad9b-74e3-8bb9-6f32-2eca9bc68bf7/source/{w}x{h}bb.jpg",
+                                    "width": 600
+                                },
+                                "composerName": "Bob Dylan",
+                                "discNumber": 1,
+                                "durationInMillis": 286757,
+                                "genreNames": [
+                                    "Rock",
+                                    "Music",
+                                    "Singer/ Songwriter",
+                                    "Singer/Songwriter",
+                                    "Contemporary Folk"
+                                ],
+                                "name": "I Shall Be Free",
+                                "playParams": {
+                                    "id": "190761224",
+                                    "kind": "song"
+                                },
+                                "releaseDate": "1963-05-27",
+                                "trackNumber": 13,
+                                "url": "https://itunes.apple.com/us/album/i-shall-be-free/id190758914?i=190761224"
+                            },
+                            "href": "/v1/catalog/us/songs/190761224",
+                            "id": "190761224",
+                            "type": "songs"
+                        }
+                    ],
+                    "href": "/v1/catalog/us/albums/190758914/tracks"
+                }
+            },
+            "type": "albums"
+        }
+    ]
+}

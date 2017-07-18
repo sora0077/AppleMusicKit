@@ -122,6 +122,7 @@ struct PlayParameters: AppleMusicKit.PlayParameters {
 typealias GetSong = AppleMusicKit.GetSong<Song, Album, Artist, Genre, Storefront>
 typealias GetMusicVideo = AppleMusicKit.GetMusicVideo<MusicVideo, Album, Artist, Genre, Storefront>
 typealias GetAlbum = AppleMusicKit.GetAlbum<Album, Song, MusicVideo, Artist, Storefront>
+typealias GetMultipleAlbums = AppleMusicKit.GetMultipleAlbums<Album, Song, MusicVideo, Artist, Storefront>
 typealias GetArtist = AppleMusicKit.GetArtist<Artist, Album, Genre, Storefront>
 typealias GetPlaylist = AppleMusicKit.GetPlaylist<Playlist, Curator, Song, MusicVideo, Storefront>
 typealias GetCharts = AppleMusicKit.GetCharts<Song, MusicVideo, Album, Storefront>
