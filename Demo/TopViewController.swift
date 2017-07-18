@@ -19,6 +19,18 @@ extension UIView {
     }
 }
 
+extension CAGradientLayer {
+    static func appleMusicLayer() -> CAGradientLayer {
+        let layer = CAGradientLayer()
+        layer.colors = [
+            UIColor(hex: 0xF6DCD9).cgColor,
+            UIColor(hex: 0xd4d2fa).cgColor]
+        layer.startPoint = .zero
+        layer.endPoint = CGPoint(x: 1, y: 1)
+        return layer
+    }
+}
+
 final class TopViewController: UIViewController {
     private enum Item {
         case deviceToken, document, request
@@ -31,6 +43,7 @@ final class TopViewController: UIViewController {
             }
         }
     }
+    private let gradientLayer = CAGradientLayer.appleMusicLayer()
     private let tableView = UITableView()
     private let dataSource = [
         Item.deviceToken, .request, .document
@@ -41,12 +54,21 @@ final class TopViewController: UIViewController {
         title = "AppleMusicKit"
         navigationController?.navigationBar.prefersLargeTitles = true
         
+        view.layer.insertSublayer(gradientLayer, at: 0)
+        
         view.addSubview(tableView)
         tableView.autolayoutFit(to: view)
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.backgroundColor = .clear
+        tableView.tableFooterView = UIView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = view.bounds
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -65,6 +87,7 @@ extension TopViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = dataSource[indexPath.row].title
+        cell.backgroundColor = .clear
         return cell
     }
 }

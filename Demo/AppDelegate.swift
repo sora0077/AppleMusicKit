@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UINavigationController(rootViewController: TopViewController())
         window?.makeKeyAndVisible()
+        window?.tintColor = UIColor(hex: 0x7A69F2)
         return true
     }
 
