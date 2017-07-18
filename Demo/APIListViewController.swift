@@ -58,11 +58,13 @@ private struct AnyRequest: AppleMusicKit.Request {
     }
 }
 
+// MARK: - APIListViewController
 final class APIListViewController: UIViewController {
     private let tableView = UITableView()
     private let dataSource: [AnyRequest] = [
         AnyRequest(GetStorefront(id: "jp")),
-        AnyRequest(GetMultipleStorefronts(id: "jp", "us"))
+        AnyRequest(GetMultipleStorefronts(id: "jp", "us")),
+        AnyRequest(GetAlbum(storefront: "us", id: "310730204"))
     ]
 
     override func viewDidLoad() {
