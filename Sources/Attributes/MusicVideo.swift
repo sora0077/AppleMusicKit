@@ -47,7 +47,7 @@ extension MusicVideo {
                       name: c.decode(forKey: .name),
                       playParams: c.decodeIfPresent(forKey: .playParams),
                       releaseDate: c.decode(forKey: .releaseDate),
-                      trackNumber: c.decode(forKey: .trackNumber),
+                      trackNumber: c.decodeIfPresent(forKey: .trackNumber),
                       url: c.decode(forKey: .url),
                       videoSubType: c.decodeIfPresent(forKey: .videoSubType))
     }
