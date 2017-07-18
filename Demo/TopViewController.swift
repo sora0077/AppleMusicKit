@@ -34,7 +34,7 @@ extension CAGradientLayer {
 final class TopViewController: UIViewController {
     private enum Item {
         case deviceToken, document, request
-        
+
         var title: String {
             switch self {
             case .deviceToken: return "Set DeviceToken"
@@ -48,29 +48,29 @@ final class TopViewController: UIViewController {
     private let dataSource = [
         Item.deviceToken, .request, .document
     ]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "AppleMusicKit"
         navigationController?.navigationBar.prefersLargeTitles = true
-        
+
         view.layer.insertSublayer(gradientLayer, at: 0)
-        
+
         view.addSubview(tableView)
         tableView.autolayoutFit(to: view)
-        
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.backgroundColor = .clear
         tableView.tableFooterView = UIView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         gradientLayer.frame = view.bounds
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         for indexPath in tableView.indexPathsForSelectedRows ?? [] {
@@ -83,7 +83,7 @@ extension TopViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = dataSource[indexPath.row].title
@@ -113,4 +113,3 @@ final class SafariViewController: SFSafariViewController {
         navigationItem.largeTitleDisplayMode = .never
     }
 }
-
