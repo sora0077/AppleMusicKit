@@ -40,6 +40,7 @@
 		D98E443E1F1BBEF700429665 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9A0250D1F00F63E00C49113 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D98E44481F1D056F00429665 /* StorefrontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98E44471F1D056F00429665 /* StorefrontTests.swift */; };
 		D99A8FD91F0954F70076EFBA /* SearchCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99A8FD81F0954F70076EFBA /* SearchCatalog.swift */; };
+		D99F9DD71F1E7B6E00ACCE9A /* APIListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99F9DD61F1E7B6E00ACCE9A /* APIListViewController.swift */; };
 		D9A025011F00F22400C49113 /* AppleMusicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A024FF1F00F22300C49113 /* AppleMusicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9A025111F00F89F00C49113 /* AppleMusicKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025101F00F89F00C49113 /* AppleMusicKit.swift */; };
 		D9A025141F00F93800C49113 /* FetchSongs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025131F00F93800C49113 /* FetchSongs.swift */; };
@@ -147,6 +148,7 @@
 		D98E44461F1D051400429665 /* get_storefront.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_storefront.json; sourceTree = "<group>"; };
 		D98E44471F1D056F00429665 /* StorefrontTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorefrontTests.swift; sourceTree = "<group>"; };
 		D99A8FD81F0954F70076EFBA /* SearchCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCatalog.swift; sourceTree = "<group>"; };
+		D99F9DD61F1E7B6E00ACCE9A /* APIListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIListViewController.swift; sourceTree = "<group>"; };
 		D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleMusicKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A024FF1F00F22300C49113 /* AppleMusicKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppleMusicKit.h; sourceTree = "<group>"; };
 		D9A025001F00F22400C49113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				D9AD5EC21F02DD8500CE8468 /* AppDelegate.swift */,
 				D94E4C3A1F1E1F8900F0F757 /* TopViewController.swift */,
 				D98163E71F1E0A1D000341ED /* DeviceTokenInputViewController.swift */,
+				D99F9DD61F1E7B6E00ACCE9A /* APIListViewController.swift */,
 				D9AD5EC41F02DD8500CE8468 /* ViewController.swift */,
 				D9AD5EC91F02DD8600CE8468 /* Assets.xcassets */,
 				D9AD5ECB1F02DD8600CE8468 /* LaunchScreen.storyboard */,
@@ -581,6 +584,7 @@
 				D94E4C3B1F1E1F8900F0F757 /* TopViewController.swift in Sources */,
 				D9AD5EC51F02DD8500CE8468 /* ViewController.swift in Sources */,
 				D98163E81F1E0A1D000341ED /* DeviceTokenInputViewController.swift in Sources */,
+				D99F9DD71F1E7B6E00ACCE9A /* APIListViewController.swift in Sources */,
 				D9AD5EC31F02DD8500CE8468 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

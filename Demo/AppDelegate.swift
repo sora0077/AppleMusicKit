@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = UINavigationController(rootViewController: TopViewController())
         window?.makeKeyAndVisible()
         window?.tintColor = UIColor(hex: 0x7A69F2)
+
+        if let token = UserDefaults.standard.string(forKey: "DeviceToken") {
+            Session.shared.authorization = Authorization(developerToken: token)
+        }
         return true
     }
 

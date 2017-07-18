@@ -98,7 +98,7 @@ extension TopViewController: UITableViewDelegate {
         case .deviceToken:
             navigationController?.pushViewController(DeviceTokenInputViewController(), animated: true)
         case .request:
-            break
+            navigationController?.pushViewController(APIListViewController(), animated: true)
         case .document:
             let vc = SafariViewController(url: URL(string: "https://developer.apple.com/musickit/")!)
             navigationController?.pushViewController(vc, animated: true)
