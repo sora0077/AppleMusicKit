@@ -8,63 +8,35 @@
 
 import UIKit
 import AppleMusicKit
-import APIKit
 
-private struct AnyRequest: AppleMusicKit.Request {
-    typealias Response = Any
+private struct Item {
+    let title: String
+    private let viewControllerTemplate: () -> APIInputFormViewController
 
-    let method: HTTPMethod
-    let baseURL: URL
-    let path: String
-    let dataParser: DataParser
-    let headerFields: [String : String]
-    let parameters: Any?
-    let queryParameters: [String : Any]?
-    let bodyParameters: BodyParameters?
-    let scope: AccessScope
-
-    private let interceptRequest: (URLRequest) throws -> URLRequest
-    private let interceptObject: (Any, HTTPURLResponse) throws -> Any
-    private let response: (Any, HTTPURLResponse) throws -> Response
-    let raw: Any
-
-    init<Req: AppleMusicKit.Request>(_ request: Req) {
-        interceptRequest = request.intercept(urlRequest:)
-        interceptObject = request.intercept(object:urlResponse:)
-        response = request.response
-        raw = request
-
-        headerFields = request.headerFields
-        method = request.method
-        baseURL = request.baseURL
-        path = request.path
-        dataParser = request.dataParser
-        parameters = request.parameters
-        queryParameters = request.queryParameters
-        bodyParameters = request.bodyParameters
-        scope = request.scope
+    init<Req: Request>(_ inputs: [FormInput],
+                       _ request: @escaping (APIInputFormViewController.Form) -> Req) {
+        self.title = "\(Req.self)".components(separatedBy: "<").first ?? ""
+        viewControllerTemplate = {
+            APIInputFormViewController(inputs: inputs, request: { AnyRequest(request($0)) })
+        }
     }
 
-    func intercept(urlRequest: URLRequest) throws -> URLRequest {
-        return try interceptRequest(urlRequest)
-    }
-
-    func intercept(object: Any, urlResponse: HTTPURLResponse) throws -> Any {
-        return try interceptObject(object, urlResponse)
-    }
-
-    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
-        return try response(object, urlResponse)
+    func generateFormViewController() -> APIInputFormViewController {
+        return viewControllerTemplate()
     }
 }
 
 // MARK: - APIListViewController
 final class APIListViewController: UIViewController {
     private let tableView = UITableView()
-    private let dataSource: [AnyRequest] = [
-        AnyRequest(GetStorefront(id: "jp")),
-        AnyRequest(GetMultipleStorefronts(id: "jp", "us")),
-        AnyRequest(GetAlbum(storefront: "us", id: "310730204"))
+    private let dataSource: [Item] = [
+        Item([TextInput(name: "id", default: "jp"),
+              TextInput(name: "language", default: nil)]) { form in
+            GetStorefront(id: form["id"], language: form["language"])
+        }
+//        AnyRequest(GetStorefront(id: "jp")),
+//        AnyRequest(GetMultipleStorefronts(id: "jp", "us")),
+//        AnyRequest(GetAlbum(storefront: "us", id: "310730204"))
     ]
 
     override func viewDidLoad() {
@@ -76,6 +48,7 @@ final class APIListViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
     }
 
@@ -95,16 +68,44 @@ extension APIListViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = "\(dataSource[indexPath.row].raw)".components(separatedBy: "<").first
+        cell.textLabel?.text = dataSource[indexPath.row].title
         return cell
     }
 }
 
 extension APIListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Session.shared.send(dataSource[indexPath.row]) { result in
+        let cell = tableView.cellForRow(at: indexPath)!
+        let vc = dataSource[indexPath.row].generateFormViewController()
+        vc.delegate = self
+        vc.modalPresentationStyle = .popover
+        vc.preferredContentSize = view.bounds.insetBy(dx: 20, dy: 20).size
+        let popover = vc.popoverPresentationController
+        popover?.delegate = self
+        popover?.sourceView = cell
+        popover?.sourceRect = cell.convert(cell.bounds, to: tableView)
+        present(vc, animated: true, completion: nil)
+    }
+}
+
+extension APIListViewController: APIInputFormViewControllerDelegate {
+    func inputFormViewController(_ vc: APIInputFormViewController, didFinishWith request: AnyRequest) {
+        vc.dismiss(animated: true) {
+            Session.shared.send(request) { result in
+                print(result)
+            }
+        }
+    }
+}
+
+extension APIListViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        for indexPath in tableView.indexPathsForSelectedRows ?? [] {
             tableView.deselectRow(at: indexPath, animated: true)
-            print(result)
         }
     }
 }
