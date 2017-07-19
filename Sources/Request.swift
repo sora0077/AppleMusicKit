@@ -15,7 +15,7 @@ public enum AccessScope {
     case readonly, user
 }
 
-public protocol Request: APIKit.Request where Response: AppleMusicKit.Response {
+public protocol Request: APIKit.Request {
     var scope: AccessScope { get }
 }
 
@@ -47,7 +47,7 @@ extension Request {
     }
 }
 
-extension Request {
+extension Request where Response: AppleMusicKit.Response {
     public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
         return try decode(object)
     }

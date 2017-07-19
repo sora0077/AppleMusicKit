@@ -23,6 +23,9 @@
 		D93B01061F0D3F6A005216B6 /* FetchAppleCurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93B01051F0D3F6A005216B6 /* FetchAppleCurators.swift */; };
 		D93B01081F0E87E2005216B6 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93B01071F0E87E2005216B6 /* Error.swift */; };
 		D93B356E1F092B1200A5D216 /* FetchCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93B356D1F092A1500A5D216 /* FetchCharts.swift */; };
+		D94E4C3B1F1E1F8900F0F757 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94E4C3A1F1E1F8900F0F757 /* TopViewController.swift */; };
+		D950020A1F1FA1F2006D410B /* APIInputFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95002091F1FA1F2006D410B /* APIInputFormViewController.swift */; };
+		D950020C1F1FA75D006D410B /* AnyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D950020B1F1FA75D006D410B /* AnyRequest.swift */; };
 		D96CB9DF1F0C976B003B8122 /* AnyResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CB9DE1F0C976B003B8122 /* AnyResource.swift */; };
 		D96CB9E11F0C9846003B8122 /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CB9E01F0C9846003B8122 /* Recommendation.swift */; };
 		D97C47021F07678500DADC28 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47011F07678500DADC28 /* Resource.swift */; };
@@ -32,12 +35,14 @@
 		D98163E31F1E0168000341ED /* get_album.json in Resources */ = {isa = PBXBuildFile; fileRef = D98163E11F1E015C000341ED /* get_album.json */; };
 		D98163E41F1E016B000341ED /* get_multiple_albums.json in Resources */ = {isa = PBXBuildFile; fileRef = D98163E21F1E015C000341ED /* get_multiple_albums.json */; };
 		D98163E61F1E01B8000341ED /* AlbumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98163E51F1E01B8000341ED /* AlbumTests.swift */; };
+		D98163E81F1E0A1D000341ED /* DeviceTokenInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98163E71F1E0A1D000341ED /* DeviceTokenInputViewController.swift */; };
 		D98E44341F1BBE7F00429665 /* AppleMusicKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98E44331F1BBE7F00429665 /* AppleMusicKitTests.swift */; };
 		D98E44361F1BBE7F00429665 /* AppleMusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */; };
 		D98E443D1F1BBEF700429665 /* APIKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9A0250E1F00F63E00C49113 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D98E443E1F1BBEF700429665 /* Result.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9A0250D1F00F63E00C49113 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D98E44481F1D056F00429665 /* StorefrontTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98E44471F1D056F00429665 /* StorefrontTests.swift */; };
 		D99A8FD91F0954F70076EFBA /* SearchCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99A8FD81F0954F70076EFBA /* SearchCatalog.swift */; };
+		D99F9DD71F1E7B6E00ACCE9A /* APIListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D99F9DD61F1E7B6E00ACCE9A /* APIListViewController.swift */; };
 		D9A025011F00F22400C49113 /* AppleMusicKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A024FF1F00F22300C49113 /* AppleMusicKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9A025111F00F89F00C49113 /* AppleMusicKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025101F00F89F00C49113 /* AppleMusicKit.swift */; };
 		D9A025141F00F93800C49113 /* FetchSongs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A025131F00F93800C49113 /* FetchSongs.swift */; };
@@ -46,7 +51,6 @@
 		D9A0251B1F012A4F00C49113 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A0251A1F012A4F00C49113 /* Artist.swift */; };
 		D9AD5EC31F02DD8500CE8468 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AD5EC21F02DD8500CE8468 /* AppDelegate.swift */; };
 		D9AD5EC51F02DD8500CE8468 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AD5EC41F02DD8500CE8468 /* ViewController.swift */; };
-		D9AD5EC81F02DD8600CE8468 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9AD5EC61F02DD8500CE8468 /* Main.storyboard */; };
 		D9AD5ECA1F02DD8600CE8468 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9AD5EC91F02DD8600CE8468 /* Assets.xcassets */; };
 		D9AD5ECD1F02DD8600CE8468 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9AD5ECB1F02DD8600CE8468 /* LaunchScreen.storyboard */; };
 		D9B1A6DC1F051C6A0088DB93 /* FetchAlbums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B1A6DB1F051C6A0088DB93 /* FetchAlbums.swift */; };
@@ -126,6 +130,9 @@
 		D93B01051F0D3F6A005216B6 /* FetchAppleCurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAppleCurators.swift; sourceTree = "<group>"; };
 		D93B01071F0E87E2005216B6 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		D93B356D1F092A1500A5D216 /* FetchCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCharts.swift; sourceTree = "<group>"; };
+		D94E4C3A1F1E1F8900F0F757 /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
+		D95002091F1FA1F2006D410B /* APIInputFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInputFormViewController.swift; sourceTree = "<group>"; };
+		D950020B1F1FA75D006D410B /* AnyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyRequest.swift; sourceTree = "<group>"; };
 		D96CB9DE1F0C976B003B8122 /* AnyResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyResource.swift; sourceTree = "<group>"; };
 		D96CB9E01F0C9846003B8122 /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		D97C47011F07678500DADC28 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
@@ -135,6 +142,7 @@
 		D98163E11F1E015C000341ED /* get_album.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_album.json; sourceTree = "<group>"; };
 		D98163E21F1E015C000341ED /* get_multiple_albums.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_multiple_albums.json; sourceTree = "<group>"; };
 		D98163E51F1E01B8000341ED /* AlbumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTests.swift; sourceTree = "<group>"; };
+		D98163E71F1E0A1D000341ED /* DeviceTokenInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTokenInputViewController.swift; sourceTree = "<group>"; };
 		D98E44311F1BBE7F00429665 /* AppleMusicKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleMusicKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98E44331F1BBE7F00429665 /* AppleMusicKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicKitTests.swift; sourceTree = "<group>"; };
 		D98E44351F1BBE7F00429665 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -144,6 +152,7 @@
 		D98E44461F1D051400429665 /* get_storefront.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_storefront.json; sourceTree = "<group>"; };
 		D98E44471F1D056F00429665 /* StorefrontTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorefrontTests.swift; sourceTree = "<group>"; };
 		D99A8FD81F0954F70076EFBA /* SearchCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCatalog.swift; sourceTree = "<group>"; };
+		D99F9DD61F1E7B6E00ACCE9A /* APIListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIListViewController.swift; sourceTree = "<group>"; };
 		D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AppleMusicKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A024FF1F00F22300C49113 /* AppleMusicKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppleMusicKit.h; sourceTree = "<group>"; };
 		D9A025001F00F22400C49113 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -157,7 +166,6 @@
 		D9AD5EC01F02DD8500CE8468 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9AD5EC21F02DD8500CE8468 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9AD5EC41F02DD8500CE8468 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D9AD5EC71F02DD8500CE8468 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D9AD5EC91F02DD8600CE8468 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9AD5ECC1F02DD8600CE8468 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9AD5ECE1F02DD8600CE8468 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -362,8 +370,12 @@
 			isa = PBXGroup;
 			children = (
 				D9AD5EC21F02DD8500CE8468 /* AppDelegate.swift */,
+				D94E4C3A1F1E1F8900F0F757 /* TopViewController.swift */,
+				D98163E71F1E0A1D000341ED /* DeviceTokenInputViewController.swift */,
+				D99F9DD61F1E7B6E00ACCE9A /* APIListViewController.swift */,
+				D95002091F1FA1F2006D410B /* APIInputFormViewController.swift */,
+				D950020B1F1FA75D006D410B /* AnyRequest.swift */,
 				D9AD5EC41F02DD8500CE8468 /* ViewController.swift */,
-				D9AD5EC61F02DD8500CE8468 /* Main.storyboard */,
 				D9AD5EC91F02DD8600CE8468 /* Assets.xcassets */,
 				D9AD5ECB1F02DD8600CE8468 /* LaunchScreen.storyboard */,
 				D9AD5ECE1F02DD8600CE8468 /* Info.plist */,
@@ -510,7 +522,6 @@
 			files = (
 				D9AD5ECD1F02DD8600CE8468 /* LaunchScreen.storyboard in Resources */,
 				D9AD5ECA1F02DD8600CE8468 /* Assets.xcassets in Resources */,
-				D9AD5EC81F02DD8600CE8468 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,7 +587,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D94E4C3B1F1E1F8900F0F757 /* TopViewController.swift in Sources */,
 				D9AD5EC51F02DD8500CE8468 /* ViewController.swift in Sources */,
+				D950020A1F1FA1F2006D410B /* APIInputFormViewController.swift in Sources */,
+				D98163E81F1E0A1D000341ED /* DeviceTokenInputViewController.swift in Sources */,
+				D950020C1F1FA75D006D410B /* AnyRequest.swift in Sources */,
+				D99F9DD71F1E7B6E00ACCE9A /* APIListViewController.swift in Sources */,
 				D9AD5EC31F02DD8500CE8468 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,14 +613,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D9AD5EC61F02DD8500CE8468 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D9AD5EC71F02DD8500CE8468 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D9AD5ECB1F02DD8600CE8468 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
