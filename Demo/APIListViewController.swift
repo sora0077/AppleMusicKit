@@ -26,17 +26,38 @@ private struct Item {
     }
 }
 
+private func csv(_ value: String) -> [String] {
+    return value.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+}
+private func csv(_ value: String?) -> [String]? {
+    return value?.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+}
+private func resouces(_ value: String?) -> Set<ResourceType>? {
+    guard let arr = csv(value) else { return nil }
+    return Set(arr.flatMap(ResourceType.init(rawValue:)))
+}
+
 // MARK: - APIListViewController
 final class APIListViewController: UIViewController {
     private let tableView = UITableView()
     private let dataSource: [Item] = [
         Item([TextInput(name: "id", default: "jp"),
-              TextInput(name: "language", default: nil)]) { form in
+              TextInput(name: "language")]) { form in
             GetStorefront(id: form["id"], language: form["language"])
+        },
+        Item([TextInput(name: "ids", default: "jp"),
+              TextInput(name: "language")]) { form in
+            GetMultipleStorefronts(ids: csv(form["ids"]), language: form["language"])
+        },
+        Item([TextInput(name: "storefront", default: "us"),
+              TextInput(name: "id", default: "310730204"),
+              TextInput(name: "language"),
+              TextInput(name: "include")]) { form in
+            GetAlbum(storefront: form["storefront"],
+                     id: form["id"],
+                     language: form["language"],
+                     include: resouces(form["include"]))
         }
-//        AnyRequest(GetStorefront(id: "jp")),
-//        AnyRequest(GetMultipleStorefronts(id: "jp", "us")),
-//        AnyRequest(GetAlbum(storefront: "us", id: "310730204"))
     ]
 
     override func viewDidLoad() {
@@ -76,20 +97,26 @@ extension APIListViewController: UITableViewDataSource {
 extension APIListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)!
+        let cellRect = cell.convert(cell.bounds, to: navigationController?.view ?? view)
         let vc = dataSource[indexPath.row].generateFormViewController()
         vc.delegate = self
         vc.modalPresentationStyle = .popover
         vc.preferredContentSize = view.bounds.insetBy(dx: 20, dy: 20).size
         let popover = vc.popoverPresentationController
         popover?.delegate = self
-        popover?.sourceView = cell
-        popover?.sourceRect = cell.convert(cell.bounds, to: tableView)
-        present(vc, animated: true, completion: nil)
+        popover?.sourceView = view
+        popover?.sourceRect = cellRect.insetBy(dx: 0, dy: -8)
+        DispatchQueue.main.async {
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 }
 
 extension APIListViewController: APIInputFormViewControllerDelegate {
     func inputFormViewController(_ vc: APIInputFormViewController, didFinishWith request: AnyRequest) {
+        for indexPath in tableView.indexPathsForSelectedRows ?? [] {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
         vc.dismiss(animated: true) {
             Session.shared.send(request) { result in
                 print(result)

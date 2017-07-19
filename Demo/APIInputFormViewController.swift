@@ -26,7 +26,7 @@ struct TextInput: FormInput {
 
     init(name: String, `default`: String? = nil) {
         self.name = name
-        self.default = `default` as? String
+        self.default = `default`
     }
 }
 
