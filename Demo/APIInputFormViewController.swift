@@ -175,6 +175,21 @@ final class APIInputFormViewController: UIViewController {
             doneButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 4),
             doneButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -4),
             doneButton.heightAnchor.constraint(equalToConstant: 44)])
+
+        preferredContentSize.height = min(44 * CGFloat(form.count) + 44 + 8, preferredContentSize.height)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showAnimation()
+    }
+
+    private func showAnimation() {
+        let view = popoverPresentationController?.presentedView
+        view?.alpha = 0
+        UIView.animate(withDuration: 0.2) {
+            view?.alpha = 1
+        }
     }
 
     @objc
