@@ -57,6 +57,42 @@ final class APIListViewController: UIViewController {
                      id: form["id"],
                      language: form["language"],
                      include: resouces(form["include"]))
+        },
+        Item([TextInput(name: "storefront", default: "us"),
+              TextInput(name: "id", default: "639032181"),
+              TextInput(name: "language"),
+              TextInput(name: "include")]) { form in
+            GetMusicVideo(storefront: form["storefront"],
+                          id: form["id"],
+                          language: form["lamguage"],
+                          include: resouces(form["include"]))
+        },
+        Item([TextInput(name: "storefront", default: "jp"),
+              TextInput(name: "id", default: "pl.7a987d29f54b4e3e9ab15906189477f7"),
+              TextInput(name: "language"),
+              TextInput(name: "include")]) { form in
+            GetPlaylist(storefront: form["storefront"],
+                        id: form["id"],
+                        language: form["lamguage"],
+                        include: resouces(form["include"]))
+        },
+        Item([TextInput(name: "storefront", default: "us"),
+              TextInput(name: "id", default: "900032829"),
+              TextInput(name: "language"),
+              TextInput(name: "include")]) { form in
+                GetSong(storefront: form["storefront"],
+                        id: form["id"],
+                        language: form["lamguage"],
+                        include: resouces(form["include"]))
+        },
+        Item([TextInput(name: "storefront", default: "us"),
+              TextInput(name: "id", default: "ra.985484166"),
+              TextInput(name: "language"),
+              TextInput(name: "include")]) { form in
+            GetStation(storefront: form["storefront"],
+                       id: form["id"],
+                       language: form["lamguage"],
+                       include: resouces(form["include"]))
         }
     ]
 

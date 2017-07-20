@@ -136,6 +136,7 @@ typealias GetMusicVideo = AppleMusicKit.GetMusicVideo<MusicVideo, Album, Artist,
 typealias GetAlbum = AppleMusicKit.GetAlbum<Album, Song, MusicVideo, Artist, Storefront>
 typealias GetArtist = AppleMusicKit.GetArtist<Artist, Album, Genre, Storefront>
 typealias GetPlaylist = AppleMusicKit.GetPlaylist<Playlist, Curator, Song, MusicVideo, Storefront>
+typealias GetStation = AppleMusicKit.GetStation<Station, Storefront>
 typealias GetCharts = AppleMusicKit.GetCharts<Song, MusicVideo, Album, Storefront>
 typealias SearchResources = AppleMusicKit.SearchResources<Song, MusicVideo, Album, Artist, Storefront>
 typealias GetStorefront = AppleMusicKit.GetStorefront<Storefront>
