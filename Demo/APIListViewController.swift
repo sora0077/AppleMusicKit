@@ -102,6 +102,24 @@ final class APIListViewController: UIViewController {
                                    ids: csv(form["ids"]),
                                    language: form["lamguage"],
                                    include: resouces(form["include"]))
+        },
+        Item([TextInput(name: "storefront", default: "us"),
+              TextInput(name: "ids", default: "976439448,1107687517"),
+              TextInput(name: "language"),
+              TextInput(name: "include")]) { form in
+                GetMultipleCurators(storefront: form["storefront"],
+                                    ids: csv(form["ids"]),
+                                    language: form["lamguage"],
+                                    include: resouces(form["include"]))
+        },
+        Item([TextInput(name: "storefront", default: "us"),
+              TextInput(name: "ids", default: "976439514,976439503"),
+              TextInput(name: "language"),
+              TextInput(name: "include")]) { form in
+                GetMultipleActivities(storefront: form["storefront"],
+                                      ids: csv(form["ids"]),
+                                      language: form["lamguage"],
+                                      include: resouces(form["include"]))
         }
     ]
 

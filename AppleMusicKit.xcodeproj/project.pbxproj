@@ -26,6 +26,8 @@
 		D94E4C3B1F1E1F8900F0F757 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94E4C3A1F1E1F8900F0F757 /* TopViewController.swift */; };
 		D950020A1F1FA1F2006D410B /* APIInputFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95002091F1FA1F2006D410B /* APIInputFormViewController.swift */; };
 		D950020C1F1FA75D006D410B /* AnyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D950020B1F1FA75D006D410B /* AnyRequest.swift */; };
+		D9657A6D1F22156A00057593 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9657A6C1F22156A00057593 /* Activity.swift */; };
+		D9657A6F1F2215B400057593 /* FetchActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9657A6E1F2215B400057593 /* FetchActivity.swift */; };
 		D96CB9DF1F0C976B003B8122 /* AnyResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CB9DE1F0C976B003B8122 /* AnyResource.swift */; };
 		D96CB9E11F0C9846003B8122 /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96CB9E01F0C9846003B8122 /* Recommendation.swift */; };
 		D97C47021F07678500DADC28 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97C47011F07678500DADC28 /* Resource.swift */; };
@@ -133,6 +135,8 @@
 		D94E4C3A1F1E1F8900F0F757 /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		D95002091F1FA1F2006D410B /* APIInputFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInputFormViewController.swift; sourceTree = "<group>"; };
 		D950020B1F1FA75D006D410B /* AnyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyRequest.swift; sourceTree = "<group>"; };
+		D9657A6C1F22156A00057593 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		D9657A6E1F2215B400057593 /* FetchActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchActivity.swift; sourceTree = "<group>"; };
 		D96CB9DE1F0C976B003B8122 /* AnyResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyResource.swift; sourceTree = "<group>"; };
 		D96CB9E01F0C9846003B8122 /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		D97C47011F07678500DADC28 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 				D97C47051F076A2B00DADC28 /* FetchPlaylists.swift */,
 				D9B46B1F1F0CF6310067B721 /* FetchCurators.swift */,
 				D93B01051F0D3F6A005216B6 /* FetchAppleCurators.swift */,
+				D9657A6E1F2215B400057593 /* FetchActivity.swift */,
 				D93B356D1F092A1500A5D216 /* FetchCharts.swift */,
 				D99A8FD81F0954F70076EFBA /* SearchCatalog.swift */,
 				D90ACBE21F0A458E00D6CB94 /* FetchStations.swift */,
@@ -360,6 +365,7 @@
 				D97C47031F0769BE00DADC28 /* Playlist.swift */,
 				D97C47071F076A7900DADC28 /* Curator.swift */,
 				D9B46B1D1F0CF4C20067B721 /* AppleCurator.swift */,
+				D9657A6C1F22156A00057593 /* Activity.swift */,
 				D90ACBE41F0A45CA00D6CB94 /* Station.swift */,
 				D96CB9E01F0C9846003B8122 /* Recommendation.swift */,
 			);
@@ -555,6 +561,7 @@
 				D90ACBE31F0A458E00D6CB94 /* FetchStations.swift in Sources */,
 				D9B46B1A1F0CDFC50067B721 /* FetchHistory.swift in Sources */,
 				D96CB9E11F0C9846003B8122 /* Recommendation.swift in Sources */,
+				D9657A6F1F2215B400057593 /* FetchActivity.swift in Sources */,
 				D92087191F02563F00F995FA /* Storefront.swift in Sources */,
 				D9B1D27A1F066C9000F3720B /* FetchMusicVideos.swift in Sources */,
 				D9C4D5641F02334500D2B58F /* Request.swift in Sources */,
@@ -566,6 +573,7 @@
 				D920871B1F0256C600F995FA /* Response.swift in Sources */,
 				D9A025141F00F93800C49113 /* FetchSongs.swift in Sources */,
 				D97C47021F07678500DADC28 /* Resource.swift in Sources */,
+				D9657A6D1F22156A00057593 /* Activity.swift in Sources */,
 				D9A0251B1F012A4F00C49113 /* Artist.swift in Sources */,
 				D9B46B201F0CF6310067B721 /* FetchCurators.swift in Sources */,
 				D97C47061F076A2B00DADC28 /* FetchPlaylists.swift in Sources */,

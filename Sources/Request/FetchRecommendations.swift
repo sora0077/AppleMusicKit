@@ -18,6 +18,7 @@ public struct GetDefaultRecommendations<
     Playlist: PlaylistDecodable,
     Curator: CuratorDecodable,
     AppleCurator: AppleCuratorDecodable,
+    Activity: ActivityDecodable,
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
@@ -59,6 +60,7 @@ extension GetDefaultRecommendations {
             Playlist,
             Curator,
             AppleCurator,
+            Activity,
             Station,
             Storefront,
             Genre,
@@ -77,11 +79,12 @@ public struct GetRecommendation<
     Playlist: PlaylistDecodable,
     Curator: CuratorDecodable,
     AppleCurator: AppleCuratorDecodable,
+    Activity: ActivityDecodable,
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
 >: PaginatorRequest {
-    public typealias Relationships = GetDefaultRecommendations<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, AppleCurator, Station, Storefront, Genre>.Relationships
+    public typealias Relationships = GetDefaultRecommendations<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, AppleCurator, Activity, Station, Storefront, Genre>.Relationships
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 
     public var scope: AccessScope { return .user }
@@ -114,11 +117,12 @@ public struct GetMultipleRecommendations<
     Playlist: PlaylistDecodable,
     Curator: CuratorDecodable,
     AppleCurator: AppleCuratorDecodable,
+    Activity: ActivityDecodable,
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
 >: PaginatorRequest {
-    public typealias Relationships = GetRecommendation<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, AppleCurator, Station, Storefront, Genre>.Relationships
+    public typealias Relationships = GetRecommendation<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, AppleCurator, Activity, Station, Storefront, Genre>.Relationships
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 
     public var scope: AccessScope { return .user }

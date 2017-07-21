@@ -104,6 +104,15 @@ struct Curator: AppleMusicKit.Curator {
         print(artwork, editorialNotes)
     }
 }
+struct Activity: AppleMusicKit.Activity {
+    typealias Identifier = String
+    typealias Artwork = Demo.Artwork
+    typealias EditorialNotes = Demo.EditorialNotes
+
+    init(artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: String) throws {
+        print(artwork, editorialNotes)
+    }
+}
 struct Station: AppleMusicKit.Station {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
@@ -139,6 +148,10 @@ typealias GetMultipleArtists = AppleMusicKit.GetMultipleArtists<Artist, Album, G
 typealias GetPlaylist = AppleMusicKit.GetPlaylist<Playlist, Curator, Song, MusicVideo, Storefront>
 typealias GetStation = AppleMusicKit.GetStation<Station, Storefront>
 typealias GetCharts = AppleMusicKit.GetCharts<Song, MusicVideo, Album, Storefront>
+typealias GetCurator = AppleMusicKit.GetCurator<Curator, Playlist, Storefront>
+typealias GetMultipleCurators = AppleMusicKit.GetMultipleCurators<Curator, Playlist, Storefront>
+typealias GetActivity = AppleMusicKit.GetActivity<Activity, Playlist, Storefront>
+typealias GetMultipleActivities = AppleMusicKit.GetMultipleActivities<Activity, Playlist, Storefront>
 typealias SearchResources = AppleMusicKit.SearchResources<Song, MusicVideo, Album, Artist, Storefront>
 typealias GetStorefront = AppleMusicKit.GetStorefront<Storefront>
 typealias GetMultipleStorefronts = AppleMusicKit.GetMultipleStorefronts<Storefront>
