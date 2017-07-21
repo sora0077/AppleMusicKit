@@ -89,10 +89,19 @@ final class APIListViewController: UIViewController {
               TextInput(name: "id", default: "ra.985484166"),
               TextInput(name: "language"),
               TextInput(name: "include")]) { form in
-            GetStation(storefront: form["storefront"],
-                       id: form["id"],
-                       language: form["lamguage"],
-                       include: resouces(form["include"]))
+                GetStation(storefront: form["storefront"],
+                           id: form["id"],
+                           language: form["lamguage"],
+                           include: resouces(form["include"]))
+        },
+        Item([TextInput(name: "storefront", default: "us"),
+              TextInput(name: "ids", default: "178834,462006"),
+              TextInput(name: "language"),
+              TextInput(name: "include")]) { form in
+                GetMultipleArtists(storefront: form["storefront"],
+                                   ids: csv(form["ids"]),
+                                   language: form["lamguage"],
+                                   include: resouces(form["include"]))
         }
     ]
 

@@ -44,7 +44,7 @@ public struct GetMultipleArtists<Artist, Album, Genre, Storefront>: ResourceRequ
     Storefront: StorefrontDecodable {
     public typealias Resource = AppleMusicKit.Resource<Artist, GetArtist<Artist, Album, Genre, Storefront>.Relationships>
     public var method: HTTPMethod { return .get }
-    public var path: String { return "/v1/catalog/\(storefront)/albums" }
+    public var path: String { return "/v1/catalog/\(storefront)/artists" }
     public let parameters: Any?
 
     private let storefront: Storefront.Identifier
