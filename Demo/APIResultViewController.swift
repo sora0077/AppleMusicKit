@@ -26,6 +26,7 @@ final class APIResultViewController: UIViewController {
             }
         }
     }
+    private let gradientLayer = CAGradientLayer.appleMusicLayer()
     private let tableView = UITableView()
     private let request: AnyRequest
     private var dataSource: [Section] = []
@@ -41,12 +42,14 @@ final class APIResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.layer.insertSublayer(gradientLayer, at: 0)
         view.addSubview(tableView)
         tableView.autolayoutFit(to: view)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.tableFooterView = UIView()
+        tableView.backgroundColor = .clear
         tableView.register(RawResultCell.self, forCellReuseIdentifier: "RawResultCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
@@ -73,6 +76,11 @@ final class APIResultViewController: UIViewController {
             }
             self?.tableView.reloadData()
         }
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = view.bounds
     }
 }
 
@@ -123,6 +131,7 @@ extension APIResultViewController {
         override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             selectionStyle = .none
+            backgroundColor = .clear
             contentView.addSubview(textView)
             textView.autolayoutFit(to: contentView, margin: 8)
             let height = textView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200)
@@ -130,6 +139,7 @@ extension APIResultViewController {
             height.isActive = true
             textView.isScrollEnabled = false
             textView.isEditable = false
+            textView.backgroundColor = .clear
         }
 
         required init?(coder aDecoder: NSCoder) {

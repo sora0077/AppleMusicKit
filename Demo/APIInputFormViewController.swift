@@ -152,6 +152,7 @@ final class APIInputFormViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Results"
         let doneButton = UIButton(type: .system)
         view.addSubview(tableView)
         view.addSubview(doneButton)

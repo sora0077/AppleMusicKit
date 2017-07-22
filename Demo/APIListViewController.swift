@@ -79,6 +79,7 @@ final class APIListViewController: UIViewController {
             }
         }
     }
+    private let gradientLayer = CAGradientLayer.appleMusicLayer()
     private let tableView = UITableView()
     private let dataSource: [Section] = [
         .storefront([
@@ -145,7 +146,9 @@ final class APIListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "API"
         navigationItem.largeTitleDisplayMode = .never
+        view.layer.insertSublayer(gradientLayer, at: 0)
 
         view.addSubview(tableView)
         tableView.autolayoutFit(to: view)
@@ -153,7 +156,13 @@ final class APIListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
+        tableView.backgroundColor = .clear
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        gradientLayer.frame = view.bounds
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -177,6 +186,7 @@ extension APIListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = dataSource[indexPath.section][indexPath.row].title
+        cell.backgroundColor = .clear
         return cell
     }
 }

@@ -33,11 +33,11 @@ extension CAGradientLayer {
 
 final class TopViewController: UIViewController {
     private enum Item {
-        case deviceToken, document, request
+        case developerToken, document, request
 
         var title: String {
             switch self {
-            case .deviceToken: return "Set DeviceToken"
+            case .developerToken: return "Set DeveloperToken"
             case .request: return "Call API"
             case .document: return "MusicKit - Apple Developer"
             }
@@ -46,7 +46,7 @@ final class TopViewController: UIViewController {
     private let gradientLayer = CAGradientLayer.appleMusicLayer()
     private let tableView = UITableView()
     private let dataSource = [
-        Item.deviceToken, .request, .document
+        Item.developerToken, .request, .document
     ]
 
     override func viewDidLoad() {
@@ -95,7 +95,7 @@ extension TopViewController: UITableViewDataSource {
 extension TopViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch dataSource[indexPath.row] {
-        case .deviceToken:
+        case .developerToken:
             navigationController?.pushViewController(DeveloperTokenInputViewController(), animated: true)
         case .request:
             navigationController?.pushViewController(APIListViewController(), animated: true)
