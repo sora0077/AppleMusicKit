@@ -103,10 +103,8 @@ private final class Adapter: URLSessionAdapter {
 
 open class Session: APIKit.Session {
     open override class var shared: Session {
-        get { return _custom ?? _shared }
-        set { _custom = newValue }
+        return _shared
     }
-    private static var _custom: Session?
     private static let _shared = Session(adapter: Adapter(configuration: URLSessionConfiguration.default))
 
     open var authorization: Authorization?

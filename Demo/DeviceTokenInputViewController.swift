@@ -15,7 +15,7 @@ final class DeviceTokenInputViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Set DeviceToken"
+        title = "DeviceToken"
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .save, target: self, action: #selector(saveAction))
 
