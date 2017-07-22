@@ -37,89 +37,77 @@ private func resouces(_ value: String?) -> Set<ResourceType>? {
     return Set(arr.flatMap(ResourceType.init(rawValue:)))
 }
 
+func inputs(storefront: String = "us", id: String) -> [FormInput] {
+    return [TextInput(name: "storefront", default: storefront),
+            TextInput(name: "id", default: id),
+            TextInput(name: "language"),
+            TextInput(name: "include")]
+}
+
+func inputs(storefront: String = "us", ids: String) -> [FormInput] {
+    return [TextInput(name: "storefront", default: storefront),
+            TextInput(name: "ids", default: ids),
+            TextInput(name: "language"),
+            TextInput(name: "include")]
+}
+
 // MARK: - APIListViewController
 final class APIListViewController: UIViewController {
     private let tableView = UITableView()
     private let dataSource: [Item] = [
-        Item([TextInput(name: "id", default: "jp"),
-              TextInput(name: "language")]) { form in
+        Item([TextInput(name: "id", default: "jp"), TextInput(name: "language")]) { form in
             GetStorefront(id: form["id"], language: form["language"])
         },
-        Item([TextInput(name: "ids", default: "jp"),
-              TextInput(name: "language")]) { form in
+        Item([TextInput(name: "ids", default: "jp"), TextInput(name: "language")]) { form in
             GetMultipleStorefronts(ids: csv(form["ids"]), language: form["language"])
         },
-        Item([TextInput(name: "storefront", default: "us"),
-              TextInput(name: "id", default: "310730204"),
-              TextInput(name: "language"),
-              TextInput(name: "include")]) { form in
+        Item(inputs(id: "310730204")) { form in
             GetAlbum(storefront: form["storefront"],
                      id: form["id"],
                      language: form["language"],
                      include: resouces(form["include"]))
         },
-        Item([TextInput(name: "storefront", default: "us"),
-              TextInput(name: "id", default: "639032181"),
-              TextInput(name: "language"),
-              TextInput(name: "include")]) { form in
+        Item(inputs(id: "639032181")) { form in
             GetMusicVideo(storefront: form["storefront"],
                           id: form["id"],
                           language: form["lamguage"],
                           include: resouces(form["include"]))
         },
-        Item([TextInput(name: "storefront", default: "jp"),
-              TextInput(name: "id", default: "pl.7a987d29f54b4e3e9ab15906189477f7"),
-              TextInput(name: "language"),
-              TextInput(name: "include")]) { form in
+        Item(inputs(storefront: "jp", id: "pl.7a987d29f54b4e3e9ab15906189477f7")) { form in
             GetPlaylist(storefront: form["storefront"],
                         id: form["id"],
                         language: form["lamguage"],
                         include: resouces(form["include"]))
         },
-        Item([TextInput(name: "storefront", default: "us"),
-              TextInput(name: "id", default: "900032829"),
-              TextInput(name: "language"),
-              TextInput(name: "include")]) { form in
-                GetSong(storefront: form["storefront"],
-                        id: form["id"],
-                        language: form["lamguage"],
-                        include: resouces(form["include"]))
+        Item(inputs(id: "900032829")) { form in
+            GetSong(storefront: form["storefront"],
+                    id: form["id"],
+                    language: form["lamguage"],
+                    include: resouces(form["include"]))
         },
-        Item([TextInput(name: "storefront", default: "us"),
-              TextInput(name: "id", default: "ra.985484166"),
-              TextInput(name: "language"),
-              TextInput(name: "include")]) { form in
-                GetStation(storefront: form["storefront"],
-                           id: form["id"],
-                           language: form["lamguage"],
-                           include: resouces(form["include"]))
+        Item(inputs(id: "ra.985484166")) { form in
+            GetStation(storefront: form["storefront"],
+                       id: form["id"],
+                       language: form["lamguage"],
+                       include: resouces(form["include"]))
         },
-        Item([TextInput(name: "storefront", default: "us"),
-              TextInput(name: "ids", default: "178834,462006"),
-              TextInput(name: "language"),
-              TextInput(name: "include")]) { form in
-                GetMultipleArtists(storefront: form["storefront"],
-                                   ids: csv(form["ids"]),
-                                   language: form["lamguage"],
-                                   include: resouces(form["include"]))
+        Item(inputs(ids: "178834,462006")) { form in
+            GetMultipleArtists(storefront: form["storefront"],
+                               ids: csv(form["ids"]),
+                               language: form["lamguage"],
+                               include: resouces(form["include"]))
         },
-        Item([TextInput(name: "storefront", default: "us"),
-              TextInput(name: "ids", default: "976439448,1107687517"),
-              TextInput(name: "language"),
-              TextInput(name: "include")]) { form in
-                GetMultipleCurators(storefront: form["storefront"],
-                                    ids: csv(form["ids"]),
-                                    language: form["lamguage"],
-                                    include: resouces(form["include"]))
+        Item(inputs(ids: "976439448,1107687517")) { form in
+            GetMultipleCurators(storefront: form["storefront"],
+                                ids: csv(form["ids"]),
+                                language: form["lamguage"],
+                                include: resouces(form["include"]))
         },
-        Item([TextInput(name: "storefront", default: "us"),
-              TextInput(name: "ids", default: "976439514,976439503"),
-              TextInput(name: "language"),
-              TextInput(name: "include")]) { form in
-                GetMultipleActivities(storefront: form["storefront"],
-                                      ids: csv(form["ids"]),
-                                      language: form["lamguage"],
-                                      include: resouces(form["include"]))
+        Item(inputs(ids: "976439514,976439503")) { form in
+            GetMultipleActivities(storefront: form["storefront"],
+                                  ids: csv(form["ids"]),
+                                  language: form["lamguage"],
+                                  include: resouces(form["include"]))
         }
     ]
 
