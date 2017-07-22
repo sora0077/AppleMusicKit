@@ -25,19 +25,23 @@ extension UIColor {
 
 extension String: Language {}
 
-struct Storefront: AppleMusicKit.Storefront {
+struct Storefront: AppleMusicKit.Storefront, CustomStringConvertible {
     typealias Identifier = String
     typealias Language = String
 
     let name: String
     let defaultLanguageTag: String
 
+    var description: String {
+        return name
+    }
+
     init(defaultLanguageTag: String, name: String, supportedLanguageTags: [String]) throws {
         self.name = name
         self.defaultLanguageTag = defaultLanguageTag
     }
 }
-struct Song: AppleMusicKit.Song {
+struct Song: AppleMusicKit.Song, CustomStringConvertible {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
     typealias EditorialNotes = Demo.EditorialNotes
@@ -45,13 +49,17 @@ struct Song: AppleMusicKit.Song {
 
     let name: String
     let artwork: Artwork
+
+    var description: String {
+        return name
+    }
 
     init(artistName: String, artwork: Artwork, composerName: String?, contentRating: String?, discNumber: Int, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], movementCount: Int?, movementName: String?, movementNumber: Int?, name: String, playParams: PlayParameters?, releaseDate: String, trackNumber: Int, url: String, workName: String?) throws {
         self.name = name
         self.artwork = artwork
     }
 }
-struct MusicVideo: AppleMusicKit.MusicVideo {
+struct MusicVideo: AppleMusicKit.MusicVideo, CustomStringConvertible {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
     typealias EditorialNotes = Demo.EditorialNotes
@@ -60,12 +68,16 @@ struct MusicVideo: AppleMusicKit.MusicVideo {
     let name: String
     let artwork: Artwork
 
+    var description: String {
+        return name
+    }
+
     init(artistName: String, artwork: Artwork, contentRating: String?, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], name: String, playParams: PlayParameters?, releaseDate: String, trackNumber: Int?, url: String, videoSubType: String?) throws {
         self.name = name
         self.artwork = artwork
     }
 }
-struct Album: AppleMusicKit.Album {
+struct Album: AppleMusicKit.Album, CustomStringConvertible {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
     typealias EditorialNotes = Demo.EditorialNotes
@@ -73,16 +85,24 @@ struct Album: AppleMusicKit.Album {
 
     let name: String
 
+    var description: String {
+        return name
+    }
+
     init(artistName: String, artwork: Artwork, contentRating: String?, copyright: String, editorialNotes: EditorialNotes?, genreNames: [String], isComplete: Bool, isSingle: Bool, name: String, releaseDate: String, playParams: PlayParameters?, trackCount: Int, url: String) throws {
         self.name = name
         print(artwork)
     }
 }
-struct Artist: AppleMusicKit.Artist {
+struct Artist: AppleMusicKit.Artist, CustomStringConvertible {
     typealias Identifier = String
     typealias EditorialNotes = Demo.EditorialNotes
 
     let name: String
+
+    var description: String {
+        return name
+    }
 
     init(genreNames: [String], editorialNotes: EditorialNotes?, name: String, url: String) throws {
         self.name = name
@@ -92,8 +112,18 @@ struct Genre: AppleMusicKit.Genre {
     typealias Identifier = String
     let name: String
 }
-struct Playlist: AppleMusicKit.Playlist {
+struct Playlist: AppleMusicKit.Playlist, CustomStringConvertible {
     typealias Identifier = String
+
+    let name: String
+
+    var description: String {
+        return name
+    }
+
+    init(name: String) throws {
+        self.name = name
+    }
 }
 struct Curator: AppleMusicKit.Curator {
     typealias Identifier = String
@@ -113,13 +143,17 @@ struct Activity: AppleMusicKit.Activity {
         print(artwork, editorialNotes)
     }
 }
-struct Station: AppleMusicKit.Station {
+struct Station: AppleMusicKit.Station, CustomStringConvertible {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
     typealias EditorialNotes = Demo.EditorialNotes
 
     let name: String
     let isLive: Bool
+
+    var description: String {
+        return name
+    }
 
     init(artwork: Artwork, durationInMillis: Int?, editorialNotes: EditorialNotes?, episodeNumber: Int?, isLive: Bool, name: String, url: String) throws {
         self.name = name

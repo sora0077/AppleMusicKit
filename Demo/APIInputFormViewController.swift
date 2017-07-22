@@ -103,12 +103,13 @@ extension APIInputFormViewController {
         fileprivate let inputs: [FormInput]
         fileprivate let resultViewController: (APIInputFormViewController.FormData) -> UIViewController
 
-        init<Req: Request>(_ inputs: [FormInput],
-                           _ request: @escaping (APIInputFormViewController.FormData) -> Req) {
+        init<Req: Request, A: CustomStringConvertible, R>(
+            _ inputs: [FormInput],
+            _ request: @escaping (APIInputFormViewController.FormData) -> Req) where Req.Response == ResponseRoot<Resource<A, R>> {
             self.title = "\(Req.self)".components(separatedBy: "<").first ?? ""
             self.inputs = inputs
             resultViewController = { form in
-                APIResultViewController(request: request(form))
+                APIResultViewController<Req, A, R>(request: request(form))
             }
         }
     }

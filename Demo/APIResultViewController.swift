@@ -15,10 +15,10 @@ private extension UILayoutPriority {
     }
 }
 
-final class APIResultViewController<Request: AppleMusicKit.Request>: UIViewController, UITableViewDataSource, UITableViewDelegate {
+final class APIResultViewController<Request: AppleMusicKit.Request, A: CustomStringConvertible, R>: UIViewController, UITableViewDataSource, UITableViewDelegate where Request.Response == ResponseRoot<Resource<A, R>> {
     private enum Section {
         case raw(String, lines: Int)
-        case results([Any])
+        case results([Resource<A, R>])
 
         var count: Int {
             switch self {
@@ -70,8 +70,9 @@ final class APIResultViewController<Request: AppleMusicKit.Request>: UIViewContr
             let lines = jsonString.components(separatedBy: "\n").count
             print(jsonString)
             switch result {
-            case .success(_):
-                self?.dataSource = [.raw(jsonString, lines: lines)]
+            case .success(let (response, _)):
+                self?.dataSource = [.raw(jsonString, lines: lines),
+                                    .results(response.data)]
             case .failure:
                 self?.dataSource = [.raw(jsonString, lines: lines)]
             }
@@ -100,7 +101,15 @@ final class APIResultViewController<Request: AppleMusicKit.Request>: UIViewContr
             cell.isScrollEnabled = lines > 100
             return cell
         case .results(let items):
+            let resource = items[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell.backgroundColor = .clear
+            let id = "\(resource.id)"
+            var shortId = id.prefix(8)
+            if id.count > 8 {
+                shortId += "..."
+            }
+            cell.textLabel?.text = "\(shortId) - \(resource.attributes?.description ?? "")"
             return cell
         }
     }
