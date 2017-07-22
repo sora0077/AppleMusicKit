@@ -8,6 +8,12 @@
 
 import UIKit
 
+private extension UILayoutPriority {
+    static func - (lhs: UILayoutPriority, rhs: Int) -> UILayoutPriority {
+        return UILayoutPriority(lhs.rawValue - Float(rhs))
+    }
+}
+
 final class APIResultViewController: UIViewController {
     private enum Section {
         case raw(String, lines: Int)
@@ -119,7 +125,9 @@ extension APIResultViewController {
             selectionStyle = .none
             contentView.addSubview(textView)
             textView.autolayoutFit(to: contentView, margin: 8)
-            textView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200).isActive = true
+            let height = textView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200)
+            height.priority = UILayoutPriority.required - 1
+            height.isActive = true
             textView.isScrollEnabled = false
             textView.isEditable = false
         }

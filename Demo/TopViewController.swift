@@ -96,7 +96,7 @@ extension TopViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch dataSource[indexPath.row] {
         case .deviceToken:
-            navigationController?.pushViewController(DeviceTokenInputViewController(), animated: true)
+            navigationController?.pushViewController(DeveloperTokenInputViewController(), animated: true)
         case .request:
             navigationController?.pushViewController(APIListViewController(), animated: true)
         case .document:

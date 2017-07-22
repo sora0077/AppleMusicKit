@@ -39,7 +39,7 @@
 		D98163E31F1E0168000341ED /* get_album.json in Resources */ = {isa = PBXBuildFile; fileRef = D98163E11F1E015C000341ED /* get_album.json */; };
 		D98163E41F1E016B000341ED /* get_multiple_albums.json in Resources */ = {isa = PBXBuildFile; fileRef = D98163E21F1E015C000341ED /* get_multiple_albums.json */; };
 		D98163E61F1E01B8000341ED /* AlbumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98163E51F1E01B8000341ED /* AlbumTests.swift */; };
-		D98163E81F1E0A1D000341ED /* DeviceTokenInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98163E71F1E0A1D000341ED /* DeviceTokenInputViewController.swift */; };
+		D98163E81F1E0A1D000341ED /* DeveloperTokenInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98163E71F1E0A1D000341ED /* DeveloperTokenInputViewController.swift */; };
 		D98E44341F1BBE7F00429665 /* AppleMusicKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D98E44331F1BBE7F00429665 /* AppleMusicKitTests.swift */; };
 		D98E44361F1BBE7F00429665 /* AppleMusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */; };
 		D98E443D1F1BBEF700429665 /* APIKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = D9A0250E1F00F63E00C49113 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -150,7 +150,7 @@
 		D98163E11F1E015C000341ED /* get_album.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_album.json; sourceTree = "<group>"; };
 		D98163E21F1E015C000341ED /* get_multiple_albums.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_multiple_albums.json; sourceTree = "<group>"; };
 		D98163E51F1E01B8000341ED /* AlbumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTests.swift; sourceTree = "<group>"; };
-		D98163E71F1E0A1D000341ED /* DeviceTokenInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTokenInputViewController.swift; sourceTree = "<group>"; };
+		D98163E71F1E0A1D000341ED /* DeveloperTokenInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperTokenInputViewController.swift; sourceTree = "<group>"; };
 		D98E44311F1BBE7F00429665 /* AppleMusicKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleMusicKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D98E44331F1BBE7F00429665 /* AppleMusicKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleMusicKitTests.swift; sourceTree = "<group>"; };
 		D98E44351F1BBE7F00429665 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -381,7 +381,7 @@
 			children = (
 				D9AD5EC21F02DD8500CE8468 /* AppDelegate.swift */,
 				D94E4C3A1F1E1F8900F0F757 /* TopViewController.swift */,
-				D98163E71F1E0A1D000341ED /* DeviceTokenInputViewController.swift */,
+				D98163E71F1E0A1D000341ED /* DeveloperTokenInputViewController.swift */,
 				D99F9DD61F1E7B6E00ACCE9A /* APIListViewController.swift */,
 				D95002091F1FA1F2006D410B /* APIInputFormViewController.swift */,
 				D9121BBF1F230E5E007FAA11 /* APIResultViewController.swift */,
@@ -605,7 +605,7 @@
 				D94E4C3B1F1E1F8900F0F757 /* TopViewController.swift in Sources */,
 				D9AD5EC51F02DD8500CE8468 /* ViewController.swift in Sources */,
 				D950020A1F1FA1F2006D410B /* APIInputFormViewController.swift in Sources */,
-				D98163E81F1E0A1D000341ED /* DeviceTokenInputViewController.swift in Sources */,
+				D98163E81F1E0A1D000341ED /* DeveloperTokenInputViewController.swift in Sources */,
 				D950020C1F1FA75D006D410B /* AnyRequest.swift in Sources */,
 				D99F9DD71F1E7B6E00ACCE9A /* APIListViewController.swift in Sources */,
 				D9AD5EC31F02DD8500CE8468 /* AppDelegate.swift in Sources */,

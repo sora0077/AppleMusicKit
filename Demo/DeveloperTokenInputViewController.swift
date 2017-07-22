@@ -1,5 +1,5 @@
 //
-//  DeviceTokenInputViewController.swift
+//  DeveloperTokenInputViewController.swift
 //  Demo
 //
 //  Created by 林 達也 on 2017/07/18.
@@ -9,7 +9,7 @@
 import UIKit
 import AppleMusicKit
 
-final class DeviceTokenInputViewController: UIViewController {
+final class DeveloperTokenInputViewController: UIViewController {
     private let gradientLayer = CAGradientLayer.appleMusicLayer()
     private let textView = UITextView()
 
