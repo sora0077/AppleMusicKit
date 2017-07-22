@@ -31,7 +31,7 @@ public struct Errors: Swift.Error, Decodable, Collection {
             code = Int(try c.decode(String.self, forKey: .code))!
             status = Int(try c.decode(String.self, forKey: .status))!
             title = try c.decode(forKey: .title)
-            detail = try c.decode(forKey: .detail)
+            detail = try c.decodeIfPresent(forKey: .detail)
         }
     }
     private let errors: [Error]

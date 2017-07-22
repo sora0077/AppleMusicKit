@@ -10,6 +10,30 @@ import APIKit
 import Result
 import AppleMusicKit
 
+func json<Res>(from result: Result<(response: Res, json: String), Error>) -> String {
+    switch result {
+    case .success(let response): return response.json
+    case .failure(let error): return error.json ?? ""
+    }
+}
+
+enum Error: Swift.Error {
+    case api(Errors, json: String)
+    case error(Swift.Error)
+
+    var json: String? {
+        switch self {
+        case .api(_, let json): return json
+        case .error: return nil
+        }
+    }
+}
+
+private struct APIError: Swift.Error {
+    let errors: Errors
+    let data: Any
+}
+
 private struct AnyRequestWithData: AppleMusicKit.Request {
     typealias Response = (Any, Any)
 
@@ -54,7 +78,11 @@ private struct AnyRequestWithData: AppleMusicKit.Request {
     }
 
     func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
-        return try response(object, urlResponse)
+        do {
+            return try response(object, urlResponse)
+        } catch let errors as Errors {
+            throw APIError(errors: errors, data: object)
+        }
     }
 }
 
@@ -67,23 +95,27 @@ class Session: AppleMusicKit.Session {
     func send<Request>(
         with request: Request,
         callbackQueue: CallbackQueue? = nil,
-        handler: @escaping (Result<(response: Request.Response, json: String), SessionTaskError>) -> Void)
+        handler: @escaping (Result<(response: Request.Response, json: String), Error>) -> Void)
         -> SessionTask? where Request : AppleMusicKit.Request {
             return super.send(AnyRequestWithData(request), callbackQueue: callbackQueue) { result in
+                func json(_ data: Any?) -> String {
+                    do {
+                        let object = try JSONSerialization.jsonObject(with: data as? Data ?? Data(),
+                                                                      options: [])
+                        let data = try JSONSerialization.data(withJSONObject: object,
+                                                              options: .prettyPrinted)
+                        return String(data: data, encoding: .utf8) ?? ""
+                    } catch {
+                        return ""
+                    }
+                }
                 switch result {
                 case .success(let response):
-                    let json: String = {
-                        do {
-                            let object = try JSONSerialization.jsonObject(with: response.1 as? Data ?? Data(), options: [])
-                            let data = try JSONSerialization.data(withJSONObject: object, options: .prettyPrinted)
-                            return String(data: data, encoding: .utf8) ?? ""
-                        } catch {
-                            return ""
-                        }
-                    }()
-                    handler(Result(value: (response.0 as! Request.Response, json)))
+                    handler(Result(value: (response.0 as! Request.Response, json(response.1))))
+                case .failure(.responseError(let error as APIError)):
+                    handler(Result(error: .api(error.errors, json: json(error.data))))
                 case .failure(let error):
-                    handler(Result(error: error))
+                    handler(Result(error: .error(error)))
                 }
             }
     }

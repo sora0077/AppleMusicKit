@@ -210,7 +210,7 @@ extension APIListViewController: APIInputFormViewControllerDelegate {
         }
         vc.dismiss(animated: true) {
             Session.shared.send(with: request) { result in
-                print(result.value?.json)
+                print(json(from: result))
             }
         }
     }
