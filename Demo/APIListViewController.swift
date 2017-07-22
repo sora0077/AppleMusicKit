@@ -53,62 +53,94 @@ func inputs(storefront: String = "us", ids: String) -> [FormInput] {
 
 // MARK: - APIListViewController
 final class APIListViewController: UIViewController {
+    private enum Section {
+        case storefront([Item])
+        case media([Item])
+        case artist([Item])
+
+        var title: String {
+            switch self {
+            case .storefront: return "Fetch Storefronts"
+            case .media: return "Fetch Albums, Music Videos, Playlists, Songs, and Stations"
+            case .artist: return "Fetch Artists, Curators, Activities, and Apple Curators"
+            }
+        }
+        var count: Int {
+            switch self {
+            case .storefront(let items), .media(let items), .artist(let items):
+                return items.count
+            }
+        }
+
+        subscript (idx: Int) -> Item {
+            switch self {
+            case .storefront(let items), .media(let items), .artist(let items):
+                return items[idx]
+            }
+        }
+    }
     private let tableView = UITableView()
-    private let dataSource: [Item] = [
-        Item([TextInput(name: "id", default: "jp"), TextInput(name: "language")]) { form in
-            GetStorefront(id: form["id"], language: form["language"])
-        },
-        Item([TextInput(name: "ids", default: "jp"), TextInput(name: "language")]) { form in
-            GetMultipleStorefronts(ids: csv(form["ids"]), language: form["language"])
-        },
-        Item(inputs(id: "310730204")) { form in
-            GetAlbum(storefront: form["storefront"],
-                     id: form["id"],
-                     language: form["language"],
-                     include: resouces(form["include"]))
-        },
-        Item(inputs(id: "639032181")) { form in
-            GetMusicVideo(storefront: form["storefront"],
-                          id: form["id"],
-                          language: form["lamguage"],
-                          include: resouces(form["include"]))
-        },
-        Item(inputs(storefront: "jp", id: "pl.7a987d29f54b4e3e9ab15906189477f7")) { form in
-            GetPlaylist(storefront: form["storefront"],
+    private let dataSource: [Section] = [
+        .storefront([
+            Item([TextInput(name: "id", default: "jp"), TextInput(name: "language")]) { form in
+                GetStorefront(id: form["id"], language: form["language"])
+            },
+            Item([TextInput(name: "ids", default: "jp"), TextInput(name: "language")]) { form in
+                GetMultipleStorefronts(ids: csv(form["ids"]), language: form["language"])
+            }
+        ]),
+        .media([
+            Item(inputs(id: "310730204")) { form in
+                GetAlbum(storefront: form["storefront"],
+                         id: form["id"],
+                         language: form["language"],
+                         include: resouces(form["include"]))
+            },
+            Item(inputs(id: "639032181")) { form in
+                GetMusicVideo(storefront: form["storefront"],
+                              id: form["id"],
+                              language: form["lamguage"],
+                              include: resouces(form["include"]))
+            },
+            Item(inputs(storefront: "jp", id: "pl.7a987d29f54b4e3e9ab15906189477f7")) { form in
+                GetPlaylist(storefront: form["storefront"],
+                            id: form["id"],
+                            language: form["lamguage"],
+                            include: resouces(form["include"]))
+            },
+            Item(inputs(id: "900032829")) { form in
+                GetSong(storefront: form["storefront"],
                         id: form["id"],
                         language: form["lamguage"],
                         include: resouces(form["include"]))
-        },
-        Item(inputs(id: "900032829")) { form in
-            GetSong(storefront: form["storefront"],
-                    id: form["id"],
-                    language: form["lamguage"],
-                    include: resouces(form["include"]))
-        },
-        Item(inputs(id: "ra.985484166")) { form in
-            GetStation(storefront: form["storefront"],
-                       id: form["id"],
-                       language: form["lamguage"],
-                       include: resouces(form["include"]))
-        },
-        Item(inputs(ids: "178834,462006")) { form in
-            GetMultipleArtists(storefront: form["storefront"],
-                               ids: csv(form["ids"]),
-                               language: form["lamguage"],
-                               include: resouces(form["include"]))
-        },
-        Item(inputs(ids: "976439448,1107687517")) { form in
-            GetMultipleCurators(storefront: form["storefront"],
-                                ids: csv(form["ids"]),
-                                language: form["lamguage"],
-                                include: resouces(form["include"]))
-        },
-        Item(inputs(ids: "976439514,976439503")) { form in
-            GetMultipleActivities(storefront: form["storefront"],
-                                  ids: csv(form["ids"]),
-                                  language: form["lamguage"],
-                                  include: resouces(form["include"]))
-        }
+            },
+            Item(inputs(id: "ra.985484166")) { form in
+                GetStation(storefront: form["storefront"],
+                           id: form["id"],
+                           language: form["lamguage"],
+                           include: resouces(form["include"]))
+            }
+        ]),
+        .artist([
+            Item(inputs(ids: "178834,462006")) { form in
+                GetMultipleArtists(storefront: form["storefront"],
+                                   ids: csv(form["ids"]),
+                                   language: form["lamguage"],
+                                   include: resouces(form["include"]))
+            },
+            Item(inputs(ids: "976439448,1107687517")) { form in
+                GetMultipleCurators(storefront: form["storefront"],
+                                    ids: csv(form["ids"]),
+                                    language: form["lamguage"],
+                                    include: resouces(form["include"]))
+            },
+            Item(inputs(ids: "976439514,976439503")) { form in
+                GetMultipleActivities(storefront: form["storefront"],
+                                      ids: csv(form["ids"]),
+                                      language: form["lamguage"],
+                                      include: resouces(form["include"]))
+            }
+        ])
     ]
 
     override func viewDidLoad() {
@@ -134,13 +166,17 @@ final class APIListViewController: UIViewController {
 }
 
 extension APIListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return dataSource.count
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataSource[section].count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = dataSource[indexPath.row].title
+        cell.textLabel?.text = dataSource[indexPath.section][indexPath.row].title
         return cell
     }
 }
@@ -149,7 +185,7 @@ extension APIListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)!
         let cellRect = cell.convert(cell.bounds, to: navigationController?.view ?? view)
-        let vc = dataSource[indexPath.row].generateFormViewController()
+        let vc = dataSource[indexPath.section][indexPath.row].generateFormViewController()
         vc.delegate = self
         vc.modalPresentationStyle = .popover
         vc.preferredContentSize = view.bounds.insetBy(dx: 20, dy: 20).size
@@ -160,6 +196,10 @@ extension APIListViewController: UITableViewDelegate {
         DispatchQueue.main.async {
             self.present(vc, animated: true, completion: nil)
         }
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dataSource[section].title
     }
 }
 
