@@ -9,21 +9,6 @@
 import UIKit
 import AppleMusicKit
 
-struct Item {
-    let title: String
-    fileprivate let inputs: [FormInput]
-    fileprivate let resultViewController: (APIInputFormViewController.Form) -> UIViewController
-
-    init<Req: Request>(_ inputs: [FormInput],
-                       _ request: @escaping (APIInputFormViewController.Form) -> Req) {
-        self.title = "\(Req.self)".components(separatedBy: "<").first ?? ""
-        self.inputs = inputs
-        resultViewController = { form in
-            APIResultViewController(request: request(form))
-        }
-    }
-}
-
 protocol FormInput {
     var name: String { get }
     var `default`: Any? { get }
@@ -113,7 +98,21 @@ private final class TextInputCell: InputBaseCell {
 }
 
 extension APIInputFormViewController {
-    final class Form {
+    struct Form {
+        let title: String
+        fileprivate let inputs: [FormInput]
+        fileprivate let resultViewController: (APIInputFormViewController.FormData) -> UIViewController
+
+        init<Req: Request>(_ inputs: [FormInput],
+                           _ request: @escaping (APIInputFormViewController.FormData) -> Req) {
+            self.title = "\(Req.self)".components(separatedBy: "<").first ?? ""
+            self.inputs = inputs
+            resultViewController = { form in
+                APIResultViewController(request: request(form))
+            }
+        }
+    }
+    final class FormData {
         private let inputs: [FormInput]
         private let map: [String: FormInput]
         private var values: [String: ValueHolder] = [:]
@@ -149,16 +148,16 @@ protocol APIInputFormViewControllerDelegate: class {
 
 final class APIInputFormViewController: UIViewController {
     weak var delegate: APIInputFormViewControllerDelegate?
+    private let formData: FormData
     private let form: Form
-    private let item: Item
 
     private let tableView = UITableView()
 
-    init(item: Item) {
-        self.form = Form(inputs: item.inputs)
-        self.item = item
+    init(form: Form) {
+        self.formData = FormData(inputs: form.inputs)
+        self.form = form
         super.init(nibName: nil, bundle: nil)
-        for input in item.inputs {
+        for input in form.inputs {
             tableView.register(input.cellClass, forCellReuseIdentifier: input.cellIdentifier)
         }
     }
@@ -195,7 +194,8 @@ final class APIInputFormViewController: UIViewController {
             doneButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -4),
             doneButton.heightAnchor.constraint(equalToConstant: 44)])
 
-        preferredContentSize.height = min(44 * CGFloat(form.count) + 44 + 8, preferredContentSize.height)
+        let contentHeight = min(44 * CGFloat(formData.count) + 44 + 8, preferredContentSize.height)
+        preferredContentSize.height = contentHeight
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -214,17 +214,17 @@ final class APIInputFormViewController: UIViewController {
     @objc
     private func doneAction() {
         delegate?.inputFormViewController(
-            self, didFinishWithResultViewController: item.resultViewController(form))
+            self, didFinishWithResultViewController: form.resultViewController(formData))
     }
 }
 
 extension APIInputFormViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return form.count
+        return formData.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let (input, value) = form[indexPath.row]
+        let (input, value) = formData[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: input.cellIdentifier,
                                                  for: indexPath) as! InputBaseCell
         cell.selectionStyle = .none

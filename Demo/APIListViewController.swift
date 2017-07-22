@@ -36,10 +36,11 @@ func inputs(storefront: String = "us", ids: String) -> [FormInput] {
 
 // MARK: - APIListViewController
 final class APIListViewController: UIViewController {
+    private typealias Form = APIInputFormViewController.Form
     private enum Section {
-        case storefront([Item])
-        case media([Item])
-        case artist([Item])
+        case storefront([Form])
+        case media([Form])
+        case artist([Form])
 
         var title: String {
             switch self {
@@ -55,7 +56,7 @@ final class APIListViewController: UIViewController {
             }
         }
 
-        subscript (idx: Int) -> Item {
+        subscript (idx: Int) -> Form {
             switch self {
             case .storefront(let items), .media(let items), .artist(let items):
                 return items[idx]
@@ -66,39 +67,39 @@ final class APIListViewController: UIViewController {
     private let tableView = UITableView()
     private let dataSource: [Section] = [
         .storefront([
-            Item([TextInput(name: "id", default: "jp"), TextInput(name: "language")]) { form in
+            Form([TextInput(name: "id", default: "jp"), TextInput(name: "language")]) { form in
                 GetStorefront(id: form["id"], language: form["language"])
             },
-            Item([TextInput(name: "ids", default: "jp"), TextInput(name: "language")]) { form in
+            Form([TextInput(name: "ids", default: "jp"), TextInput(name: "language")]) { form in
                 GetMultipleStorefronts(ids: csv(form["ids"]), language: form["language"])
             }
         ]),
         .media([
-            Item(inputs(id: "310730204")) { form in
+            Form(inputs(id: "310730204")) { form in
                 GetAlbum(storefront: form["storefront"],
                          id: form["id"],
                          language: form["language"],
                          include: resouces(form["include"]))
             },
-            Item(inputs(id: "639032181")) { form in
+            Form(inputs(id: "639032181")) { form in
                 GetMusicVideo(storefront: form["storefront"],
                               id: form["id"],
                               language: form["lamguage"],
                               include: resouces(form["include"]))
             },
-            Item(inputs(storefront: "jp", id: "pl.7a987d29f54b4e3e9ab15906189477f7")) { form in
+            Form(inputs(storefront: "jp", id: "pl.7a987d29f54b4e3e9ab15906189477f7")) { form in
                 GetPlaylist(storefront: form["storefront"],
                             id: form["id"],
                             language: form["lamguage"],
                             include: resouces(form["include"]))
             },
-            Item(inputs(id: "900032829")) { form in
+            Form(inputs(id: "900032829")) { form in
                 GetSong(storefront: form["storefront"],
                         id: form["id"],
                         language: form["lamguage"],
                         include: resouces(form["include"]))
             },
-            Item(inputs(id: "ra.985484166")) { form in
+            Form(inputs(id: "ra.985484166")) { form in
                 GetStation(storefront: form["storefront"],
                            id: form["id"],
                            language: form["lamguage"],
@@ -106,19 +107,19 @@ final class APIListViewController: UIViewController {
             }
         ]),
         .artist([
-            Item(inputs(ids: "178834,462006")) { form in
+            Form(inputs(ids: "178834,462006")) { form in
                 GetMultipleArtists(storefront: form["storefront"],
                                    ids: csv(form["ids"]),
                                    language: form["lamguage"],
                                    include: resouces(form["include"]))
             },
-            Item(inputs(ids: "976439448,1107687517")) { form in
+            Form(inputs(ids: "976439448,1107687517")) { form in
                 GetMultipleCurators(storefront: form["storefront"],
                                     ids: csv(form["ids"]),
                                     language: form["lamguage"],
                                     include: resouces(form["include"]))
             },
-            Item(inputs(ids: "976439514,976439503")) { form in
+            Form(inputs(ids: "976439514,976439503")) { form in
                 GetMultipleActivities(storefront: form["storefront"],
                                       ids: csv(form["ids"]),
                                       language: form["lamguage"],
@@ -178,8 +179,8 @@ extension APIListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)!
         let cellRect = cell.convert(cell.bounds, to: navigationController?.view ?? view)
-        let item = dataSource[indexPath.section][indexPath.row]
-        let vc = APIInputFormViewController(item: item)
+        let form = dataSource[indexPath.section][indexPath.row]
+        let vc = APIInputFormViewController(form: form)
         vc.delegate = self
         vc.modalPresentationStyle = .popover
         vc.preferredContentSize = view.bounds.insetBy(dx: 20, dy: 20).size
