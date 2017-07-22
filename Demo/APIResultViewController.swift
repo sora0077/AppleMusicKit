@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AppleMusicKit
 
 private extension UILayoutPriority {
     static func - (lhs: UILayoutPriority, rhs: Int) -> UILayoutPriority {
@@ -14,7 +15,7 @@ private extension UILayoutPriority {
     }
 }
 
-final class APIResultViewController: UIViewController {
+final class APIResultViewController<Request: AppleMusicKit.Request>: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private enum Section {
         case raw(String, lines: Int)
         case results([Any])
@@ -28,10 +29,10 @@ final class APIResultViewController: UIViewController {
     }
     private let gradientLayer = CAGradientLayer.appleMusicLayer()
     private let tableView = UITableView()
-    private let request: AnyRequest
+    private let request: Request
     private var dataSource: [Section] = []
 
-    init(request: AnyRequest) {
+    init(request: Request) {
         self.request = request
         super.init(nibName: nil, bundle: nil)
     }
@@ -82,9 +83,7 @@ final class APIResultViewController: UIViewController {
         super.viewDidLayoutSubviews()
         gradientLayer.frame = view.bounds
     }
-}
 
-extension APIResultViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return dataSource.count
     }
@@ -105,9 +104,7 @@ extension APIResultViewController: UITableViewDataSource {
             return cell
         }
     }
-}
 
-extension APIResultViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         switch dataSource[indexPath.section] {
         case .raw: return 500
@@ -135,7 +132,7 @@ extension APIResultViewController {
             contentView.addSubview(textView)
             textView.autolayoutFit(to: contentView, margin: 8)
             let height = textView.heightAnchor.constraint(greaterThanOrEqualToConstant: 200)
-            height.priority = UILayoutPriority.required - 1
+            height.priority = .required - 1
             height.isActive = true
             textView.isScrollEnabled = false
             textView.isEditable = false

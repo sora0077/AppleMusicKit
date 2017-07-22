@@ -7,6 +7,22 @@
 //
 
 import UIKit
+import AppleMusicKit
+
+struct Item {
+    let title: String
+    fileprivate let inputs: [FormInput]
+    fileprivate let resultViewController: (APIInputFormViewController.Form) -> UIViewController
+
+    init<Req: Request>(_ inputs: [FormInput],
+                       _ request: @escaping (APIInputFormViewController.Form) -> Req) {
+        self.title = "\(Req.self)".components(separatedBy: "<").first ?? ""
+        self.inputs = inputs
+        resultViewController = { form in
+            APIResultViewController(request: request(form))
+        }
+    }
+}
 
 protocol FormInput {
     var name: String { get }
@@ -127,21 +143,22 @@ extension APIInputFormViewController {
 }
 
 protocol APIInputFormViewControllerDelegate: class {
-    func inputFormViewController(_ vc: APIInputFormViewController, didFinishWith request: AnyRequest)
+    func inputFormViewController(_ vc: APIInputFormViewController,
+                                 didFinishWithResultViewController resultVC: UIViewController)
 }
 
 final class APIInputFormViewController: UIViewController {
     weak var delegate: APIInputFormViewControllerDelegate?
     private let form: Form
-    private let request: (APIInputFormViewController.Form) -> AnyRequest
+    private let item: Item
 
     private let tableView = UITableView()
 
-    init(inputs: [FormInput], request: @escaping (APIInputFormViewController.Form) -> AnyRequest) {
-        self.form = Form(inputs: inputs)
-        self.request = request
+    init(item: Item) {
+        self.form = Form(inputs: item.inputs)
+        self.item = item
         super.init(nibName: nil, bundle: nil)
-        for input in inputs {
+        for input in item.inputs {
             tableView.register(input.cellClass, forCellReuseIdentifier: input.cellIdentifier)
         }
     }
@@ -153,6 +170,7 @@ final class APIInputFormViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Results"
+        view.backgroundColor = .white
         let doneButton = UIButton(type: .system)
         view.addSubview(tableView)
         view.addSubview(doneButton)
@@ -195,7 +213,8 @@ final class APIInputFormViewController: UIViewController {
 
     @objc
     private func doneAction() {
-        delegate?.inputFormViewController(self, didFinishWith: request(form))
+        delegate?.inputFormViewController(
+            self, didFinishWithResultViewController: item.resultViewController(form))
     }
 }
 

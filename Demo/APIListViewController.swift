@@ -9,23 +9,6 @@
 import UIKit
 import AppleMusicKit
 
-private struct Item {
-    let title: String
-    private let viewControllerTemplate: () -> APIInputFormViewController
-
-    init<Req: Request>(_ inputs: [FormInput],
-                       _ request: @escaping (APIInputFormViewController.Form) -> Req) {
-        self.title = "\(Req.self)".components(separatedBy: "<").first ?? ""
-        viewControllerTemplate = {
-            APIInputFormViewController(inputs: inputs, request: { AnyRequest(request($0)) })
-        }
-    }
-
-    func generateFormViewController() -> APIInputFormViewController {
-        return viewControllerTemplate()
-    }
-}
-
 private func csv(_ value: String) -> [String] {
     return value.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }
 }
@@ -195,7 +178,8 @@ extension APIListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)!
         let cellRect = cell.convert(cell.bounds, to: navigationController?.view ?? view)
-        let vc = dataSource[indexPath.section][indexPath.row].generateFormViewController()
+        let item = dataSource[indexPath.section][indexPath.row]
+        let vc = APIInputFormViewController(item: item)
         vc.delegate = self
         vc.modalPresentationStyle = .popover
         vc.preferredContentSize = view.bounds.insetBy(dx: 20, dy: 20).size
@@ -214,13 +198,12 @@ extension APIListViewController: UITableViewDelegate {
 }
 
 extension APIListViewController: APIInputFormViewControllerDelegate {
-    func inputFormViewController(_ vc: APIInputFormViewController, didFinishWith request: AnyRequest) {
+    func inputFormViewController(_ vc: APIInputFormViewController, didFinishWithResultViewController resultVC: UIViewController) {
         for indexPath in tableView.indexPathsForSelectedRows ?? [] {
             tableView.deselectRow(at: indexPath, animated: true)
         }
         vc.dismiss(animated: true) {
-            self.navigationController?.pushViewController(
-                APIResultViewController(request: request), animated: true)
+            self.navigationController?.pushViewController(resultVC, animated: true)
         }
     }
 }
