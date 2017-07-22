@@ -12,7 +12,18 @@ public protocol PlaylistDecodable: Attributes {
 }
 
 public protocol Playlist: PlaylistDecodable {
-    init(name: String) throws
+    associatedtype Artwork: AppleMusicKit.Artwork
+    associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
+    associatedtype PlayParameters: AppleMusicKit.PlayParameters
+
+    init(artwork: Artwork?,
+         curatorName: String?,
+         description: EditorialNotes?,
+         lastModifiedDate: String,
+         name: String,
+         playlistType: PlaylistType,
+         playParams: PlayParameters?,
+         url: String) throws
 }
 
 public enum PlaylistType: String, Decodable {
@@ -21,12 +32,19 @@ public enum PlaylistType: String, Decodable {
 
 // MARK: - Playlist
 private enum CodingKeys: String, CodingKey {
-    case name
+    case artwork, curatorName, description, lastModifiedDate, name, playlistType, playParams, url
 }
 
 extension Playlist {
     public init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        try self.init(name: c.decode(forKey: .name))
+        try self.init(artwork: c.decodeIfPresent(forKey: .artwork),
+                      curatorName: c.decodeIfPresent(forKey: .curatorName),
+                      description: c.decodeIfPresent(forKey: .description),
+                      lastModifiedDate: c.decode(forKey: .lastModifiedDate),
+                      name: c.decode(forKey: .name),
+                      playlistType: c.decode(forKey: .playlistType),
+                      playParams: c.decodeIfPresent(forKey: .playParams),
+                      url: c.decode(forKey: .url))
     }
 }

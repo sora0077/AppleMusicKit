@@ -43,6 +43,8 @@ final class APIResultViewController<Request: AppleMusicKit.Request, A: CustomStr
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "\(Request.self)".components(separatedBy: "<").first ?? ""
+        navigationItem.largeTitleDisplayMode = .always
         view.layer.insertSublayer(gradientLayer, at: 0)
         view.addSubview(tableView)
         tableView.autolayoutFit(to: view)
@@ -110,6 +112,7 @@ final class APIResultViewController<Request: AppleMusicKit.Request, A: CustomStr
                 shortId += "..."
             }
             cell.textLabel?.text = "\(shortId) - \(resource.attributes?.description ?? "")"
+            cell.selectionStyle = .none
             return cell
         }
     }

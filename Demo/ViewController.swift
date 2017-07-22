@@ -114,6 +114,9 @@ struct Genre: AppleMusicKit.Genre {
 }
 struct Playlist: AppleMusicKit.Playlist, CustomStringConvertible {
     typealias Identifier = String
+    typealias Artwork = Demo.Artwork
+    typealias EditorialNotes = Demo.EditorialNotes
+    typealias PlayParameters = Demo.PlayParameters
 
     let name: String
 
@@ -121,7 +124,7 @@ struct Playlist: AppleMusicKit.Playlist, CustomStringConvertible {
         return name
     }
 
-    init(name: String) throws {
+    init(artwork: Artwork?, curatorName: String?, description: EditorialNotes?, lastModifiedDate: String, name: String, playlistType: PlaylistType, playParams: PlayParameters?, url: String) throws {
         self.name = name
     }
 }
