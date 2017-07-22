@@ -10,12 +10,12 @@ import UIKit
 import SafariServices
 
 extension UIView {
-    func autolayoutFit(to view: UIView) {
+    func autolayoutFit(to view: UIView, margin: CGFloat = 0) {
         translatesAutoresizingMaskIntoConstraints = false
-        topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        topAnchor.constraint(equalTo: view.topAnchor, constant: margin).isActive = true
+        bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -margin).isActive = true
+        leftAnchor.constraint(equalTo: view.leftAnchor, constant: margin).isActive = true
+        rightAnchor.constraint(equalTo: view.rightAnchor, constant: -margin).isActive = true
     }
 }
 

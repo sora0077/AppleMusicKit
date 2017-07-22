@@ -209,9 +209,8 @@ extension APIListViewController: APIInputFormViewControllerDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
         }
         vc.dismiss(animated: true) {
-            Session.shared.send(with: request) { result in
-                print(json(from: result))
-            }
+            self.navigationController?.pushViewController(
+                APIResultViewController(request: request), animated: true)
         }
     }
 }

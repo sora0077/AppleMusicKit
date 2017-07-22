@@ -104,7 +104,8 @@ class Session: AppleMusicKit.Session {
                                                                       options: [])
                         let data = try JSONSerialization.data(withJSONObject: object,
                                                               options: .prettyPrinted)
-                        return String(data: data, encoding: .utf8) ?? ""
+                        let json = String(data: data, encoding: .utf8)
+                        return json?.replacingOccurrences(of: "\\", with: "") ?? ""
                     } catch {
                         return ""
                     }
