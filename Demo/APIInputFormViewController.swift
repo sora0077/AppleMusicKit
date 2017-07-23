@@ -130,6 +130,14 @@ extension APIInputFormViewController {
             }
         }
         init(_ inputs: [FormInput],
+             _ request: @escaping (APIInputFormViewController.FormData) -> GetCharts) {
+            self.title = "\(GetCharts.self)".components(separatedBy: "<").first ?? ""
+            self.inputs = inputs
+            resultViewController = { form in
+                APIResultViewController(request: request(form))
+            }
+        }
+        init(_ inputs: [FormInput],
              _ request: @escaping (APIInputFormViewController.FormData) -> SearchResources) {
             self.title = "\(SearchResources.self)".components(separatedBy: "<").first ?? ""
             self.inputs = inputs

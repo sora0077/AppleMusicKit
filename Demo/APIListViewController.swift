@@ -9,38 +9,11 @@
 import UIKit
 import AppleMusicKit
 
-private func csv(_ value: String) -> [String] {
-    return value.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }
-}
-private func csv(_ value: String?) -> [String]? {
-    return value?.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }
-}
-private func resources(_ value: String?) -> Set<ResourceType>? {
-    guard let arr = csv(value) else { return nil }
-    return Set(arr.flatMap(ResourceType.init(rawValue:)))
-}
-
-func inputs(storefront: String = "us", id: String) -> [FormInput] {
-    return [TextInput(name: "storefront", default: storefront),
-            TextInput(name: "id", default: id),
-            TextInput(name: "language"),
-            TextInput(name: "include")]
-}
-
-func inputs(storefront: String = "us", ids: String) -> [FormInput] {
-    return [TextInput(name: "storefront", default: storefront),
-            TextInput(name: "ids", default: ids),
-            TextInput(name: "language"),
-            TextInput(name: "include")]
-}
-
 // MARK: - APIListViewController
 final class APIListViewController: UIViewController {
     private typealias Form = APIInputFormViewController.Form
     private enum Section {
-        case storefront([Form])
-        case media([Form])
-        case artist([Form])
+        case storefront([Form]), media([Form]), artist([Form]), chart([Form])
         case search([Form])
 
         var title: String {
@@ -48,12 +21,13 @@ final class APIListViewController: UIViewController {
             case .storefront: return "Fetch Storefronts"
             case .media: return "Fetch Albums, Music Videos, Playlists, Songs, and Stations"
             case .artist: return "Fetch Artists, Curators, Activities, and Apple Curators"
+            case .chart: return "Fetch Charts"
             case .search: return "Search the catalog"
             }
         }
         var count: Int {
             switch self {
-            case .storefront(let items), .media(let items), .artist(let items),
+            case .storefront(let items), .media(let items), .artist(let items), .chart(let items),
                  .search(let items):
                 return items.count
             }
@@ -61,7 +35,7 @@ final class APIListViewController: UIViewController {
 
         subscript (idx: Int) -> Form {
             switch self {
-            case .storefront(let items), .media(let items), .artist(let items),
+            case .storefront(let items), .media(let items), .artist(let items), .chart(let items),
                  .search(let items):
                 return items[idx]
             }
@@ -70,98 +44,11 @@ final class APIListViewController: UIViewController {
     private let gradientLayer = CAGradientLayer.appleMusicLayer()
     private let tableView = UITableView()
     private let dataSource: [Section] = [
-        .storefront([
-            Form([TextInput(name: "id", default: "jp"), TextInput(name: "language")]) { form in
-                GetStorefront(id: form["id"], language: form["language"])
-            },
-            Form([TextInput(name: "ids", default: "jp"), TextInput(name: "language")]) { form in
-                GetMultipleStorefronts(ids: csv(form["ids"]), language: form["language"])
-            }
-        ]),
-        .media([
-            Form(inputs(id: "310730204")) { form in
-                GetAlbum(storefront: form["storefront"],
-                         id: form["id"],
-                         language: form["language"],
-                         include: resources(form["include"]))
-            },
-            Form(inputs(id: "639032181")) { form in
-                GetMusicVideo(storefront: form["storefront"],
-                              id: form["id"],
-                              language: form["lamguage"],
-                              include: resources(form["include"]))
-            },
-            Form(inputs(storefront: "jp", id: "pl.7a987d29f54b4e3e9ab15906189477f7")) { form in
-                GetPlaylist(storefront: form["storefront"],
-                            id: form["id"],
-                            language: form["lamguage"],
-                            include: resources(form["include"]))
-            },
-            Form(inputs(id: "900032829")) { form in
-                GetSong(storefront: form["storefront"],
-                        id: form["id"],
-                        language: form["lamguage"],
-                        include: resources(form["include"]))
-            },
-            Form(inputs(id: "ra.985484166")) { form in
-                GetStation(storefront: form["storefront"],
-                           id: form["id"],
-                           language: form["lamguage"],
-                           include: resources(form["include"]))
-            }
-        ]),
-        .artist([
-            Form(inputs(ids: "178834,462006")) { form in
-                GetMultipleArtists(storefront: form["storefront"],
-                                   ids: csv(form["ids"]),
-                                   language: form["lamguage"],
-                                   include: resources(form["include"]))
-            },
-            Form(inputs(ids: "976439448,1107687517")) { form in
-                GetMultipleCurators(storefront: form["storefront"],
-                                    ids: csv(form["ids"]),
-                                    language: form["lamguage"],
-                                    include: resources(form["include"]))
-            },
-            Form(inputs(ids: "976439514,976439503")) { form in
-                GetMultipleActivities(storefront: form["storefront"],
-                                      ids: csv(form["ids"]),
-                                      language: form["lamguage"],
-                                      include: resources(form["include"]))
-            },
-            Form(inputs(ids: "976439526,1017168810")) { form in
-                GetMultipleAppleCurators(storefront: form["storefront"],
-                                         ids: csv(form["ids"]),
-                                         language: form["lamguage"],
-                                         include: resources(form["include"]))
-            }
-        ]),
-        .search([
-            Form([TextInput(name: "storefront", default: "jp"),
-                  TextInput(name: "term", default: ""),
-                  TextInput(name: "language"),
-                  IntInput(name: "limit"),
-                  IntInput(name: "offset"),
-                  TextInput(name: "types")]) { form in
-                    SearchResources(storefront: form["storefront"],
-                                    term: form["term"],
-                                    language: form["language"],
-                                    limit: form["limit"],
-                                    offset: form["offset"],
-                                    types: resources(form["types"]))
-            },
-            Form([TextInput(name: "storefront", default: "jp"),
-                  TextInput(name: "term", default: ""),
-                  TextInput(name: "language"),
-                  IntInput(name: "limit"),
-                  TextInput(name: "types")]) { form in
-                    GetSearchHints(storefront: form["storefront"],
-                                   term: form["term"],
-                                   language: form["language"],
-                                   limit: form["limit"],
-                                   types: resources(form["types"]))
-            }
-        ])
+        .storefront(storefrontForms),
+        .media(mediaForms),
+        .artist(artistForms),
+        .chart(chartForms),
+        .search(searchForms)
     ]
 
     override func viewDidLoad() {

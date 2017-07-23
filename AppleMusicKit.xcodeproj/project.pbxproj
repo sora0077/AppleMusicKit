@@ -76,6 +76,7 @@
 		D9CFF71A1F063B38005F983D /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF7191F063B38005F983D /* Genre.swift */; };
 		D9CFF71C1F0648C5005F983D /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF71B1F0648C5005F983D /* Artwork.swift */; };
 		D9CFF71E1F065225005F983D /* MusicVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CFF71D1F065225005F983D /* MusicVideo.swift */; };
+		D9DAA41D1F24DC2A008D2EFB /* Forms.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DAA41C1F24DC2A008D2EFB /* Forms.swift */; };
 		D9DAE08D1F0A0190007EB5DE /* FetchStorefronts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9DAE08C1F0A0190007EB5DE /* FetchStorefronts.swift */; };
 /* End PBXBuildFile section */
 
@@ -192,6 +193,7 @@
 		D9CFF7191F063B38005F983D /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		D9CFF71B1F0648C5005F983D /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		D9CFF71D1F065225005F983D /* MusicVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideo.swift; sourceTree = "<group>"; };
+		D9DAA41C1F24DC2A008D2EFB /* Forms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forms.swift; sourceTree = "<group>"; };
 		D9DAE08C1F0A0190007EB5DE /* FetchStorefronts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchStorefronts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -387,6 +389,7 @@
 				D9121BBF1F230E5E007FAA11 /* APIResultViewController.swift */,
 				D950020B1F1FA75D006D410B /* AnyRequest.swift */,
 				D9121BC11F231027007FAA11 /* Session.swift */,
+				D9DAA41C1F24DC2A008D2EFB /* Forms.swift */,
 				D9AD5EC41F02DD8500CE8468 /* ViewController.swift */,
 				D9AD5EC91F02DD8600CE8468 /* Assets.xcassets */,
 				D9AD5ECB1F02DD8600CE8468 /* LaunchScreen.storyboard */,
@@ -602,6 +605,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9121BC01F230E5E007FAA11 /* APIResultViewController.swift in Sources */,
+				D9DAA41D1F24DC2A008D2EFB /* Forms.swift in Sources */,
 				D94E4C3B1F1E1F8900F0F757 /* TopViewController.swift in Sources */,
 				D9AD5EC51F02DD8500CE8468 /* ViewController.swift in Sources */,
 				D950020A1F1FA1F2006D410B /* APIInputFormViewController.swift in Sources */,

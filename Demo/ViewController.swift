@@ -192,7 +192,7 @@ struct Artwork: AppleMusicKit.Artwork {
     }
 }
 struct EditorialNotes: AppleMusicKit.EditorialNotes {
-    init(standard: String?, short: String) throws {
+    init(standard: String?, short: String?) throws {
     }
 }
 struct PlayParameters: AppleMusicKit.PlayParameters {
