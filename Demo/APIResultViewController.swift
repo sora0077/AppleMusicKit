@@ -15,10 +15,10 @@ private extension UILayoutPriority {
     }
 }
 
-final class APIResultViewController<Request: AppleMusicKit.Request, A: CustomStringConvertible, R>: UIViewController, UITableViewDataSource, UITableViewDelegate where Request.Response == ResponseRoot<Resource<A, R>> {
+final class APIResultViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     private enum Section {
         case raw(String, lines: Int)
-        case results([Resource<A, R>])
+        case results([(UITableViewCell) -> Void])
 
         var count: Int {
             switch self {
@@ -29,12 +29,84 @@ final class APIResultViewController<Request: AppleMusicKit.Request, A: CustomStr
     }
     private let gradientLayer = CAGradientLayer.appleMusicLayer()
     private let tableView = UITableView()
-    private let request: Request
     private var dataSource: [Section] = []
+    private var fetcher: (_ completion: @escaping () -> Void) -> Void = { _ in }
 
-    init(request: Request) {
-        self.request = request
+    init<Request: AppleMusicKit.Request, A: CustomStringConvertible, R>(request: Request) where Request.Response == ResponseRoot<Resource<A, R>> {
         super.init(nibName: nil, bundle: nil)
+
+        title = "\(Request.self)".components(separatedBy: "<").first ?? ""
+        fetcher = { [weak self] completion in
+            Session.shared.send(with: request) { result in
+                defer {
+                    completion()
+                }
+                let jsonString = json(from: result)
+                let lines = jsonString.components(separatedBy: "\n").count
+                print(jsonString, String(describing: result.error))
+                switch result {
+                case .success(let (response, _)):
+                    self?.dataSource = [.raw(jsonString, lines: lines),
+                                        .results(response.data.map { resource in
+                                            let id = "\(resource.id)"
+                                            var shortId = id.prefix(8)
+                                            if id.count > 8 {
+                                                shortId += "..."
+                                            }
+                                            return { cell in
+                                                cell.textLabel?.text = "\(shortId) - \(resource.attributes?.description ?? "")"
+                                            }
+                                        })]
+                case .failure:
+                    self?.dataSource = [.raw(jsonString, lines: lines)]
+                }
+                self?.tableView.reloadData()
+            }
+        }
+    }
+
+    init(request: SearchResources) {
+        super.init(nibName: nil, bundle: nil)
+
+        title = "\(SearchResources.self)".components(separatedBy: "<").first ?? ""
+        fetcher = { [weak self] completion in
+            Session.shared.send(with: request) { result in
+                defer {
+                    completion()
+                }
+                let jsonString = json(from: result)
+                let lines = jsonString.components(separatedBy: "\n").count
+                print(jsonString, String(describing: result.error))
+                switch result {
+                case .success(let (response, _)):
+                    func empty(_ title: String) -> (UITableViewCell) -> Void {
+                        return { cell in
+                            cell.textLabel?.text = "\(title) - 0件"
+                        }
+                    }
+                    let songs = Section.results(response.songs?.data.map { resource in { cell in
+                            cell.textLabel?.text = resource.attributes?.name
+                        }
+                    } ?? [empty("songs")])
+                    let musicVideos = Section.results(response.musicVideos?.data.map { resource in { cell in
+                            cell.textLabel?.text = resource.attributes?.name
+                        }
+                    } ?? [empty("musicVideos")])
+                    let albums = Section.results(response.albums?.data.map { resource in { cell in
+                            cell.textLabel?.text = resource.attributes?.name
+                        }
+                    } ?? [empty("albums")])
+                    let artists = Section.results(response.artists?.data.map { resource in { cell in
+                            cell.textLabel?.text = resource.attributes?.name
+                        }
+                    } ?? [empty("artists")])
+                    self?.dataSource = [.raw(jsonString, lines: lines), songs, musicVideos, albums, artists]
+                case .failure:
+                    self?.dataSource = [.raw(jsonString, lines: lines)]
+                }
+                self?.tableView.reloadData()
+            }
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -43,7 +115,6 @@ final class APIResultViewController<Request: AppleMusicKit.Request, A: CustomStr
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "\(Request.self)".components(separatedBy: "<").first ?? ""
         navigationItem.largeTitleDisplayMode = .always
         view.layer.insertSublayer(gradientLayer, at: 0)
         view.addSubview(tableView)
@@ -64,21 +135,10 @@ final class APIResultViewController<Request: AppleMusicKit.Request, A: CustomStr
         indicator.hidesWhenStopped = true
 
         indicator.startAnimating()
-        Session.shared.send(with: request) { [weak self] result in
+        fetcher {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 indicator.stopAnimating()
             }
-            let jsonString = json(from: result)
-            let lines = jsonString.components(separatedBy: "\n").count
-            print(jsonString, String(describing: result.error))
-            switch result {
-            case .success(let (response, _)):
-                self?.dataSource = [.raw(jsonString, lines: lines),
-                                    .results(response.data)]
-            case .failure:
-                self?.dataSource = [.raw(jsonString, lines: lines)]
-            }
-            self?.tableView.reloadData()
         }
     }
 
@@ -103,14 +163,9 @@ final class APIResultViewController<Request: AppleMusicKit.Request, A: CustomStr
             cell.isScrollEnabled = lines > 100
             return cell
         case .results(let items):
-            let resource = items[indexPath.row]
+            let apply = items[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            let id = "\(resource.id)"
-            var shortId = id.prefix(8)
-            if id.count > 8 {
-                shortId += "..."
-            }
-            cell.textLabel?.text = "\(shortId) - \(resource.attributes?.description ?? "")"
+            apply(cell)
             cell.textLabel?.font = UIFont.monospacedDigitSystemFont(ofSize: 14, weight: .regular)
             cell.selectionStyle = .none
             cell.backgroundColor = .clear

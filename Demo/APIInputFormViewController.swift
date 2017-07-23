@@ -31,6 +31,17 @@ struct TextInput: FormInput {
     }
 }
 
+struct IntInput: FormInput {
+    let name: String
+    let `default`: Any?
+    var cellClass: UITableViewCell.Type { return IntInputCell.self }
+
+    init(name: String, `default`: Int? = nil) {
+        self.name = name
+        self.default = `default`
+    }
+}
+
 private final class ValueHolder {
     var value: Any?
     init(initial: Any?) {
@@ -66,7 +77,7 @@ private class InputBaseCell: UITableViewCell {
     func updateValue(withInitial initial: Any?) {}
 }
 
-private final class TextInputCell: InputBaseCell {
+private class TextInputCell: InputBaseCell {
     let textField = UITextField()
 
     override func setupViews() {
@@ -92,8 +103,14 @@ private final class TextInputCell: InputBaseCell {
     }
 
     @objc
-    private func textFieldValueChanged() {
+    func textFieldValueChanged() {
         valueHolder?.value = textField.text
+    }
+}
+
+private final class IntInputCell: TextInputCell {
+    override func textFieldValueChanged() {
+        valueHolder?.value = Int(textField.text ?? "")
     }
 }
 
@@ -109,7 +126,16 @@ extension APIInputFormViewController {
             self.title = "\(Req.self)".components(separatedBy: "<").first ?? ""
             self.inputs = inputs
             resultViewController = { form in
-                APIResultViewController<Req, A, R>(request: request(form))
+                APIResultViewController(request: request(form))
+            }
+        }
+        init(
+            _ inputs: [FormInput],
+            _ request: @escaping (APIInputFormViewController.FormData) -> SearchResources) {
+            self.title = "\(SearchResources.self)".components(separatedBy: "<").first ?? ""
+            self.inputs = inputs
+            resultViewController = { form in
+                APIResultViewController(request: request(form))
             }
         }
     }

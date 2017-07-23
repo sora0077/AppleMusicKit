@@ -15,7 +15,7 @@ private func csv(_ value: String) -> [String] {
 private func csv(_ value: String?) -> [String]? {
     return value?.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }
 }
-private func resouces(_ value: String?) -> Set<ResourceType>? {
+private func resources(_ value: String?) -> Set<ResourceType>? {
     guard let arr = csv(value) else { return nil }
     return Set(arr.flatMap(ResourceType.init(rawValue:)))
 }
@@ -41,24 +41,28 @@ final class APIListViewController: UIViewController {
         case storefront([Form])
         case media([Form])
         case artist([Form])
+        case search([Form])
 
         var title: String {
             switch self {
             case .storefront: return "Fetch Storefronts"
             case .media: return "Fetch Albums, Music Videos, Playlists, Songs, and Stations"
             case .artist: return "Fetch Artists, Curators, Activities, and Apple Curators"
+            case .search: return "Search the catalog"
             }
         }
         var count: Int {
             switch self {
-            case .storefront(let items), .media(let items), .artist(let items):
+            case .storefront(let items), .media(let items), .artist(let items),
+                 .search(let items):
                 return items.count
             }
         }
 
         subscript (idx: Int) -> Form {
             switch self {
-            case .storefront(let items), .media(let items), .artist(let items):
+            case .storefront(let items), .media(let items), .artist(let items),
+                 .search(let items):
                 return items[idx]
             }
         }
@@ -79,31 +83,31 @@ final class APIListViewController: UIViewController {
                 GetAlbum(storefront: form["storefront"],
                          id: form["id"],
                          language: form["language"],
-                         include: resouces(form["include"]))
+                         include: resources(form["include"]))
             },
             Form(inputs(id: "639032181")) { form in
                 GetMusicVideo(storefront: form["storefront"],
                               id: form["id"],
                               language: form["lamguage"],
-                              include: resouces(form["include"]))
+                              include: resources(form["include"]))
             },
             Form(inputs(storefront: "jp", id: "pl.7a987d29f54b4e3e9ab15906189477f7")) { form in
                 GetPlaylist(storefront: form["storefront"],
                             id: form["id"],
                             language: form["lamguage"],
-                            include: resouces(form["include"]))
+                            include: resources(form["include"]))
             },
             Form(inputs(id: "900032829")) { form in
                 GetSong(storefront: form["storefront"],
                         id: form["id"],
                         language: form["lamguage"],
-                        include: resouces(form["include"]))
+                        include: resources(form["include"]))
             },
             Form(inputs(id: "ra.985484166")) { form in
                 GetStation(storefront: form["storefront"],
                            id: form["id"],
                            language: form["lamguage"],
-                           include: resouces(form["include"]))
+                           include: resources(form["include"]))
             }
         ]),
         .artist([
@@ -111,25 +115,40 @@ final class APIListViewController: UIViewController {
                 GetMultipleArtists(storefront: form["storefront"],
                                    ids: csv(form["ids"]),
                                    language: form["lamguage"],
-                                   include: resouces(form["include"]))
+                                   include: resources(form["include"]))
             },
             Form(inputs(ids: "976439448,1107687517")) { form in
                 GetMultipleCurators(storefront: form["storefront"],
                                     ids: csv(form["ids"]),
                                     language: form["lamguage"],
-                                    include: resouces(form["include"]))
+                                    include: resources(form["include"]))
             },
             Form(inputs(ids: "976439514,976439503")) { form in
                 GetMultipleActivities(storefront: form["storefront"],
                                       ids: csv(form["ids"]),
                                       language: form["lamguage"],
-                                      include: resouces(form["include"]))
+                                      include: resources(form["include"]))
             },
             Form(inputs(ids: "976439526,1017168810")) { form in
                 GetMultipleAppleCurators(storefront: form["storefront"],
                                          ids: csv(form["ids"]),
                                          language: form["lamguage"],
-                                         include: resouces(form["include"]))
+                                         include: resources(form["include"]))
+            }
+        ]),
+        .search([
+            Form([TextInput(name: "storefront", default: "jp"),
+                  TextInput(name: "term", default: ""),
+                  TextInput(name: "language"),
+                  IntInput(name: "limit"),
+                  IntInput(name: "offset"),
+                  TextInput(name: "types")]) { form in
+                    SearchResources(storefront: form["storefront"],
+                                    term: form["term"],
+                                    language: form["language"],
+                                    limit: form["limit"],
+                                    offset: form["offset"],
+                                    types: resources(form["types"]))
             }
         ])
     ]
