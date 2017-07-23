@@ -87,25 +87,12 @@ private struct AnyRequest<R>: APIKit.Request {
     }
 }
 
-private final class Adapter: URLSessionAdapter {
-    override func createTask(with URLRequest: URLRequest, handler: @escaping (Data?, URLResponse?, Error?) -> Void) -> SessionTask {
-        return super.createTask(with: URLRequest, handler: { (data, response, error) in
-            if let data = data,
-                let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
-                print(json)
-            } else if let error = error {
-                print(error)
-            }
-            handler(data, response, error)
-        })
-    }
-}
-
 open class Session: APIKit.Session {
     open override class var shared: Session {
         return _shared
     }
-    private static let _shared = Session(adapter: Adapter(configuration: URLSessionConfiguration.default))
+    private static let _shared
+        = Session(adapter: URLSessionAdapter(configuration: URLSessionConfiguration.default))
 
     open var authorization: Authorization?
 

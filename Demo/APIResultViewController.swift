@@ -70,7 +70,7 @@ final class APIResultViewController<Request: AppleMusicKit.Request, A: CustomStr
             }
             let jsonString = json(from: result)
             let lines = jsonString.components(separatedBy: "\n").count
-            print(jsonString)
+            print(jsonString, String(describing: result.error))
             switch result {
             case .success(let (response, _)):
                 self?.dataSource = [.raw(jsonString, lines: lines),
@@ -105,14 +105,15 @@ final class APIResultViewController<Request: AppleMusicKit.Request, A: CustomStr
         case .results(let items):
             let resource = items[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            cell.backgroundColor = .clear
             let id = "\(resource.id)"
             var shortId = id.prefix(8)
             if id.count > 8 {
                 shortId += "..."
             }
             cell.textLabel?.text = "\(shortId) - \(resource.attributes?.description ?? "")"
+            cell.textLabel?.font = UIFont.monospacedDigitSystemFont(ofSize: 14, weight: .regular)
             cell.selectionStyle = .none
+            cell.backgroundColor = .clear
             return cell
         }
     }

@@ -70,9 +70,9 @@ public struct GetMultipleAppleCurators<
     Playlist: PlaylistDecodable,
     Storefront: StorefrontDecodable
 >: ResourceRequest {
-    public typealias Resource = AppleMusicKit.Resource<Playlist, GetAppleCurator<Curator, Playlist, Storefront>.Relationships>
+    public typealias Resource = AppleMusicKit.Resource<Curator, GetAppleCurator<Curator, Playlist, Storefront>.Relationships>
     public var method: HTTPMethod { return .get }
-    public var path: String { return "/v1/catalog/\(storefront)/curators" }
+    public var path: String { return "/v1/catalog/\(storefront)/apple-curators" }
     public let parameters: Any?
 
     private let storefront: Storefront.Identifier

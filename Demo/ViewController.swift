@@ -128,12 +128,35 @@ struct Playlist: AppleMusicKit.Playlist, CustomStringConvertible {
         self.name = name
     }
 }
-struct Curator: AppleMusicKit.Curator {
+struct Curator: AppleMusicKit.Curator, CustomStringConvertible {
     typealias Identifier = String
     typealias Artwork = Demo.Artwork
     typealias EditorialNotes = Demo.EditorialNotes
 
+    let name: String
+
+    var description: String {
+        return name
+    }
+
     init(artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: String) throws {
+        self.name = name
+        print(artwork, editorialNotes)
+    }
+}
+struct AppleCurator: AppleMusicKit.AppleCurator, CustomStringConvertible {
+    typealias Identifier = String
+    typealias Artwork = Demo.Artwork
+    typealias EditorialNotes = Demo.EditorialNotes
+
+    let name: String
+
+    var description: String {
+        return name
+    }
+
+    init(artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: String) throws {
+        self.name = name
         print(artwork, editorialNotes)
     }
 }
@@ -187,6 +210,8 @@ typealias GetStation = AppleMusicKit.GetStation<Station, Storefront>
 typealias GetCharts = AppleMusicKit.GetCharts<Song, MusicVideo, Album, Storefront>
 typealias GetCurator = AppleMusicKit.GetCurator<Curator, Playlist, Storefront>
 typealias GetMultipleCurators = AppleMusicKit.GetMultipleCurators<Curator, Playlist, Storefront>
+typealias GetAppleCurator = AppleMusicKit.GetAppleCurator<AppleCurator, Playlist, Storefront>
+typealias GetMultipleAppleCurators = AppleMusicKit.GetMultipleAppleCurators<AppleCurator, Playlist, Storefront>
 typealias GetActivity = AppleMusicKit.GetActivity<Activity, Playlist, Storefront>
 typealias GetMultipleActivities = AppleMusicKit.GetMultipleActivities<Activity, Playlist, Storefront>
 typealias SearchResources = AppleMusicKit.SearchResources<Song, MusicVideo, Album, Artist, Storefront>

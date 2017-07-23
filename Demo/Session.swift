@@ -86,6 +86,20 @@ private struct AnyRequestWithData: AppleMusicKit.Request {
     }
 }
 
+private final class Adapter: URLSessionAdapter {
+    override func createTask(with URLRequest: URLRequest, handler: @escaping (Data?, URLResponse?, Swift.Error?) -> Void) -> SessionTask {
+        return super.createTask(with: URLRequest, handler: { (data, response, error) in
+            if let data = data,
+                let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
+                print(json)
+            } else if let error = error {
+                print(error)
+            }
+            handler(data, response, error)
+        })
+    }
+}
+
 class Session: AppleMusicKit.Session {
     override class var shared: Session { return _shared }
     private static let _shared

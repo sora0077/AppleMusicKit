@@ -12,7 +12,7 @@ public protocol AppleCuratorDecodable: Attributes {
 }
 
 // MARK: - AppleCurator
-public protocol AppleCurator: CuratorDecodable {
+public protocol AppleCurator: AppleCuratorDecodable {
     associatedtype Artwork: AppleMusicKit.Artwork
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
 

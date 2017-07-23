@@ -124,6 +124,12 @@ final class APIListViewController: UIViewController {
                                       ids: csv(form["ids"]),
                                       language: form["lamguage"],
                                       include: resouces(form["include"]))
+            },
+            Form(inputs(ids: "976439526,1017168810")) { form in
+                GetMultipleAppleCurators(storefront: form["storefront"],
+                                         ids: csv(form["ids"]),
+                                         language: form["lamguage"],
+                                         include: resouces(form["include"]))
             }
         ])
     ]
