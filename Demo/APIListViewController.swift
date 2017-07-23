@@ -149,6 +149,17 @@ final class APIListViewController: UIViewController {
                                     limit: form["limit"],
                                     offset: form["offset"],
                                     types: resources(form["types"]))
+            },
+            Form([TextInput(name: "storefront", default: "jp"),
+                  TextInput(name: "term", default: ""),
+                  TextInput(name: "language"),
+                  IntInput(name: "limit"),
+                  TextInput(name: "types")]) { form in
+                    GetSearchHints(storefront: form["storefront"],
+                                   term: form["term"],
+                                   language: form["language"],
+                                   limit: form["limit"],
+                                   types: resources(form["types"]))
             }
         ])
     ]

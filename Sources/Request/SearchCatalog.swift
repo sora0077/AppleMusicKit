@@ -87,3 +87,39 @@ extension SearchResources {
         }
     }
 }
+
+// MARK: - GetSearchHints
+public struct GetSearchHints<Storefront: StorefrontDecodable>: Request {
+    public var method: HTTPMethod { return .get }
+    public let path: String
+    public let parameters: Any?
+
+    public init(storefront: Storefront.Identifier, term: String,
+                language: Storefront.Language? = nil,
+                limit: Int? = nil, types: Set<ResourceType>? = nil) {
+        self.path = "/v1/catalog/\(storefront)/search/hints"
+        self.parameters = ["term": term.replacingOccurrences(of: " ", with: "+"),
+                           "l": language?.languageTag,
+                           "types": types?.map { $0.rawValue }.joined(separator: ","),
+                           "limit": limit].cleaned
+    }
+}
+
+extension GetSearchHints {
+    public struct Response: AppleMusicKit.Response, Decodable {
+        public let terms: [String]
+
+        private enum RootKeys: String, CodingKey {
+            case results
+        }
+        private enum CodingKeys: String, CodingKey {
+            case terms
+        }
+
+        public init(from decoder: Decoder) throws {
+            let c = try decoder.container(keyedBy: RootKeys.self)
+            let cc = try c.nestedContainer(keyedBy: CodingKeys.self, forKey: .results)
+            terms = try cc.decode(forKey: .terms)
+        }
+    }
+}

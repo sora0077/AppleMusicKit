@@ -85,22 +85,43 @@ final class APIResultViewController: UIViewController, UITableViewDataSource, UI
                         }
                     }
                     let songs = Section.results(response.songs?.data.map { resource in { cell in
-                            cell.textLabel?.text = resource.attributes?.name
-                        }
-                    } ?? [empty("songs")])
+                        cell.textLabel?.text = resource.attributes?.name
+                        }} ?? [empty("songs")])
                     let musicVideos = Section.results(response.musicVideos?.data.map { resource in { cell in
-                            cell.textLabel?.text = resource.attributes?.name
-                        }
-                    } ?? [empty("musicVideos")])
+                        cell.textLabel?.text = resource.attributes?.name
+                        }} ?? [empty("musicVideos")])
                     let albums = Section.results(response.albums?.data.map { resource in { cell in
-                            cell.textLabel?.text = resource.attributes?.name
-                        }
-                    } ?? [empty("albums")])
+                        cell.textLabel?.text = resource.attributes?.name
+                        }} ?? [empty("albums")])
                     let artists = Section.results(response.artists?.data.map { resource in { cell in
-                            cell.textLabel?.text = resource.attributes?.name
-                        }
-                    } ?? [empty("artists")])
+                        cell.textLabel?.text = resource.attributes?.name
+                        }} ?? [empty("artists")])
                     self?.dataSource = [.raw(jsonString, lines: lines), songs, musicVideos, albums, artists]
+                case .failure:
+                    self?.dataSource = [.raw(jsonString, lines: lines)]
+                }
+                self?.tableView.reloadData()
+            }
+        }
+    }
+
+    init(request: GetSearchHints) {
+        super.init(nibName: nil, bundle: nil)
+
+        title = "\(GetSearchHints.self)".components(separatedBy: "<").first ?? ""
+        fetcher = { [weak self] completion in
+            Session.shared.send(with: request) { result in
+                defer {
+                    completion()
+                }
+                let jsonString = json(from: result)
+                let lines = jsonString.components(separatedBy: "\n").count
+                print(jsonString, String(describing: result.error))
+                switch result {
+                case .success(let (response, _)):
+                    let results = Section.results(response.terms.map { term in { cell in cell.textLabel?.text = term }
+                    })
+                    self?.dataSource = [.raw(jsonString, lines: lines), results]
                 case .failure:
                     self?.dataSource = [.raw(jsonString, lines: lines)]
                 }

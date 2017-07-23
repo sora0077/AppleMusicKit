@@ -129,10 +129,17 @@ extension APIInputFormViewController {
                 APIResultViewController(request: request(form))
             }
         }
-        init(
-            _ inputs: [FormInput],
-            _ request: @escaping (APIInputFormViewController.FormData) -> SearchResources) {
+        init(_ inputs: [FormInput],
+             _ request: @escaping (APIInputFormViewController.FormData) -> SearchResources) {
             self.title = "\(SearchResources.self)".components(separatedBy: "<").first ?? ""
+            self.inputs = inputs
+            resultViewController = { form in
+                APIResultViewController(request: request(form))
+            }
+        }
+        init(_ inputs: [FormInput],
+             _ request: @escaping (APIInputFormViewController.FormData) -> GetSearchHints) {
+            self.title = "\(GetSearchHints.self)".components(separatedBy: "<").first ?? ""
             self.inputs = inputs
             resultViewController = { form in
                 APIResultViewController(request: request(form))

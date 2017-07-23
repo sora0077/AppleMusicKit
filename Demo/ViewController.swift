@@ -221,6 +221,7 @@ typealias GetAllStorefronts = AppleMusicKit.GetAllStorefronts<Storefront>
 typealias GetUserStorefront = AppleMusicKit.GetUserStorefront<Storefront>
 typealias GetMultipleStations = AppleMusicKit.GetMultipleStations<Station, Storefront>
 typealias GetTopChartGenres = AppleMusicKit.GetTopChartGenres<Genre, Storefront>
+typealias GetSearchHints = AppleMusicKit.GetSearchHints<Storefront>
 
 private func recursiveStorefronts(request: GetAllStorefronts?) {
     guard let request = request else {
