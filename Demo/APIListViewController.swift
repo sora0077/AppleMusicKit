@@ -14,7 +14,7 @@ final class APIListViewController: UIViewController {
     private typealias Form = APIInputFormViewController.Form
     private enum Section {
         case storefront([Form]), media([Form]), artist([Form]), chart([Form])
-        case search([Form])
+        case genre([Form]), search([Form])
 
         var title: String {
             switch self {
@@ -22,13 +22,14 @@ final class APIListViewController: UIViewController {
             case .media: return "Fetch Albums, Music Videos, Playlists, Songs, and Stations"
             case .artist: return "Fetch Artists, Curators, Activities, and Apple Curators"
             case .chart: return "Fetch Charts"
+            case .genre: return "Fetch genres"
             case .search: return "Search the catalog"
             }
         }
         var count: Int {
             switch self {
             case .storefront(let items), .media(let items), .artist(let items), .chart(let items),
-                 .search(let items):
+                 .genre(let items), .search(let items):
                 return items.count
             }
         }
@@ -36,7 +37,7 @@ final class APIListViewController: UIViewController {
         subscript (idx: Int) -> Form {
             switch self {
             case .storefront(let items), .media(let items), .artist(let items), .chart(let items),
-                 .search(let items):
+                 .genre(let items), .search(let items):
                 return items[idx]
             }
         }
@@ -48,6 +49,7 @@ final class APIListViewController: UIViewController {
         .media(mediaForms),
         .artist(artistForms),
         .chart(chartForms),
+        .genre(genreForms),
         .search(searchForms)
     ]
 

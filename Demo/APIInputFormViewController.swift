@@ -129,6 +129,15 @@ extension APIInputFormViewController {
                 APIResultViewController(request: request(form))
             }
         }
+        init<Request, A: CustomStringConvertible, R>(
+            _ inputs: [FormInput],
+            _ request: @escaping (APIInputFormViewController.FormData) -> Request) where Request.Response == Page<Request>, Request.Resource == Resource<A, R> {
+            self.title = "\(Request.self)".components(separatedBy: "<").first ?? ""
+            self.inputs = inputs
+            resultViewController = { form in
+                APIResultViewController(request: request(form))
+            }
+        }
         init(_ inputs: [FormInput],
              _ request: @escaping (APIInputFormViewController.FormData) -> GetCharts) {
             self.title = "\(GetCharts.self)".components(separatedBy: "<").first ?? ""

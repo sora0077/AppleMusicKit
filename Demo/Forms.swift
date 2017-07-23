@@ -120,6 +120,24 @@ let chartForms = [
                       offset: form["offset"])
     }]
 
+let genreForms = [
+    Form([TextInput(name: "storefront", default: "jp"),
+          TextInput(name: "language"),
+          IntInput(name: "limit"),
+          IntInput(name: "offset")]) { form in
+            GetTopChartGenres(storefront: form["storefront"],
+                              language: form["language"],
+                              limit: form["limit"],
+                              offset: form["offset"])
+    },
+    Form([TextInput(name: "storefront", default: "jp"),
+          TextInput(name: "ids", default: "34"),
+          TextInput(name: "language")]) { form in
+            GetMultipleGenres(storefront: form["storefront"],
+                              ids: csv(form["ids"]),
+                              language: form["language"])
+    }]
+
 let searchForms = [
     Form([TextInput(name: "storefront", default: "jp"),
           TextInput(name: "term", default: ""),

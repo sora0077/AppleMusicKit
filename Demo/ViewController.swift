@@ -108,9 +108,13 @@ struct Artist: AppleMusicKit.Artist, CustomStringConvertible {
         self.name = name
     }
 }
-struct Genre: AppleMusicKit.Genre {
+struct Genre: AppleMusicKit.Genre, CustomStringConvertible {
     typealias Identifier = String
     let name: String
+
+    var description: String {
+        return name
+    }
 }
 struct Playlist: AppleMusicKit.Playlist, CustomStringConvertible {
     typealias Identifier = String
@@ -221,6 +225,8 @@ typealias GetAllStorefronts = AppleMusicKit.GetAllStorefronts<Storefront>
 typealias GetUserStorefront = AppleMusicKit.GetUserStorefront<Storefront>
 typealias GetMultipleStations = AppleMusicKit.GetMultipleStations<Station, Storefront>
 typealias GetTopChartGenres = AppleMusicKit.GetTopChartGenres<Genre, Storefront>
+typealias GetGenre = AppleMusicKit.GetGenre<Genre, Storefront>
+typealias GetMultipleGenres = AppleMusicKit.GetMultipleGenres<Genre, Storefront>
 typealias GetSearchHints = AppleMusicKit.GetSearchHints<Storefront>
 
 private func recursiveStorefronts(request: GetAllStorefronts?) {

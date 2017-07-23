@@ -65,6 +65,39 @@ final class APIResultViewController: UIViewController, UITableViewDataSource, UI
         }
     }
 
+    init<Request, A: CustomStringConvertible, R>(request: Request) where Request.Response == Page<Request>, Request.Resource == Resource<A, R> {
+        super.init(nibName: nil, bundle: nil)
+
+        title = "\(Request.self)".components(separatedBy: "<").first ?? ""
+        fetcher = { [weak self] completion in
+            Session.shared.send(with: request) { result in
+                defer {
+                    completion()
+                }
+                let jsonString = json(from: result)
+                let lines = jsonString.components(separatedBy: "\n").count
+                print(jsonString, String(describing: result.error))
+                switch result {
+                case .success(let (page, _)):
+                    self?.dataSource = [.raw(jsonString, lines: lines),
+                                        .results(page.data.map { resource in
+                                            let id = "\(resource.id)"
+                                            var shortId = id.prefix(8)
+                                            if id.count > 8 {
+                                                shortId += "..."
+                                            }
+                                            return { cell in
+                                                cell.textLabel?.text = "\(shortId) - \(resource.attributes?.description ?? "")"
+                                            }
+                                        })]
+                case .failure:
+                    self?.dataSource = [.raw(jsonString, lines: lines)]
+                }
+                self?.tableView.reloadData()
+            }
+        }
+    }
+
     init(request: GetCharts) {
         super.init(nibName: nil, bundle: nil)
 
