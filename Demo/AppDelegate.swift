@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.tintColor = UIColor(hex: 0x7A69F2)
 
-        if let token = UserDefaults.standard.string(forKey: "DeviceToken") {
+        if let token = UserDefaults.standard.string(forKey: "DeveloperToken") {
             Session.shared.authorization = Authorization(developerToken: token)
         }
         return true

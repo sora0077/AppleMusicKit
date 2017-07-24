@@ -31,7 +31,7 @@ final class DeveloperTokenInputViewController: UIViewController {
         textView.isScrollEnabled = false
         textView.layer.cornerRadius = 8
         textView.font = UIFont.monospacedDigitSystemFont(ofSize: 16, weight: .regular)
-        textView.text = UserDefaults.standard.string(forKey: "DeviceToken") ?? ""
+        textView.text = UserDefaults.standard.string(forKey: "DeveloperToken") ?? ""
         textView.backgroundColor = UIColor.white.withAlphaComponent(0.4)
     }
 
@@ -43,7 +43,7 @@ final class DeveloperTokenInputViewController: UIViewController {
     @objc
     private func saveAction() {
         let token = textView.text ?? ""
-        UserDefaults.standard.set(token, forKey: "DeviceToken")
+        UserDefaults.standard.set(token, forKey: "DeveloperToken")
         UserDefaults.standard.synchronize()
         Session.shared.authorization = Authorization(developerToken: token)
         navigationController?.popViewController(animated: true)
