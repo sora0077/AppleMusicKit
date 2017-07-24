@@ -1,11 +1,10 @@
 //
-//  ViewController.swift
+//  Types.swift
 //  Demo
 //
 //  Created by 林達也 on 2017/06/28.
 //  Copyright © 2017年 jp.sora0077. All rights reserved.
 //
-
 import UIKit
 import AppleMusicKit
 
@@ -228,43 +227,3 @@ typealias GetTopChartGenres = AppleMusicKit.GetTopChartGenres<Genre, Storefront>
 typealias GetGenre = AppleMusicKit.GetGenre<Genre, Storefront>
 typealias GetMultipleGenres = AppleMusicKit.GetMultipleGenres<Genre, Storefront>
 typealias GetSearchHints = AppleMusicKit.GetSearchHints<Storefront>
-
-private func recursiveStorefronts(request: GetAllStorefronts?) {
-    guard let request = request else {
-        return
-    }
-    Session.shared.send(request) { result in
-        switch result {
-        case .success(let response):
-            recursiveStorefronts(request: response.next)
-        case .failure(let error):
-            print(error)
-        }
-    }
-}
-
-class ViewController: UIViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        Session.shared.send(GetMusicVideo(storefront: "us", id: "639032181")) { result in
-            switch result {
-            case .success(let response):
-                print(response)
-//                if let next = response.next {
-//                    Session.shared.send(next) { result in
-//                        print(next)
-//                    }
-//                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-}
