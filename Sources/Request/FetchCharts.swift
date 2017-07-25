@@ -38,6 +38,7 @@ where
 
 extension GetCharts {
     public struct Response: AppleMusicKit.Response, Decodable {
+        public typealias Page = _GetChartsResponsePage
         public let songs: Page<GetPage<Song>>?
         public let musicVideos: Page<GetPage<MusicVideo>>?
         public let albums: Page<GetPage<Album>>?
@@ -75,4 +76,13 @@ extension GetCharts {
             (limit, offset) = parsePaginatorParameters(parameters)
         }
     }
+}
+
+// MARK: -
+public struct _GetChartsResponsePage<R: PaginatorRequest>: Response where R.Resource: Decodable {
+    public let name: String
+    public let chart: String
+    public let data: [R.Resource]
+    public let href: String?
+    public internal(set) var next: R?
 }
