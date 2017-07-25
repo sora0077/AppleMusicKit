@@ -8,11 +8,12 @@
 
 import Foundation
 
-public struct GetCharts<Song, MusicVideo, Album, Storefront>: Request
+public struct GetCharts<Song, MusicVideo, Album, Genre, Storefront>: Request
 where
     Song: SongDecodable,
     MusicVideo: MusicVideoDecodable,
     Album: AlbumDecodable,
+    Genre: GenreDecodable,
     Storefront: StorefrontDecodable {
     public var method: HTTPMethod { return .get }
     public let path: String
@@ -20,11 +21,12 @@ where
 
     public init(storefront: Storefront.Identifier, types: Set<ResourceType>,
                 language: Storefront.Language? = nil,
-                chart: String? = nil, genre: String? = nil,
+                chart: String? = nil, genre: Genre.Identifier? = nil,
                 limit: Int? = nil, offset: Int? = nil) {
         assert(types.contains(.songs) || types.contains(.musicVideos) || types.contains(.albums))
         self.init(path: "/v1/catalog/\(storefront)/charts",
             parameters: ["types": types.map { $0.rawValue }.joined(separator: ","),
+                         "chart": chart, "genre": genre.map { "\($0)" },
                          "l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
