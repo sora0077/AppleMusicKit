@@ -22,14 +22,14 @@ public protocol StorefrontDecodable: Attributes {
 
 // MARK: - Storefront
 public protocol Storefront: StorefrontDecodable {
-    init(defaultLanguageTag: String, name: String, supportedLanguageTags: [String]) throws
+    init(defaultLanguageTag: Language, name: String, supportedLanguageTags: [Language]) throws
 }
 
 private enum CodingKeys: String, CodingKey {
     case defaultLanguageTag, name, supportedLanguageTags
 }
 
-extension Storefront {
+extension Storefront where Language: Decodable {
     public init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
         try self.init(defaultLanguageTag: c.decode(forKey: .defaultLanguageTag),

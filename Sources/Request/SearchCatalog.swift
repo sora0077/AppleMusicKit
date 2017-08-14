@@ -8,15 +8,6 @@
 
 import Foundation
 
-extension KeyedDecodingContainer {
-    func decode<D: Decodable>(forKey key: K) throws -> D {
-        return try decode(D.self, forKey: key)
-    }
-    func decodeIfPresent<D: Decodable>(forKey key: K) throws -> D? {
-        return try decodeIfPresent(D.self, forKey: key)
-    }
-}
-
 public struct SearchResources<Song, MusicVideo, Album, Artist, Storefront>: Request
 where
     Song: SongDecodable,
