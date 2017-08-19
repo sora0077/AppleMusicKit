@@ -18,6 +18,7 @@ public protocol Album: AlbumDecodable, _AttributesCustomInitializable {
     associatedtype PlayParameters: AppleMusicKit.PlayParameters
 
     init(
+        id: Identifier,
         artistName: String,
         artwork: Artwork,
         contentRating: String?,
@@ -43,7 +44,8 @@ extension Album {
     public init(from decoder: Decoder) throws {
         let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
         let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
-        try self.init(artistName: c.decode(forKey: .artistName),
+        try self.init(id: cc.decode(forKey: .id),
+                      artistName: c.decode(forKey: .artistName),
                       artwork: c.decode(forKey: .artwork),
                       contentRating: c.decodeIfPresent(forKey: .contentRating),
                       copyright: c.decode(forKey: .copyright),

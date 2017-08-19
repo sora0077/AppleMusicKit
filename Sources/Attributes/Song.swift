@@ -16,7 +16,8 @@ public protocol Song: SongDecodable, _AttributesCustomInitializable {
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
     associatedtype PlayParameters: AppleMusicKit.PlayParameters
 
-    init(artistName: String,
+    init(id: Identifier,
+         artistName: String,
          artwork: Artwork,
          composerName: String?,
          contentRating: String?,
@@ -45,7 +46,8 @@ extension Song {
     public init(from decoder: Decoder) throws {
         let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
         let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
-        try self.init(artistName: c.decode(forKey: .artistName),
+        try self.init(id: cc.decode(forKey: .id),
+                      artistName: c.decode(forKey: .artistName),
                       artwork: c.decode(forKey: .artwork),
                       composerName: c.decodeIfPresent(forKey: .composerName),
                       contentRating: c.decodeIfPresent(forKey: .contentRating),

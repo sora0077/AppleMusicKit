@@ -22,7 +22,7 @@ public protocol StorefrontDecodable: Attributes {
 
 // MARK: - Storefront
 public protocol Storefront: StorefrontDecodable, _AttributesCustomInitializable {
-    init(defaultLanguageTag: Language, name: String, supportedLanguageTags: [Language]) throws
+    init(id: Identifier, defaultLanguageTag: Language, name: String, supportedLanguageTags: [Language]) throws
 }
 
 private enum CodingKeys: String, CodingKey {
@@ -33,7 +33,8 @@ extension Storefront where Language: Decodable {
     public init(from decoder: Decoder) throws {
         let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
         let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
-        try self.init(defaultLanguageTag: c.decode(forKey: .defaultLanguageTag),
+        try self.init(id: cc.decode(forKey: .id),
+                      defaultLanguageTag: c.decode(forKey: .defaultLanguageTag),
                       name: c.decode(forKey: .name),
                       supportedLanguageTags: c.decode(forKey: .supportedLanguageTags))
     }

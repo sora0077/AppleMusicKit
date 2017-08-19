@@ -16,7 +16,8 @@ public protocol Playlist: PlaylistDecodable, _AttributesCustomInitializable {
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
     associatedtype PlayParameters: AppleMusicKit.PlayParameters
 
-    init(artwork: Artwork?,
+    init(id: Identifier,
+         artwork: Artwork?,
          curatorName: String?,
          description: EditorialNotes?,
          lastModifiedDate: String,
@@ -39,7 +40,8 @@ extension Playlist {
     public init(from decoder: Decoder) throws {
         let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
         let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
-        try self.init(artwork: c.decodeIfPresent(forKey: .artwork),
+        try self.init(id: cc.decode(forKey: .id),
+                      artwork: c.decodeIfPresent(forKey: .artwork),
                       curatorName: c.decodeIfPresent(forKey: .curatorName),
                       description: c.decodeIfPresent(forKey: .description),
                       lastModifiedDate: c.decode(forKey: .lastModifiedDate),

@@ -16,7 +16,8 @@ public protocol Station: StationDecodable, _AttributesCustomInitializable {
     associatedtype Artwork: AppleMusicKit.Artwork
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
 
-    init(artwork: Artwork,
+    init(id: Identifier,
+         artwork: Artwork,
          durationInMillis: Int?,
          editorialNotes: EditorialNotes?,
          episodeNumber: Int?,
@@ -33,7 +34,8 @@ extension Station {
     public init(from decoder: Decoder) throws {
         let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
         let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
-        try self.init(artwork: c.decode(forKey: .artwork),
+        try self.init(id: cc.decode(forKey: .id),
+                      artwork: c.decode(forKey: .artwork),
                       durationInMillis: c.decodeIfPresent(forKey: .durationInMillis),
                       editorialNotes: c.decodeIfPresent(forKey: .editorialNotes),
                       episodeNumber: c.decodeIfPresent(forKey: .episodeNumber),
