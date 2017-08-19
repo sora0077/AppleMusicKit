@@ -82,6 +82,12 @@ struct Genre: AppleMusicKit.Genre {
 }
 struct Playlist: AppleMusicKit.Playlist {
     typealias Identifier = String
+    typealias Artwork = AppleMusicKitTests.Artwork
+    typealias EditorialNotes = AppleMusicKitTests.EditorialNotes
+    typealias PlayParameters = AppleMusicKitTests.PlayParameters
+
+    init(artwork: Artwork?, curatorName: String?, description: EditorialNotes?, lastModifiedDate: String, name: String, playlistType: PlaylistType, playParams: PlayParameters?, url: String) throws {
+    }
 }
 struct Curator: AppleMusicKit.Curator {
     typealias Identifier = String
@@ -111,7 +117,7 @@ struct Artwork: AppleMusicKit.Artwork {
     }
 }
 struct EditorialNotes: AppleMusicKit.EditorialNotes {
-    init(standard: String?, short: String) throws {
+    init(standard: String?, short: String?) throws {
     }
 }
 struct PlayParameters: AppleMusicKit.PlayParameters {
@@ -125,7 +131,7 @@ typealias GetAlbum = AppleMusicKit.GetAlbum<Album, Song, MusicVideo, Artist, Sto
 typealias GetMultipleAlbums = AppleMusicKit.GetMultipleAlbums<Album, Song, MusicVideo, Artist, Storefront>
 typealias GetArtist = AppleMusicKit.GetArtist<Artist, Album, Genre, Storefront>
 typealias GetPlaylist = AppleMusicKit.GetPlaylist<Playlist, Curator, Song, MusicVideo, Storefront>
-typealias GetCharts = AppleMusicKit.GetCharts<Song, MusicVideo, Album, Storefront>
+typealias GetCharts = AppleMusicKit.GetCharts<Song, MusicVideo, Album, Genre, Storefront>
 typealias SearchResources = AppleMusicKit.SearchResources<Song, MusicVideo, Album, Artist, Storefront>
 typealias GetStorefront = AppleMusicKit.GetStorefront<Storefront>
 typealias GetMultipleStorefronts = AppleMusicKit.GetMultipleStorefronts<Storefront>
