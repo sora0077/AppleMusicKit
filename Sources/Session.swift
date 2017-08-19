@@ -100,42 +100,42 @@ open class Session: APIKit.Session {
     open override class func send<Request>(
         _ request: Request,
         callbackQueue: CallbackQueue? = nil,
-        handler: @escaping (Result<Request.Response, SessionTaskError>) -> Void)
-        -> SessionTask? where Request : AppleMusicKit.Request {
-            return shared.send(request, callbackQueue: callbackQueue, handler: handler)
+        handler: @escaping (Result<Request.Response, SessionTaskError>) -> Void
+    ) -> SessionTask? where Request : AppleMusicKit.Request {
+        return shared.send(request, callbackQueue: callbackQueue, handler: handler)
     }
 
     @discardableResult
     open override func send<Request>(
         _ request: Request,
         callbackQueue: CallbackQueue? = nil,
-        handler: @escaping (Result<Request.Response, SessionTaskError>) -> Void)
-        -> SessionTask? where Request : AppleMusicKit.Request {
-            do {
-                return super.send(try AnyRequest(request, authorization: authorization),
-                                  callbackQueue: callbackQueue,
-                                  handler: handler)
-            } catch {
-                (callbackQueue ?? .main).execute {
-                    handler(Result(error: SessionTaskError.requestError(error)))
-                }
-                return nil
+        handler: @escaping (Result<Request.Response, SessionTaskError>) -> Void
+    ) -> SessionTask? where Request : AppleMusicKit.Request {
+        do {
+            return super.send(try AnyRequest(request, authorization: authorization),
+                              callbackQueue: callbackQueue,
+                              handler: handler)
+        } catch {
+            (callbackQueue ?? .main).execute {
+                handler(Result(error: SessionTaskError.requestError(error)))
             }
+            return nil
+        }
     }
 
     open override class func cancelRequests<Request>(
         with requestType: Request.Type,
-        passingTest test: @escaping (Request) -> Bool)
-        where Request : APIKit.Request {
-            shared.cancelRequests(with: requestType, passingTest: test)
+        passingTest test: @escaping (Request) -> Bool
+    ) where Request : APIKit.Request {
+        shared.cancelRequests(with: requestType, passingTest: test)
     }
 
     open override func cancelRequests<Request>(
         with requestType: Request.Type,
-        passingTest test: @escaping (Request) -> Bool)
-        where Request : APIKit.Request {
-            super.cancelRequests(with: AnyRequest<Request.Response>.self) { request in
-                (request.raw as? Request).map(test) ?? false
-            }
+        passingTest test: @escaping (Request) -> Bool
+    ) where Request : APIKit.Request {
+        super.cancelRequests(with: AnyRequest<Request.Response>.self) { request in
+            (request.raw as? Request).map(test) ?? false
+        }
     }
 }

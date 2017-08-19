@@ -11,7 +11,7 @@ import Foundation
 public protocol PlaylistDecodable: Attributes {
 }
 
-public protocol Playlist: PlaylistDecodable {
+public protocol Playlist: PlaylistDecodable, _AttributesCustomInitializable {
     associatedtype Artwork: AppleMusicKit.Artwork
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
     associatedtype PlayParameters: AppleMusicKit.PlayParameters
@@ -37,7 +37,8 @@ private enum CodingKeys: String, CodingKey {
 
 extension Playlist {
     public init(from decoder: Decoder) throws {
-        let c = try decoder.container(keyedBy: CodingKeys.self)
+        let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
+        let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
         try self.init(artwork: c.decodeIfPresent(forKey: .artwork),
                       curatorName: c.decodeIfPresent(forKey: .curatorName),
                       description: c.decodeIfPresent(forKey: .description),

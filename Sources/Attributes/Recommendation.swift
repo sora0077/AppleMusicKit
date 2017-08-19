@@ -12,7 +12,7 @@ public protocol RecommendationDecodable: Attributes {
 }
 
 // MARK: - Recommendation
-public protocol Recommendation: RecommendationDecodable {
+public protocol Recommendation: RecommendationDecodable, _AttributesCustomInitializable {
     init(
         isGroupRecommendation: Bool,
         title: String?,
@@ -32,7 +32,8 @@ private struct Object: Decodable {
 
 extension Recommendation {
     public init(from decoder: Decoder) throws {
-        let c = try decoder.container(keyedBy: CodingKeys.self)
+        let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
+        let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
         try self.init(isGroupRecommendation: c.decode(forKey: .isGroupRecommendation),
                       title: c.decodeIfPresent(Object.self, forKey: .title)?.stringForDisplay,
                       reason: c.decodeIfPresent(Object.self, forKey: .reason)?.stringForDisplay,

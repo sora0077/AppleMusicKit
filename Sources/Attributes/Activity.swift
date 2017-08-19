@@ -12,7 +12,7 @@ public protocol ActivityDecodable: Attributes {
 }
 
 // MARK: - Activity
-public protocol Activity: ActivityDecodable {
+public protocol Activity: ActivityDecodable, _AttributesCustomInitializable {
     associatedtype Artwork: AppleMusicKit.Artwork
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
 
@@ -25,7 +25,8 @@ private enum CodingKeys: String, CodingKey {
 
 extension Activity {
     public init(from decoder: Decoder) throws {
-        let c = try decoder.container(keyedBy: CodingKeys.self)
+        let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
+        let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
         try self.init(artwork: c.decode(forKey: .artwork),
                       editorialNotes: c.decodeIfPresent(forKey: .editorialNotes),
                       name: c.decode(forKey: .name),

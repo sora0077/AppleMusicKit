@@ -12,7 +12,7 @@ public protocol GenreDecodable: Attributes {
 }
 
 // MARK: - Genre
-public protocol Genre: GenreDecodable {
+public protocol Genre: GenreDecodable, _AttributesCustomInitializable {
     init(name: String) throws
 }
 
@@ -22,7 +22,8 @@ private enum CodingKeys: String, CodingKey {
 
 extension Genre {
     public init(from decoder: Decoder) throws {
-        let c = try decoder.container(keyedBy: CodingKeys.self)
+        let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
+        let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
         try self.init(name: c.decode(forKey: .name))
     }
 }

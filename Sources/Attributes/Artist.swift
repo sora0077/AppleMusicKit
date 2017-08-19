@@ -12,7 +12,7 @@ public protocol ArtistDecodable: Attributes {
 }
 
 // MARK: - Artist
-public protocol Artist: ArtistDecodable {
+public protocol Artist: ArtistDecodable, _AttributesCustomInitializable {
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
 
     init(genreNames: [String],
@@ -27,7 +27,8 @@ private enum CodingKeys: String, CodingKey {
 
 extension Artist {
     public init(from decoder: Decoder) throws {
-        let c = try decoder.container(keyedBy: CodingKeys.self)
+        let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
+        let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
         try self.init(genreNames: c.decode(forKey: .genreNames),
                       editorialNotes: c.decodeIfPresent(forKey: .editorialNotes),
                       name: c.decode(forKey: .name),

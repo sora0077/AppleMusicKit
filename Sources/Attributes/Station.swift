@@ -12,7 +12,7 @@ public protocol StationDecodable: Attributes {
 }
 
 // MARK: - Station
-public protocol Station: StationDecodable {
+public protocol Station: StationDecodable, _AttributesCustomInitializable {
     associatedtype Artwork: AppleMusicKit.Artwork
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
 
@@ -31,7 +31,8 @@ private enum CodingKeys: String, CodingKey {
 
 extension Station {
     public init(from decoder: Decoder) throws {
-        let c = try decoder.container(keyedBy: CodingKeys.self)
+        let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
+        let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
         try self.init(artwork: c.decode(forKey: .artwork),
                       durationInMillis: c.decodeIfPresent(forKey: .durationInMillis),
                       editorialNotes: c.decodeIfPresent(forKey: .editorialNotes),
