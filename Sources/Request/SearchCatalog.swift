@@ -62,7 +62,7 @@ extension SearchResources {
 }
 
 extension SearchResources {
-    public struct GetPage<A: Attributes>: PaginatorRequest {
+    public struct GetPage<A: Attributes>: ResourcePaginatorRequest {
         public typealias Resource = AppleMusicKit.Resource<A, NoRelationships>
         public let path: String
         public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }

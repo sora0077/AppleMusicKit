@@ -37,7 +37,7 @@ extension GetCurator {
 }
 
 extension GetCurator {
-    public struct GetPlaylists: PaginatorRequest {
+    public struct GetPlaylists: ResourcePaginatorRequest {
         public typealias Resource = AppleMusicKit.Resource<Playlist, NoRelationships>
 
         public let path: String

@@ -22,7 +22,7 @@ public struct GetDefaultRecommendations<
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
->: PaginatorRequest {
+>: ResourcePaginatorRequest {
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 
     public var scope: AccessScope { return .user }
@@ -83,7 +83,7 @@ public struct GetRecommendation<
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
->: PaginatorRequest {
+>: ResourcePaginatorRequest {
     public typealias Relationships = GetDefaultRecommendations<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, AppleCurator, Activity, Station, Storefront, Genre>.Relationships
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 
@@ -121,7 +121,7 @@ public struct GetMultipleRecommendations<
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
->: PaginatorRequest {
+>: ResourcePaginatorRequest {
     public typealias Relationships = GetRecommendation<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, AppleCurator, Activity, Station, Storefront, Genre>.Relationships
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 

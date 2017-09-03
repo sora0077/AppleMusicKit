@@ -9,7 +9,7 @@
 import Foundation
 import APIKit
 
-public protocol PaginatorRequest: ResourceRequest, Decodable {
+public protocol PaginatorRequest: Request, Decodable {
     var limit: Int? { get set }
     var offset: Int? { get set }
     init(path: String, parameters: [String: Any])
@@ -34,4 +34,9 @@ extension PaginatorRequest where Response == Page<Self> {
         page.next?.limit = limit
         return page
     }
+}
+
+
+public protocol ResourcePaginatorRequest: PaginatorRequest {
+    associatedtype Resource
 }

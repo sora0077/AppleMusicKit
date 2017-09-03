@@ -15,7 +15,7 @@ public struct ResponseRoot<Resource: Decodable>: Response {
     public let data: [Resource]
 }
 
-public struct Page<R: PaginatorRequest>: Response where R.Resource: Decodable {
+public struct Page<R: ResourcePaginatorRequest>: Response where R.Resource: Decodable {
     public let data: [R.Resource]
     public let href: String?
     public internal(set) var next: R?
