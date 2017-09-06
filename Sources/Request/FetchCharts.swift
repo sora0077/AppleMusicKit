@@ -43,43 +43,28 @@ extension GetCharts {
         public let albums: Page<Album>?
 
         public init(from decoder: Decoder) throws {
-            do {
-                songs = try .init(from: decoder)
-            } catch let error as DecodingError {
-                switch error {
-                case .keyNotFound(let key, _) where key.stringValue == "songs":
-                    songs = nil
-                default:
-                    throw error
+            func decode<D: Decodable>(forKey keyName: String) throws -> D? {
+                do {
+                    return try D.init(from: decoder)
+                } catch let error as DecodingError {
+                    switch error {
+                    case .keyNotFound(let key, _) where key.stringValue == keyName:
+                        return nil
+                    default:
+                        throw error
+                    }
                 }
             }
-            do {
-                musicVideos = try .init(from: decoder)
-            } catch let error as DecodingError {
-                switch error {
-                case .keyNotFound(let key, _) where key.stringValue == "music-videos":
-                    musicVideos = nil
-                default:
-                    throw error
-                }
-            }
-            do {
-                albums = try .init(from: decoder)
-            } catch let error as DecodingError {
-                switch error {
-                case .keyNotFound(let key, _) where key.stringValue == "albums":
-                    albums = nil
-                default:
-                    throw error
-                }
-            }
+            songs = try decode(forKey: "songs")
+            musicVideos = try decode(forKey: "music-videos")
+            albums = try decode(forKey: "albums")
         }
     }
 }
 
 extension GetCharts {
     public struct Page<A: Attributes>: AppleMusicKit.Response {
-        fileprivate struct Tmp: Decodable {
+        private struct Tmp: Decodable {
             let name: String
             let chart: String
             let data: [AppleMusicKit.Resource<A, NoRelationships>]
@@ -104,7 +89,15 @@ extension GetCharts {
             let c = try decoder.container(keyedBy: RootKeys.self)
             let cc = try c.nestedContainer(keyedBy: CodingKeys.self, forKey: .results)
             let key: CodingKeys = {
-                if A.self == Song.self { return .songs } else if A.self == MusicVideo.self { return .musicVideos } else if A.self == Album.self { return .albums } else { fatalError() }
+                if A.self == Song.self {
+                    return .songs
+                } else if A.self == MusicVideo.self {
+                    return .musicVideos
+                } else if A.self == Album.self {
+                    return .albums
+                } else {
+                    fatalError()
+                }
             }()
             let tmp = try cc.decode([Tmp].self, forKey: key)[0]
             name = tmp.name

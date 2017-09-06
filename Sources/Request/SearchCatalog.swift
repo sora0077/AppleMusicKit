@@ -38,32 +38,76 @@ where
 
 extension SearchResources {
     public struct Response: AppleMusicKit.Response, Decodable {
-        public let songs: Page<GetPage<Song>>?
-        public let musicVideos: Page<GetPage<MusicVideo>>?
-        public let albums: Page<GetPage<Album>>?
-        public let artists: Page<GetPage<Artist>>?
-
-        private enum RootKeys: String, CodingKey {
-            case results
-        }
-        private enum CodingKeys: String, CodingKey {
-            case songs, musicVideos = "music-videos", albums, artists
-        }
+        public let songs: Page<Song>?
+        public let musicVideos: Page<MusicVideo>?
+        public let albums: Page<Album>?
+        public let artists: Page<Artist>?
 
         public init(from decoder: Decoder) throws {
-            let c = try decoder.container(keyedBy: RootKeys.self)
-            let cc = try c.nestedContainer(keyedBy: CodingKeys.self, forKey: .results)
-            songs = try cc.decodeIfPresent(forKey: .songs)
-            musicVideos = try cc.decodeIfPresent(forKey: .musicVideos)
-            albums = try cc.decodeIfPresent(forKey: .albums)
-            artists = try cc.decodeIfPresent(forKey: .artists)
+            func decode<D: Decodable>(forKey keyName: String) throws -> D? {
+                do {
+                    return try D.init(from: decoder)
+                } catch let error as DecodingError {
+                    switch error {
+                    case .keyNotFound(let key, _) where key.stringValue == keyName:
+                        return nil
+                    default:
+                        throw error
+                    }
+                }
+            }
+            songs = try decode(forKey: "songs")
+            musicVideos = try decode(forKey: "music-videos")
+            albums = try decode(forKey: "albums")
+            artists = try decode(forKey: "artists")
         }
     }
 }
 
 extension SearchResources {
-    public struct GetPage<A: Attributes>: PaginatorResourceRequest {
-        public typealias Resource = AppleMusicKit.Resource<A, NoRelationships>
+    public struct Page<A: Attributes>: AppleMusicKit.Response {
+        public let data: [AppleMusicKit.Resource<A, NoRelationships>]
+        public let href: String?
+        public internal(set) var next: SearchResources.GetPage<A>?
+
+        private enum RootKeys: String, CodingKey {
+            case results
+        }
+
+        private enum ResourceKeys: String, CodingKey {
+            case songs, musicVideos = "music-videos", albums, artists
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case data, href, next
+        }
+
+        public init(from decoder: Decoder) throws {
+            let c = try decoder.container(keyedBy: RootKeys.self)
+            let cc = try c.nestedContainer(keyedBy: ResourceKeys.self, forKey: .results)
+            let key: ResourceKeys = {
+                if A.self == Song.self {
+                    return .songs
+                } else if A.self == MusicVideo.self {
+                    return .musicVideos
+                } else if A.self == Album.self {
+                    return .albums
+                } else if A.self == Artist.self {
+                    return .artists
+                } else {
+                    fatalError()
+                }
+            }()
+            let ccc = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: key)
+            data = try ccc.decode(forKey: .data)
+            href = try ccc.decodeIfPresent(forKey: .href)
+            next = try ccc.decodeIfPresent(forKey: .next)
+        }
+    }
+}
+
+extension SearchResources {
+    public struct GetPage<A: Attributes>: PaginatorRequest {
         public let path: String
         public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
 
@@ -75,6 +119,12 @@ extension SearchResources {
             self.path = path
             _parameters = parameters
             (limit, offset) = parsePaginatorParameters(parameters)
+        }
+
+        public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Page<A> {
+            var page = try decode(object) as Page<A>
+            page.next?.limit = limit
+            return page
         }
     }
 }
