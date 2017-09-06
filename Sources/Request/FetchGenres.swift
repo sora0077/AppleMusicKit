@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct GetTopChartGenres<Genre: GenreDecodable, Storefront: StorefrontDecodable>: ResourcePaginatorRequest {
+public struct GetTopChartGenres<Genre: GenreDecodable, Storefront: StorefrontDecodable>: PaginatorResourceRequest {
     public typealias Resource = AppleMusicKit.Resource<Genre, NoRelationships>
 
     public let path: String

@@ -41,7 +41,7 @@ public struct GetMultipleStorefronts<Storefront: StorefrontDecodable>: ResourceR
 }
 
 // MARK: - GetAllStorefronts
-public struct GetAllStorefronts<Storefront: StorefrontDecodable>: ResourcePaginatorRequest {
+public struct GetAllStorefronts<Storefront: StorefrontDecodable>: PaginatorResourceRequest {
     public typealias Resource = AppleMusicKit.Resource<Storefront, NoRelationships>
 
     public let path: String

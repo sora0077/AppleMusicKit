@@ -74,7 +74,7 @@ extension GetMusicVideo {
 }
 
 extension GetMusicVideo {
-    public struct GetAlbums: ResourcePaginatorRequest {
+    public struct GetAlbums: PaginatorResourceRequest {
         public typealias Resource = AppleMusicKit.Resource<Album, NoRelationships>
         public let path: String
         public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
@@ -94,7 +94,7 @@ extension GetMusicVideo {
             (limit, offset) = parsePaginatorParameters(parameters)
         }
     }
-    public struct GetArtists: ResourcePaginatorRequest {
+    public struct GetArtists: PaginatorResourceRequest {
         public typealias Resource = AppleMusicKit.Resource<Artist, NoRelationships>
         public let path: String
         public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
@@ -114,7 +114,7 @@ extension GetMusicVideo {
             (limit, offset) = parsePaginatorParameters(parameters)
         }
     }
-    public struct GetGenres: ResourcePaginatorRequest {
+    public struct GetGenres: PaginatorResourceRequest {
         public typealias Resource = AppleMusicKit.Resource<Genre, NoRelationships>
         public let path: String
         public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }

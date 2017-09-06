@@ -71,7 +71,7 @@ extension GetArtist {
 }
 
 extension GetArtist {
-    public struct GetAlbums: ResourcePaginatorRequest {
+    public struct GetAlbums: PaginatorResourceRequest {
         public typealias Resource = AppleMusicKit.Resource<Album, NoRelationships>
         public let path: String
         public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
@@ -91,7 +91,7 @@ extension GetArtist {
             (limit, offset) = parsePaginatorParameters(parameters)
         }
     }
-    public struct GetGenres: ResourcePaginatorRequest {
+    public struct GetGenres: PaginatorResourceRequest {
         public typealias Resource = AppleMusicKit.Resource<Genre, NoRelationships>
         public let path: String
         public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }

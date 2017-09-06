@@ -36,7 +36,6 @@ extension PaginatorRequest where Response == Page<Self> {
     }
 }
 
-
-public protocol ResourcePaginatorRequest: PaginatorRequest {
+public protocol PaginatorResourceRequest: PaginatorRequest {
     associatedtype Resource
 }

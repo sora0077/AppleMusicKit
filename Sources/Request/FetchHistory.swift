@@ -21,7 +21,7 @@ public struct GetHeavyRotationContent<
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable,
     Recommendation: RecommendationDecodable
->: ResourcePaginatorRequest {
+>: PaginatorResourceRequest {
     public typealias Resource = AnyResource<NoRelationships>
 
     public var scope: AccessScope { return .user }

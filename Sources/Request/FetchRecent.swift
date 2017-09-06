@@ -21,7 +21,7 @@ public struct GetRecentlyPlayed<
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable,
     Recommendation: RecommendationDecodable
->: ResourcePaginatorRequest {
+>: PaginatorResourceRequest {
     public typealias Resource = AnyResource<NoRelationships>
 
     public var scope: AccessScope { return .user }
@@ -62,7 +62,7 @@ extension GetRecentlyPlayed {
 }
 
 // MARK: - GetRecentStations
-public struct GetRecentStations<Station: StationDecodable, Storefront: StorefrontDecodable>: ResourcePaginatorRequest {
+public struct GetRecentStations<Station: StationDecodable, Storefront: StorefrontDecodable>: PaginatorResourceRequest {
     public typealias Resource = AppleMusicKit.Resource<Station, NoRelationships>
 
     public var scope: AccessScope { return .user }
