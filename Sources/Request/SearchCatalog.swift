@@ -19,6 +19,9 @@ where
     public let path: String
     public let parameters: Any?
 
+    private let limit: Int?
+    private let offset: Int?
+
     public init(storefront: Storefront.Identifier, term: String,
                 language: Storefront.Language? = nil,
                 limit: Int? = nil, offset: Int? = nil,
@@ -33,15 +36,25 @@ where
     public init(path: String, parameters: [String: Any]) {
         self.path = path
         self.parameters = parameters
+        (limit, offset) = parsePaginatorParameters(parameters)
+    }
+
+    public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
+        var response: Response = try decode(object)
+        response.songs?.next?.limit = limit
+        response.musicVideos?.next?.limit = limit
+        response.albums?.next?.limit = limit
+        response.artists?.next?.limit = limit
+        return response
     }
 }
 
 extension SearchResources {
     public struct Response: AppleMusicKit.Response, Decodable {
-        public let songs: Page<Song>?
-        public let musicVideos: Page<MusicVideo>?
-        public let albums: Page<Album>?
-        public let artists: Page<Artist>?
+        public fileprivate(set) var songs: Page<Song>?
+        public fileprivate(set) var musicVideos: Page<MusicVideo>?
+        public fileprivate(set) var albums: Page<Album>?
+        public fileprivate(set) var artists: Page<Artist>?
 
         public init(from decoder: Decoder) throws {
             func decode<D: Decodable>(forKey keyName: String) throws -> D? {
