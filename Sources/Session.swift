@@ -36,9 +36,9 @@ private struct AnyRequest<R>: APIKit.Request {
     let baseURL: URL
     let path: String
     let dataParser: DataParser
-    let headerFields: [String : String]
+    let headerFields: [String: String]
     let parameters: Any?
-    let queryParameters: [String : Any]?
+    let queryParameters: [String: Any]?
     let bodyParameters: BodyParameters?
 
     private let interceptRequest: (URLRequest) throws -> URLRequest
@@ -101,7 +101,7 @@ open class Session: APIKit.Session {
         _ request: Request,
         callbackQueue: CallbackQueue? = nil,
         handler: @escaping (Result<Request.Response, SessionTaskError>) -> Void
-    ) -> SessionTask? where Request : AppleMusicKit.Request {
+    ) -> SessionTask? where Request: AppleMusicKit.Request {
         return shared.send(request, callbackQueue: callbackQueue, handler: handler)
     }
 
@@ -110,7 +110,7 @@ open class Session: APIKit.Session {
         _ request: Request,
         callbackQueue: CallbackQueue? = nil,
         handler: @escaping (Result<Request.Response, SessionTaskError>) -> Void
-    ) -> SessionTask? where Request : AppleMusicKit.Request {
+    ) -> SessionTask? where Request: AppleMusicKit.Request {
         do {
             return super.send(try AnyRequest(request, authorization: authorization),
                               callbackQueue: callbackQueue,
@@ -126,14 +126,14 @@ open class Session: APIKit.Session {
     open override class func cancelRequests<Request>(
         with requestType: Request.Type,
         passingTest test: @escaping (Request) -> Bool
-    ) where Request : APIKit.Request {
+    ) where Request: APIKit.Request {
         shared.cancelRequests(with: requestType, passingTest: test)
     }
 
     open override func cancelRequests<Request>(
         with requestType: Request.Type,
         passingTest test: @escaping (Request) -> Bool
-    ) where Request : APIKit.Request {
+    ) where Request: APIKit.Request {
         super.cancelRequests(with: AnyRequest<Request.Response>.self) { request in
             (request.raw as? Request).map(test) ?? false
         }

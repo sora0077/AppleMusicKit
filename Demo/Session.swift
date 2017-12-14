@@ -41,9 +41,9 @@ private struct AnyRequestWithData: AppleMusicKit.Request {
     let baseURL: URL
     let path: String
     let dataParser: DataParser
-    let headerFields: [String : String]
+    let headerFields: [String: String]
     let parameters: Any?
-    let queryParameters: [String : Any]?
+    let queryParameters: [String: Any]?
     let bodyParameters: BodyParameters?
     let scope: AccessScope
 
@@ -110,7 +110,7 @@ class Session: AppleMusicKit.Session {
         with request: Request,
         callbackQueue: CallbackQueue? = nil,
         handler: @escaping (Result<(response: Request.Response, json: String), Error>) -> Void)
-        -> SessionTask? where Request : AppleMusicKit.Request {
+        -> SessionTask? where Request: AppleMusicKit.Request {
             return super.send(AnyRequestWithData(request), callbackQueue: callbackQueue) { result in
                 func json(_ data: Any?) -> String {
                     do {

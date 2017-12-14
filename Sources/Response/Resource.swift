@@ -22,7 +22,7 @@ public enum ResourceType: String, Decodable {
     case personalRecommendation = "personal-recommendation"
 }
 
-enum ResourceCodingKeys: CodingKey {
+enum ResourceCodingKeys: String, CodingKey {
     case id, href, type, attributes, relationships
 }
 
@@ -44,13 +44,10 @@ public struct Resource<A: Attributes, R: Decodable>: Decodable {
         if Attributes.self is _AttributesCustomInitializable.Type {
             do {
                 attributes = try Attributes(from: decoder)
-            } catch let error as DecodingError {
-                switch error {
-                case .keyNotFound, .valueNotFound:
-                    attributes = nil
-                default:
-                    throw error
-                }
+            } catch DecodingError.keyNotFound(let key as ResourceCodingKeys, _) where key == .attributes {
+                attributes = nil
+            } catch DecodingError.valueNotFound(_, let context) where (context.codingPath.last as? ResourceCodingKeys) == .attributes {
+                attributes = nil
             } catch {
                 throw error
             }

@@ -13,17 +13,18 @@ public protocol ArtworkDecodable: Decodable {
 
 // MARK: - Artwork
 public protocol Artwork: ArtworkDecodable {
+    typealias Colors = (
+        bgColor: String,
+        textColor1: String,
+        textColor2: String,
+        textColor3: String,
+        textColor4: String)
+
     init(
         width: Int,
         height: Int,
         url: String,
-        colors: (
-            bgColor: String,
-            textColor1: String,
-            textColor2: String,
-            textColor3: String,
-            textColor4: String
-        )?
+        colors: Colors?
     ) throws
 }
 
@@ -34,7 +35,7 @@ private enum CodingKeys: CodingKey {
 extension Artwork {
     public init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        var colors: (String, String, String, String, String)?
+        var colors: Colors?
         if let bgColor = try c.decodeIfPresent(String.self, forKey: .bgColor),
             let textColor1 = try c.decodeIfPresent(String.self, forKey: .textColor1),
             let textColor2 = try c.decodeIfPresent(String.self, forKey: .textColor2),

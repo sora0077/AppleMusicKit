@@ -194,7 +194,7 @@ struct Station: AppleMusicKit.Station, CustomStringConvertible {
     }
 }
 struct Artwork: AppleMusicKit.Artwork {
-    init(width: Int, height: Int, url: String, colors: (bgColor: String, textColor1: String, textColor2: String, textColor3: String, textColor4: String)?) throws {
+    init(width: Int, height: Int, url: String, colors: Colors?) throws {
         print(colors)
     }
 }

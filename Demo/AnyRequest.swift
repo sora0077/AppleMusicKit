@@ -17,9 +17,9 @@ struct AnyRequest: AppleMusicKit.Request {
     let baseURL: URL
     let path: String
     let dataParser: DataParser
-    let headerFields: [String : String]
+    let headerFields: [String: String]
     let parameters: Any?
-    let queryParameters: [String : Any]?
+    let queryParameters: [String: Any]?
     let bodyParameters: BodyParameters?
     let scope: AccessScope
 
