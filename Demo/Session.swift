@@ -109,7 +109,7 @@ class Session: AppleMusicKit.Session {
     func send<Request>(
         with request: Request,
         callbackQueue: CallbackQueue? = nil,
-        handler: @escaping (Result<(response: Request.Response, json: String), Error>) -> Void)
+        handler: @escaping (Result<(response: Request.Response, json: String), Demo.Error>) -> Void)
         -> SessionTask? where Request: AppleMusicKit.Request {
             return super.send(AnyRequestWithData(request), callbackQueue: callbackQueue) { result in
                 func json(_ data: Any?) -> String {

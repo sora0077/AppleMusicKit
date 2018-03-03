@@ -56,12 +56,12 @@ private struct AnyRequest<R>: APIKit.Request {
         if let developerToken = authorization?.developerToken {
             headers["Authorization"] = "Bearer \(developerToken)"
         } else {
-            throw AppleMusicKitError.missingDeveloperToken
+            throw Session.Error.missingDeveloperToken
         }
         if let musicUserToken = authorization?.musicUserToken {
             headers["Music-User-Token"] = musicUserToken
         } else if request.scope.requireUserToken {
-            throw AppleMusicKitError.missingMusicUserToken
+            throw Session.Error.missingMusicUserToken
         }
         headerFields = headers
         method = request.method
@@ -74,7 +74,6 @@ private struct AnyRequest<R>: APIKit.Request {
     }
 
     func intercept(urlRequest: URLRequest) throws -> URLRequest {
-        print(urlRequest)
         return try interceptRequest(urlRequest)
     }
 
@@ -88,11 +87,12 @@ private struct AnyRequest<R>: APIKit.Request {
 }
 
 open class Session: APIKit.Session {
-    open override class var shared: Session {
-        return _shared
+    public enum Error: Swift.Error {
+        case missingDeveloperToken
+        case missingMusicUserToken
     }
-    private static let _shared
-        = Session(adapter: URLSessionAdapter(configuration: URLSessionConfiguration.default))
+    open override class var shared: Session { return _shared }
+    private static let _shared = Session(adapter: URLSessionAdapter(configuration: .default))
 
     open var authorization: Authorization?
 

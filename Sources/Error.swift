@@ -9,8 +9,7 @@
 import Foundation
 
 public enum AppleMusicKitError: Error {
-    case missingDeveloperToken
-    case missingMusicUserToken
+    case unexpectedResponse(Any, HTTPURLResponse)
 }
 
 public struct Errors: Swift.Error, Decodable, Collection {

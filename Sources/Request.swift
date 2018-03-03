@@ -43,6 +43,9 @@ extension Request {
     }
 
     public func intercept(object: Any, urlResponse: HTTPURLResponse) throws -> Any {
+        if (urlResponse.allHeaderFields["Content-Type"] as? String)?.hasPrefix("text/plain") ?? false {
+            throw AppleMusicKitError.unexpectedResponse(object, urlResponse)
+        }
         return object
     }
 }
