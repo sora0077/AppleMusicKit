@@ -47,7 +47,7 @@ extension Hashable {
 
 extension Dictionary where Key == String, Value == Any? {
     var cleaned: [String: Any] {
-        return [String: Any](uniqueKeysWithValues: flatMap { (arg) in
+        return [String: Any](uniqueKeysWithValues: compactMap { (arg) in
             arg.value.map { (arg.key, $0) }
         })
     }

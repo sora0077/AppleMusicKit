@@ -16,11 +16,11 @@ private func csv(_ value: String?) -> [String]? {
     return value?.components(separatedBy: ",").map { $0.trimmingCharacters(in: .whitespaces) }
 }
 private func resources(_ value: String) -> Set<ResourceType> {
-    return Set(csv(value).flatMap(ResourceType.init(rawValue:)))
+    return Set(csv(value).compactMap(ResourceType.init(rawValue:)))
 }
 private func resources(_ value: String?) -> Set<ResourceType>? {
     guard let arr = csv(value) else { return nil }
-    return Set(arr.flatMap(ResourceType.init(rawValue:)))
+    return Set(arr.compactMap(ResourceType.init(rawValue:)))
 }
 private func inputs(storefront: String = "us", id: String) -> [FormInput] {
     return [TextInput(name: "storefront", default: storefront),
@@ -45,7 +45,7 @@ let storefrontForms = [
         GetMultipleStorefronts(ids: csv(form["ids"]), language: form["language"])
     }]
 
-let mediaForms = [
+let mediaForms: [Form] = [
     Form(inputs(id: "310730204")) { form in
         GetAlbum(storefront: form["storefront"],
                  id: form["id"],
@@ -151,6 +151,15 @@ let searchForms = [
                             limit: form["limit"],
                             offset: form["offset"],
                             types: resources(form["types"]))
+    },
+    Form([TextInput(name: "storefront", default: "jp"),
+          TextInput(name: "term", default: ""),
+          TextInput(name: "language"),
+          IntInput(name: "limit"),
+          IntInput(name: "offset"),
+          TextInput(name: "types")]) { _ in
+            SearchResources.GetPage<Song>(path: "/v1/catalog/jp/search",
+                                          parameters: ["term": "初音ミク" as Any, "types": "songs", "offset": 5])
     },
     Form([TextInput(name: "storefront", default: "jp"),
           TextInput(name: "term", default: ""),

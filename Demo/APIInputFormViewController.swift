@@ -162,6 +162,14 @@ extension APIInputFormViewController {
                 APIResultViewController(request: request(form))
             }
         }
+        init(_ inputs: [FormInput],
+             _ request: @escaping (APIInputFormViewController.FormData) -> SearchResources.GetPage<Song>) {
+            self.title = "\(SearchResources.GetPage<Song>.self)".components(separatedBy: "<").first ?? ""
+            self.inputs = inputs
+            resultViewController = { form in
+                APIResultViewController(request: request(form))
+            }
+        }
     }
     final class FormData {
         private let inputs: [FormInput]

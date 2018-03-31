@@ -200,6 +200,30 @@ final class APIResultViewController: UIViewController, UITableViewDataSource, UI
         }
     }
 
+    init(request: SearchResources.GetPage<Song>) {
+        super.init(nibName: nil, bundle: nil)
+
+        title = "\(SearchResources.GetPage<Song>.self)".components(separatedBy: "<").first ?? ""
+        fetcher = { [weak self] completion in
+            Session.shared.send(with: request) { result in
+                defer {
+                    completion()
+                }
+                let jsonString = json(from: result)
+                let lines = jsonString.components(separatedBy: "\n").count
+                print(jsonString, String(describing: result.error))
+                switch result {
+                case .success(let (response, _)):
+                    let results = Section.results(response.data.map { d in { cell in cell.textLabel?.text = d.attributes?.name } })
+                    self?.dataSource = [.raw(jsonString, lines: lines), results]
+                case .failure:
+                    self?.dataSource = [.raw(jsonString, lines: lines)]
+                }
+                self?.tableView.reloadData()
+            }
+        }
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
