@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol Attributes: Decodable {
-    associatedtype Identifier: Decodable
+    associatedtype Identifier: Decodable & CustomStringConvertible
 }
 
 public protocol _AttributesCustomInitializable {}
