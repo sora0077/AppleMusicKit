@@ -8,8 +8,8 @@
 
 import Foundation
 
-func makeIds<Identifier>(_ ids: [Identifier]) -> String {
-    return Set(ids.map(String.init(describing:))).joined(separator: ",")
+func makeIds<Identifier: CustomStringConvertible>(_ ids: [Identifier]) -> String {
+    return Set(ids.map { $0.description }).joined(separator: ",")
 }
 
 func makeInclude(_ include: Set<ResourceType>?) -> String? {
