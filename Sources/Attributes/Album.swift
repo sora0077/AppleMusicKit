@@ -8,8 +8,7 @@
 
 import Foundation
 
-public protocol AlbumDecodable: Attributes {
-}
+public protocol AlbumDecodable: Attributes {}
 
 // MARK: - Album
 public protocol Album: AlbumDecodable, _AttributesCustomInitializable {
@@ -19,6 +18,7 @@ public protocol Album: AlbumDecodable, _AttributesCustomInitializable {
 
     init(
         id: Identifier,
+        albumName: String?,
         artistName: String,
         artwork: Artwork,
         contentRating: String?,
@@ -28,6 +28,7 @@ public protocol Album: AlbumDecodable, _AttributesCustomInitializable {
         isComplete: Bool,
         isSingle: Bool,
         name: String,
+        recordLabel: String,
         releaseDate: String,
         playParams: PlayParameters?,
         trackCount: Int,
@@ -36,8 +37,8 @@ public protocol Album: AlbumDecodable, _AttributesCustomInitializable {
 }
 
 private enum CodingKeys: String, CodingKey {
-    case artistName, artwork, contentRating, copyright, editorialNotes, genreNames
-    case isComplete, isSingle, name, releaseDate, playParams, trackCount, url
+    case albumName, artistName, artwork, contentRating, copyright, editorialNotes, genreNames
+    case isComplete, isSingle, name, recordLabel, releaseDate, playParams, trackCount, url
 }
 
 extension Album {
@@ -45,6 +46,7 @@ extension Album {
         let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
         let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
         try self.init(id: cc.decode(forKey: .id),
+                      albumName: c.decodeIfPresent(forKey: .albumName),
                       artistName: c.decode(forKey: .artistName),
                       artwork: c.decode(forKey: .artwork),
                       contentRating: c.decodeIfPresent(forKey: .contentRating),
@@ -54,6 +56,7 @@ extension Album {
                       isComplete: c.decode(forKey: .isComplete),
                       isSingle: c.decode(forKey: .isSingle),
                       name: c.decode(forKey: .name),
+                      recordLabel: c.decode(forKey: .recordLabel),
                       releaseDate: c.decode(forKey: .releaseDate),
                       playParams: c.decodeIfPresent(forKey: .playParams),
                       trackCount: c.decode(forKey: .trackCount),

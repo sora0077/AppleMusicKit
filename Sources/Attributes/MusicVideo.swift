@@ -15,16 +15,20 @@ public protocol MusicVideo: MusicVideoDecodable, _AttributesCustomInitializable 
     associatedtype Artwork: AppleMusicKit.Artwork
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
     associatedtype PlayParameters: AppleMusicKit.PlayParameters
+    associatedtype Preview: AppleMusicKit.Preview
 
     init(id: Identifier,
+         albumName: String?,
          artistName: String,
          artwork: Artwork,
          contentRating: String?,
          durationInMillis: Int?,
          editorialNotes: EditorialNotes?,
          genreNames: [String],
+         isrc: String,
          name: String,
          playParams: PlayParameters?,
+         previews: [Preview],
          releaseDate: String,
          trackNumber: Int?,
          url: String,
@@ -32,8 +36,8 @@ public protocol MusicVideo: MusicVideoDecodable, _AttributesCustomInitializable 
 }
 
 private enum CodingKeys: String, CodingKey {
-    case artistName, artwork, contentRating, durationInMillis, editorialNotes, genreNames
-    case name, playParams, releaseDate, trackNumber, url, videoSubType
+    case albumName, artistName, artwork, contentRating, durationInMillis, editorialNotes, genreNames
+    case isrc, name, playParams, previews, releaseDate, trackNumber, url, videoSubType
 }
 
 extension MusicVideo {
@@ -41,14 +45,17 @@ extension MusicVideo {
         let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
         let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
         try self.init(id: cc.decode(forKey: .id),
+                      albumName: c.decodeIfPresent(forKey: .albumName),
                       artistName: c.decode(forKey: .artistName),
                       artwork: c.decode(forKey: .artwork),
                       contentRating: c.decodeIfPresent(forKey: .contentRating),
                       durationInMillis: c.decodeIfPresent(forKey: .durationInMillis),
                       editorialNotes: c.decodeIfPresent(forKey: .editorialNotes),
                       genreNames: c.decode(forKey: .genreNames),
+                      isrc: c.decode(forKey: .isrc),
                       name: c.decode(forKey: .name),
                       playParams: c.decodeIfPresent(forKey: .playParams),
+                      previews: c.decode(forKey: .previews),
                       releaseDate: c.decode(forKey: .releaseDate),
                       trackNumber: c.decodeIfPresent(forKey: .trackNumber),
                       url: c.decode(forKey: .url),

@@ -25,6 +25,7 @@
 		D93B01061F0D3F6A005216B6 /* FetchAppleCurators.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93B01051F0D3F6A005216B6 /* FetchAppleCurators.swift */; };
 		D93B01081F0E87E2005216B6 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93B01071F0E87E2005216B6 /* Error.swift */; };
 		D93B356E1F092B1200A5D216 /* FetchCharts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93B356D1F092A1500A5D216 /* FetchCharts.swift */; };
+		D94243B520B91652004181F5 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94243B420B91652004181F5 /* Preview.swift */; };
 		D94E4C3B1F1E1F8900F0F757 /* TopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94E4C3A1F1E1F8900F0F757 /* TopViewController.swift */; };
 		D950020A1F1FA1F2006D410B /* APIInputFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D95002091F1FA1F2006D410B /* APIInputFormViewController.swift */; };
 		D950020C1F1FA75D006D410B /* AnyRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D950020B1F1FA75D006D410B /* AnyRequest.swift */; };
@@ -137,6 +138,7 @@
 		D93B01051F0D3F6A005216B6 /* FetchAppleCurators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAppleCurators.swift; sourceTree = "<group>"; };
 		D93B01071F0E87E2005216B6 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		D93B356D1F092A1500A5D216 /* FetchCharts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchCharts.swift; sourceTree = "<group>"; };
+		D94243B420B91652004181F5 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		D94E4C3A1F1E1F8900F0F757 /* TopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopViewController.swift; sourceTree = "<group>"; };
 		D95002091F1FA1F2006D410B /* APIInputFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInputFormViewController.swift; sourceTree = "<group>"; };
 		D950020B1F1FA75D006D410B /* AnyRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyRequest.swift; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 			children = (
 				D92087181F02563F00F995FA /* Storefront.swift */,
 				D9CFF71B1F0648C5005F983D /* Artwork.swift */,
+				D94243B420B91652004181F5 /* Preview.swift */,
 				D9A025161F00F96C00C49113 /* Song.swift */,
 				D9A025181F011FD000C49113 /* Album.swift */,
 				D9A0251A1F012A4F00C49113 /* Artist.swift */,
@@ -568,6 +571,7 @@
 				D9B46B1E1F0CF4C20067B721 /* AppleCurator.swift in Sources */,
 				D9B46B181F0CC0220067B721 /* FetchRecommendations.swift in Sources */,
 				D90ACBE31F0A458E00D6CB94 /* FetchStations.swift in Sources */,
+				D94243B520B91652004181F5 /* Preview.swift in Sources */,
 				D9B46B1A1F0CDFC50067B721 /* FetchHistory.swift in Sources */,
 				D96CB9E11F0C9846003B8122 /* Recommendation.swift in Sources */,
 				D9657A6F1F2215B400057593 /* FetchActivity.swift in Sources */,
