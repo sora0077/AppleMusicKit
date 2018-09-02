@@ -8,7 +8,7 @@
 
 import Foundation
 
-func makeIds<Identifier: CustomStringConvertible>(_ ids: [Identifier]) -> String {
+func makeIds<C>(_ ids: C) -> String where C: Collection, C.Element: CustomStringConvertible {
     return Set(ids.map { $0.description }).joined(separator: ",")
 }
 
