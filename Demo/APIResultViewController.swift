@@ -236,13 +236,13 @@ final class APIResultViewController: UIViewController, UITableViewDataSource, UI
         tableView.autolayoutFit(to: view)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = .clear
         tableView.register(RawResultCell.self, forCellReuseIdentifier: "RawResultCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let indicator = UIActivityIndicatorView(style: .gray)
         view.addSubview(indicator)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -308,7 +308,7 @@ extension APIResultViewController {
             set { textView.isScrollEnabled = newValue }
         }
 
-        override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             selectionStyle = .none
             backgroundColor = .clear

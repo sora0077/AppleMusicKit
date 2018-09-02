@@ -53,7 +53,7 @@ private class InputBaseCell: UITableViewCell {
     weak var valueHolder: ValueHolder?
     let titleLabel = UILabel()
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addSubview(titleLabel)
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -94,7 +94,7 @@ private class TextInputCell: InputBaseCell {
 
         NotificationCenter.default.addObserver(
             self, selector: #selector(textFieldValueChanged),
-            name: .UITextFieldTextDidChange, object: textField)
+            name: UITextField.textDidChangeNotification, object: textField)
     }
 
     override func updateValue(withInitial initial: Any?) {
