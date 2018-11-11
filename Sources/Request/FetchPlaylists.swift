@@ -55,7 +55,10 @@ public struct GetMultiplePlaylists<Playlist, Curator, Song, MusicVideo, Storefro
         self.init(storefront: storefront, ids: [id] + additions, language: language, include: include)
     }
 
-    public init(storefront: Storefront.Identifier, ids: [Playlist.Identifier], language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
+    public init<C>(storefront: Storefront.Identifier,
+                   ids: C,
+                   language: Storefront.Language? = nil,
+                   include: Set<ResourceType>? = nil) where C: Collection, C.Element == Playlist.Identifier {
         assert(!ids.isEmpty)
         self.storefront = storefront
         self.parameters = ["ids": makeIds(ids), "l": language?.languageTag, "include": makeInclude(include)].cleaned

@@ -45,6 +45,7 @@ struct Song: AppleMusicKit.Song, CustomStringConvertible {
     typealias Artwork = Demo.Artwork
     typealias EditorialNotes = Demo.EditorialNotes
     typealias PlayParameters = Demo.PlayParameters
+    typealias Preview = Demo.Preview
 
     let name: String
     let artwork: Artwork
@@ -53,7 +54,7 @@ struct Song: AppleMusicKit.Song, CustomStringConvertible {
         return name
     }
 
-    init(id: Identifier, artistName: String, artwork: Artwork, composerName: String?, contentRating: String?, discNumber: Int, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], movementCount: Int?, movementName: String?, movementNumber: Int?, name: String, playParams: PlayParameters?, releaseDate: String, trackNumber: Int, url: String, workName: String?) throws {
+    init(id: Identifier, albumName: String, artistName: String, artwork: Artwork, composerName: String?, contentRating: String?, discNumber: Int, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], isrc: String, movementCount: Int?, movementName: String?, movementNumber: Int?, name: String, playParams: PlayParameters?, previews: [Preview], releaseDate: String, trackNumber: Int, url: String, workName: String?) throws {
         self.name = name
         self.artwork = artwork
     }
@@ -63,6 +64,7 @@ struct MusicVideo: AppleMusicKit.MusicVideo, CustomStringConvertible {
     typealias Artwork = Demo.Artwork
     typealias EditorialNotes = Demo.EditorialNotes
     typealias PlayParameters = Demo.PlayParameters
+    typealias Preview = Demo.Preview
 
     let name: String
     let artwork: Artwork
@@ -71,7 +73,7 @@ struct MusicVideo: AppleMusicKit.MusicVideo, CustomStringConvertible {
         return name
     }
 
-    init(id: Identifier, artistName: String, artwork: Artwork, contentRating: String?, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], name: String, playParams: PlayParameters?, releaseDate: String, trackNumber: Int?, url: String, videoSubType: String?) throws {
+    init(id: Identifier, albumName: String?, artistName: String, artwork: Artwork, contentRating: String?, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], isrc: String, name: String, playParams: PlayParameters?, previews: [Preview], releaseDate: String, trackNumber: Int?, url: String, videoSubType: String?) throws {
         self.name = name
         self.artwork = artwork
     }
@@ -88,7 +90,7 @@ struct Album: AppleMusicKit.Album, CustomStringConvertible {
         return name
     }
 
-    init(id: Identifier, artistName: String, artwork: Artwork, contentRating: String?, copyright: String, editorialNotes: EditorialNotes?, genreNames: [String], isComplete: Bool, isSingle: Bool, name: String, releaseDate: String, playParams: PlayParameters?, trackCount: Int, url: String) throws {
+    init(id: Identifier, albumName: String?, artistName: String, artwork: Artwork, contentRating: String?, copyright: String, editorialNotes: EditorialNotes?, genreNames: [String], isComplete: Bool, isSingle: Bool, name: String, recordLabel: String, releaseDate: String, playParams: PlayParameters?, trackCount: Int, url: String) throws {
         self.name = name
         print(artwork)
     }
@@ -204,6 +206,12 @@ struct EditorialNotes: AppleMusicKit.EditorialNotes {
 }
 struct PlayParameters: AppleMusicKit.PlayParameters {
     init(id: String, kind: String) throws {
+    }
+}
+struct Preview: AppleMusicKit.Preview {
+    typealias Artwork = Demo.Artwork
+
+    init(url: String, artwork: Artwork?) throws {
     }
 }
 

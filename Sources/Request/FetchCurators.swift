@@ -73,7 +73,10 @@ public struct GetMultipleCurators<Curator: CuratorDecodable, Playlist: PlaylistD
         self.init(storefront: storefront, ids: [id] + additions, language: language, include: include)
     }
 
-    public init(storefront: Storefront.Identifier, ids: [Curator.Identifier], language: Storefront.Language? = nil, include: Set<ResourceType>? = nil) {
+    public init<C>(storefront: Storefront.Identifier,
+                   ids: C,
+                   language: Storefront.Language? = nil,
+                   include: Set<ResourceType>? = nil) where C: Collection, C.Element == Curator.Identifier {
         assert(!ids.isEmpty)
         self.storefront = storefront
         self.parameters = ["ids": makeIds(ids), "l": language?.languageTag, "include": makeInclude(include)].cleaned

@@ -34,7 +34,8 @@ public struct GetMultipleStorefronts<Storefront: StorefrontDecodable>: ResourceR
         self.init(ids: [id] + additions, language: language)
     }
 
-    public init(ids: [Storefront.Identifier], language: Storefront.Language? = nil) {
+    public init<C>(ids: C,
+                   language: Storefront.Language? = nil) where C: Collection, C.Element == Storefront.Identifier {
         assert(!ids.isEmpty)
         self.parameters = ["ids": makeIds(ids), "l": language?.languageTag].cleaned
     }

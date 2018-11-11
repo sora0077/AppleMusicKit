@@ -200,6 +200,30 @@ final class APIResultViewController: UIViewController, UITableViewDataSource, UI
         }
     }
 
+    init(request: SearchResources.GetPage<Song>) {
+        super.init(nibName: nil, bundle: nil)
+
+        title = "\(SearchResources.GetPage<Song>.self)".components(separatedBy: "<").first ?? ""
+        fetcher = { [weak self] completion in
+            Session.shared.send(with: request) { result in
+                defer {
+                    completion()
+                }
+                let jsonString = json(from: result)
+                let lines = jsonString.components(separatedBy: "\n").count
+                print(jsonString, String(describing: result.error))
+                switch result {
+                case .success(let (response, _)):
+                    let results = Section.results(response.data.map { d in { cell in cell.textLabel?.text = d.attributes?.name } })
+                    self?.dataSource = [.raw(jsonString, lines: lines), results]
+                case .failure:
+                    self?.dataSource = [.raw(jsonString, lines: lines)]
+                }
+                self?.tableView.reloadData()
+            }
+        }
+    }
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -212,13 +236,13 @@ final class APIResultViewController: UIViewController, UITableViewDataSource, UI
         tableView.autolayoutFit(to: view)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = .clear
         tableView.register(RawResultCell.self, forCellReuseIdentifier: "RawResultCell")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
 
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let indicator = UIActivityIndicatorView(style: .gray)
         view.addSubview(indicator)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -284,7 +308,7 @@ extension APIResultViewController {
             set { textView.isScrollEnabled = newValue }
         }
 
-        override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             selectionStyle = .none
             backgroundColor = .clear

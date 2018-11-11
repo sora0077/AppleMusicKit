@@ -58,7 +58,9 @@ public struct GetMultipleGenres<Genre: GenreDecodable, Storefront: StorefrontDec
         self.init(storefront: storefront, ids: [id] + additions, language: language)
     }
 
-    public init(storefront: Storefront.Identifier, ids: [Genre.Identifier], language: Storefront.Language? = nil) {
+    public init<C>(storefront: Storefront.Identifier,
+                   ids: C,
+                   language: Storefront.Language? = nil) where C: Collection, C.Element == Genre.Identifier {
         assert(!ids.isEmpty)
         self.storefront = storefront
         self.parameters = ["ids": makeIds(ids), "l": language?.languageTag].cleaned

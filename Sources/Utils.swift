@@ -8,8 +8,8 @@
 
 import Foundation
 
-func makeIds<Identifier>(_ ids: [Identifier]) -> String {
-    return Set(ids.map(String.init(describing:))).joined(separator: ",")
+func makeIds<C>(_ ids: C) -> String where C: Collection, C.Element: CustomStringConvertible {
+    return Set(ids.map { $0.description }).joined(separator: ",")
 }
 
 func makeInclude(_ include: Set<ResourceType>?) -> String? {
@@ -47,7 +47,7 @@ extension Hashable {
 
 extension Dictionary where Key == String, Value == Any? {
     var cleaned: [String: Any] {
-        return [String: Any](uniqueKeysWithValues: flatMap { (arg) in
+        return [String: Any](uniqueKeysWithValues: compactMap { (arg) in
             arg.value.map { (arg.key, $0) }
         })
     }
