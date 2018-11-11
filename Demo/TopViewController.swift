@@ -100,16 +100,8 @@ extension TopViewController: UITableViewDelegate {
         case .request:
             navigationController?.pushViewController(APIListViewController(), animated: true)
         case .document:
-            let vc = SafariViewController(url: URL(string: "https://developer.apple.com/musickit/")!)
-            navigationController?.pushViewController(vc, animated: true)
+            let vc = SFSafariViewController(url: URL(string: "https://developer.apple.com/musickit/")!)
+            present(vc, animated: true, completion: nil)
         }
-    }
-}
-
-// MARK: - SafariViewController
-final class SafariViewController: SFSafariViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationItem.largeTitleDisplayMode = .never
     }
 }

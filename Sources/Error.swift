@@ -12,7 +12,7 @@ public enum AppleMusicKitError: Error {
     case unexpectedResponse(Any, HTTPURLResponse)
 }
 
-public struct Errors: Swift.Error, Decodable, Collection {
+public struct Errors: Swift.Error, Decodable, RandomAccessCollection {
     public struct Error: Swift.Error, Decodable {
         public let id: String
         public let code: Int
