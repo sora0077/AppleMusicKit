@@ -44,15 +44,6 @@ extension Request {
     public var baseURL: URL { return URL(string: "https://api.music.apple.com")! }
 
     public var headerFields: [String: String] { return [:] }
-
-    public func intercept(data: Data, urlResponse: HTTPURLResponse?) throws -> Data {
-        if let urlResponse = urlResponse,
-            let contentType = urlResponse.allHeaderFields["Content-Type"] as? String,
-            contentType.hasPrefix("text/plain") {
-            throw AppleMusicKitError.unexpectedResponse(data, urlResponse)
-        }
-        return data
-    }
 }
 
 extension Request where Response: Decodable {

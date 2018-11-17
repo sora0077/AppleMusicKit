@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import APIKit
 
 public struct NoRelationships: Decodable {}
 

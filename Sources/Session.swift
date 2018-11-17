@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Result
 
 private extension AccessScope {
     var requireUserToken: Bool {

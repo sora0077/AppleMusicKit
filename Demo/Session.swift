@@ -6,9 +6,19 @@
 //  Copyright © 2017年 jp.sora0077. All rights reserved.
 //
 
-import APIKit
-import Result
 import AppleMusicKit
+
+enum Result<Value, Error> {
+    case success(Value)
+    case failure(Error)
+
+    var error: Error? {
+        switch self {
+        case .failure(let error): return error
+        case .success: return nil
+        }
+    }
+}
 
 func json<Res>(from result: Result<(response: Res, json: String), Error>) -> String {
     switch result {
@@ -42,7 +52,6 @@ class Session {
 
     func send<Request: AppleMusicKit.Request>(
         with request: Request,
-        callbackQueue: CallbackQueue? = nil,
         handler: @escaping (Result<(response: Request.Response, json: String), Demo.Error>) -> Void
     ) {
         func fetch(urlRequest: URLRequest, completion: @escaping (Data, HTTPURLResponse?) -> Void) {

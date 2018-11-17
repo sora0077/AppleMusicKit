@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import APIKit
 
 public protocol PaginatorRequest: Request, Decodable {
     var limit: Int? { get set }
