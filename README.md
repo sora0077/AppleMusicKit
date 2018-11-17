@@ -46,17 +46,26 @@ typealias GetSong = AppleMusicKit.GetSong<Song, Album, Artist, Genre, Storefront
 
 // ------
 
-Session.shared.authorization = Authorization(developerToken: token)
-
-Session.shared.send(GetSong(storefront: "us", id: "900032829")) { result in
-    switch result {
-    case .success(let response):
-        break
-    case .failure(let error):
-        break
+func fetcher(urlRequest: URLRequest, completion: @escaping (Data, HTTPURLResponse?) -> Void) -> URLSessionTask {
+    return URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+        if let error = error {
+            // ...
+        } else {
+            completion(data!, response as? HTTPURLResponse)
+        }
     }
 }
 
+let authorization = Authorization(developerToken: token)
+let task = build(GetSong(storefront: "us", id: "900032829"), authorization: authorization, using: fetcher) { response in
+    do {
+        let response = try response()
+        print(response)
+    } catch {
+        print(error)
+    }
+}
+task?.resume()
 ```
 
 ## Appendix
