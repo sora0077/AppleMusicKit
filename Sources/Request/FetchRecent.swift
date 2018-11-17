@@ -26,7 +26,7 @@ public struct GetRecentlyPlayed<
 
     public var scope: AccessScope { return .user }
     public let path: String
-    public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+    public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
     public var limit: Int?
     public var offset: Int?
@@ -67,7 +67,7 @@ public struct GetRecentStations<Station: StationDecodable, Storefront: Storefron
 
     public var scope: AccessScope { return .user }
     public let path: String
-    public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+    public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
     public var limit: Int?
     public var offset: Int?

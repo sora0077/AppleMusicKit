@@ -12,7 +12,7 @@ public struct GetStation<Station: StationDecodable, Storefront: StorefrontDecoda
     public typealias Resource = AppleMusicKit.Resource<Station, NoRelationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/stations/\(id)" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let storefront: Storefront.Identifier
     private let id: Station.Identifier
@@ -28,7 +28,7 @@ public struct GetMultipleStations<Station: StationDecodable, Storefront: Storefr
     public typealias Resource = AppleMusicKit.Resource<Station, NoRelationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/stations" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let storefront: Storefront.Identifier
 

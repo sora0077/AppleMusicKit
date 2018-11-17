@@ -34,104 +34,37 @@ private struct APIError: Swift.Error {
     let data: Any
 }
 
-private struct AnyRequestWithData: AppleMusicKit.Request {
-    typealias Response = (Any, Any)
+class Session {
 
-    let method: HTTPMethod
-    let baseURL: URL
-    let path: String
-    let dataParser: DataParser
-    let headerFields: [String: String]
-    let parameters: Any?
-    let queryParameters: [String: Any]?
-    let bodyParameters: BodyParameters?
-    let scope: AccessScope
+    static let shared = Session()
 
-    private let interceptRequest: (URLRequest) throws -> URLRequest
-    private let interceptObject: (Any, HTTPURLResponse) throws -> Any
-    private let response: (Any, HTTPURLResponse) throws -> Response
-    let raw: Any
+    var authorization: Authorization?
 
-    init<Req: AppleMusicKit.Request>(_ request: Req) {
-        interceptRequest = request.intercept(urlRequest:)
-        interceptObject = request.intercept(object:urlResponse:)
-        response = { try (request.response(from: $0, urlResponse: $1), $0) }
-        raw = request
-
-        headerFields = request.headerFields
-        method = request.method
-        baseURL = request.baseURL
-        path = request.path
-        dataParser = request.dataParser
-        parameters = request.parameters
-        queryParameters = request.queryParameters
-        bodyParameters = request.bodyParameters
-        scope = request.scope
-    }
-
-    func intercept(urlRequest: URLRequest) throws -> URLRequest {
-        return try interceptRequest(urlRequest)
-    }
-
-    func intercept(object: Any, urlResponse: HTTPURLResponse) throws -> Any {
-        return try interceptObject(object, urlResponse)
-    }
-
-    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
-        do {
-            return try response(object, urlResponse)
-        } catch let errors as Errors {
-            throw APIError(errors: errors, data: object)
-        }
-    }
-}
-
-private final class Adapter: URLSessionAdapter {
-    override func createTask(with URLRequest: URLRequest, handler: @escaping (Data?, URLResponse?, Swift.Error?) -> Void) -> SessionTask {
-        return super.createTask(with: URLRequest, handler: { (data, response, error) in
-            if let data = data,
-                let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) {
-                print(json)
-            } else if let error = error {
-                print(error)
-            }
-            handler(data, response, error)
-        })
-    }
-}
-
-class Session: AppleMusicKit.Session {
-    override class var shared: Session { return _shared }
-    private static let _shared
-        = Session(adapter: URLSessionAdapter(configuration: URLSessionConfiguration.default))
-
-    @discardableResult
-    func send<Request>(
+    func send<Request: AppleMusicKit.Request>(
         with request: Request,
         callbackQueue: CallbackQueue? = nil,
-        handler: @escaping (Result<(response: Request.Response, json: String), Demo.Error>) -> Void)
-        -> SessionTask? where Request: AppleMusicKit.Request {
-            return super.send(AnyRequestWithData(request), callbackQueue: callbackQueue) { result in
-                func json(_ data: Any?) -> String {
-                    do {
-                        let object = try JSONSerialization.jsonObject(with: data as? Data ?? Data(),
-                                                                      options: [])
-                        let data = try JSONSerialization.data(withJSONObject: object,
-                                                              options: .prettyPrinted)
-                        let json = String(data: data, encoding: .utf8)
-                        return json?.replacingOccurrences(of: "\\", with: "") ?? ""
-                    } catch {
-                        return ""
-                    }
-                }
-                switch result {
-                case .success(let response):
-                    handler(Result(value: (response.0 as! Request.Response, json(response.1))))
-                case .failure(.responseError(let error as APIError)):
-                    handler(Result(error: .api(error.errors, json: json(error.data))))
-                case .failure(let error):
-                    handler(Result(error: .error(error)))
+        handler: @escaping (Result<(response: Request.Response, json: String), Demo.Error>) -> Void
+    ) {
+        func fetch(urlRequest: URLRequest, completion: @escaping (Data, HTTPURLResponse?) -> Void) {
+            let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+                if let error = error {
+                    handler(.failure(Error.error(error)))
+                } else {
+                    completion(data!, response as? HTTPURLResponse)
                 }
             }
+            task.resume()
+        }
+        build(AnyRequest(request), authorization: authorization, fetch: fetch) { response in
+            do {
+                let (response, data) = try response()
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                let pp = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+                let jsonString = String(data: pp, encoding: .utf8)?.replacingOccurrences(of: "\\", with: "")
+                handler(.success((response, jsonString ?? "")))
+            } catch {
+                handler(.failure(Error.error(error)))
+            }
+        }
     }
 }

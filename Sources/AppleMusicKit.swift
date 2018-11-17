@@ -13,8 +13,7 @@ public struct NoRelationships: Decodable {}
 
 private let defaultDecoder = JSONDecoder()
 
-func decode<D: Decodable>(_ object: Any) throws -> D {
-    let data = object as! Data
+func decode<D: Decodable>(_ data: Data) throws -> D {
     do {
         return try defaultDecoder.decode(D.self, from: data)
     } catch let modelError {

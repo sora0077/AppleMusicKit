@@ -18,7 +18,7 @@ public struct GetPlaylist<Playlist, Curator, Song, MusicVideo, Storefront>: Reso
     public typealias Resource = AppleMusicKit.Resource<Playlist, Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/playlists/\(id)" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let storefront: Storefront.Identifier
     private let id: Playlist.Identifier
@@ -47,7 +47,7 @@ public struct GetMultiplePlaylists<Playlist, Curator, Song, MusicVideo, Storefro
     public typealias Resource = AppleMusicKit.Resource<Playlist, GetPlaylist<Playlist, Curator, Song, MusicVideo, Storefront>.Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/playlists" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let storefront: Storefront.Identifier
 
@@ -79,7 +79,7 @@ extension GetPlaylist {
     public struct GetCurator: PaginatorResourceRequest {
         public typealias Resource = AppleMusicKit.Resource<Curator, NoRelationships>
         public let path: String
-        public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+        public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
         public var limit: Int?
         public var offset: Int?
@@ -99,7 +99,7 @@ extension GetPlaylist {
     public struct GetTracks: PaginatorResourceRequest {
         public typealias Resource = Track<Song, MusicVideo, NoRelationships>
         public let path: String
-        public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+        public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
         public var limit: Int?
         public var offset: Int?

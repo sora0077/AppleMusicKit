@@ -12,7 +12,7 @@ public struct GetTopChartGenres<Genre: GenreDecodable, Storefront: StorefrontDec
     public typealias Resource = AppleMusicKit.Resource<Genre, NoRelationships>
 
     public let path: String
-    public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+    public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
     public var limit: Int?
     public var offset: Int?
@@ -34,7 +34,7 @@ public struct GetGenre<Genre: GenreDecodable, Storefront: StorefrontDecodable>: 
     public typealias Resource = AppleMusicKit.Resource<Genre, NoRelationships>
 
     public var path: String { return "/v1/catalog/\(storefront)/genres/\(id)" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let storefront: Storefront.Identifier
     private let id: Genre.Identifier
@@ -50,7 +50,7 @@ public struct GetMultipleGenres<Genre: GenreDecodable, Storefront: StorefrontDec
     public typealias Resource = AppleMusicKit.Resource<Genre, NoRelationships>
 
     public var path: String { return "/v1/catalog/\(storefront)/genres" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let storefront: Storefront.Identifier
 

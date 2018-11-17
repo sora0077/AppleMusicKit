@@ -12,7 +12,7 @@ public struct GetCurator<Curator: CuratorDecodable, Playlist: PlaylistDecodable,
     public typealias Resource = AppleMusicKit.Resource<Curator, Relationships>
 
     public var path: String { return "/v1/catalog/\(storefront)/curators/\(id)" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let storefront: Storefront.Identifier
     private let id: Curator.Identifier
@@ -41,7 +41,7 @@ extension GetCurator {
         public typealias Resource = AppleMusicKit.Resource<Playlist, NoRelationships>
 
         public let path: String
-        public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+        public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
         public var limit: Int?
         public var offset: Int?
@@ -65,7 +65,7 @@ public struct GetMultipleCurators<Curator: CuratorDecodable, Playlist: PlaylistD
     public typealias Resource = AppleMusicKit.Resource<Curator, GetCurator<Curator, Playlist, Storefront>.Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/curators" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let storefront: Storefront.Identifier
 

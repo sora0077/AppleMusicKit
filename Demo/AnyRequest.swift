@@ -8,52 +8,35 @@
 
 import Foundation
 import AppleMusicKit
-import APIKit
 
-struct AnyRequest: AppleMusicKit.Request {
-    typealias Response = Any
+struct AnyRequest<R>: AppleMusicKit.Request {
+    typealias Response = (R, Data)
 
     let method: HTTPMethod
     let baseURL: URL
     let path: String
-    let dataParser: DataParser
     let headerFields: [String: String]
-    let parameters: Any?
-    let queryParameters: [String: Any]?
-    let bodyParameters: BodyParameters?
+    let parameters: [String: Any]?
     let scope: AccessScope
 
-    private let interceptRequest: (URLRequest) throws -> URLRequest
-    private let interceptObject: (Any, HTTPURLResponse) throws -> Any
-    private let response: (Any, HTTPURLResponse) throws -> Response
+    private let response: (Data, HTTPURLResponse?) throws -> Response
     let raw: Any
 
-    init<Req: AppleMusicKit.Request>(_ request: Req) {
-        interceptRequest = request.intercept(urlRequest:)
-        interceptObject = request.intercept(object:urlResponse:)
-        response = request.response
+    init<Req: AppleMusicKit.Request>(_ request: Req) where R == Req.Response {
+        response = { data, response in
+            try (request.response(from: data, urlResponse: response), data)
+        }
         raw = request
 
         headerFields = request.headerFields
+        parameters = request.parameters
         method = request.method
         baseURL = request.baseURL
         path = request.path
-        dataParser = request.dataParser
-        parameters = request.parameters
-        queryParameters = request.queryParameters
-        bodyParameters = request.bodyParameters
         scope = request.scope
     }
 
-    func intercept(urlRequest: URLRequest) throws -> URLRequest {
-        return try interceptRequest(urlRequest)
-    }
-
-    func intercept(object: Any, urlResponse: HTTPURLResponse) throws -> Any {
-        return try interceptObject(object, urlResponse)
-    }
-
-    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
-        return try response(object, urlResponse)
+    func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Response {
+        return try response(data, urlResponse)
     }
 }

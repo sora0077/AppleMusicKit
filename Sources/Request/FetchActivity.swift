@@ -12,7 +12,7 @@ public struct GetActivity<Activity: ActivityDecodable, Playlist: PlaylistDecodab
     public typealias Resource = AppleMusicKit.Resource<Activity, Relationships>
 
     public var path: String { return "/v1/catalog/\(storefront)/activities/\(id)" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let storefront: Storefront.Identifier
     private let id: Activity.Identifier
@@ -41,7 +41,7 @@ extension GetActivity {
         public typealias Resource = AppleMusicKit.Resource<Playlist, NoRelationships>
 
         public let path: String
-        public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+        public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
         public var limit: Int?
         public var offset: Int?
@@ -65,7 +65,7 @@ public struct GetMultipleActivities<Activity: ActivityDecodable, Playlist: Playl
     public typealias Resource = AppleMusicKit.Resource<Playlist, GetActivity<Activity, Playlist, Storefront>.Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/activities" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let storefront: Storefront.Identifier
 

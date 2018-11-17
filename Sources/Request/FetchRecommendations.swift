@@ -27,7 +27,7 @@ public struct GetDefaultRecommendations<
 
     public var scope: AccessScope { return .user }
     public let path: String
-    public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+    public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
     public var limit: Int?
     public var offset: Int?
@@ -89,7 +89,7 @@ public struct GetRecommendation<
 
     public var scope: AccessScope { return .user }
     public let path: String
-    public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+    public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
     public var limit: Int?
     public var offset: Int?
@@ -127,7 +127,7 @@ public struct GetMultipleRecommendations<
 
     public var scope: AccessScope { return .user }
     public let path: String
-    public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+    public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
     public var limit: Int?
     public var offset: Int?
