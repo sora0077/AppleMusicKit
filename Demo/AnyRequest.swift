@@ -15,7 +15,7 @@ struct AnyRequest<R>: AppleMusicKit.Request {
     let method: HTTPMethod
     let baseURL: URL
     let path: String
-    let headerFields: [String: String]
+    let headers: [String: String]
     let parameters: [String: Any]?
     let scope: AccessScope
 
@@ -28,7 +28,7 @@ struct AnyRequest<R>: AppleMusicKit.Request {
         }
         raw = request
 
-        headerFields = request.headerFields
+        headers = request.headers
         parameters = request.parameters
         method = request.method
         baseURL = request.baseURL

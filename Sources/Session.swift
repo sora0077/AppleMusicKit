@@ -70,7 +70,7 @@ public func build<Req: Request>(
     var urlRequest = URLRequest(url: _url)
     urlRequest.httpMethod = request.method.rawValue.uppercased()
     urlRequest.httpBody = body
-    urlRequest.allHTTPHeaderFields = request.headerFields
+    urlRequest.allHTTPHeaderFields = request.headers
     urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
 
     fetch(urlRequest) { data, response in
@@ -89,7 +89,7 @@ private struct AnyRequest<R>: Request {
     let method: HTTPMethod
     let baseURL: URL
     let path: String
-    let headerFields: [String: String]
+    let headers: [String: String]
     let parameters: [String: Any]?
 
     private let response: (Data, HTTPURLResponse?) throws -> R
@@ -99,18 +99,20 @@ private struct AnyRequest<R>: Request {
         response = request.response
         raw = request
 
-        var headers = request.headerFields
-        if let developerToken = authorization?.developerToken {
-            headers["Authorization"] = "Bearer \(developerToken)"
-        } else {
-            throw AppleMusicKitError.missingDeveloperToken
-        }
-        if let musicUserToken = authorization?.musicUserToken {
-            headers["Music-User-Token"] = musicUserToken
-        } else if request.scope.requireUserToken {
-            throw AppleMusicKitError.missingMusicUserToken
-        }
-        headerFields = headers
+        headers = try {
+            var headers = request.headers
+            if let developerToken = authorization?.developerToken {
+                headers["Authorization"] = "Bearer \(developerToken)"
+            } else {
+                throw AppleMusicKitError.missingDeveloperToken
+            }
+            if let musicUserToken = authorization?.musicUserToken {
+                headers["Music-User-Token"] = musicUserToken
+            } else if request.scope.requireUserToken {
+                throw AppleMusicKitError.missingMusicUserToken
+            }
+            return headers
+        }()
         method = request.method
         baseURL = request.baseURL
         path = request.path

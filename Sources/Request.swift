@@ -24,7 +24,7 @@ public protocol Request {
     var baseURL: URL { get }
     var path: String { get }
 
-    var headerFields: [String: String] { get }
+    var headers: [String: String] { get }
     var parameters: [String: Any]? { get }
 
     func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Response
@@ -43,7 +43,7 @@ extension Request {
 
     public var baseURL: URL { return URL(string: "https://api.music.apple.com")! }
 
-    public var headerFields: [String: String] { return [:] }
+    public var headers: [String: String] { return [:] }
 }
 
 extension Request where Response: Decodable {
