@@ -54,10 +54,15 @@ class Session {
         with request: Request,
         handler: @escaping (Result<(response: Request.Response, json: String), Demo.Error>) -> Void
     ) {
+        let _handler: (Result<(response: Request.Response, json: String), Demo.Error>) -> Void = { result in
+            DispatchQueue.main.async {
+                handler(result)
+            }
+        }
         func fetch(urlRequest: URLRequest, completion: @escaping (Data, HTTPURLResponse?) -> Void) {
             let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
                 if let error = error {
-                    handler(.failure(Error.error(error)))
+                    _handler(.failure(Error.error(error)))
                 } else {
                     completion(data!, response as? HTTPURLResponse)
                 }
@@ -70,9 +75,10 @@ class Session {
                 let json = try JSONSerialization.jsonObject(with: data, options: [])
                 let pp = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
                 let jsonString = String(data: pp, encoding: .utf8)?.replacingOccurrences(of: "\\", with: "")
-                handler(.success((response, jsonString ?? "")))
+
+                _handler(.success((response, jsonString ?? "")))
             } catch {
-                handler(.failure(Error.error(error)))
+                _handler(.failure(Error.error(error)))
             }
         }
     }
