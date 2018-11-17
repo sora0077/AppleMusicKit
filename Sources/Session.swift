@@ -75,11 +75,14 @@ public func build<Req: Request>(
 
     fetch(urlRequest) { data, response in
         completion {
-            try request.response(from: data, urlResponse: response)
+            return try request.response(from: data, urlResponse: response)
         }
     }
 }
 
+//
+//
+// MARK: - private
 private struct AnyRequest<R>: Request {
     typealias Response = R
 

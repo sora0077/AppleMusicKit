@@ -29,7 +29,7 @@ extension PaginatorRequest {
 
 extension PaginatorRequest where Response == Page<Self> {
     public func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Page<Self> {
-        var page = try decode(data) as Page<Self>
+        var page = try decode(data, urlResponse: urlResponse) as Page<Self>
         page.next?.limit = limit
         return page
     }

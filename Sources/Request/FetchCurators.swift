@@ -60,7 +60,7 @@ extension GetCurator {
     }
 }
 
-// MARK - GetMultipleCurators
+// MARK: - GetMultipleCurators
 public struct GetMultipleCurators<Curator: CuratorDecodable, Playlist: PlaylistDecodable, Storefront: StorefrontDecodable>: ResourceRequest {
     public typealias Resource = AppleMusicKit.Resource<Curator, GetCurator<Curator, Playlist, Storefront>.Relationships>
     public var method: HTTPMethod { return .get }

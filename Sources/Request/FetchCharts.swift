@@ -125,7 +125,7 @@ extension GetCharts {
         }
 
         public func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Page<A> {
-            var page = try decode(data) as Page<A>
+            var page = try decode(data, urlResponse: urlResponse) as Page<A>
             page.next?.limit = limit
             return page
         }

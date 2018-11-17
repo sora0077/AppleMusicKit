@@ -64,7 +64,7 @@ extension GetAppleCurator {
     }
 }
 
-// MARK - GetMultipleAppleCurators
+// MARK: - GetMultipleAppleCurators
 public struct GetMultipleAppleCurators<
     Curator: AppleCuratorDecodable,
     Playlist: PlaylistDecodable,

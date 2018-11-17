@@ -28,7 +28,7 @@ func json<Res>(from result: Result<(response: Res, json: String), Error>) -> Str
 }
 
 enum Error: Swift.Error {
-    case api(Errors, json: String)
+    case api(AppleMusicKitError.Errors, json: String)
     case error(Swift.Error)
 
     var json: String? {
@@ -40,7 +40,7 @@ enum Error: Swift.Error {
 }
 
 private struct APIError: Swift.Error {
-    let errors: Errors
+    let errors: AppleMusicKitError.Errors
     let data: Any
 }
 

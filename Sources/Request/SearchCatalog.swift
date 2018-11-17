@@ -40,7 +40,7 @@ where
     }
 
     public func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Response {
-        var response: Response = try decode(data)
+        var response: Response = try decode(data, urlResponse: urlResponse)
         response.songs?.next?.limit = limit
         response.musicVideos?.next?.limit = limit
         response.albums?.next?.limit = limit
@@ -135,7 +135,7 @@ extension SearchResources {
         }
 
         public func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Page<A> {
-            var page = try decode(data) as Page<A>
+            var page = try decode(data, urlResponse: urlResponse) as Page<A>
             page.next?.limit = limit
             return page
         }

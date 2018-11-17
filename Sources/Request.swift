@@ -48,12 +48,12 @@ extension Request {
 
 extension Request where Response: Decodable {
     public func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Response {
-        return try decode(data)
+        return try decode(data, urlResponse: urlResponse)
     }
 }
 
 extension ResourceRequest where Resource: Decodable {
     public func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> ResponseRoot<Resource> {
-        return try decode(data)
+        return try decode(data, urlResponse: urlResponse)
     }
 }
