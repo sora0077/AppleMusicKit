@@ -11,7 +11,7 @@ import Foundation
 public enum AppleMusicKitError: Error {
     case missingDeveloperToken
     case missingMusicUserToken
-    case invalidURL(URL)
+    case invalidURL(URL, Error?)
     case responseError(Errors?, Data, HTTPURLResponse?)
     case internalError(Error, Data, HTTPURLResponse?)
 }

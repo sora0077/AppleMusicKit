@@ -39,11 +39,6 @@ enum Error: Swift.Error {
     }
 }
 
-private struct APIError: Swift.Error {
-    let errors: AppleMusicKitError.Errors
-    let data: Any
-}
-
 class Session {
 
     static let shared = Session()
@@ -59,27 +54,30 @@ class Session {
                 handler(result)
             }
         }
-        func fetch(urlRequest: URLRequest, completion: @escaping (Data, HTTPURLResponse?) -> Void) {
-            let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+        func fetcher(urlRequest: URLRequest, completion: @escaping (Data, HTTPURLResponse?) -> Void) -> URLSessionTask {
+            return URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
                 if let error = error {
                     _handler(.failure(Error.error(error)))
                 } else {
                     completion(data!, response as? HTTPURLResponse)
                 }
             }
-            task.resume()
         }
-        build(AnyRequest(request), authorization: authorization, fetch: fetch) { response in
+        func parseJSON(from data: Data) throws -> String? {
+            let json = try JSONSerialization.jsonObject(with: data, options: [])
+            let pp = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
+            return String(data: pp, encoding: .utf8)?.replacingOccurrences(of: "\\", with: "")
+        }
+        let task = build(AnyRequest(request), authorization: authorization, using: fetcher) { response in
             do {
                 let (response, data) = try response()
-                let json = try JSONSerialization.jsonObject(with: data, options: [])
-                let pp = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
-                let jsonString = String(data: pp, encoding: .utf8)?.replacingOccurrences(of: "\\", with: "")
-
-                _handler(.success((response, jsonString ?? "")))
+                _handler(.success((response, try parseJSON(from: data) ?? "")))
+            } catch AppleMusicKitError.responseError(let errors?, let data, _) {
+                _handler(.failure(Error.api(errors, json: (try? parseJSON(from: data) ?? "") ?? "")))
             } catch {
                 _handler(.failure(Error.error(error)))
             }
         }
+        task?.resume()
     }
 }

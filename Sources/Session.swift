@@ -17,6 +17,28 @@ private extension AccessScope {
     }
 }
 
+private extension Request {
+
+    func buildURL() throws -> URL {
+        let url = baseURL.appendingPathComponent(path)
+        if method != .get {
+            return url
+        }
+        guard var comps = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+            throw AppleMusicKitError.invalidURL(url, nil)
+        }
+        if let parameters = parameters, !parameters.isEmpty {
+            comps.queryItems = parameters.map {
+                URLQueryItem(name: $0, value: "\($1)")
+            }
+        }
+        guard let _url = comps.url else {
+            throw AppleMusicKitError.invalidURL(url, nil)
+        }
+        return _url
+    }
+}
+
 public struct Authorization {
     public var developerToken: String
     public var musicUserToken: String?
@@ -27,55 +49,39 @@ public struct Authorization {
     }
 }
 
-public func build<Req: Request>(
+public func build<Req: Request, Context>(
     _ req: Req,
     authorization: Authorization?,
-    fetch: (URLRequest, @escaping (Data, HTTPURLResponse?) -> Void) -> Void,
+    using fetch: (URLRequest, @escaping (Data, HTTPURLResponse?) -> Void) -> Context,
     completion: @escaping (() throws -> Req.Response) -> Void
-) {
+) -> Context? {
     let request: AnyRequest<Req.Response>
-    let body: Data?
+    let url: URL
+    var urlRequest: URLRequest
     do {
         request = try AnyRequest(req, authorization: authorization)
-        if let parameters = request.parameters, request.method != .get {
-            body = try JSONSerialization.data(withJSONObject: parameters, options: [])
-        } else {
-            body = nil
+        url = try request.buildURL()
+        urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = request.method.rawValue.uppercased()
+        urlRequest.allHTTPHeaderFields = request.headers
+        do {
+            if let parameters = request.parameters, request.method != .get {
+                urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+                urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            }
+        } catch {
+            throw AppleMusicKitError.invalidURL(url, error)
         }
     } catch {
         completion {
             throw error
         }
-        return
-    }
-    let url = request.baseURL.appendingPathComponent(request.path)
-    guard var comps = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
-        completion {
-            throw AppleMusicKitError.invalidURL(url)
-        }
-        return
-    }
-    if let parameters = request.parameters, !parameters.isEmpty, request.method == .get {
-        comps.queryItems = parameters.map {
-            URLQueryItem(name: $0, value: "\($1)")
-        }
-    }
-    guard let _url = comps.url else {
-        completion {
-            throw AppleMusicKitError.invalidURL(url)
-        }
-        return
+        return nil
     }
 
-    var urlRequest = URLRequest(url: _url)
-    urlRequest.httpMethod = request.method.rawValue.uppercased()
-    urlRequest.httpBody = body
-    urlRequest.allHTTPHeaderFields = request.headers
-    urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-
-    fetch(urlRequest) { data, response in
+    return fetch(urlRequest) { data, response in
         completion {
-            return try request.response(from: data, urlResponse: response)
+            try request.response(from: data, urlResponse: response)
         }
     }
 }
