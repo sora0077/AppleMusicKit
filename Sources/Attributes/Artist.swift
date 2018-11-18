@@ -16,10 +16,10 @@ public protocol Artist: ArtistDecodable, _AttributesCustomInitializable {
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
 
     init(id: Identifier,
-         genreNames: [String],
          editorialNotes: EditorialNotes?,
+         genreNames: [String],
          name: String,
-         url: String) throws
+         url: URL) throws
 }
 
 private enum CodingKeys: String, CodingKey {
@@ -31,8 +31,8 @@ extension Artist {
         let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
         let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
         try self.init(id: cc.decode(forKey: .id),
-                      genreNames: c.decode(forKey: .genreNames),
                       editorialNotes: c.decodeIfPresent(forKey: .editorialNotes),
+                      genreNames: c.decode(forKey: .genreNames),
                       name: c.decode(forKey: .name),
                       url: c.decode(forKey: .url))
     }

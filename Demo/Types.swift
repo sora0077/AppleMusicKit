@@ -54,7 +54,7 @@ struct Song: AppleMusicKit.Song, CustomStringConvertible {
         return name
     }
 
-    init(id: Identifier, albumName: String, artistName: String, artwork: Artwork, composerName: String?, contentRating: String?, discNumber: Int, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], isrc: String, movementCount: Int?, movementName: String?, movementNumber: Int?, name: String, playParams: PlayParameters?, previews: [Preview], releaseDate: String, trackNumber: Int, url: String, workName: String?) throws {
+    init(id: Identifier, albumName: String, artistName: String, artwork: Artwork, composerName: String?, contentRating: String?, discNumber: Int, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], isrc: String, movementCount: Int?, movementName: String?, movementNumber: Int?, name: String, playParams: PlayParameters?, previews: [Preview], releaseDate: Date, trackNumber: Int, url: URL, workName: String?) throws {
         self.name = name
         self.artwork = artwork
     }
@@ -73,7 +73,7 @@ struct MusicVideo: AppleMusicKit.MusicVideo, CustomStringConvertible {
         return name
     }
 
-    init(id: Identifier, albumName: String?, artistName: String, artwork: Artwork, contentRating: String?, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], isrc: String, name: String, playParams: PlayParameters?, previews: [Preview], releaseDate: String, trackNumber: Int?, url: String, videoSubType: String?) throws {
+    init(id: Identifier, albumName: String?, artistName: String, artwork: Artwork, contentRating: String?, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], isrc: String, name: String, playParams: PlayParameters?, previews: [Preview], releaseDate: Date, trackNumber: Int?, url: URL, videoSubType: String?, hasHDR: Bool, has4K: Bool) throws {
         self.name = name
         self.artwork = artwork
     }
@@ -90,7 +90,7 @@ struct Album: AppleMusicKit.Album, CustomStringConvertible {
         return name
     }
 
-    init(id: Identifier, albumName: String?, artistName: String, artwork: Artwork, contentRating: String?, copyright: String, editorialNotes: EditorialNotes?, genreNames: [String], isComplete: Bool, isSingle: Bool, name: String, recordLabel: String, releaseDate: String, playParams: PlayParameters?, trackCount: Int, url: String) throws {
+    init(id: Identifier, albumName: String, artistName: String, artwork: Artwork?, contentRating: String?, copyright: String?, editorialNotes: EditorialNotes?, genreNames: [String], isComplete: Bool, isSingle: Bool, name: String, playParams: PlayParameters?, recordLabel: String, releaseDate: Date, trackCount: Int, url: URL, isMasteredForItunes: Bool) throws {
         self.name = name
         print(artwork)
     }
@@ -105,7 +105,7 @@ struct Artist: AppleMusicKit.Artist, CustomStringConvertible {
         return name
     }
 
-    init(id: Identifier, genreNames: [String], editorialNotes: EditorialNotes?, name: String, url: String) throws {
+    init(id: Identifier, editorialNotes: EditorialNotes?, genreNames: [String], name: String, url: URL) throws {
         self.name = name
     }
 }
@@ -133,7 +133,7 @@ struct Playlist: AppleMusicKit.Playlist, CustomStringConvertible {
         return name
     }
 
-    init(id: Identifier, artwork: Artwork?, curatorName: String?, description: EditorialNotes?, lastModifiedDate: String, name: String, playlistType: PlaylistType, playParams: PlayParameters?, url: String) throws {
+    init(id: Identifier, artwork: Artwork?, curatorName: String?, description: EditorialNotes?, lastModifiedDate: Date, name: String, playlistType: PlaylistType, playParams: PlayParameters?, url: URL) throws {
         self.name = name
     }
 }
@@ -148,7 +148,7 @@ struct Curator: AppleMusicKit.Curator, CustomStringConvertible {
         return name
     }
 
-    init(id: Identifier, artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: String) throws {
+    init(id: Identifier, artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: URL) throws {
         self.name = name
         print(artwork, editorialNotes)
     }
@@ -164,7 +164,7 @@ struct AppleCurator: AppleMusicKit.AppleCurator, CustomStringConvertible {
         return name
     }
 
-    init(id: Identifier, artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: String) throws {
+    init(id: Identifier, artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: URL) throws {
         self.name = name
         print(artwork, editorialNotes)
     }
@@ -174,7 +174,7 @@ struct Activity: AppleMusicKit.Activity {
     typealias Artwork = Demo.Artwork
     typealias EditorialNotes = Demo.EditorialNotes
 
-    init(id: Identifier, artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: String) throws {
+    init(id: Identifier, artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: URL) throws {
         print(artwork, editorialNotes)
     }
 }
@@ -190,7 +190,7 @@ struct Station: AppleMusicKit.Station, CustomStringConvertible {
         return name
     }
 
-    init(id: Identifier, artwork: Artwork, durationInMillis: Int?, editorialNotes: EditorialNotes?, episodeNumber: Int?, isLive: Bool, name: String, url: String) throws {
+    init(id: Identifier, artwork: Artwork, durationInMillis: Int?, editorialNotes: EditorialNotes?, episodeNumber: Int?, isLive: Bool, name: String, url: URL) throws {
         self.name = name
         self.isLive = isLive
     }
@@ -201,7 +201,7 @@ struct Artwork: AppleMusicKit.Artwork {
     }
 }
 struct EditorialNotes: AppleMusicKit.EditorialNotes {
-    init(standard: String?, short: String?) throws {
+    init(standard: String, short: String) throws {
     }
 }
 struct PlayParameters: AppleMusicKit.PlayParameters {
@@ -211,7 +211,7 @@ struct PlayParameters: AppleMusicKit.PlayParameters {
 struct Preview: AppleMusicKit.Preview {
     typealias Artwork = Demo.Artwork
 
-    init(url: String, artwork: Artwork?) throws {
+    init(artwork: Artwork?, url: URL) throws {
     }
 }
 

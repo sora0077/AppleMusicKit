@@ -8,8 +8,7 @@
 
 import Foundation
 
-public protocol MusicVideoDecodable: Attributes {
-}
+public protocol MusicVideoDecodable: Attributes {}
 
 public protocol MusicVideo: MusicVideoDecodable, _AttributesCustomInitializable {
     associatedtype Artwork: AppleMusicKit.Artwork
@@ -29,15 +28,17 @@ public protocol MusicVideo: MusicVideoDecodable, _AttributesCustomInitializable 
          name: String,
          playParams: PlayParameters?,
          previews: [Preview],
-         releaseDate: String,
+         releaseDate: Date,
          trackNumber: Int?,
-         url: String,
-         videoSubType: String?) throws
+         url: URL,
+         videoSubType: String?,
+         hasHDR: Bool,
+         has4K: Bool) throws
 }
 
 private enum CodingKeys: String, CodingKey {
     case albumName, artistName, artwork, contentRating, durationInMillis, editorialNotes, genreNames
-    case isrc, name, playParams, previews, releaseDate, trackNumber, url, videoSubType
+    case isrc, name, playParams, previews, releaseDate, trackNumber, url, videoSubType, hasHDR, has4K
 }
 
 extension MusicVideo {
@@ -59,6 +60,8 @@ extension MusicVideo {
                       releaseDate: c.decode(forKey: .releaseDate),
                       trackNumber: c.decodeIfPresent(forKey: .trackNumber),
                       url: c.decode(forKey: .url),
-                      videoSubType: c.decodeIfPresent(forKey: .videoSubType))
+                      videoSubType: c.decodeIfPresent(forKey: .videoSubType),
+                      hasHDR: c.decode(forKey: .hasHDR),
+                      has4K: c.decode(forKey: .has4K))
     }
 }

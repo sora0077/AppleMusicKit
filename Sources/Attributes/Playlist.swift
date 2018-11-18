@@ -20,11 +20,11 @@ public protocol Playlist: PlaylistDecodable, _AttributesCustomInitializable {
          artwork: Artwork?,
          curatorName: String?,
          description: EditorialNotes?,
-         lastModifiedDate: String,
+         lastModifiedDate: Date,
          name: String,
          playlistType: PlaylistType,
          playParams: PlayParameters?,
-         url: String) throws
+         url: URL) throws
 }
 
 public enum PlaylistType: String, Decodable {

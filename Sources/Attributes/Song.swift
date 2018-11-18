@@ -33,9 +33,9 @@ public protocol Song: SongDecodable, _AttributesCustomInitializable {
          name: String,
          playParams: PlayParameters?,
          previews: [Preview],
-         releaseDate: String,
+         releaseDate: Date,
          trackNumber: Int,
-         url: String,
+         url: URL,
          workName: String?) throws
 }
 

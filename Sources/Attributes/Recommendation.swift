@@ -16,10 +16,10 @@ public protocol Recommendation: RecommendationDecodable, _AttributesCustomInitia
     init(
         id: Identifier,
         isGroupRecommendation: Bool,
-        title: String?,
+        nextUpdateDate: Date,
         reason: String?,
         resourceTypes: [ResourceType],
-        nextUpdateDate: String
+        title: String?
     ) throws
 }
 
@@ -37,9 +37,9 @@ extension Recommendation {
         let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
         try self.init(id: cc.decode(forKey: .id),
                       isGroupRecommendation: c.decode(forKey: .isGroupRecommendation),
-                      title: c.decodeIfPresent(Object.self, forKey: .title)?.stringForDisplay,
+                      nextUpdateDate: c.decode(forKey: .nextUpdateDate),
                       reason: c.decodeIfPresent(Object.self, forKey: .reason)?.stringForDisplay,
                       resourceTypes: c.decode(forKey: .resourceTypes),
-                      nextUpdateDate: c.decode(forKey: .nextUpdateDate))
+                      title: c.decodeIfPresent(Object.self, forKey: .title)?.stringForDisplay)
     }
 }

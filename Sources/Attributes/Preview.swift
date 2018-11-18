@@ -15,8 +15,8 @@ public protocol Preview: PreviewDecodable {
     associatedtype Artwork: AppleMusicKit.Artwork
 
     init(
-        url: String,
-        artwork: Artwork?
+        artwork: Artwork?,
+        url: URL
     ) throws
 }
 
@@ -27,7 +27,7 @@ private enum CodingKeys: CodingKey {
 extension Preview {
     public init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        try self.init(url: c.decode(forKey: .url),
-                      artwork: c.decodeIfPresent(forKey: .artwork))
+        try self.init(artwork: c.decodeIfPresent(forKey: .artwork),
+                      url: c.decode(forKey: .url))
     }
 }

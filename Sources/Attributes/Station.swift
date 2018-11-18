@@ -23,7 +23,7 @@ public protocol Station: StationDecodable, _AttributesCustomInitializable {
          episodeNumber: Int?,
          isLive: Bool,
          name: String,
-         url: String) throws
+         url: URL) throws
 }
 
 private enum CodingKeys: String, CodingKey {
