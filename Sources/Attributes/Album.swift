@@ -18,7 +18,7 @@ public protocol Album: AlbumDecodable, _AttributesCustomInitializable {
 
     init(
         id: Identifier,
-        albumName: String,
+        albumName: String?,
         artistName: String,
         artwork: Artwork?,
         contentRating: String?,
@@ -47,7 +47,7 @@ extension Album {
         let cc = try decoder.container(keyedBy: ResourceCodingKeys.self)
         let c = try cc.nestedContainer(keyedBy: CodingKeys.self, forKey: .attributes)
         try self.init(id: cc.decode(forKey: .id),
-                      albumName: c.decode(forKey: .albumName),
+                      albumName: c.decodeIfPresent(forKey: .albumName),
                       artistName: c.decode(forKey: .artistName),
                       artwork: c.decodeIfPresent(forKey: .artwork),
                       contentRating: c.decodeIfPresent(forKey: .contentRating),

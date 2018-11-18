@@ -30,4 +30,3 @@ extension Rating {
                       value: c.decode(forKey: .value))
     }
 }
-
