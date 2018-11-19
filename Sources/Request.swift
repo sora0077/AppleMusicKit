@@ -7,16 +7,27 @@
 //
 
 import Foundation
-import APIKit
 
-public typealias HTTPMethod = APIKit.HTTPMethod
+public enum HTTPMethod: String {
+    case get
+}
 
 public enum AccessScope {
     case readonly, user
 }
 
-public protocol Request: APIKit.Request {
+public protocol Request {
+    associatedtype Response
+
     var scope: AccessScope { get }
+    var method: HTTPMethod { get }
+    var baseURL: URL { get }
+    var path: String { get }
+
+    var headers: [String: String] { get }
+    var parameters: [String: Any]? { get }
+
+    func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Response
 }
 
 public protocol ResourceRequest: Request {
@@ -27,37 +38,22 @@ extension ResourceRequest {
     public var method: HTTPMethod { return .get }
 }
 
-private struct FoundationDataParser: DataParser {
-    var contentType: String? { return nil }
-
-    func parse(data: Data) throws -> Any { return data }
-}
-
 extension Request {
     public var scope: AccessScope { return .readonly }
 
     public var baseURL: URL { return URL(string: "https://api.music.apple.com")! }
 
-    public var dataParser: DataParser {
-        return FoundationDataParser()
-    }
-
-    public func intercept(object: Any, urlResponse: HTTPURLResponse) throws -> Any {
-        if (urlResponse.allHeaderFields["Content-Type"] as? String)?.hasPrefix("text/plain") ?? false {
-            throw AppleMusicKitError.unexpectedResponse(object, urlResponse)
-        }
-        return object
-    }
+    public var headers: [String: String] { return [:] }
 }
 
-extension Request where Response: AppleMusicKit.Response {
-    public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
-        return try decode(object)
+extension Request where Response: Decodable {
+    public func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Response {
+        return try decode(data, urlResponse: urlResponse)
     }
 }
 
 extension ResourceRequest where Resource: Decodable {
-    public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> ResponseRoot<Resource> {
-        return try decode(object)
+    public func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> ResponseRoot<Resource> {
+        return try decode(data, urlResponse: urlResponse)
     }
 }

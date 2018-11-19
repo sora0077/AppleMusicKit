@@ -13,7 +13,7 @@ public struct GetStorefront<Storefront: StorefrontDecodable>: ResourceRequest {
     public typealias Resource = AppleMusicKit.Resource<Storefront, NoRelationships>
 
     public var path: String { return "/v1/storefronts/\(id)" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let id: Storefront.Identifier
 
@@ -28,7 +28,7 @@ public struct GetMultipleStorefronts<Storefront: StorefrontDecodable>: ResourceR
     public typealias Resource = AppleMusicKit.Resource<Storefront, NoRelationships>
 
     public var path: String { return "/v1/storefronts" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     public init(id: Storefront.Identifier, _ additions: Storefront.Identifier..., language: Storefront.Language? = nil) {
         self.init(ids: [id] + additions, language: language)
@@ -46,7 +46,7 @@ public struct GetAllStorefronts<Storefront: StorefrontDecodable>: PaginatorResou
     public typealias Resource = AppleMusicKit.Resource<Storefront, NoRelationships>
 
     public let path: String
-    public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+    public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
     public var limit: Int?
     public var offset: Int?
@@ -69,7 +69,7 @@ public struct GetUserStorefront<Storefront: StorefrontDecodable>: ResourceReques
     public typealias Resource = AppleMusicKit.Resource<Storefront, NoRelationships>
 
     public var path: String { return "/v1/me/storefront" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     public init(language: Storefront.Language? = nil) {
         parameters = ["l": language?.languageTag].cleaned

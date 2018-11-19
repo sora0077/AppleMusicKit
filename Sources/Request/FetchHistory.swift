@@ -26,7 +26,7 @@ public struct GetHeavyRotationContent<
 
     public var scope: AccessScope { return .user }
     public let path: String
-    public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+    public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
     public var limit: Int?
     public var offset: Int?

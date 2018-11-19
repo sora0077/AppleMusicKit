@@ -17,7 +17,7 @@ where
     Storefront: StorefrontDecodable {
     public var method: HTTPMethod { return .get }
     public let path: String
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let limit: Int?
     private let offset: Int?
@@ -39,8 +39,8 @@ where
         (limit, offset) = parsePaginatorParameters(parameters)
     }
 
-    public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Response {
-        var response: Response = try decode(object)
+    public func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Response {
+        var response: Response = try decode(data, urlResponse: urlResponse)
         response.songs?.next?.limit = limit
         response.musicVideos?.next?.limit = limit
         response.albums?.next?.limit = limit
@@ -122,7 +122,7 @@ extension SearchResources {
 extension SearchResources {
     public struct GetPage<A: Attributes>: PaginatorRequest {
         public let path: String
-        public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+        public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
         public var limit: Int?
         public var offset: Int?
@@ -134,8 +134,8 @@ extension SearchResources {
             (limit, offset) = parsePaginatorParameters(parameters)
         }
 
-        public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Page<A> {
-            var page = try decode(object) as Page<A>
+        public func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Page<A> {
+            var page = try decode(data, urlResponse: urlResponse) as Page<A>
             page.next?.limit = limit
             return page
         }
@@ -146,7 +146,7 @@ extension SearchResources {
 public struct GetSearchHints<Storefront: StorefrontDecodable>: Request {
     public var method: HTTPMethod { return .get }
     public let path: String
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     public init(storefront: Storefront.Identifier, term: String,
                 language: Storefront.Language? = nil,

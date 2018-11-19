@@ -7,23 +7,28 @@
 //
 
 import Foundation
-import APIKit
 
 public struct NoRelationships: Decodable {}
 
 private let defaultDecoder = JSONDecoder()
 
-func decode<D: Decodable>(_ object: Any) throws -> D {
-    let data = object as! Data
-    do {
-        return try defaultDecoder.decode(D.self, from: data)
-    } catch let modelError {
+func decode<D: Decodable>(_ data: Data, urlResponse: HTTPURLResponse?) throws -> D {
+    switch urlResponse?.statusCode {
+    case (200..<300)?:
         do {
-            throw try defaultDecoder.decode(Errors.self, from: data)
-        } catch let error as Errors {
-            throw error
+            return try defaultDecoder.decode(D.self, from: data)
         } catch {
-            throw modelError
+            throw AppleMusicKitError.internalError(error, data, urlResponse)
         }
+    case (400...)? where !data.isEmpty:
+        do {
+            throw try defaultDecoder.decode(AppleMusicKitError.Errors.self, from: data)
+        } catch let error as AppleMusicKitError.Errors {
+            throw AppleMusicKitError.responseError(error, data, urlResponse)
+        } catch {
+            throw AppleMusicKitError.internalError(error, data, urlResponse)
+        }
+    case _:
+        throw AppleMusicKitError.responseError(nil, data, urlResponse)
     }
 }

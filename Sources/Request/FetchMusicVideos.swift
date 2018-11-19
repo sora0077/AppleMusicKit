@@ -18,7 +18,7 @@ public struct GetMusicVideo<MusicVideo, Album, Artist, Genre, Storefront>: Resou
     public typealias Resource = AppleMusicKit.Resource<MusicVideo, Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/music-videos/\(id)" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let storefront: Storefront.Identifier
     private let id: MusicVideo.Identifier
@@ -48,7 +48,7 @@ public struct GetMultipleMusicVideos<MusicVideo, Album, Artist, Genre, Storefron
     public typealias Resource = AppleMusicKit.Resource<MusicVideo, GetMusicVideo<MusicVideo, Album, Artist, Genre, Storefront>.Relationships>
     public var method: HTTPMethod { return .get }
     public var path: String { return "/v1/catalog/\(storefront)/music-videos" }
-    public let parameters: Any?
+    public let parameters: [String: Any]?
 
     private let storefront: Storefront.Identifier
 
@@ -80,7 +80,7 @@ extension GetMusicVideo {
     public struct GetAlbums: PaginatorResourceRequest {
         public typealias Resource = AppleMusicKit.Resource<Album, NoRelationships>
         public let path: String
-        public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+        public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
         public var limit: Int?
         public var offset: Int?
@@ -100,7 +100,7 @@ extension GetMusicVideo {
     public struct GetArtists: PaginatorResourceRequest {
         public typealias Resource = AppleMusicKit.Resource<Artist, NoRelationships>
         public let path: String
-        public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+        public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
         public var limit: Int?
         public var offset: Int?
@@ -120,7 +120,7 @@ extension GetMusicVideo {
     public struct GetGenres: PaginatorResourceRequest {
         public typealias Resource = AppleMusicKit.Resource<Genre, NoRelationships>
         public let path: String
-        public var parameters: Any? { return makePaginatorParameters(_parameters, request: self) }
+        public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
         public var limit: Int?
         public var offset: Int?

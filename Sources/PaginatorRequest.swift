@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import APIKit
 
 public protocol PaginatorRequest: Request, Decodable {
     var limit: Int? { get set }
@@ -29,8 +28,8 @@ extension PaginatorRequest {
 }
 
 extension PaginatorRequest where Response == Page<Self> {
-    public func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Page<Self> {
-        var page = try decode(object) as Page<Self>
+    public func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Page<Self> {
+        var page = try decode(data, urlResponse: urlResponse) as Page<Self>
         page.next?.limit = limit
         return page
     }

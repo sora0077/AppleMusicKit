@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		D9043B9D1F0360EF001D9B50 /* AppleMusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */; };
 		D9043B9E1F0360EF001D9B50 /* AppleMusicKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9A024FC1F00F22300C49113 /* AppleMusicKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9043BA21F0360F5001D9B50 /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A0250E1F00F63E00C49113 /* APIKit.framework */; };
-		D9043BA31F0360F5001D9B50 /* APIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9A0250E1F00F63E00C49113 /* APIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		D9043BA41F0360F5001D9B50 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A0250D1F00F63E00C49113 /* Result.framework */; };
-		D9043BA51F0360F5001D9B50 /* Result.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9A0250D1F00F63E00C49113 /* Result.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D90ACBE11F0A2D4200D6CB94 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90ACBE01F0A2D4200D6CB94 /* Utils.swift */; };
 		D90ACBE31F0A458E00D6CB94 /* FetchStations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90ACBE21F0A458E00D6CB94 /* FetchStations.swift */; };
 		D90ACBE51F0A45CA00D6CB94 /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = D90ACBE41F0A45CA00D6CB94 /* Station.swift */; };
@@ -105,8 +101,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D9043BA51F0360F5001D9B50 /* Result.framework in Embed Frameworks */,
-				D9043BA31F0360F5001D9B50 /* APIKit.framework in Embed Frameworks */,
 				D9043B9E1F0360EF001D9B50 /* AppleMusicKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -219,8 +213,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9043BA41F0360F5001D9B50 /* Result.framework in Frameworks */,
-				D9043BA21F0360F5001D9B50 /* APIKit.framework in Frameworks */,
 				D9043B9D1F0360EF001D9B50 /* AppleMusicKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

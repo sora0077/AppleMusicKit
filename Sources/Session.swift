@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import APIKit
-import Result
 
 private extension AccessScope {
     var requireUserToken: Bool {
@@ -16,6 +14,28 @@ private extension AccessScope {
         case .user: return true
         case .readonly: return false
         }
+    }
+}
+
+private extension Request {
+
+    func buildURL() throws -> URL {
+        let url = baseURL.appendingPathComponent(path)
+        if method != .get {
+            return url
+        }
+        guard var comps = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+            throw AppleMusicKitError.invalidURL(url, nil)
+        }
+        if let parameters = parameters, !parameters.isEmpty {
+            comps.queryItems = parameters.map {
+                URLQueryItem(name: $0, value: "\($1)")
+            }
+        }
+        guard let _url = comps.url else {
+            throw AppleMusicKitError.invalidURL(url, nil)
+        }
+        return _url
     }
 }
 
@@ -29,113 +49,83 @@ public struct Authorization {
     }
 }
 
-private struct AnyRequest<R>: APIKit.Request {
+public func build<Req: Request, Context>(
+    _ req: Req,
+    authorization: Authorization?,
+    using fetch: (URLRequest, @escaping (Data, HTTPURLResponse?) -> Void) -> Context,
+    completion: @escaping (() throws -> Req.Response) -> Void
+) -> Context? {
+    let request: AnyRequest<Req.Response>
+    let url: URL
+    var urlRequest: URLRequest
+    do {
+        request = try AnyRequest(req, authorization: authorization)
+        url = try request.buildURL()
+        urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = request.method.rawValue.uppercased()
+        urlRequest.allHTTPHeaderFields = request.headers
+        do {
+            if let parameters = request.parameters, request.method != .get {
+                urlRequest.httpBody = try JSONSerialization.data(withJSONObject: parameters, options: [])
+                urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+            }
+        } catch {
+            throw AppleMusicKitError.invalidURL(url, error)
+        }
+    } catch {
+        completion {
+            throw error
+        }
+        return nil
+    }
+
+    return fetch(urlRequest) { data, response in
+        completion {
+            try request.response(from: data, urlResponse: response)
+        }
+    }
+}
+
+//
+//
+// MARK: - private
+private struct AnyRequest<R>: Request {
     typealias Response = R
 
     let method: HTTPMethod
     let baseURL: URL
     let path: String
-    let dataParser: DataParser
-    let headerFields: [String: String]
-    let parameters: Any?
-    let queryParameters: [String: Any]?
-    let bodyParameters: BodyParameters?
+    let headers: [String: String]
+    let parameters: [String: Any]?
 
-    private let interceptRequest: (URLRequest) throws -> URLRequest
-    private let interceptObject: (Any, HTTPURLResponse) throws -> Any
-    private let response: (Any, HTTPURLResponse) throws -> R
+    private let response: (Data, HTTPURLResponse?) throws -> R
     fileprivate let raw: Any
 
-    init<Req: AppleMusicKit.Request>(_ request: Req, authorization: Authorization?) throws where Req.Response == R {
-        interceptRequest = request.intercept(urlRequest:)
-        interceptObject = request.intercept(object:urlResponse:)
+    init<Req: Request>(_ request: Req, authorization: Authorization?) throws where Req.Response == R {
         response = request.response
         raw = request
 
-        var headers = request.headerFields
-        if let developerToken = authorization?.developerToken {
-            headers["Authorization"] = "Bearer \(developerToken)"
-        } else {
-            throw Session.Error.missingDeveloperToken
-        }
-        if let musicUserToken = authorization?.musicUserToken {
-            headers["Music-User-Token"] = musicUserToken
-        } else if request.scope.requireUserToken {
-            throw Session.Error.missingMusicUserToken
-        }
-        headerFields = headers
+        headers = try {
+            var headers = request.headers
+            if let developerToken = authorization?.developerToken {
+                headers["Authorization"] = "Bearer \(developerToken)"
+            } else {
+                throw AppleMusicKitError.missingDeveloperToken
+            }
+            if let musicUserToken = authorization?.musicUserToken {
+                headers["Music-User-Token"] = musicUserToken
+            } else if request.scope.requireUserToken {
+                throw AppleMusicKitError.missingMusicUserToken
+            }
+            return headers
+        }()
         method = request.method
         baseURL = request.baseURL
         path = request.path
-        dataParser = request.dataParser
         parameters = request.parameters
-        queryParameters = request.queryParameters
-        bodyParameters = request.bodyParameters
     }
 
-    func intercept(urlRequest: URLRequest) throws -> URLRequest {
-        return try interceptRequest(urlRequest)
-    }
-
-    func intercept(object: Any, urlResponse: HTTPURLResponse) throws -> Any {
-        return try interceptObject(object, urlResponse)
-    }
-
-    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> R {
-        return try response(object, urlResponse)
-    }
-}
-
-open class Session: APIKit.Session {
-    public enum Error: Swift.Error {
-        case missingDeveloperToken
-        case missingMusicUserToken
-    }
-    open override class var shared: Session { return _shared }
-    private static let _shared = Session(adapter: URLSessionAdapter(configuration: .default))
-
-    open var authorization: Authorization?
-
-    @discardableResult
-    open override class func send<Request>(
-        _ request: Request,
-        callbackQueue: CallbackQueue? = nil,
-        handler: @escaping (Result<Request.Response, SessionTaskError>) -> Void
-    ) -> SessionTask? where Request: AppleMusicKit.Request {
-        return shared.send(request, callbackQueue: callbackQueue, handler: handler)
-    }
-
-    @discardableResult
-    open override func send<Request>(
-        _ request: Request,
-        callbackQueue: CallbackQueue? = nil,
-        handler: @escaping (Result<Request.Response, SessionTaskError>) -> Void
-    ) -> SessionTask? where Request: AppleMusicKit.Request {
-        do {
-            return super.send(try AnyRequest(request, authorization: authorization),
-                              callbackQueue: callbackQueue,
-                              handler: handler)
-        } catch {
-            (callbackQueue ?? .main).execute {
-                handler(Result(error: SessionTaskError.requestError(error)))
-            }
-            return nil
-        }
-    }
-
-    open override class func cancelRequests<Request>(
-        with requestType: Request.Type,
-        passingTest test: @escaping (Request) -> Bool
-    ) where Request: APIKit.Request {
-        shared.cancelRequests(with: requestType, passingTest: test)
-    }
-
-    open override func cancelRequests<Request>(
-        with requestType: Request.Type,
-        passingTest test: @escaping (Request) -> Bool
-    ) where Request: APIKit.Request {
-        super.cancelRequests(with: AnyRequest<Request.Response>.self) { request in
-            (request.raw as? Request).map(test) ?? false
-        }
+    func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> R {
+        return try response(data, urlResponse)
     }
 }
