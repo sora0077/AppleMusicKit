@@ -20,25 +20,26 @@ public protocol Album: AlbumDecodable, _AttributesCustomInitializable {
         id: Identifier,
         albumName: String?,
         artistName: String,
-        artwork: Artwork,
+        artwork: Artwork?,
         contentRating: String?,
-        copyright: String,
+        copyright: String?,
         editorialNotes: EditorialNotes?,
         genreNames: [String],
         isComplete: Bool,
         isSingle: Bool,
         name: String,
-        recordLabel: String,
-        releaseDate: String,
         playParams: PlayParameters?,
+        recordLabel: String,
+        releaseDate: Date,
         trackCount: Int,
-        url: String
+        url: URL,
+        isMasteredForItunes: Bool
     ) throws
 }
 
 private enum CodingKeys: String, CodingKey {
     case albumName, artistName, artwork, contentRating, copyright, editorialNotes, genreNames
-    case isComplete, isSingle, name, recordLabel, releaseDate, playParams, trackCount, url
+    case isComplete, isSingle, name, recordLabel, releaseDate, playParams, trackCount, url, isMasteredForItunes
 }
 
 extension Album {
@@ -48,18 +49,19 @@ extension Album {
         try self.init(id: cc.decode(forKey: .id),
                       albumName: c.decodeIfPresent(forKey: .albumName),
                       artistName: c.decode(forKey: .artistName),
-                      artwork: c.decode(forKey: .artwork),
+                      artwork: c.decodeIfPresent(forKey: .artwork),
                       contentRating: c.decodeIfPresent(forKey: .contentRating),
-                      copyright: c.decode(forKey: .copyright),
+                      copyright: c.decodeIfPresent(forKey: .copyright),
                       editorialNotes: c.decodeIfPresent(forKey: .editorialNotes),
                       genreNames: c.decode(forKey: .genreNames),
                       isComplete: c.decode(forKey: .isComplete),
                       isSingle: c.decode(forKey: .isSingle),
                       name: c.decode(forKey: .name),
+                      playParams: c.decodeIfPresent(forKey: .playParams),
                       recordLabel: c.decode(forKey: .recordLabel),
                       releaseDate: c.decode(forKey: .releaseDate),
-                      playParams: c.decodeIfPresent(forKey: .playParams),
                       trackCount: c.decode(forKey: .trackCount),
-                      url: c.decode(forKey: .url))
+                      url: c.decode(forKey: .url),
+                      isMasteredForItunes: c.decode(forKey: .isMasteredForItunes))
     }
 }

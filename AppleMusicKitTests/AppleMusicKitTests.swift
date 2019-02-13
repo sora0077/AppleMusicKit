@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import AppleMusicKit
+@testable import AppleMusicKit
 
 extension String: Language {}
 
@@ -30,11 +30,12 @@ struct Song: AppleMusicKit.Song {
     typealias Artwork = AppleMusicKitTests.Artwork
     typealias EditorialNotes = AppleMusicKitTests.EditorialNotes
     typealias PlayParameters = AppleMusicKitTests.PlayParameters
+    typealias Preview = AppleMusicKitTests.Preview
 
     let name: String
     let artwork: Artwork
 
-    init(id: Identifier, artistName: String, artwork: Artwork, composerName: String?, contentRating: String?, discNumber: Int, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], movementCount: Int?, movementName: String?, movementNumber: Int?, name: String, playParams: PlayParameters?, releaseDate: String, trackNumber: Int, url: String, workName: String?) throws {
+    init(id: Identifier, albumName: String?, artistName: String, artwork: Artwork, composerName: String?, contentRating: String?, discNumber: Int, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], isrc: String, movementCount: Int?, movementName: String?, movementNumber: Int?, name: String, playParams: PlayParameters?, previews: [Preview], releaseDate: Date, trackNumber: Int, url: URL, workName: String?) throws {
         self.name = name
         self.artwork = artwork
     }
@@ -44,11 +45,12 @@ struct MusicVideo: AppleMusicKit.MusicVideo {
     typealias Artwork = AppleMusicKitTests.Artwork
     typealias EditorialNotes = AppleMusicKitTests.EditorialNotes
     typealias PlayParameters = AppleMusicKitTests.PlayParameters
+    typealias Preview = AppleMusicKitTests.Preview
 
     let name: String
     let artwork: Artwork
 
-    init(id: Identifier, artistName: String, artwork: Artwork, contentRating: String?, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], name: String, playParams: PlayParameters?, releaseDate: String, trackNumber: Int?, url: String, videoSubType: String?) throws {
+    init(id: Identifier, albumName: String?, artistName: String, artwork: Artwork, contentRating: String?, durationInMillis: Int?, editorialNotes: EditorialNotes?, genreNames: [String], isrc: String, name: String, playParams: PlayParameters?, previews: [Preview], releaseDate: Date, trackNumber: Int?, url: URL, videoSubType: String?, hasHDR: Bool, has4K: Bool) throws {
         self.name = name
         self.artwork = artwork
     }
@@ -61,7 +63,7 @@ struct Album: AppleMusicKit.Album {
 
     let name: String
 
-    init(id: Identifier, artistName: String, artwork: Artwork, contentRating: String?, copyright: String, editorialNotes: EditorialNotes?, genreNames: [String], isComplete: Bool, isSingle: Bool, name: String, releaseDate: String, playParams: PlayParameters?, trackCount: Int, url: String) throws {
+    init(id: Identifier, albumName: String?, artistName: String, artwork: Artwork?, contentRating: String?, copyright: String?, editorialNotes: EditorialNotes?, genreNames: [String], isComplete: Bool, isSingle: Bool, name: String, playParams: PlayParameters?, recordLabel: String, releaseDate: Date, trackCount: Int, url: URL, isMasteredForItunes: Bool) throws {
         self.name = name
         print(artwork)
     }
@@ -72,7 +74,7 @@ struct Artist: AppleMusicKit.Artist {
 
     let name: String
 
-    init(id: Identifier, genreNames: [String], editorialNotes: EditorialNotes?, name: String, url: String) throws {
+    init(id: Identifier, editorialNotes: EditorialNotes?, genreNames: [String], name: String, url: URL) throws {
         self.name = name
     }
 }
@@ -90,7 +92,7 @@ struct Playlist: AppleMusicKit.Playlist {
     typealias EditorialNotes = AppleMusicKitTests.EditorialNotes
     typealias PlayParameters = AppleMusicKitTests.PlayParameters
 
-    init(id: Identifier, artwork: Artwork?, curatorName: String?, description: EditorialNotes?, lastModifiedDate: String, name: String, playlistType: PlaylistType, playParams: PlayParameters?, url: String) throws {
+    init(id: Identifier, artwork: Artwork?, curatorName: String?, description: EditorialNotes?, lastModifiedDate: Date, name: String, playlistType: PlaylistType, playParams: PlayParameters?, url: URL) throws {
     }
 }
 struct Curator: AppleMusicKit.Curator {
@@ -98,7 +100,7 @@ struct Curator: AppleMusicKit.Curator {
     typealias Artwork = AppleMusicKitTests.Artwork
     typealias EditorialNotes = AppleMusicKitTests.EditorialNotes
 
-    init(id: Identifier, artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: String) throws {
+    init(id: Identifier, artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: URL) throws {
         print(artwork, editorialNotes)
     }
 }
@@ -110,7 +112,7 @@ struct Station: AppleMusicKit.Station {
     let name: String
     let isLive: Bool
 
-    init(id: Identifier, artwork: Artwork, durationInMillis: Int?, editorialNotes: EditorialNotes?, episodeNumber: Int?, isLive: Bool, name: String, url: String) throws {
+    init(id: Identifier, artwork: Artwork, durationInMillis: Int?, editorialNotes: EditorialNotes?, episodeNumber: Int?, isLive: Bool, name: String, url: URL) throws {
         self.name = name
         self.isLive = isLive
     }
@@ -121,11 +123,17 @@ struct Artwork: AppleMusicKit.Artwork {
     }
 }
 struct EditorialNotes: AppleMusicKit.EditorialNotes {
-    init(standard: String?, short: String?) throws {
+    init(standard: String, short: String) throws {
     }
 }
 struct PlayParameters: AppleMusicKit.PlayParameters {
     init(id: String, kind: String) throws {
+    }
+}
+struct Preview: AppleMusicKit.Preview {
+    typealias Artwork = AppleMusicKitTests.Artwork
+
+    init(artwork: Artwork?, url: URL) throws {
     }
 }
 
@@ -160,9 +168,13 @@ extension Array where Element: Hashable {
 extension XCTestCase {
     func XCTAssertDecodeNoThrow<Response: Decodable>(class: Response.Type, fixture: String, file: StaticString = #file, line: UInt = #line, _ expression: (Response) throws -> Void = { _ in }) throws {
         let json = try AppleMusicKitTests.load(fixture)
-        let decoder = JSONDecoder()
         do {
-            try expression(try decoder.decode(`class`, from: json))
+            try expression(decode(json, urlResponse: {
+                HTTPURLResponse(url: URL(string: "https://api.music.apple.com")!,
+                                statusCode: 200,
+                                httpVersion: "HTTP/1.1",
+                                headerFields: nil)
+            }()))
         } catch {
             XCTFail("\(error)", file: file, line: line)
         }

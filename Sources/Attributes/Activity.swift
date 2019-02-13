@@ -16,7 +16,7 @@ public protocol Activity: ActivityDecodable, _AttributesCustomInitializable {
     associatedtype Artwork: AppleMusicKit.Artwork
     associatedtype EditorialNotes: AppleMusicKit.EditorialNotes
 
-    init(id: Identifier, artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: String) throws
+    init(id: Identifier, artwork: Artwork, editorialNotes: EditorialNotes?, name: String, url: URL) throws
 }
 
 private enum CodingKeys: String, CodingKey {
