@@ -53,7 +53,7 @@ public func build<Req: Request, Context>(
     _ req: Req,
     authorization: Authorization?,
     using fetch: (URLRequest, @escaping (Data, HTTPURLResponse?) -> Void) -> Context,
-    completion: @escaping (() throws -> Req.Response) -> Void
+    completion: @escaping (Result<Req.Response, Error>) -> Void
 ) -> Context? {
     let request: AnyRequest<Req.Response>
     let url: URL
@@ -73,16 +73,14 @@ public func build<Req: Request, Context>(
             throw AppleMusicKitError.invalidURL(url, error)
         }
     } catch {
-        completion {
-            throw error
-        }
+        completion(.failure(error))
         return nil
     }
 
     return fetch(urlRequest) { data, response in
-        completion {
+        completion(.init(catching: {
             try request.response(from: data, urlResponse: response)
-        }
+        }))
     }
 }
 

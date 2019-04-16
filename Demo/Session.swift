@@ -70,7 +70,7 @@ class Session {
         }
         let task = build(AnyRequest(request), authorization: authorization, using: fetcher) { response in
             do {
-                let (response, data) = try response()
+                let (response, data) = try response.get()
                 _handler(.success((response, try parseJSON(from: data) ?? "")))
             } catch AppleMusicKitError.responseError(let errors?, let data, _) {
                 _handler(.failure(Error.api(errors, json: (try? parseJSON(from: data) ?? "") ?? "")))
