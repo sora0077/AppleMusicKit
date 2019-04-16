@@ -30,7 +30,7 @@ where
                          "l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
-    public init(path: String, parameters: [String: Any]) {
+    init(path: String, parameters: [String: Any]) {
         self.path = path
         self.parameters = parameters
     }
@@ -110,7 +110,8 @@ extension GetCharts {
 }
 
 extension GetCharts {
-    public struct GetPage<A: Attributes>: PaginatorRequest {
+    public struct GetPage<A: Attributes>: PaginatorRequest, InternalPaginatorRequest {
+        public typealias Response = Page<A>
         public let path: String
         public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
@@ -118,16 +119,10 @@ extension GetCharts {
         public var offset: Int?
         private let _parameters: [String: Any]
 
-        public init(path: String, parameters: [String: Any]) {
+        init(path: String, parameters: [String: Any]) {
             self.path = path
             _parameters = parameters
             (limit, offset) = parsePaginatorParameters(parameters)
-        }
-
-        public func response(from data: Data, urlResponse: HTTPURLResponse?) throws -> Page<A> {
-            var page = try decode(data, urlResponse: urlResponse) as Page<A>
-            page.next?.limit = limit
-            return page
         }
     }
 }

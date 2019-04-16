@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct GetTopChartGenres<Genre: GenreDecodable, Storefront: StorefrontDecodable>: PaginatorResourceRequest {
+public struct GetTopChartGenres<Genre: GenreDecodable, Storefront: StorefrontDecodable>: PaginatorResourceRequest, InternalPaginatorRequest {
     public typealias Resource = AppleMusicKit.Resource<Genre, NoRelationships>
 
     public let path: String
@@ -23,7 +23,7 @@ public struct GetTopChartGenres<Genre: GenreDecodable, Storefront: StorefrontDec
             parameters: ["l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
-    public init(path: String, parameters: [String: Any]) {
+    init(path: String, parameters: [String: Any]) {
         self.path = path
         _parameters = parameters
         (limit, offset) = parsePaginatorParameters(parameters)

@@ -22,7 +22,7 @@ public struct GetDefaultRecommendations<
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
->: PaginatorResourceRequest {
+>: PaginatorResourceRequest, InternalPaginatorRequest {
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 
     public var scope: AccessScope { return .user }
@@ -40,7 +40,7 @@ public struct GetDefaultRecommendations<
                                "limit": limit, "offset": offset].cleaned)
     }
 
-    public init(path: String, parameters: [String: Any]) {
+    init(path: String, parameters: [String: Any]) {
         self.path = path
         _parameters = parameters
         (limit, offset) = parsePaginatorParameters(parameters)
@@ -83,7 +83,7 @@ public struct GetRecommendation<
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
->: PaginatorResourceRequest {
+>: PaginatorResourceRequest, InternalPaginatorRequest {
     public typealias Relationships = GetDefaultRecommendations<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, AppleCurator, Activity, Station, Storefront, Genre>.Relationships
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 
@@ -100,7 +100,7 @@ public struct GetRecommendation<
             parameters: ["l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
-    public init(path: String, parameters: [String: Any]) {
+    init(path: String, parameters: [String: Any]) {
         self.path = path
         _parameters = parameters
         (limit, offset) = parsePaginatorParameters(parameters)
@@ -121,7 +121,7 @@ public struct GetMultipleRecommendations<
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
->: PaginatorResourceRequest {
+>: PaginatorResourceRequest, InternalPaginatorRequest {
     public typealias Relationships = GetRecommendation<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, AppleCurator, Activity, Station, Storefront, Genre>.Relationships
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 
@@ -143,7 +143,7 @@ public struct GetMultipleRecommendations<
                   parameters: ["ids": makeIds(ids), "l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
-    public init(path: String, parameters: [String: Any]) {
+    init(path: String, parameters: [String: Any]) {
         self.path = path
         _parameters = parameters
         (limit, offset) = parsePaginatorParameters(parameters)

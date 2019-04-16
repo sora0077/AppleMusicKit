@@ -76,7 +76,7 @@ extension GetAlbum {
 }
 
 extension GetAlbum {
-    public struct GetTracks: PaginatorResourceRequest {
+    public struct GetTracks: PaginatorResourceRequest, InternalPaginatorRequest {
         public typealias Resource = Track<Song, MusicVideo, NoRelationships>
         public let path: String
         public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
@@ -90,13 +90,13 @@ extension GetAlbum {
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }
 
-        public init(path: String, parameters: [String: Any]) {
+        init(path: String, parameters: [String: Any]) {
             self.path = path
             _parameters = parameters
             (limit, offset) = parsePaginatorParameters(parameters)
         }
     }
-    public struct GetArtists: PaginatorResourceRequest {
+    public struct GetArtists: PaginatorResourceRequest, InternalPaginatorRequest {
         public typealias Resource = AppleMusicKit.Resource<Artist, NoRelationships>
         public let path: String
         public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
@@ -110,7 +110,7 @@ extension GetAlbum {
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }
 
-        public init(path: String, parameters: [String: Any]) {
+        init(path: String, parameters: [String: Any]) {
             self.path = path
             _parameters = parameters
             (limit, offset) = parsePaginatorParameters(parameters)

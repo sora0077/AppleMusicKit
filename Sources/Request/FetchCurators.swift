@@ -37,7 +37,7 @@ extension GetCurator {
 }
 
 extension GetCurator {
-    public struct GetPlaylists: PaginatorResourceRequest {
+    public struct GetPlaylists: PaginatorResourceRequest, InternalPaginatorRequest {
         public typealias Resource = AppleMusicKit.Resource<Playlist, NoRelationships>
 
         public let path: String
@@ -52,7 +52,7 @@ extension GetCurator {
                 parameters: ["limit": limit, "offset": offset].cleaned)
         }
 
-        public init(path: String, parameters: [String: Any]) {
+        init(path: String, parameters: [String: Any]) {
             self.path = path
             _parameters = parameters
             (limit, offset) = parsePaginatorParameters(parameters)

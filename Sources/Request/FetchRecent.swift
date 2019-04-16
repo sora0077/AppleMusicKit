@@ -21,7 +21,7 @@ public struct GetRecentlyPlayed<
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable,
     Recommendation: RecommendationDecodable
->: PaginatorResourceRequest {
+>: PaginatorResourceRequest, InternalPaginatorRequest {
     public typealias Resource = AnyResource<NoRelationships>
 
     public var scope: AccessScope { return .user }
@@ -37,7 +37,7 @@ public struct GetRecentlyPlayed<
                   parameters: ["l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
-    public init(path: String, parameters: [String: Any]) {
+    init(path: String, parameters: [String: Any]) {
         self.path = path
         _parameters = parameters
         (limit, offset) = parsePaginatorParameters(parameters)
@@ -62,7 +62,7 @@ extension GetRecentlyPlayed {
 }
 
 // MARK: - GetRecentStations
-public struct GetRecentStations<Station: StationDecodable, Storefront: StorefrontDecodable>: PaginatorResourceRequest {
+public struct GetRecentStations<Station: StationDecodable, Storefront: StorefrontDecodable>: PaginatorResourceRequest, InternalPaginatorRequest {
     public typealias Resource = AppleMusicKit.Resource<Station, NoRelationships>
 
     public var scope: AccessScope { return .user }
@@ -78,7 +78,7 @@ public struct GetRecentStations<Station: StationDecodable, Storefront: Storefron
                   parameters: ["l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
-    public init(path: String, parameters: [String: Any]) {
+    init(path: String, parameters: [String: Any]) {
         self.path = path
         _parameters = parameters
         (limit, offset) = parsePaginatorParameters(parameters)

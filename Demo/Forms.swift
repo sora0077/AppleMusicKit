@@ -156,15 +156,6 @@ let searchForms = [
           TextInput(name: "term", default: ""),
           TextInput(name: "language"),
           IntInput(name: "limit"),
-          IntInput(name: "offset"),
-          TextInput(name: "types")]) { _ in
-            SearchResources.GetPage<Song>(path: "/v1/catalog/jp/search",
-                                          parameters: ["term": "初音ミク" as Any, "types": "songs", "offset": 5])
-    },
-    Form([TextInput(name: "storefront", default: "jp"),
-          TextInput(name: "term", default: ""),
-          TextInput(name: "language"),
-          IntInput(name: "limit"),
           TextInput(name: "types")]) { form in
             GetSearchHints(storefront: form["storefront"],
                            term: form["term"],

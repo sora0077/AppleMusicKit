@@ -42,7 +42,7 @@ public struct GetMultipleStorefronts<Storefront: StorefrontDecodable>: ResourceR
 }
 
 // MARK: - GetAllStorefronts
-public struct GetAllStorefronts<Storefront: StorefrontDecodable>: PaginatorResourceRequest {
+public struct GetAllStorefronts<Storefront: StorefrontDecodable>: PaginatorResourceRequest, InternalPaginatorRequest {
     public typealias Resource = AppleMusicKit.Resource<Storefront, NoRelationships>
 
     public let path: String
@@ -57,7 +57,7 @@ public struct GetAllStorefronts<Storefront: StorefrontDecodable>: PaginatorResou
                   parameters: ["l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
-    public init(path: String, parameters: [String: Any]) {
+    init(path: String, parameters: [String: Any]) {
         self.path = path
         _parameters = parameters
         (limit, offset) = parsePaginatorParameters(parameters)
