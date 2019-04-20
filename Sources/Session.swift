@@ -17,7 +17,7 @@ private extension AccessScope {
     }
 }
 
-private extension Request {
+extension Request {
 
     func buildURL() throws -> URL {
         let url = baseURL.appendingPathComponent(path)

@@ -14,8 +14,8 @@ public struct GetTopChartGenres<Genre: GenreDecodable, Storefront: StorefrontDec
     public let path: String
     public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
-    public var limit: Int?
-    public var offset: Int?
+    public internal(set) var limit: Int?
+    public let offset: Int?
     private let _parameters: [String: Any]
 
     public init(storefront: Storefront.Identifier, language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {

@@ -29,8 +29,8 @@ public struct GetDefaultRecommendations<
     public let path: String
     public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
-    public var limit: Int?
-    public var offset: Int?
+    public internal(set) var limit: Int?
+    public let offset: Int?
     private let _parameters: [String: Any]
 
     public init(type: ResourceType? = nil, language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {
@@ -91,8 +91,8 @@ public struct GetRecommendation<
     public let path: String
     public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
-    public var limit: Int?
-    public var offset: Int?
+    public internal(set) var limit: Int?
+    public let offset: Int?
     private let _parameters: [String: Any]
 
     public init(id: Recommendation.Identifier, language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {
@@ -129,8 +129,8 @@ public struct GetMultipleRecommendations<
     public let path: String
     public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
-    public var limit: Int?
-    public var offset: Int?
+    public internal(set) var limit: Int?
+    public let offset: Int?
     private let _parameters: [String: Any]
 
     public init(id: Recommendation.Identifier, _ additions: Recommendation.Identifier...,

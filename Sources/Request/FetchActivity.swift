@@ -43,8 +43,8 @@ extension GetActivity {
         public let path: String
         public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
-        public var limit: Int?
-        public var offset: Int?
+        public internal(set) var limit: Int?
+        public let offset: Int?
         private let _parameters: [String: Any]
 
         init(storefront: Storefront.Identifier, id: Activity.Identifier, limit: Int? = nil, offset: Int? = nil) {

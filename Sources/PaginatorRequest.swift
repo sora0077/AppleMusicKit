@@ -30,14 +30,32 @@ protocol InternalPaginatorRequest: Decodable {
     init(path: String, parameters: [String: Any])
 }
 
+private struct InternalError: Error {}
+
 extension InternalPaginatorRequest {
     public init(from decoder: Decoder) throws {
         let c = try decoder.singleValueContainer()
-        let str = try c.decode(String.self).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        let comps = URLComponents(string: str)!
-        let parameters = [String: Any](uniqueKeysWithValues: comps.queryItems?.map {
-            ($0.name, $0.value ?? "" as Any) } ?? [])
-        self.init(path: comps.path, parameters: parameters)
+        let string = try c.decode(String.self)
+        do {
+            try self.init(_string: string)
+        } catch {
+            throw DecodingError.dataCorruptedError(in: c, debugDescription: "Invalid URL (\(string))")
+        }
+    }
+
+    public init?(string: String) {
+        try? self.init(_string: string)
+    }
+
+    private init(_string string: String) throws {
+        let str = string.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        guard let comps = URLComponents(string: str) else {
+            throw InternalError()
+        }
+        let parameters = [String: Any?](uniqueKeysWithValues:
+            comps.queryItems?.map { ($0.name, $0.value as Any?) } ?? []
+        )
+        self.init(path: comps.path, parameters: parameters.cleaned)
     }
 }
 
@@ -51,4 +69,11 @@ extension PaginatorRequest where Response == Page<Self> {
 
 public protocol PaginatorResourceRequest: PaginatorRequest {
     associatedtype Resource
+}
+
+extension String {
+    public init?<Req: PaginatorRequest>(_ req: Req) {
+        guard let url = try? req.buildURL() else { return nil }
+        self = url.absoluteString
+    }
 }
