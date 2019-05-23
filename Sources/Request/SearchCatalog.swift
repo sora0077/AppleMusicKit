@@ -33,7 +33,7 @@ where
                          "limit": limit, "offset": offset].cleaned)
     }
 
-    public init(path: String, parameters: [String: Any]) {
+    init(path: String, parameters: [String: Any]) {
         self.path = path
         self.parameters = parameters
         (limit, offset) = parsePaginatorParameters(parameters)
@@ -120,15 +120,15 @@ extension SearchResources {
 }
 
 extension SearchResources {
-    public struct GetPage<A: Attributes>: PaginatorRequest {
+    public struct GetPage<A: Attributes>: PaginatorRequest, InternalPaginatorRequest {
         public let path: String
         public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
-        public var limit: Int?
-        public var offset: Int?
+        public internal(set) var limit: Int?
+        public let offset: Int?
         private let _parameters: [String: Any]
 
-        public init(path: String, parameters: [String: Any]) {
+        init(path: String, parameters: [String: Any]) {
             self.path = path
             _parameters = parameters
             (limit, offset) = parsePaginatorParameters(parameters)

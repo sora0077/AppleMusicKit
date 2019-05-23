@@ -22,15 +22,15 @@ public struct GetDefaultRecommendations<
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
->: PaginatorResourceRequest {
+>: PaginatorResourceRequest, InternalPaginatorRequest {
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 
     public var scope: AccessScope { return .user }
     public let path: String
     public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
-    public var limit: Int?
-    public var offset: Int?
+    public internal(set) var limit: Int?
+    public let offset: Int?
     private let _parameters: [String: Any]
 
     public init(type: ResourceType? = nil, language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {
@@ -40,7 +40,7 @@ public struct GetDefaultRecommendations<
                                "limit": limit, "offset": offset].cleaned)
     }
 
-    public init(path: String, parameters: [String: Any]) {
+    init(path: String, parameters: [String: Any]) {
         self.path = path
         _parameters = parameters
         (limit, offset) = parsePaginatorParameters(parameters)
@@ -83,7 +83,7 @@ public struct GetRecommendation<
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
->: PaginatorResourceRequest {
+>: PaginatorResourceRequest, InternalPaginatorRequest {
     public typealias Relationships = GetDefaultRecommendations<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, AppleCurator, Activity, Station, Storefront, Genre>.Relationships
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 
@@ -91,8 +91,8 @@ public struct GetRecommendation<
     public let path: String
     public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
-    public var limit: Int?
-    public var offset: Int?
+    public internal(set) var limit: Int?
+    public let offset: Int?
     private let _parameters: [String: Any]
 
     public init(id: Recommendation.Identifier, language: Storefront.Language? = nil, limit: Int? = nil, offset: Int? = nil) {
@@ -100,7 +100,7 @@ public struct GetRecommendation<
             parameters: ["l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
-    public init(path: String, parameters: [String: Any]) {
+    init(path: String, parameters: [String: Any]) {
         self.path = path
         _parameters = parameters
         (limit, offset) = parsePaginatorParameters(parameters)
@@ -121,7 +121,7 @@ public struct GetMultipleRecommendations<
     Station: StationDecodable,
     Storefront: StorefrontDecodable,
     Genre: GenreDecodable
->: PaginatorResourceRequest {
+>: PaginatorResourceRequest, InternalPaginatorRequest {
     public typealias Relationships = GetRecommendation<Recommendation, Song, Album, Artist, MusicVideo, Playlist, Curator, AppleCurator, Activity, Station, Storefront, Genre>.Relationships
     public typealias Resource = AppleMusicKit.Resource<Recommendation, Relationships>
 
@@ -129,8 +129,8 @@ public struct GetMultipleRecommendations<
     public let path: String
     public var parameters: [String: Any]? { return makePaginatorParameters(_parameters, request: self) }
 
-    public var limit: Int?
-    public var offset: Int?
+    public internal(set) var limit: Int?
+    public let offset: Int?
     private let _parameters: [String: Any]
 
     public init(id: Recommendation.Identifier, _ additions: Recommendation.Identifier...,
@@ -143,7 +143,7 @@ public struct GetMultipleRecommendations<
                   parameters: ["ids": makeIds(ids), "l": language?.languageTag, "limit": limit, "offset": offset].cleaned)
     }
 
-    public init(path: String, parameters: [String: Any]) {
+    init(path: String, parameters: [String: Any]) {
         self.path = path
         _parameters = parameters
         (limit, offset) = parsePaginatorParameters(parameters)
